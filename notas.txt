@@ -1,0 +1,17 @@
+CARPETAS
+
+ARCHIVOS: Carpeta donde se va a guardar las imagenes de la base de datos
+
+CSS: Carpeta para los estilos del proyecto
+
+Iconos: Carpeta para guardar los Iconos
+
+IMG: Carpeta donde se van a guardar las imagenes para el proyecto
+
+Js: Carpeta donde se van a guardar los archivos de javascript
+
+Librerias: Carpeta donde se van a guardar las librerias que vamos a usar
+
+Vistas: Carpeta para las vistas de la pagina
+
+Procesos: Carpeta para todos los archivos de php

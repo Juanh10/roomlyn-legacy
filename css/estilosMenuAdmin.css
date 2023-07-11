@@ -1,0 +1,325 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+body.activoBackground{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/** ESTILOS CABECERA  */
+
+.cabeceraMenu{
+    position: fixed;
+    width: calc(100% - 85px);
+    margin-left: 85px;
+    background-color: #c4ac9f;
+    padding: 12px;
+    z-index: 90;
+}
+
+.cabeceraMenu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cabeceraMenu .iconoMenu{
+    display: flex;
+    align-items: center;
+}
+
+.cabeceraMenu .iconoMenu span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cabeceraMenu .iconoMenu i{
+    font-size: 25px;
+    margin: 0 30px 0 10px;
+    cursor: pointer;
+}
+
+.usuPlat{
+    margin-right: 45px;
+    padding: 10px;
+    background-color: #86726b;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usuPlat span{
+    font-size: 12px;
+    color: #fff;
+}
+
+/** ESTILOS MENU LATERAL FIJO  */
+
+.menuLateralFijo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 85px;
+    background-color: #86726b;
+    padding: 6px 5px;
+}
+
+.logo_cont2 .logo2{
+    width: 190px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.logo_cont2 .logo2 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menuLateralFijo ul{
+    padding: 0 6px;
+    margin-top: 15px;
+}
+
+.menuLateralFijo ul li{
+    list-style: none;
+    position: relative;
+    height: 60px;
+    width: 100%;
+    margin: 10px 5px 0 5px ;
+    line-height: 60px;
+}
+
+.menuLateralFijo ul li a{
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    transition: .5s ease;
+}
+
+.menuLateralFijo ul li a:hover{
+    background-color: #c4ad9d;
+}
+
+.menuLateralFijo ul li a.activo{
+    background-color: #c4ad9d;
+}
+
+.menuLateralFijo ul li a i{
+    height: 50px;
+    min-width: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.iconCerrarSesion2{
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    width: 60px;
+}
+
+.iconCerrarSesion2 a{
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: .5s ease;
+    border-radius: 15px;
+}
+
+.iconCerrarSesion2 a:hover{
+    background-color: #c4ad9d;
+}
+
+.iconCerrarSesion2 a i{
+    height: 60px;
+    min-width: 50px;
+    line-height: 60px;
+    font-size: 25px;
+    text-align: center;
+}
+
+
+/** Estilos del menu lateral OCULTO */
+
+.menuLateral{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #86726b;
+    padding: 6px 10px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+}
+
+.menuLateral.activoMenu{
+    transform: translateX(0%);
+}
+
+.menuLateral.descMenu{
+    opacity: 0;
+}
+
+.logo_cont .logo{
+    padding: 5px;
+    width: 180px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.logo_cont .logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menuLateral #btnMenu{
+    position: absolute;
+    left: 90%;
+    top: 15px;
+    right: 0;
+    font-size: 35px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.menuLateral ul{
+    padding: 0;
+    margin-top: 20px;
+}
+
+.menuLateral ul li{
+    list-style: none;
+    position: relative;
+    height: 60px;
+    width: 100%;
+    margin: 10px 5px 0 5px ;
+    line-height: 60px;
+}
+
+.menuLateral ul li a{
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    transition: .5s ease;
+}
+
+.menuLateral ul li a:hover{
+    background-color: #c4ad9d;
+}
+
+.menuLateral ul li a.activo{
+    background-color: #c4ad9d;
+}
+
+.menuLateral ul li a span{
+    font-size: 15px;
+}
+
+.menuLateral ul li a i{
+    height: 60px;
+    min-width: 50px;
+    line-height: 60px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.iconCerrarSesion{
+    position: absolute;
+    bottom: 1rem;
+    left: 1.2rem;
+}
+
+.iconCerrarSesion a{
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: .5s ease;
+    border-radius: 15px;
+}
+
+.iconCerrarSesion a i{
+    height: 60px;
+    min-width: 50px;
+    line-height: 60px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.contenido{
+    padding-top: 80px;
+    margin-left: 100px;
+}
+
+.btn-registrar{
+    background-color: #a89188;
+}
+
+.btn-registrar:hover{
+    background-color: #83716a;
+}
+
+
+@media only screen and (max-width: 600px){
+
+    .cabeceraMenu{
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .cabeceraMenu .iconoMenu span{
+        display: none;
+    }
+
+    .cabeceraMenu .iconoMenu i{
+        font-size: 30px;
+        margin: 0 30px 0 10px;
+        cursor: pointer;
+    }
+
+    .usuPlat{
+        margin-right: 15px;
+    }
+    
+    .usuPlat span{
+        font-size: 12px;
+        color: #fff;
+    }
+
+    .menuLateralFijo{
+        display: none;
+    }
+
+    .contenido{
+        padding-top: 80px;
+        margin-left: 0;
+    }
+
+}

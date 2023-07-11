@@ -1,0 +1,1 @@
+<h1>HABITACIONES</h1>

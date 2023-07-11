@@ -1,0 +1,457 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*::selection{
+    background-color: #753b29;
+    color: #fff;
+}
+
+.cabecera{
+    background-color: #9d8076;
+    position: fixed;
+    padding: 10px 35px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+
+.cabecera a{
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.navContenedor{
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logoPlahot{
+    width: 196px;
+    height: 100px;
+    padding: 0;
+    position: absolute;   
+    left: 0;  
+    display: flex;
+    align-items: center;
+}
+
+.logoPlahot img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menuRespon{
+    display: none;
+}
+
+.navegacion ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navegacion ul li{
+    display: inline-block;
+    font-size: 18px;
+}
+
+.ingresarAdmin i{
+    font-size: 35px;
+}
+
+.navegacion ul li a{
+    position: relative;
+    display: block;
+    padding: 18px;
+    transition: .5s;
+}
+
+.navegacion ul li a:hover, .navegacion .activo{
+    color: #643e33;
+}
+
+.navegacion ul li a:after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #643e33;
+    bottom: 0;
+    left: 0;
+    transition: all .5s;
+}
+
+.navegacion ul li a:not(.ingresoLogin):not(.filtro):hover:after{
+    width: 100%;
+}
+
+.navegacion ul li .activo:after{
+    width: 100%;
+}
+
+/** ESTILOS AL PRELOADER CARGAR PAGINA */
+
+.contenedorPreloader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    width: 100%;
+    height: 100vh;
+    background-color: #f3f3f3;
+}
+
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-default div {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 37px;
+  left: 66px;
+}
+
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 22px;
+  left: 62px;
+}
+
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 11px;
+  left: 52px;
+}
+
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 7px;
+  left: 37px;
+}
+
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 11px;
+  left: 22px;
+}
+
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 22px;
+  left: 11px;
+}
+
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 37px;
+  left: 7px;
+}
+
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 52px;
+  left: 11px;
+}
+
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 62px;
+  left: 22px;
+}
+
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 66px;
+  left: 37px;
+}
+
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 62px;
+  left: 52px;
+}
+
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 52px;
+  left: 62px;
+}
+
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+/** ESTILOS PIE DE PAGINA */
+
+footer{
+    background-color: #795850;
+}
+
+.piePagina{
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 50px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoPiePagina{
+    width: 250px;
+    height: 90px;
+    display: flex;
+}
+
+.logoPiePagina img{
+    width: 100%;
+    height: 100%;
+}
+
+.copyPiePagina p{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.contenidoPiePagina a{
+    display: block;
+    margin-top: 20PX;
+    color: #000;
+    font-size: 18px;
+}
+
+/* ESTILOS BOTON WHATSAPP */
+
+.btnWha{
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #0df053;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 50%;
+    box-shadow: 0 1px 10px rgb(0, 0, 0, .3);
+    z-index: 999;
+    transition: .5s ease;
+    display: none;
+}
+
+.btnWha:hover{
+    text-decoration: none;
+    color: #0df053;
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 982px){
+
+    .cabecera{
+        padding: 10px 20px;
+    }
+
+    .logoPlahot{
+        width: 180px;
+        height: 100px;
+    }
+
+    footer{
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .logoPiePagina{
+        display: none;
+    }
+
+    .contenidoPiePagina a{
+        text-align: center;
+    }
+
+}
+
+@media only screen and (max-width: 860px){
+
+    .cabecera{
+        padding:0;
+    }
+
+    .menuRespon{
+        margin-top: auto;
+    }
+
+    .icono{
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        width: 3rem;
+        height: 3rem;
+        border: 0;
+        background-color: transparent;
+        gap: .65rem;
+    }
+
+    .icono > div{
+        background-color: #000;
+        height: 3px;
+        width: 100%;
+        border-radius: 5px;
+        transition: all .5s;
+        transform-origin: left;
+    }
+
+    .icono.iconoActivo div:first-child{
+        transform: rotate(35deg);
+    }
+
+    .icono.iconoActivo div:nth-child(2){
+        opacity: 0;
+    }
+
+    .icono.iconoActivo div:last-child{
+        transform: rotate(-35deg);
+    }
+
+    .menuRespon{
+        display: block;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    .menuRespon i{
+        font-size: 50px;
+    }
+    
+    .navContenedor{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logoPlahot{
+        position: relative;   
+    }
+
+    .navegacion{
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .navegacion ul {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1s ease;
+    }
+      
+    .navegacion ul.mostrar {
+        max-height: 500px; 
+    }
+
+    .navegacion ul li{
+        display: block;
+        font-size: 18px;
+    }
+
+    .ingresarAdmin{
+        margin-bottom: 20px;
+    }
+
+    .ingresarAdmin i{
+        font-size: 35px;
+    }
+
+    .ingresarAdmin i:after{
+        content: 'Ingresar';
+        font-size: 20px;
+        margin-left: 10px;
+        font-family: inherit;
+    }
+    
+    .navegacion ul li a{
+        position: relative;
+        display: block;
+        padding: 18px;
+    }
+
+    .navegacion ul li a:after{
+        display: none;
+    }
+
+    .navegacion ul li a:active{
+        outline: none;
+        background-color: transparent;
+    }
+
+
+}
+
+@media only screen and (max-width: 470px){
+
+        /** ESTILOS RESPONSIVE PIE DE PAGINA */
+
+        .piePagina{
+            padding: 20px;
+            justify-content: center;
+            flex-direction: column-reverse;
+        }
+    
+        .logoPiePagina{
+            display: none;
+        }
+    
+        .copyPiePagina p{
+            font-size: 18px;
+            text-align: center;
+        }
+    
+        .contenidoPiePagina{
+            display: flex;
+            justify-content: center;
+        }
+
+        .contenidoPiePagina a{
+            text-align: center;
+            font-size: 15px;
+            margin: 10px;
+        }
+
+}

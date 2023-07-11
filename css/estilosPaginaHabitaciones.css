@@ -1,0 +1,426 @@
+/** MENU DE NAVEGACION  */
+
+.cabeceraHab{
+    background-color: #9d8076;
+    position: fixed;
+    padding: 18px 35px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+
+.cabeceraHab a{
+    color: #000;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.navContenedorHab{
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.logoPlahotHab{
+    width: 196px;
+    height: 100px;
+    padding: 0;
+    position: absolute;   
+    left: 0;  
+    display: flex;
+    align-items: center;
+}
+
+.logoPlahotHab img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navegacionHab ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navegacionHab ul li{
+    display: inline-block;
+}
+
+.navegacionHab ul li a{
+    display: block;
+    padding: 18px;
+}
+
+/** BUSCADOR DEL MENU DE HABITACIONES  */
+
+.buscador{
+    padding: 5px;
+    position: relative;
+}
+
+.buscador input{
+    box-shadow: 0 1px 10px rgb(0, 0, 0, .3);
+    width: 240px;
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    font-size: 15px;
+    border-radius: 30px;
+    outline: none;
+    transition: .5s;
+}
+
+.btnBuscar{
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #9d8076;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btnFiltro{
+    font-size: 20px;
+}
+
+/** ESTILOS A LOS CARD DE HABITACIONES  */
+
+.resHabitaciones{
+    max-width: 90em;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.resHabitaciones h1{
+    margin-top: 150px;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.contenedorResHab{
+    max-width: 71.3em;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
+}
+
+.cardHab{
+    width: 350px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .2);
+    transition: transform .3s ease;
+}
+
+.cardHab:hover{
+    transform: scale(1.01);
+}
+
+.cardHab .btnImgHab{
+    display: none;
+}
+
+.cardHab .cardImgHab{
+    width: 100%;
+    height: 200px;
+}
+
+.cardHab .cardImgHab img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+}
+
+.cardHab .cardContenido{
+    margin: 0 20px;
+}
+
+.cardHab .cardContenido h2{
+    padding: 20px 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.cardHab .cardContenido p{
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.cardHab .cardContenido p span{
+    font-weight: bold;
+}
+
+.cardHab .cardContenido ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.cardHab .cardContenido ul li{
+    margin-bottom: 2px;
+    margin-right: 5px;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 1px solid #7f7d7d;
+    cursor: default;
+}
+
+.metReservas{
+    position: relative;
+    height: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.metReservas .precioHab p{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    font-size: 12px;
+}
+
+.metReservas .precioHab p span{
+    font-size: 15px;
+    font-weight: bold;
+    color: #633121;
+}
+
+.metReservas .precioHab2 p{
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+}
+
+.metReservas .precioHab2 p span{
+    font-size: 15px;
+    font-weight: bold;
+    color: #633121;
+}
+
+.metReservas .btnReservar{
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.metReservas .btnReservar p{
+    color: red;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.metReservas .btnReservar a{
+    position: absolute;
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 2px solid #753b29;
+    border-radius: 5px;
+    background-color: #753b29;
+    color: #fff;
+    font-size: 15px;
+    transition: background-color .3s ease;
+}
+
+.cardHab .btnReservar a:hover{
+    background-color: #633121;
+}
+
+
+@media only screen and (max-width: 982px){
+
+    .cabeceraHab{
+        padding: 10px 20px;
+    }
+
+    .logoPlahotHab{
+        width: 180px;
+        height: 100px;
+    }
+
+}
+
+@media only screen and (max-width: 580px){
+
+    .cabeceraHab{
+        padding: 5px;
+    }
+
+    .navContenedorHab{
+        margin-right: 0;
+    }
+    
+    .buscador input{
+        box-shadow: none;
+        width: 0px;
+    }
+
+    .logoPlahotHab.estadoLogo{
+        display: none;
+    }
+
+    .buscador.activoBuscador input{
+        box-shadow: 0 1px 10px rgb(0, 0, 0, .3);
+        width: 250px;
+    }
+
+    /** ESTILOS CARD DE HABITACIONES  */
+    .resHabitaciones h1{
+        margin-top: 100px;
+        padding: 20px;
+        text-align: center;
+        font-size: 35px;
+    }
+
+    .contenedorResHab{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cardHab{
+        width: 95%;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        border-radius: 10px;
+    }
+    
+    .cardHab .cardImgHab{
+        display: none;
+    }
+    
+    .cardHab .cardContenido{
+        margin: 0 10px;
+    }
+
+    .cardHab .cardContenido .tituloHab{
+        margin: 0;
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cardHab .cardContenido .tituloHab h2{
+        padding: 0;
+        font-size: 18px;
+    }
+
+    .cardHab .cardContenido .tituloHab a{
+        padding: 0;
+        font-size: 22px;
+        color: #000;
+        display: block;
+    }
+
+    .cardHab .cardContenido p{
+        font-size: 13px;
+    }
+    
+    .cardHab .cardContenido p span{
+        font-weight: normal;
+        font-size: 13px;
+    }
+    
+    .cardHab .cardContenido ul{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 8px 0;
+    }
+    
+    .cardHab .cardContenido ul li{
+        margin-bottom: 5px;
+        margin-right: 5px;
+        padding: 2px;
+        font-size: 10px;
+        border-radius: 5px;
+        border: 1px solid #7f7d7d;
+        cursor: default;
+    }
+    
+    .metReservas{
+        position: relative;
+        height: 80px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .metReservas .precioHab p{
+        position: absolute;
+        left: 0;
+        height: 100%;
+    }
+    
+    .metReservas .precioHab span{
+        font-size: 10px;
+        font-weight: bold;
+        color: #633121;
+    }
+    
+    .metReservas .btnReservar{
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .metReservas .btnReservar p{
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .metReservas .btnReservar a{
+        position: absolute;
+        text-decoration: none;
+        padding: 4px 8px;
+        border: 2px solid #753b29;
+        border-radius: 5px;
+        background-color: #753b29;
+        color: #fff;
+        font-size: 18px;
+        transition: background-color .3s ease;
+    }
+    
+    .cardHab .btnReservar a:hover{
+        background-color: #633121;
+    }
+
+
+}
