@@ -73,6 +73,8 @@ $(document).ready(function() {
 
       const sr = ScrollReveal();
 
+      //* Libreria para crear las animaciones y creando una funcion con parametros para las animaciones para ahorrar codigo
+
       const animacion = (clase, origen, duracion, delay, distacia, ease) => {
         sr.reveal(clase, {
           origin: origen,
@@ -86,7 +88,6 @@ $(document).ready(function() {
       animacion('.cabecera','top', 1000, 200, '30px', 'ease-out');
       animacion('.descripcionHotel','left', 1000, 200, '30px', 'ease-out');
       animacion('.cardServicios','right', 1000, 200, '50px', 'ease-in-out');
-      animacion('.contenedorImg','bottom', 1000, 200, '30px', 'ease-in-out');
       animacion('.mapa','left', 1000, 200, '30px', 'ease-out');
 
     

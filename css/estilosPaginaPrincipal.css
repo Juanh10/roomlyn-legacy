@@ -40,7 +40,7 @@
 .imagen1{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/entradaPrincipal.jpg);
+    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/entradaPrincipal.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
@@ -49,7 +49,7 @@
 .imagen2{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/entrada3.jpg);
+    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/entrada3.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
@@ -58,7 +58,7 @@
 .imagen3{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/recepcion.jpg);
+    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/recepcion.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
@@ -67,7 +67,7 @@
 .imagen4{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/solarRecepcion.jpg);
+    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/solarRecepcion.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
@@ -288,7 +288,7 @@
     justify-content: center;
     border-radius: 10px;
     margin-top: 40px;
-    background: linear-gradient(rgba(0, 0, 0, .60), rgb(0, 0, 0, .60)), url(../img/reservar.jpg);
+    background: linear-gradient(rgba(0, 0, 0, .60), rgb(0, 0, 0, .60)), url(../img/reservar.webp);
 	background-position: center;
 	background-size: cover;
     box-shadow: 0 2px 15px rgba(0, 0, 0, .2);   

@@ -1,4 +1,4 @@
-//*VER CONTRASEÑA
+//* VER CONTRASEÑA
 const contraseñaInput = document.querySelector("#pass");
 const botonVer = document.querySelector(".verContraseña i");
 
