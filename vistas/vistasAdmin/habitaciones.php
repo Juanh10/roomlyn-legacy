@@ -23,25 +23,6 @@ echo $_SESSION['tipoUsuario']; */
 </head>
 <body>
 
-<div class="contenido">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <button class="btn btn-outline-dark p-2 m-2" id="serviciosBtn">Servicios</button>
-                <button class="btn btn-outline-dark p-2 m-2" id="tipoHabitacionesBtn">Tipo Habitaciones</button>
-                <button class="btn btn-outline-dark p-2 m-2" id="habitacionesBtn">Habitaciones</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="servicios"></div>
-                <div id="tipoHabitaciones"></div>
-                <div id="habitaciones"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
 <!--* SECCION PARA LAS ALERTAS  -->

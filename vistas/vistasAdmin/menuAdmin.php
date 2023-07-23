@@ -15,7 +15,7 @@
 
 <body>
 
-<!--* CABECERA DEL MENU  -->
+    <!--* CABECERA DEL MENU  -->
 
     <header class="cabeceraMenu">
         <div class="iconoMenu">
@@ -33,32 +33,52 @@
         <div class="logo_cont2">
             <div class="logo2">
                 <a href="inicio.php">
-                    <img src="../../iconos/logoPlahot3.png" alt="Icono PLAHOT">
+                   <img src="../../iconos/logoRoomlyn3.png" alt="Logo roomlyn">
                 </a>
             </div>
         </div>
 
-        <ul class="opcionesMenuFijo">
+        <ul class="list">
 
-            <li>
+            <li class="list_item">
                 <a class="enlaceMenu" href="inicio.php" title="Inicio">
                     <i class="bi bi-house-door-fill"></i>
                 </a>
             </li>
 
-            <li>
+            <li class="list_item">
                 <a class="enlaceMenu" href="reservaciones.php" title="Reservaciones">
                     <i class="bi bi-calendar-check-fill"></i>
                 </a>
             </li>
 
-            <li>
-                <a class="enlaceMenu" href="habitaciones.php" title="Habitaciones">
-                    <i class="bi bi-list-ul"></i>
-                </a>
+            <li class="list_item">
+
+                <div class="enlacePrincipal">
+                    <a class="enlaceMenu menuDesplegable" title="Habitaciones">
+                        <i class="bi bi-list-ul"></i>
+                        <i class="bi bi-caret-right-fill flecha"></i>
+                    </a>
+                </div>
+
+                <ul class="submenu">
+                    <li class="list_itemSecund">
+                        <div class="enlaceSecundarios">
+                            <a class="enlaceMenuSecund" href="serviciosHabitaciones.php" title="Servicios">
+                            <i class="bi bi-gear"></i>
+                            </a>
+                            <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Tipo de habitaciones">
+                            <i class="bi bi-card-checklist"></i>
+                            </a>
+                            <a class="enlaceMenuSecund" href="regHabitaciones.php" title="Habitaciones">
+                            <i class="bi bi-key-fill"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </li>
 
-            <li>
+            <li class="list_item">
                 <a class="enlaceMenu" href="clientes.php" title="Clientes">
                     <i class="bi bi-person-fill"></i>
                 </a>
@@ -74,7 +94,7 @@
 
             ?>
 
-                <li>
+                <li class="list_item">
                     <a class="enlaceMenu" href="usuarios.php" title="Usuarios">
                         <i class="bi bi-people-fill"></i>
                     </a>
@@ -104,30 +124,53 @@
                 </a>
             </div>
         </div>
-        <ul class="opcionesMenu">
+        <ul class="list_MenuDesplegable">
 
-            <li>
+            <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="inicio.php">
                     <i class="bi bi-house-door-fill"></i>
                     <span class="linksOpciones">Inicio</span>
                 </a>
             </li>
 
-            <li>
+            <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="reservaciones.php">
                     <i class="bi bi-calendar-check-fill"></i>
                     <span class="linksOpciones">Reservaciones</span>
                 </a>
             </li>
 
-            <li>
-                <a class="enlaceMenu2" href="habitaciones.php">
-                    <i class="bi bi-list-ul"></i>
-                    <span class="linksOpciones">Habitaciones</span>
-                </a>
+            <li class="list_itemDesplegable">
+
+                <div class="enlacePrincipal">
+                    <a class="enlaceMenu2 menuDesplegable" title="Habitaciones">
+                        <i class="bi bi-list-ul"></i>
+                        <span>Habitaciones</span>
+                        <i class="bi bi-caret-right-fill flecha"></i>
+                    </a>
+                </div>
+
+                <ul class="submenu">
+                    <li class="list_itemSecund">
+                        <div class="enlaceSecundarios">
+                            <a class="enlaceMenuSecund" href="serviciosHabitaciones.php" title="Servicios">
+                            <i class="bi bi-gear"></i>
+                            <span>Servicios</span>
+                            </a>
+                            <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Tipo de habitaciones">
+                            <i class="bi bi-card-checklist"></i>
+                            <span>Tipo de habitaciones</span>
+                            </a>
+                            <a class="enlaceMenuSecund" href="regHabitaciones.php" title="Habitaciones">
+                            <i class="bi bi-key-fill"></i>
+                            <span>Habitaciones</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </li>
 
-            <li>
+            <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="clientes.php">
                     <i class="bi bi-person-fill"></i>
                     <span class="linksOpciones">Clientes</span>
@@ -137,14 +180,14 @@
 
             <?php
 
-             //* comparar si el tipo de usuario es igual a administrador para asi mostrar otra opcion del menu que solo se le muestra si es administrador
+            //* comparar si el tipo de usuario es igual a administrador para asi mostrar otra opcion del menu que solo se le muestra si es administrador
 
             if (strtolower($_SESSION['tipoUsuario']) == "administrador") :
 
             ?>
 
 
-                <li>
+                <li class="list_itemDesplegable">
                     <a class="enlaceMenu2" href="usuarios.php">
                         <i class="bi bi-people-fill"></i>
                         <span class="linksOpciones">Usuarios</span>
