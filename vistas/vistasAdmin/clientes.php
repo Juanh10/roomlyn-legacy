@@ -21,7 +21,7 @@ echo $_SESSION['tipoUsuario']; */
     <?php require_once "menuAdmin.php"; ?>
     <title>Clientes</title>
 </head>
-<body>
+<body class="fondo">
 
 <div class="contenido">
     <h1>CLIENTES</h1>

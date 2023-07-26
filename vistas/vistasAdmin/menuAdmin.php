@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
     <link rel="stylesheet" href="../../css/estilosMenuAdmin.css">
+    <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
     <title>ROOMLYN</title>
 </head>
 
@@ -20,7 +21,7 @@
     <header class="cabeceraMenu">
         <div class="iconoMenu">
             <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
-            <span>ADMINISTRACION</span>
+            <span>INICIO</span>
         </div>
         <div class="usuPlat">
             <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>

@@ -75,63 +75,51 @@ $(document).ready(function () {
 
 });
 
-$(document).ready(function () {
+$(document).ready(function(){
 
-  //* PARTE DE MOSTRAR DATOS PARA ACTUALIZAR EN LA TABLA DE USUARIOS
+  //! Alertas de verificacion
 
-  $('.editBtn').click(function () {
-
-    $tr = $(this).closest('tr'); // Seleccionar el elemento tr mas cercano
-
-    let datos = $tr.children('td').map(function () { // me recorre todos los elementos de la etiqueta td
-      return $(this).text(); // me retorna todos los valores de la etiqueta hijo del td
-    });
-
-    $('#id_actual').val(datos[0]); // al id en la cual es un input toma el valor del dato
-    $('#primerNombreUsuario').val(datos[1]);
-    $('#segundoNombreUsuario').val(datos[2]);
-    $('#primerApellidoUsuario').val(datos[3]);
-    $('#segundoApellidoUsuario').val(datos[4]);
-    $('#documentoUsuario').val(datos[5]);
-    $('#telefonoUsuario').val(datos[6]);
-    $('#emailUsuario').val(datos[7]);
-    $('#usuario').val(datos[9]);
-    $('#contraseña').val(datos[10]);
-
-  });
-
-  //* ALERTA DE VERIFICACION PARA ELIMINAR UN DATO (DESHABILITAR)
-
-  $('.formularioEliminar').submit(function (e) {
+  $('.formularioEliminar').submit(function(e) {
     e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
     Swal.fire({
-      title: '¿Estas seguro?',
-      text: "¡No podrás revertir esto!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Deshabilitar'
+        title: '¿Estas seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Deshabilitar'
     }).then((result) => {
-      if (result.isConfirmed) {
-        this.submit(); // sirve para enivar los datos del formulario
-      }
+        if (result.isConfirmed) {
+            this.submit(); // sirve para enivar los datos del formulario
+        }
     });
-  });
+});
 
-  //* MOSTRAR DATOS DE LA TABLA DE SERVICIOS
+  //* Mostrar datos de usuarios para editar
 
-  $('.editServiciosBtn').click(function () {
+  $('.botonEditar').click(function(e){
+    let tr = e.target.parentElement.parentElement.parentElement; // seleccionar al tr
+    let td = [...tr.children]; // convertir en arreglo
 
-    $tr = $(this).closest('tr'); // Seleccionar el elemento tr mas cercano
+    let datos = td.map(function(element){ // recorre los td
+      return $(element).text(); // combierte los elementos del td en texto
+    })
 
-    let datos = $tr.children('td').map(function () { // me recorre todos los elementos de la etiqueta td
-      return $(this).text(); // me retorna todos los valores de la etiqueta hijo del td
-    });
+    let nombreSeparados = datos[1].split(" "); // separa el nombre y lo convierte en un arreglo
+    
+    $('#id_usuario').val(datos[0]);
+    $('#pNombre').val(nombreSeparados[0]);
+    $('#sNombre').val(nombreSeparados[1]);
+    $('#pApellido').val(nombreSeparados[2]);
+    $('#sApellido').val(nombreSeparados[3]);
+    $('#documento').val(datos[2]);
+    $('#telefono').val(datos[3]);
+    $('#email').val(datos[4]);
+    $('#usuario').val(datos[6]);
+    $('#contraseñaUsuario').val(datos[7]);
+    
 
-    $('#id_actualServicio').val(datos[0]); // al id en la cual es un input toma el valor del dato
-    $('#servicioAct').val(datos[1]);
-
-  });
+  })
 
 });

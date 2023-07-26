@@ -1,0 +1,45 @@
+.contenido{
+    padding-top: 90px;
+    padding-left: 90px;
+}
+
+/*! SECCION USUARIO  */
+
+.botonAgregar{
+    display: flex;
+    justify-content: end;
+}
+
+.botonAgregar a{
+    background-color: #1cc78d;
+    color: #fff;
+}
+
+.botonAgregar a:hover{
+    background-color: #23a97c;
+    color: #fff;
+}
+
+.tabla-usuarios{
+    margin-top: 20px;
+}
+
+.tabla-background{
+    background-color: #c4ac9f;
+}
+
+.accion{
+    display: flex;
+}
+
+.botonEditar{
+    margin-right: 5px;
+}
+
+.fondo-modal{
+    background-color: #c4ac9f;
+}
+
+.boton-guardar-modal{
+    background-color: #c4ac9f;
+}
