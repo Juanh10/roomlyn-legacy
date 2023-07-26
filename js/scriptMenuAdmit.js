@@ -77,7 +77,7 @@ $(document).ready(function () {
 
 $(document).ready(function(){
 
-  //! Alertas de verificacion
+  //! Alertas
 
   $('.formularioEliminar').submit(function(e) {
     e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
@@ -95,6 +95,11 @@ $(document).ready(function(){
         }
     });
 });
+
+
+setTimeout(function(){
+  $('.alerta').fadeOut(500)
+}, 2000)
 
   //* Mostrar datos de usuarios para editar
 
@@ -118,8 +123,23 @@ $(document).ready(function(){
     $('#email').val(datos[4]);
     $('#usuario').val(datos[6]);
     $('#contraseñaUsuario').val(datos[7]);
-    
+  });
 
-  })
+  //* MOSTRAR DATOS DE SERVICIOS DE HABITACIONES PARA EDITAR
+
+  $('.botonEditar').click(function(e){
+
+    let tr = e.target.parentElement.parentElement;
+    let td = [...tr.children];
+    
+    let datos = td.map(function(element){
+      return $(element).text();
+    });
+
+    $('#idServicio').val(datos[0]);  
+    $('#servicio').val(datos[1]);  
+
+
+  });
 
 });

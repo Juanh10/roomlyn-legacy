@@ -11,15 +11,9 @@ echo $_SESSION['pNombre'];
 echo $_SESSION['pApellido'];
 echo $_SESSION['tipoUsuario']; */
 
-?>
-
-<?php
-
 include_once "../../procesos/config/conex.php";
 
 $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usuarios.id_infoUsuario = infousuarios.id_infoUsuario WHERE 1";
-
-
 
 ?>
 
@@ -165,7 +159,7 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
                 </div>
                 <div class="modal-footer">
                     <span class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</span>
-                    <input type="submit" value="Actualizar" name="btnActualizar" class="btn boton-guardar-modal">
+                    <input type="submit" value="Actualizar" name="btnActualizar" class="btn boton-guardar">
                 </div>
                 </form>
             </div>

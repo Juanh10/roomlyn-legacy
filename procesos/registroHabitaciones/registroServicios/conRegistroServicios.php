@@ -11,7 +11,7 @@ if(!empty($_POST['servicio'])){
     $sql -> bindParam(':elemento', $servicio);
 
     if($sql -> execute()){
-        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+        header("location: ../../../vistas/vistasAdmin/serviciosHabitaciones.php");
         session_start();
         $_SESSION['msjRegistradoServicio'] = "REGISTRADO";
     }else{
@@ -19,7 +19,9 @@ if(!empty($_POST['servicio'])){
     }
 
 }else{
-    echo "CAMPOS VACIOS";
+    header("location: ../../../vistas/vistasAdmin/serviciosHabitaciones.php");
+    session_start();
+    $_SESSION['msjCamposVacios'] = "Campos vacios";
 }
 
 ?>

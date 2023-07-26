@@ -40,6 +40,23 @@
     background-color: #c4ac9f;
 }
 
-.boton-guardar-modal{
+.boton-guardar{
     background-color: #c4ac9f;
+    transition: .3s ease;
+}
+
+.boton-guardar:hover{
+    background-color: #b49d91;
+}
+
+
+/*! SECCION SERVICIOS DE HABITACIONES  */
+.alerta{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.alerta strong i{
+    margin-right: 10px;
 }
