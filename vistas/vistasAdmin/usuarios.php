@@ -39,10 +39,13 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
     <div class="contenido">
         <div class="container">
             <div class="botonAgregar">
-                <a href="../registroUsuarios.php" class="btn btnColorUsuario">Añadir Usuario</a>
+                <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir Usuario</a>
             </div>
             <div class="row">
                 <div class="col">
+                <div class="buscadorInput">
+                        <input type="search" class="buscador form-control" id="buscador" name="buscador" placeholder="Buscar">
+                    </div>
                     <div class="table-responsive tabla-usuarios">
                         <table class="table table-hover table-borderless text-center">
                             <thead class="tabla-background">
@@ -80,15 +83,15 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
 
                                 ?>
 
-                                        <tr>
-                                            <td><?php echo $id ?></td>
-                                            <td><?php echo $nombre1 . " " . $nombre2 . " " . $apellido1 . " " . $apellido2 ?></td>
-                                            <td><?php echo $documento ?></td>
-                                            <td><?php echo $celular ?></td>
-                                            <td><?php echo $email ?></td>
-                                            <td><?php echo $tipoUsuario ?></td>
-                                            <td><?php echo $usuario ?></td>
-                                            <td><?php echo $contraseña ?></td>
+                                        <tr class="filas">
+                                            <td class="datos"><?php echo $id ?></td>
+                                            <td class="datos"><?php echo $nombre1 . " " . $nombre2 . " " . $apellido1 . " " . $apellido2 ?></td>
+                                            <td class="datos"><?php echo $documento ?></td>
+                                            <td class="datos"><?php echo $celular ?></td>
+                                            <td class="datos"><?php echo $email ?></td>
+                                            <td class="datos"><?php echo $tipoUsuario ?></td>
+                                            <td class="datos"><?php echo $usuario ?></td>
+                                            <td class="datos"><?php echo $contraseña ?></td>
                                             <td>
                                                 <div class="accion">
                                                     <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarUsuario" title="Editar"></span>

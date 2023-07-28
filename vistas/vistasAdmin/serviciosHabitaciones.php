@@ -53,7 +53,10 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                         </div>
                     </form>
                 </div>
-                <div class="col-md-8 mt-4">
+                <div class="col-md-8 mt-2">
+                    <div class="buscadorInput">
+                        <input type="search" class="buscador form-control mb-3" id="buscador" name="buscador" placeholder="Buscar">
+                    </div>
                     <table class="table table-hover table-borderless text-center">
                         <thead class="tabla-background">
                             <tr>
@@ -67,9 +70,9 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                             <?php
                             foreach ($dbh->query($sql) as $row) :
                             ?>
-                                <tr>
-                                    <td><?php echo $row['id'] ?></td>
-                                    <td><?php echo $row['elemento'] ?></td>
+                                <tr class="filas">
+                                    <td class="datos"><?php echo $row['id'] ?></td>
+                                    <td class="datos"><?php echo $row['elemento'] ?></td>
                                     <td><span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarServicios" title="Editar"></span></td>
                                 </tr>
                             <?php

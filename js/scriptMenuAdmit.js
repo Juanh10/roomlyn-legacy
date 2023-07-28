@@ -138,7 +138,30 @@ setTimeout(function(){
 
     $('#idServicio').val(datos[0]);  
     $('#servicio').val(datos[1]);  
+  });
 
+  $('#buscador').keyup(function(e){
+
+    let busqueda = e.target.value.toLowerCase(); // convertir en minuscula lo que se escribe en el buscador
+
+    $('.filas').each(function(i, filas){ // ciclo foreach para recorrer todas las filas
+
+      let busquedaEncontrada = false; 
+
+      $(filas).find('.datos').each(function(j, elementos){ // ciclo foreach para recorrer todos los elementos que contiene la clase datos
+        let elementosTextMin = elementos.textContent.toLowerCase();
+        if(elementosTextMin.includes(busqueda)){ // comparar lo que hay en elementos con lo que se escribe en el buscador con esto se obtiene true o false
+          busquedaEncontrada = true;
+        }
+      });
+      
+      if (busquedaEncontrada) { // si esto llega ser verdadero me tiene que aparecer solo la fila que contenga lo que se buscó
+        $(filas).removeClass('filtro');
+      }else{ // si es falso se oculta las demas filas
+        $(filas).addClass('filtro');
+      }
+
+    });
 
   });
 

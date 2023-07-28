@@ -3,6 +3,30 @@
     padding-left: 90px;
 }
 
+/*! SECCION PARA TODO  */
+.alerta{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.alerta strong i{
+    margin-right: 10px;
+}
+
+.fondo-modal{
+    background-color: #c4ac9f;
+}
+
+.boton-guardar{
+    background-color: #c4ac9f;
+    transition: .3s ease;
+}
+
+.boton-guardar:hover{
+    background-color: #b49d91;
+}
+
 /*! SECCION USUARIO  */
 
 .botonAgregar{
@@ -21,7 +45,7 @@
 }
 
 .tabla-usuarios{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .tabla-background{
@@ -36,27 +60,20 @@
     margin-right: 5px;
 }
 
-.fondo-modal{
-    background-color: #c4ac9f;
-}
-
-.boton-guardar{
-    background-color: #c4ac9f;
-    transition: .3s ease;
-}
-
-.boton-guardar:hover{
-    background-color: #b49d91;
-}
-
 
 /*! SECCION SERVICIOS DE HABITACIONES  */
-.alerta{
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+
+.buscadorInput{
+    display: flex;
+    justify-content: end;
 }
 
-.alerta strong i{
-    margin-right: 10px;
+.buscador{
+    width: 250px;
+    padding: 10px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.filtro{
+    display: none;
 }
