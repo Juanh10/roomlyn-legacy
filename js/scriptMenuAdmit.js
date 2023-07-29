@@ -140,6 +140,8 @@ setTimeout(function(){
     $('#servicio').val(datos[1]);  
   });
 
+  //* BUSCADOR
+
   $('#buscador').keyup(function(e){
 
     let busqueda = e.target.value.toLowerCase(); // convertir en minuscula lo que se escribe en el buscador
@@ -163,6 +165,43 @@ setTimeout(function(){
 
     });
 
+  });
+
+  //* 
+  
+  let pagActual = 1;
+  let filasTotalPagina = 5;
+
+  function mostrarFilas(){
+    $('.filas').each(function(i, filas){
+
+      if(i >= (pagActual - 1) * filasTotalPagina && i < pagActual * filasTotalPagina){
+        $(filas).removeClass('paginacion');
+      }else{
+        $(filas).addClass('paginacion');
+      }
+
+    });
+    $('#pagActual').text(`Pag Actual: ${pagActual}`);
+  }
+
+  mostrarFilas();
+
+  $('#btnSiguiente').click(function(){
+    let totalFilas = $('.filas').length;
+    let totalPag = Math.ceil(totalFilas / filasTotalPagina);
+    if(pagActual < totalPag){
+      pagActual++;
+      mostrarFilas();
+    }else{
+    }
+  });
+
+  $('#btnAnterior').click(function(){
+    if(pagActual > 1){
+      pagActual--;
+      mostrarFilas();
+    }
   });
 
 });

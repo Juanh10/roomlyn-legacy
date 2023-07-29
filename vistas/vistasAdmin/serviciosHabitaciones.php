@@ -57,27 +57,40 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                     <div class="buscadorInput">
                         <input type="search" class="buscador form-control mb-3" id="buscador" name="buscador" placeholder="Buscar">
                     </div>
-                    <table class="table table-hover table-borderless text-center">
-                        <thead class="tabla-background">
-                            <tr>
-                                <th>#</th>
-                                <th>Servicio</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <?php
-                            foreach ($dbh->query($sql) as $row) :
-                            ?>
-                                <tr class="filas">
-                                    <td class="datos"><?php echo $row['id'] ?></td>
-                                    <td class="datos"><?php echo $row['elemento'] ?></td>
-                                    <td><span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarServicios" title="Editar"></span></td>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-borderless text-center">
+                            <thead class="tabla-background">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Servicio</th>
+                                    <th>Editar</th>
                                 </tr>
-                            <?php
-                            endforeach;
-                            ?>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                foreach ($dbh->query($sql) as $row) :
+                                ?>
+                                    <tr class="filas">
+                                        <td class="datos"><?php echo $row['id'] ?></td>
+                                        <td class="datos"><?php echo $row['elemento'] ?></td>
+                                        <td><span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarServicios" title="Editar"></span></td>
+                                    </tr>
+                                <?php
+                                endforeach;
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="paginacionTabla">
+                        <div class="inforPaginacion">
+                            <span id="pagActual"></span>
+                        </div>
+                        <div class=botonesPaginacion">
+                            <button class="btn colorBtn" id="btnAnterior"><i class="bi bi-caret-left-fill"></i> Anterior</button>
+                            <button class="btn colorBtn" id="btnSiguiente">Siguiente <i class="bi bi-caret-right-fill"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

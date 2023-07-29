@@ -71,9 +71,40 @@
 .buscador{
     width: 250px;
     padding: 10px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 .filtro{
     display: none;
+}
+
+.paginacion{
+    display: none;
+}
+
+.paginacionTabla{
+    display: flex;
+    justify-content: space-between;
+}
+
+.colorBtn{
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    font-size: 12px;
+    transition: .5s ease;
+}
+
+.colorBtn:hover{
+    background-color: #c3c3c3;
+}
+
+#pagActual{
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 600px){
+    .contenido{
+        padding-top: 80px;
+        padding-left: 0;
+    }
 }

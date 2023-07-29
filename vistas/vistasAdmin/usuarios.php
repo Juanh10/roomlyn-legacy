@@ -43,7 +43,7 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
             </div>
             <div class="row">
                 <div class="col">
-                <div class="buscadorInput">
+                    <div class="buscadorInput">
                         <input type="search" class="buscador form-control" id="buscador" name="buscador" placeholder="Buscar">
                     </div>
                     <div class="table-responsive tabla-usuarios">
@@ -116,7 +116,15 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="paginacionTabla">
+                        <div class="inforPaginacion">
+                            <span id="pagActual"></span>
+                        </div>
+                        <div class=botonesPaginacion">
+                            <button class="btn colorBtn" id="btnAnterior"><i class="bi bi-caret-left-fill"></i> Anterior</button>
+                            <button class="btn colorBtn" id="btnSiguiente">Siguiente <i class="bi bi-caret-right-fill"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
