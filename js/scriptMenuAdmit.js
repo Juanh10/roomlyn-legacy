@@ -167,7 +167,7 @@ setTimeout(function(){
 
   });
 
-  //* 
+  //* Paginacion de tablas
   
   let pagActual = 1;
   let filasTotalPagina = 5;
@@ -182,7 +182,7 @@ setTimeout(function(){
       }
 
     });
-    $('#pagActual').text(`Pag Actual: ${pagActual}`);
+    $('#pagActual').text(`| Pag Actual: ${pagActual}`);
   }
 
   mostrarFilas();
@@ -203,5 +203,19 @@ setTimeout(function(){
       mostrarFilas();
     }
   });
+
+  //* Contador de registros
+
+  let contadorRegistro = 0;
+  
+  function totalRegistro(filaTabla){
+    $(filaTabla).each(function(i, filasUsuario){
+      contadorRegistro++;
+    });
+    $('#totalRegistro').text(`Total datos: ${contadorRegistro}`);
+  }
+
+  totalRegistro('.filasUsuario');
+  totalRegistro('.filasServicio');
 
 });

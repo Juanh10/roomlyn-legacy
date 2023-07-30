@@ -11,8 +11,16 @@ body{
     transition: background-color 0.3s ease;
 }
 
-body.activoBackground{
+body.activoBackground::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100;
 }
 
 /** ESTILOS CABECERA  */
@@ -210,7 +218,7 @@ body.activoBackground{
     padding: 6px 0;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    z-index: 100;
+    z-index: 200;
 }
 
 .menuLateral.activoMenu{
@@ -406,11 +414,6 @@ body.activoBackground{
 
     .menuLateralFijo{
         display: none;
-    }
-
-    .contenido{
-        padding-top: 80px;
-        margin-left: 0;
     }
 
 }

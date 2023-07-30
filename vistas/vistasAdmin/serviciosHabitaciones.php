@@ -71,7 +71,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                                 <?php
                                 foreach ($dbh->query($sql) as $row) :
                                 ?>
-                                    <tr class="filas">
+                                    <tr class="filas filasServicio">
                                         <td class="datos"><?php echo $row['id'] ?></td>
                                         <td class="datos"><?php echo $row['elemento'] ?></td>
                                         <td><span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarServicios" title="Editar"></span></td>
@@ -84,6 +84,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                     </div>
                     <div class="paginacionTabla">
                         <div class="inforPaginacion">
+                            <span id="totalRegistro"></span>
                             <span id="pagActual"></span>
                         </div>
                         <div class=botonesPaginacion">

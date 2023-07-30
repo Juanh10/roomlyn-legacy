@@ -83,7 +83,7 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
 
                                 ?>
 
-                                        <tr class="filas">
+                                        <tr class="filas filasUsuario">
                                             <td class="datos"><?php echo $id ?></td>
                                             <td class="datos"><?php echo $nombre1 . " " . $nombre2 . " " . $apellido1 . " " . $apellido2 ?></td>
                                             <td class="datos"><?php echo $documento ?></td>
@@ -118,6 +118,7 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
                     </div>
                     <div class="paginacionTabla">
                         <div class="inforPaginacion">
+                            <span id="totalRegistro"></span>
                             <span id="pagActual"></span>
                         </div>
                         <div class=botonesPaginacion">
