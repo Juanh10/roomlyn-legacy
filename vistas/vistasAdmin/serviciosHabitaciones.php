@@ -54,7 +54,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                     </form>
                 </div>
                 <div class="col-md-8 mt-2">
-                    <div class="buscadorInput">
+                    <div class="buscadorInputServicios">
                         <input type="search" class="buscador form-control mb-3" id="buscador" name="buscador" placeholder="Buscar">
                     </div>
                     <div class="table-responsive">

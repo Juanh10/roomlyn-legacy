@@ -112,6 +112,10 @@ body {
 
 /*! SECCION SERVICIOS DE HABITACIONES  */
 
+.buscadorInputServicios{
+    display: flex;
+    justify-content: end;
+}
 
 
 @media only screen and (max-width: 600px) {
