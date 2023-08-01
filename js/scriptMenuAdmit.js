@@ -173,6 +173,7 @@ setTimeout(function(){
   let filasTotalPagina = 5;
 
   function mostrarFilas(){
+
     $('.filas').each(function(i, filas){
 
       if(i >= (pagActual - 1) * filasTotalPagina && i < pagActual * filasTotalPagina){
@@ -187,6 +188,8 @@ setTimeout(function(){
 
   mostrarFilas();
 
+  //* Botones de siguiente y anterior de la paginacion de tablas
+
   $('#btnSiguiente').click(function(){
     let totalFilas = $('.filas').length;
     let totalPag = Math.ceil(totalFilas / filasTotalPagina);
@@ -200,6 +203,16 @@ setTimeout(function(){
   $('#btnAnterior').click(function(){
     if(pagActual > 1){
       pagActual--;
+      mostrarFilas();
+    }
+  });
+
+  //*quitar clase de paginacion en el momento de que se este buscando algo
+
+  $('#buscador').on('input',function(e){;
+    if(e.target.value.length > 0){
+      $('.filas').removeClass('paginacion');
+    }else{
       mostrarFilas();
     }
   });

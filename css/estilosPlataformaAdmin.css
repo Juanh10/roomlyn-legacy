@@ -1,92 +1,85 @@
-.contenido{
+body {
+    background-color: #f8f9fc;
+}
+
+.contenido {
     padding-top: 90px;
     padding-left: 90px;
 }
 
 /*! SECCION PARA TODO  */
-.alerta{
+
+.tabla-background {
+    background-color: #c4ac9f;
+}
+
+.alerta {
     position: absolute;
     bottom: 5px;
     right: 5px;
 }
 
-.alerta strong i{
+.alerta strong i {
     margin-right: 10px;
 }
 
-.fondo-modal{
+.fondo-modal {
     background-color: #c4ac9f;
 }
 
-.boton-guardar{
+.boton-guardar {
     background-color: #c4ac9f;
     transition: .3s ease;
 }
 
-.boton-guardar:hover{
+.boton-guardar:hover {
     background-color: #b49d91;
 }
 
-/*! SECCION USUARIO  */
+.buscBntAgr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
 
 .botonAgregar{
-    display: flex;
-    justify-content: end;
+    height: 50px;
+    line-height: 50px;
 }
 
-.botonAgregar a{
+.botonAgregar a {
+    margin-top: 5px;
     background-color: #1cc78d;
     color: #fff;
+    box-shadow: 0px 1px 2px #1cc78d;
 }
 
-.botonAgregar a:hover{
+.botonAgregar a:hover {
     background-color: #23a97c;
     color: #fff;
 }
 
-.tabla-usuarios{
-    margin-top: 10px;
-}
-
-.tabla-background{
-    background-color: #c4ac9f;
-}
-
-.accion{
-    display: flex;
-}
-
-.botonEditar{
-    margin-right: 5px;
-}
-
-
-/*! SECCION SERVICIOS DE HABITACIONES  */
-
-.buscadorInput{
-    display: flex;
-    justify-content: end;
-}
-
-.buscador{
+.buscador {
     width: 250px;
     padding: 10px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.filtro{
+.filtro {
     display: none;
 }
 
-.paginacion{
+.paginacion {
     display: none;
 }
 
-.paginacionTabla{
+.paginacionTabla {
     display: flex;
     justify-content: space-between;
 }
 
-.colorBtn{
+.colorBtn {
     background-color: #000;
     color: #fff;
     padding: 5px;
@@ -94,16 +87,35 @@
     transition: .5s ease;
 }
 
-.colorBtn:hover{
+.colorBtn:hover {
     background-color: #c3c3c3;
 }
 
-.inforPaginacion{
+.inforPaginacion {
     font-size: 12px;
 }
 
-@media only screen and (max-width: 600px){
-    .contenido{
+/*! SECCION USUARIO  */
+
+.tabla-usuarios {
+    margin-top: 10px;
+}
+
+.accion {
+    display: flex;
+}
+
+.botonEditar {
+    margin-right: 5px;
+}
+
+
+/*! SECCION SERVICIOS DE HABITACIONES  */
+
+
+
+@media only screen and (max-width: 600px) {
+    .contenido {
         padding-top: 80px;
         padding-left: 0;
     }

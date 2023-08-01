@@ -38,12 +38,12 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
 
     <div class="contenido">
         <div class="container">
-            <div class="botonAgregar">
-                <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir Usuario</a>
-            </div>
             <div class="row">
                 <div class="col">
-                    <div class="buscadorInput">
+                    <div class="buscBntAgr">
+                        <div class="botonAgregar">
+                            <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir Usuario</a>
+                        </div>
                         <input type="search" class="buscador form-control" id="buscador" name="buscador" placeholder="Buscar">
                     </div>
                     <div class="table-responsive tabla-usuarios">
