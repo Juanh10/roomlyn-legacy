@@ -4,13 +4,13 @@ session_start();
 
 include "../procesos/config/conex.php";
 
-$sql = $dbh -> prepare("SELECT tipoUsuario FROM usuarios WHERE tipoUsuario = 'administrador'"); // consulta sobre el tipo de usuario
+$sql = $dbh->prepare("SELECT tipoUsuario FROM usuarios WHERE tipoUsuario = 'administrador'"); // consulta sobre el tipo de usuario
 
-$sql -> execute();
+$sql->execute();
 
 $validarTipoUsuario = false;
 
-if($sql -> fetch()){ // si ya existe un administrador en el tipo de usuario entonces pasa a true la variable
+if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario entonces pasa a true la variable
     $validarTipoUsuario = true;
 }
 
@@ -23,9 +23,12 @@ if($sql -> fetch()){ // si ya existe un administrador en el tipo de usuario ento
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../iconos/logo_icono.png">
-    <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/estilosLogin.css">
+    <!-- librerias para el diseño del login -->
+    <link rel="icon" href="../iconos/logo_icono.png">
+    <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
+    <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <title>LOGIN</title>
 </head>
 
@@ -74,16 +77,17 @@ if($sql -> fetch()){ // si ya existe un administrador en el tipo de usuario ento
                         <div class="btnIngresar">
                             <input type="submit" value="Ingresar" name="btnSubmit" id="btnSubmit">
                             <div class="opcionesFormu">
-                                <?php 
-                                if(!$validarTipoUsuario) : // si ya existe un tipo de usuario administrador no debe aparecer "Registrar" en el login
-                                    ?>
+                                <?php
+                                if (!$validarTipoUsuario) : // si ya existe un tipo de usuario administrador no debe aparecer "Registrar" en el login
+                                ?>
                                     <a href="registroUsuarios.php">Registrar |</a>
                                 <?php
-                                    endif;          
+                                endif;
                                 ?>
 
-                            <a href="#">¿Olvidaste tu contraseña?</a>
+                                <a href="olvConrtraseña.php">¿Olvidaste tu contraseña?</a>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -91,6 +95,22 @@ if($sql -> fetch()){ // si ya existe un administrador en el tipo de usuario ento
         </div>
     </div>
 
+    <?php
+
+    if (isset($_SESSION['mjscontraseña'])) {
+    ?>
+
+        <script>
+            Swal.fire('Contraseña generada: <?php echo $_SESSION['mjscontraseña']; ?>')
+        </script>
+
+    <?php
+        unset($_SESSION['mjscontraseña']);
+    }
+
+    ?>
+
+    <script src="../librerias/jquery-3.7.0.min.js"></script>
 
     <script src="../js/scriptLogin.js"></script>
 

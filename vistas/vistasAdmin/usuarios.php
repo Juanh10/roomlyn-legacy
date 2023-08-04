@@ -208,7 +208,7 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
                 title: '<?php echo $_SESSION['msjEliminar']; ?>',
                 showConfirmButton: false,
                 timer: 1000
-            });;
+            });
         </script>
     <?php
         unset($_SESSION['msjEliminar']);

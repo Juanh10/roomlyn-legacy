@@ -221,6 +221,24 @@
     font-weight: bold;
 }
 
+/** estilos patra la seccion de olvidar contraseña */
+
+.formLogin .recuperarh1{
+    font-size: 35px;
+}
+
+/** estilos para la alerta */
+
+.swal2-title {
+    font-family: Arial, sans-serif;
+    font-size: 19px !important;
+    line-height: 30px;
+}
+
+.swal2-popup {
+   width: 20em !important;
+}
+
 @media only screen and (max-width: 982px){
 
     .ConImgLogin{
