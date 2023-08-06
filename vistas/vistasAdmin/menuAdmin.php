@@ -65,10 +65,10 @@
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
-                            <a class="enlaceMenuSecund" href="serviciosHabitaciones.php" title="Servicios">
-                            <i class="bi bi-gear"></i>
+                            <a class="enlaceMenuSecund" href="regTipoHabitacion.php" title="Crear tipo de habitación">
+                            <i class="bi bi-pencil"></i>
                             </a>
-                            <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Tipo de habitaciones">
+                            <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Listado tipo de habitaciones">
                             <i class="bi bi-card-checklist"></i>
                             </a>
                             <a class="enlaceMenuSecund" href="regHabitaciones.php" title="Habitaciones">
@@ -144,7 +144,7 @@
             <li class="list_itemDesplegable">
 
                 <div class="enlacePrincipal">
-                    <a class="enlaceMenu2 menuDesplegable" title="Habitaciones">
+                    <a class="enlaceMenu2 menuDesplegable">
                         <i class="bi bi-list-ul"></i>
                         <span>Habitaciones</span>
                         <i class="bi bi-caret-right-fill flecha"></i>
@@ -154,15 +154,15 @@
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
-                            <a class="enlaceMenuSecund" href="serviciosHabitaciones.php" title="Servicios">
-                            <i class="bi bi-gear"></i>
-                            <span>Servicios</span>
+                            <a class="enlaceMenuSecund" href="regTipoHabitacion.php">
+                            <i class="bi bi-pencil"></i>
+                            <span>Crear tipo de habitación</span>
                             </a>
-                            <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Tipo de habitaciones">
+                            <a class="enlaceMenuSecund" href="tipoHabitaciones.php">
                             <i class="bi bi-card-checklist"></i>
-                            <span>Tipo de habitaciones</span>
+                            <span>Listado tipo de habitaciones</span>
                             </a>
-                            <a class="enlaceMenuSecund" href="regHabitaciones.php" title="Habitaciones">
+                            <a class="enlaceMenuSecund" href="regHabitaciones.php">
                             <i class="bi bi-key-fill"></i>
                             <span>Habitaciones</span>
                             </a>

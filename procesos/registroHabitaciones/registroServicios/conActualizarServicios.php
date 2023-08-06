@@ -11,7 +11,7 @@ $sql -> bindParam(':servicio',$servicioAct);
 $sql -> bindParam(':idServicios',$idServicio);
 
 if($sql -> execute()){
-    header("location: ../../../vistas/vistasAdmin/serviciosHabitaciones.php");
+    header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
     session_start();
     $_SESSION['msjActualizadoServicio'] = "ACTUALIZADO";
 }else{

@@ -127,17 +127,18 @@ setTimeout(function(){
 
   //* MOSTRAR DATOS DE SERVICIOS DE HABITACIONES PARA EDITAR
 
-  $('.botonEditar').click(function(e){
+  $('.editServiciosBtn').click(function(e){
 
-    let tr = e.target.parentElement.parentElement;
-    let td = [...tr.children];
+    let elemento = e.target.parentElement.children;
+    let arregloElemento = [...elemento];
     
-    let datos = td.map(function(element){
+    let datos = arregloElemento.map(function(element){
       return $(element).text();
     });
 
-    $('#idServicio').val(datos[0]);  
-    $('#servicio').val(datos[1]);  
+    $('#idServicio').val(datos[1]);
+    $('#servicioAct').val(datos[2]);
+
   });
 
   //* BUSCADOR
