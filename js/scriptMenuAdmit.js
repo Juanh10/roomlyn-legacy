@@ -136,7 +136,7 @@ setTimeout(function(){
       return $(element).text();
     });
 
-    $('#idServicio').val(datos[1]);
+    $('#idServicio').val(datos[0]);
     $('#servicioAct').val(datos[2]);
 
   });

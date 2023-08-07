@@ -163,7 +163,7 @@ const validarSelects = (input, idCampo, message) =>{
     }
 }
 
-//* ciclo donde reocorre todos los inputs
+//* ciclo donde recorre todos los inputs
 datosInput.forEach((input) => {
     input.addEventListener('input', validarFormulario);
     input.addEventListener('blur', validarFormulario);

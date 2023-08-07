@@ -142,6 +142,21 @@ body {
     font-size: 22px;
 }
 
+.tituloServicios .checkSpan{
+    font-size: 12px;
+}
+
+#mensajeErrorServicio{
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+    display: none;
+}
+
+#mensajeErrorServicio.activoMensajeErrorServicio{
+    display: block;
+}
+
 .formularioRegTipoHabi{
     background-color: #fff;
     padding: 14px;
@@ -254,6 +269,41 @@ body {
     box-shadow: none;
     border-color: #000;
 }
+
+/*! ESTILOS DE MENSAJES DE ERROR Y VALIDACION DEL FORMULARIO  */
+
+.error{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.inputError{
+    border-color: red;
+    box-shadow: 0 0 2px red;
+}
+
+.formularioMensaje{
+    margin-top: 20px;
+    background-color: #f66060;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 900;
+    display: none;
+}
+
+.formularioMensaje.activoMensaje{
+    display: block;
+}
+
+.formularioMensaje i{
+    margin-right: 5px;
+}
+
 
 @media only screen and (max-width: 600px) {
     .contenido {

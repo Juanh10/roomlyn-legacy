@@ -18,14 +18,11 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
     <?php require_once "menuAdmin.php"; ?>
-    <title>Servicios</title>
 </head>
 
 <body>
@@ -51,37 +48,43 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 
                         <!-- FORMULARIO DE REGISTRO DE TIPOS DE HABITACIONES  -->
 
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="../../procesos/registroHabitaciones/registroTipos/conRegistroTipos.php" method="post" enctype="multipart/form-data" id="formularioReg">
 
                             <h2>Información</h2>
 
                             <label for="nombreTipo" class="form-label">Tipo de habitacion</label>
-                            <input type="text" name="nombreTipo" id="nombreTipo" class="form-control p-2" placeholder="Nombre del tipo de la habitacion">
+                            <input type="text" name="nombreTipo" id="nombreTipo" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" required>
+                            <p></p>
 
                             <div class="row">
                                 <div class="col-5">
-                                    <label for="nombreTipo" class="form-label mt-3">Cantidad de camas</label>
-                                    <input type="number" name="nombreTipo" id="nombreTipo" class="form-control p-2 inputPeque">
+                                    <label for="cantidadCamas" class="form-label mt-3">Cantidad de camas</label>
+                                    <input type="number" name="cantidadCamas" id="cantidadCamas" min="0" class="form-control p-2 inputPeque" required>
+                                    <p></p>
                                 </div>
 
                                 <div class="col">
-                                    <label for="nombreTipo" class="form-label mt-3">Cantidad maxima de huespedes</label>
-                                    <input type="number" name="nombreTipo" id="nombreTipo" class="form-control p-2 inputPeque">
+                                    <label for="cantidadPersonas" class="form-label mt-3">Cantidad maxima de huespedes</label>
+                                    <input type="number" name="cantidadPersonas" id="cantidadPersonas" min="0" class="form-control p-2 inputPeque" required>
+                                    <p></p>
                                 </div>
                             </div>
 
                             <label for="formFileMultiple" class="form-label mt-3">Adjuntar imagenes</label>
-                            <input class="form-control" name="" type="file" id="formFileMultiple" accept="image/*" multiple required>
+                            <input class="form-control" name="imagenes[]" id="imagenes" type="file" id="formFileMultiple" accept="image/*" multiple required>
+                            <p></p>
 
                             <div class="row">
                                 <div class="col-5">
-                                    <label for="nombreTipo" class="form-label mt-3">Costo con ventilador</label>
-                                    <input type="number" name="nombreTipo" id="nombreTipo" class="form-control p-2 inputPeque">
+                                    <label for="precioVentilador" class="form-label mt-3">Costo con ventilador</label>
+                                    <input type="number" name="precioVentilador" id="precioVentilador" min="0" class="form-control p-2 inputPeque" required>
+                                    <p></p>
                                 </div>
 
                                 <div class="col">
-                                    <label for="nombreTipo" class="form-label mt-3">Costo con aire acondicionado</label>
-                                    <input type="number" name="nombreTipo" id="nombreTipo" class="form-control p-2 inputPeque">
+                                    <label for="precioAire" class="form-label mt-3">Costo con aire acondicionado</label>
+                                    <input type="number" name="precioAire" id="precioAire" min="0" class="form-control p-2 inputPeque" required>
+                                    <p></p>
                                 </div>
                             </div>
                     </div>
@@ -90,14 +93,14 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                 <div class="col-4">
 
                     <div class="serviciosHabitaciones">
-                        <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
+                        <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios <span class="checkSpan">(Seleccione al menos una opción)</span></h1>
                         <?php
 
                         foreach ($dbh->query($sql) as $row) :
                         ?>
                             <div class="form-check serviciosCheck border border-bottom">
-                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['elemento'] ?>" name="opcionesServ[]">
                                 <label for="" class="ocularIdServi"><?php echo $row['id'] ?></label>
+                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['id'] ?>" name="opcionesServ[]">
                                 <label class="form-check-label" for="<?php echo $row['elemento'] ?>"><?php echo $row['elemento'] ?></label>
                                 <span class="btn btn-sm editServiciosBtn bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#actualizarServicios" title="Editar"></span>
                             </div>
@@ -109,7 +112,13 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                             <span class="btnServicio" data-bs-toggle="modal" data-bs-target="#modalRegServ">Registrar servicio</span>
                         </div>
                     </div>
+                    <div>
+                        <span id="mensajeErrorServicio">Debes seleccionar al menos un servicio</span>
+                    </div>
                 </div>
+            </div>
+            <div class="formularioMensaje">
+                <p><i class="bi bi-exclamation-circle-fill"></i>¡Por favor rellene los campos correctamente!</p>
             </div>
             <div class="botonRgServicio">
                 <input type="submit" value="Registrar" class="btnInputSubmit">
@@ -194,8 +203,28 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
         unset($_SESSION['msjActualizadoServicio']);
     endif;
 
+    
+
+    if (isset($_SESSION['msjRegistradoTipoH'])) {
+    ?>  
+    <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '<?php echo $_SESSION['msjRegistradoTipoH']; ?>',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjRegistradoTipoH']);
+    }
+
 
     ?>
+
+
+    <script src="../../js/scriptRegistroHabitacion.js"></script>
 
 
 </body>
