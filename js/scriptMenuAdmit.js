@@ -233,3 +233,22 @@ setTimeout(function(){
   totalRegistro('.filasServicio');
 
 });
+
+$(document).ready(function(){
+
+  //* SCRIPTS DE LA PARTE PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO VAMOS A USAR fetch para el envio del ID del tipo que se esta seleccionando
+
+  const crud = $('.tipoHab button');
+  const contCrud = $('#contenidoDelCrud');
+
+  crud.click(function(e){
+    let id = e.target.dataset.id; // obtener el valor del data-id en la cual es el id que seleccionó en el crud
+
+    fetch(`../../vistas/vistasAdmin/mostrarTiposHabitaciones.php?id=${id}`) // usamos fetch para el envio de dtos
+    .then(res => res.text())
+    .then(datos => contCrud.html(datos))
+    .catch(error => console.log(error))
+  });
+
+
+});

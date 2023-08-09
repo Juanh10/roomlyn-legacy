@@ -305,6 +305,149 @@ body {
 }
 
 
+/*! SECCION LISTADO TIPOS DE HABITACIONES */
+
+.lisTiposHb h1{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.cardHabitacion{
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 180px;
+    grid-gap: 20px;
+}
+
+.cardHab{
+    width: 300px;
+    height: 180px;
+    background-color: #fff;
+    border: 1px solid #c3c3c3;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: transform .3s ease;
+}
+
+.cardHab:hover{
+    transform: scale(1.03);
+}
+
+.imgHab{
+    width: 100%;
+    height: 100%;
+}
+
+.imgHab img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cardHab .tipoHab{
+    position: absolute;
+    inset: 0;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.cardHab .tipoHab button{
+    margin-top: 5px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 15px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+}
+
+/** Estilos a mostrarTipoHabitaciones  */
+
+.contenidoTipoHab{
+    padding: 15px;
+}
+
+.contenidoTipoHab .nombreTipo{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.contenidoTipoHab .inforTipHo{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.contenidoTipoHab h2{
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 20px;
+}
+
+.contenidoTipoHab .inforTipHo p{
+    margin-right: 40px;
+    font-size: 15px;
+}
+
+.contenidoTipoHab .precioTipo{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0 10px 30px;
+}
+
+.contenidoTipoHab .precioTipo p{
+    margin-right: 40px;
+    font-size: 15px;
+}
+
+.contenidoTipoHab .serviciosTipo{
+    font-size: 15px;
+    margin: 20px 0 20px 30px;
+}
+
+.imagenesTipos{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0 10px 30px;
+}
+
+.imagenesTipos .listImg{
+    width: 220px;
+    height: 120px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.imagenesTipos .listImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
 @media only screen and (max-width: 600px) {
     .contenido {
         padding-top: 80px;

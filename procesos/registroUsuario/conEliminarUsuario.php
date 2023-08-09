@@ -2,6 +2,8 @@
 
 include "../config/conex.php";
 
+session_start();
+
 $idUsuario = $_POST['id_usuario'];
 
 $estado = 0;
@@ -13,10 +15,10 @@ $sql -> bindParam(':idUsuario', $idUsuario);
 
 if($sql -> execute()){
     header("location: ../../vistas/vistasAdmin/usuarios.php");
-    session_start();
-    $_SESSION['msjEliminar'] = "Deshabilitado";
+    $_SESSION['msj2'] = "Deshabilitado";
 }else{
-    echo "ERROR";
+    header("location: ../../vistas/vistasAdmin/usuarios.php");
+    $_SESSION['msj2'] = "ERROR";
 }
 
 

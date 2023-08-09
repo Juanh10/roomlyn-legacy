@@ -182,36 +182,19 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
 
     <?php
 
-    if (isset($_SESSION['msjActualizado'])) :
+    if (isset($_SESSION['msj2'])) :
     ?>
         <script>
             Swal.fire({
                 position: '',
                 icon: 'success',
-                title: '<?php echo $_SESSION['msjActualizado']; ?>',
+                title: '<?php echo $_SESSION['msj2']; ?>',
                 showConfirmButton: false,
                 timer: 1000
             });
         </script>
     <?php
-        unset($_SESSION['msjActualizado']);
-    endif;
-
-
-    if (isset($_SESSION['msjEliminar'])) :
-    ?>
-
-        <script>
-            Swal.fire({
-                position: '',
-                icon: 'success',
-                title: '<?php echo $_SESSION['msjEliminar']; ?>',
-                showConfirmButton: false,
-                timer: 1000
-            });
-        </script>
-    <?php
-        unset($_SESSION['msjEliminar']);
+        unset($_SESSION['msj2']);
     endif;
 
     ?>

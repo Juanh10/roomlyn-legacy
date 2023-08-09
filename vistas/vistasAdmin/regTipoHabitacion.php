@@ -184,40 +184,33 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 
     <!-- ALERTAS -->
 
-    <?php
-    if (isset($_SESSION['msjRegistradoServicio'])) :
+    <?php 
+
+    // registro de servicios
+    if (isset($_SESSION['mensaje'])) :
     ?>
         <div class="alert alert-success alerta" role="alert">
-            <strong><i class="bi bi-check-circle-fill"></i><?php echo $_SESSION['msjRegistradoServicio'] ?></strong>
+            <strong><i class="bi bi-check-circle-fill"></i><?php echo $_SESSION['mensaje'] ?></strong>
         </div>
     <?php
-        unset($_SESSION['msjRegistradoServicio']);
+        unset($_SESSION['mensaje']);
     endif;
 
-    if (isset($_SESSION['msjActualizadoServicio'])) :
-    ?>
-        <div class="alert alert-success alerta" role="alert">
-            <strong><i class="bi bi-check-circle-fill"></i><?php echo $_SESSION['msjActualizadoServicio'] ?></strong>
-        </div>
-    <?php
-        unset($_SESSION['msjActualizadoServicio']);
-    endif;
+    // registro de tipos de habitaciones
 
-    
-
-    if (isset($_SESSION['msjRegistradoTipoH'])) {
+    if (isset($_SESSION['msj2'])) {
     ?>  
     <script>
             Swal.fire({
                 position: '',
                 icon: 'success',
-                title: '<?php echo $_SESSION['msjRegistradoTipoH']; ?>',
+                title: '<?php echo $_SESSION['msj2']; ?>',
                 showConfirmButton: false,
                 timer: 1000
             });
         </script>
     <?php
-        unset($_SESSION['msjRegistradoTipoH']);
+        unset($_SESSION['msj2']);
     }
 
 

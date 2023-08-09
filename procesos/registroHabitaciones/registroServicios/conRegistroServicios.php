@@ -4,6 +4,8 @@ include "../../config/conex.php";
 
 if(isset($_POST['registrarServicio'])){
     if(!empty($_POST['servicio'])){
+
+        session_start();
         
         $servicio = $_POST['servicio'];
     
@@ -13,15 +15,13 @@ if(isset($_POST['registrarServicio'])){
     
         if($sql -> execute()){
             header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
-            session_start();
-            $_SESSION['msjRegistradoServicio'] = "REGISTRADO";
+            $_SESSION['mensaje'] = "REGISTRADO";
         }else{
             echo "ERROR";
         }
     
     }else{
         header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
-        session_start();
-        $_SESSION['msjCamposVacios'] = "Campos vacios";
+        $_SESSION['mensaje'] = "Campos vacios";
     }
 }

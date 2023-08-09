@@ -13,9 +13,10 @@ $sql -> bindParam(':idServicios',$idServicio);
 if($sql -> execute()){
     header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
     session_start();
-    $_SESSION['msjActualizadoServicio'] = "ACTUALIZADO";
+    $_SESSION['mensaje'] = "ACTUALIZADO";
 }else{
-    echo "ERROR";
+    header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
+    $_SESSION['mensaje'] = "ERROR";
 }
 
 ?>

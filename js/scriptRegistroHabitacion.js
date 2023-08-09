@@ -3,7 +3,7 @@ const formularioTipoHab = document.getElementById('formularioReg'); // acceder a
 const formularioInput = document.querySelectorAll('#formularioReg input');
 
 const expresiones = {
-    soloLetrasNumeros: /^[a-zA-Z0-9 ]+$/, // Letras numeros y espacios, pueden llevar acentos.
+    soloLetrasNumeros: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, // Letras numeros y espacios, pueden llevar acentos.
     soloNumeros: /^[0-9,.]+$/ //solo numeros
 }
 

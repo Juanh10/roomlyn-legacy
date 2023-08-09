@@ -2,6 +2,8 @@
 
 include "../config/conex.php";
 
+session_start();
+
 //* DATOS DEL FORMULARIO
 $idUsuario = $_POST['id_usuario'];
 $pNombre = $_POST['primerNombreUsuario'];
@@ -31,10 +33,10 @@ $sql -> bindParam(':contra', $contraseña);
 
 if($sql -> execute()){
     header("location: ../../vistas/vistasAdmin/usuarios.php");
-    session_start();
-    $_SESSION['msjActualizado'] = "Actualizado";
+    $_SESSION['msj2'] = "Actualizado";
 }else{
-    echo "ERROR";
+    header("location: ../../vistas/vistasAdmin/usuarios.php");
+    $_SESSION['msj2'] = "ERROR";
 }
 
 
