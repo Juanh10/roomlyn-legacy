@@ -234,21 +234,45 @@ setTimeout(function(){
 
 });
 
+
 $(document).ready(function(){
 
   //* SCRIPTS DE LA PARTE PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO VAMOS A USAR fetch para el envio del ID del tipo que se esta seleccionando
 
   const crud = $('.tipoHab button');
   const contCrud = $('#contenidoDelCrud');
+  const btnEditTipo = $('#editTipo');
 
   crud.click(function(e){
     let id = e.target.dataset.id; // obtener el valor del data-id en la cual es el id que seleccionó en el crud
 
-    fetch(`../../vistas/vistasAdmin/mostrarTiposHabitaciones.php?id=${id}`) // usamos fetch para el envio de dtos
-    .then(res => res.text())
-    .then(datos => contCrud.html(datos))
-    .catch(error => console.log(error))
+    let url = `editTiposHabitaciones.php?id=${id}`; // obtenemos la url para editar los tipos de habitaciones
+
+    btnEditTipo.attr('href',url);
+
+    fetch(`../../vistas/vistasAdmin/tiposHabitaciones/mostrarTiposHabitaciones.php?id=${id}`) // usamos fetch para el envio de dtos
+    .then(res => res.text()) // recibe la respuesta del servidor
+    .then(datos => contCrud.html(datos)) // mostramos la respuesta
+    .catch()
   });
 
+
+  const btnActImg = $('.listImg');
+  const contenidoImg = $('#contenidoImg');
+  const formularioRegTipoHabi = $('.formularioRegTipoHabi');
+
+  btnActImg.click(function(e){
+
+    let idImg = e.target.id;
+    let idTipoHab = formularioRegTipoHabi[0].id;
+    
+    fetch(`../../vistas/vistasAdmin/tiposHabitaciones/mostrarImgTipo.php?id=${idImg}&&idTipo=${idTipoHab}`) // enviamos el id al servidor por medio de fetch
+    .then(res => res.text())
+    .then(datos => contenidoImg.html(datos))
+    .catch()
+
+    
+
+  });
 
 });

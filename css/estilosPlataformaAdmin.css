@@ -334,7 +334,6 @@ body {
     border: 1px solid #c3c3c3;
     border-radius: 5px;
     position: relative;
-    cursor: pointer;
     transition: transform .3s ease;
 }
 
@@ -447,6 +446,118 @@ body {
     border-radius: 5px;
 }
 
+/*! ESTILOS PARA LA SECCION DE EDITAR DE TIPOS DE HABITACIONES  */
+
+.cardFotos{
+    padding: 14px;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-left: 12px;
+    width: 640px;
+    height: 100%;
+}
+
+
+.cardFotos h2{
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    margin-bottom: 20px;
+}
+
+.actImg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listImg{
+    width: 160px;
+    height: 120px;
+    margin: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform .3s ease;
+}
+
+.listImg:hover{
+    transform: scale(1.1);
+    position: relative;
+}
+
+.listImg:hover:after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+ }
+
+ .listImg:hover:after{
+    content: 'Actualizar';
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+ }
+
+.listImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/** ESTILOS A mostrarImgTipo  */
+
+.mostrarImg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.imagenTipo{
+    width: 180px;
+    height: 150px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.imagenTipo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#formActImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputFileImg{
+    width: 350px;
+    margin-bottom: 20px;
+}
+
+.btnActImg{
+    padding: 8px;
+    background-color: #c4ac9f;
+    border: none;
+    border-radius: 5px;
+    transition: .3s ease;
+}
+
+.btnActImg:hover{
+    background-color: #8c7b71;
+}
 
 @media only screen and (max-width: 600px) {
     .contenido {

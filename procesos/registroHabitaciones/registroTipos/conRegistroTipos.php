@@ -33,10 +33,12 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
 
     if ($sql->execute()) {
 
-        $sql2 = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_habitacion_tipo, id_elemento) VALUES (:idTipo, :idElemento)"); // consulta de la tabla habitaciones_tipos_elementos de la BD
+        $sql2 = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_habitacion_tipo, id_elemento, estado) VALUES (:idTipo, :idElemento, :estadoServ)"); // consulta de la tabla habitaciones_tipos_elementos de la BD
 
+        $estadoServ = 1;
         $ultID = $dbh->lastInsertId('habitaciones_tipos'); // funcion para capturar el ultimo id de la tabla habitaciones_tipos
         $sql2->bindParam(':idTipo', $ultID);
+        $sql2->bindParam(':estadoServ', $estadoServ);
 
 
         foreach ($opcionesServ as $opciones) { // recorrer todas las opciones de servicios
@@ -52,7 +54,8 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
         //* SECCION PARA SUBIR LAS IMAGENES A LA BASE DE DATOS
 
 
-        $sql3 = $dbh->prepare("INSERT INTO habitaciones_imagenes(idTipoHabitacion, nombre, ruta) VALUES (:idTipo, :nombre, :ruta)"); // preparar la consulta de la tabla de las imagenes
+        $sql3 = $dbh->prepare("INSERT INTO habitaciones_imagenes(idTipoHabitacion, nombre, ruta, estado) VALUES (:idTipo, :nombre, :ruta, :estadoImg)"); // preparar la consulta de la tabla de las imagenes
+        $estadoImg = 1;
 
         $imagenesNombre = $_FILES['imagenes']['name']; // capturar el nombre de la imagen esto me da con la extension tambien (imagen.png)
         $rutaTmp = $_FILES['imagenes']['tmp_name']; // capturar la ruta temporal
@@ -72,6 +75,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
                 $sql3->bindParam(':idTipo', $ultID);
                 $sql3->bindParam(':nombre', $nombreNuevoImg);
                 $sql3->bindParam(':ruta', $rutaImg);
+                $sql3->bindParam(':estadoImg', $estadoImg);
 
                 if ($sql3->execute()) {
                     move_uploaded_file($rutaTmp2, "../../../imgServidor/".$rutaImg);

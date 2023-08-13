@@ -88,7 +88,7 @@ echo $_SESSION['tipoUsuario']; */
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Deshabilitar</button>
-                    <button type="button" class="btn btn-primary">Editar</button>
+                    <a href="" id="editTipo" class="btn btn-primary">Editar </a>
                 </div>
             </div>
         </div>
