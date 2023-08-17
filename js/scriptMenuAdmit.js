@@ -257,7 +257,7 @@ $(document).ready(function(){
   });
 
 
-  const btnActImg = $('.listImg');
+  const btnActImg = $('.listImg2');
   const contenidoImg = $('#contenidoImg');
   const formularioRegTipoHabi = $('.formularioRegTipoHabi');
 
@@ -270,9 +270,19 @@ $(document).ready(function(){
     .then(res => res.text())
     .then(datos => contenidoImg.html(datos))
     .catch()
-
-    
-
   });
+
+  //* script para añadir una imagen en la parte de editar los tipos de habitaciones
+
+  $('.addImg').click(function(){
+    $('#addImg').click(); // abrir el input de añadir imagen
+  });
+
+  $('#addImg').on('change', function(e){
+    if(e.target.files[0]){
+      $('#btnAddImg').click();
+    }
+  });
+
 
 });

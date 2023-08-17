@@ -10,7 +10,7 @@ $sql = "SELECT tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilado
 
 $sqlServi = "SELECT habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = " . $id . ""; // sql de los servicios de los tipos de habitaciones
 
-$sqlImg = "SELECT nombre, ruta FROM habitaciones_imagenes WHERE idTipoHabitacion = " . $id . ""; // sql de las imagenes de los tipos de habitaciones
+$sqlImg = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE idTipoHabitacion = " . $id . ""; // sql de las imagenes de los tipos de habitaciones
 
 ?>
 
@@ -63,11 +63,13 @@ $sqlImg = "SELECT nombre, ruta FROM habitaciones_imagenes WHERE idTipoHabitacion
             <div class="imagenesTipos">
                 <?php
                 foreach ($dbh->query($sqlImg) as $rowImg) :
+                    if($rowImg['estado'] == 1):
                 ?>
                     <div class="listImg">
-                        <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Imagenes de las habitaciones">
+                        <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Imagenes de las habitaciones">  
                     </div>
                 <?php
+                endif;
                 endforeach;
                 ?>
             </div>

@@ -47,28 +47,29 @@ echo $_SESSION['tipoUsuario']; */
 
                         include "../../procesos/config/conex.php";
 
-                        $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
+                        $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
 
                         foreach ($dbh->query($sql) as $row) :
-
                         ?>
                             <div class="cardHab">
-                                <div class="imgHab">
-                                    <img src="../../imgServidor/<?php echo $row['ruta']?>" alt="">
-                                </div>
+                                <?php
+                                if ($row['estado'] == 1) :
+                                ?>
+                                    <div class="imgHab">
+                                        <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="">
+                                    </div>
+                                <?php
+                                endif;
+                                ?>
                                 <div class="tipoHab">
                                     <span><?php echo $row['tipoHabitacion'] ?></span>
-                                    <button data-id="<?php echo $row['id'];?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
+                                    <button data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
                                 </div>
                             </div>
 
                         <?php
-
-
                         endforeach;
-
                         ?>
-
                     </div>
                 </div>
             </div>
@@ -87,8 +88,8 @@ echo $_SESSION['tipoUsuario']; */
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Deshabilitar</button>
-                    <a href="" id="editTipo" class="btn btn-primary">Editar </a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Deshabilitar</button>
+                    <a href="" id="editTipo" class="btn btn-warning">Editar </a>
                 </div>
             </div>
         </div>

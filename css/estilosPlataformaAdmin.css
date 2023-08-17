@@ -14,7 +14,7 @@ body {
 }
 
 .alerta {
-    position: absolute;
+    position: fixed;
     top: 90px;
     right: 0;
 }
@@ -235,8 +235,8 @@ body {
 }
 
 .botonRgServicio{
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
 }
@@ -455,6 +455,7 @@ body {
     margin-left: 12px;
     width: 640px;
     height: 100%;
+    margin-bottom: 50px;
 }
 
 
@@ -473,7 +474,7 @@ body {
     flex-wrap: wrap;
 }
 
-.listImg{
+.listImg2{
     width: 160px;
     height: 120px;
     margin: 20px;
@@ -482,20 +483,20 @@ body {
     transition: transform .3s ease;
 }
 
-.listImg:hover{
+.listImg2:hover{
     transform: scale(1.1);
     position: relative;
 }
 
-.listImg:hover:after{
+.listImg2:hover:after{
     content: '';
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.2);
  }
 
- .listImg:hover:after{
-    content: 'Actualizar';
+ .listImg2:hover:after{
+    content: 'Editar';
     position: absolute;
     display: flex;
     justify-content: center;
@@ -505,7 +506,7 @@ body {
     font-weight: bold;
  }
 
-.listImg img{
+.listImg2 img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -547,6 +548,23 @@ body {
     margin-bottom: 20px;
 }
 
+.btnInputs{
+    display: flex;
+}
+
+.btnElmImg{
+    padding: 8px;
+    margin-right: 15px;
+    background-color: #f66060;
+    border: none;
+    border-radius: 5px;
+    transition: .3s ease;
+}
+
+.btnElmImg:hover{
+    background-color: #cd4b4b;
+}
+
 .btnActImg{
     padding: 8px;
     background-color: #c4ac9f;
@@ -558,6 +576,41 @@ body {
 .btnActImg:hover{
     background-color: #8c7b71;
 }
+
+
+/*! ESTILOS PARA LA SECCION DE AÑADIR IMAGEN  */
+
+.addImg{
+    width: 160px;
+    height: 120px;
+    margin: 20px;
+    border: 2px dashed #4863A0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.addImg i{
+    margin-top: 20px;
+    color: #4863A0;
+    font-size: 25px;
+}
+
+.addImg p{
+    color: #4863A0;
+    font-size: 18px;
+}
+
+#addImg{
+    display: none;
+}
+
+#btnAddImg{
+    display: none;
+}
+
 
 @media only screen and (max-width: 600px) {
     .contenido {

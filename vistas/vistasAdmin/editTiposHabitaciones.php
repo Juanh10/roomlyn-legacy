@@ -88,13 +88,17 @@ $idTipo = $_GET['id'];
                                         <input type="number" name="precioAire" id="precioAire" value="<?php echo $row['precioAire'] ?>" min="0" class="form-control p-2 inputPeque" required>
                                     </div>
                                 </div>
+                                <div class="botonRgServicio">
+                                    <input type="submit" value="Actualizar" class="btnInputSubmit">
+                                </div>
+                                </form>
                         </div>
                 </div>
 
                 <div class="col-4">
 
                     <div class="serviciosHabitaciones">
-                        <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios <span class="checkSpan">(Seleccione al menos una opción)</span></h1>
+                        <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
 
 
 
@@ -113,30 +117,38 @@ $idTipo = $_GET['id'];
                         <?php
                         // mostrar las imagenes por medio del foreach
                         foreach ($dbh->query($sqlImg) as $row) :
+                            if($row['estado'] == 1):
                         ?>
-                            <div class="listImg" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg">
+                            <div class="listImg2" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg">
                                 <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="Fotos de las habitaciones">
                             </div>
                         <?php
+                        endif;
                         endforeach;
                         ?>
+                        <div class="addImg">
+                            <i class="bi bi-camera"></i>
+                            <p>Añadir</p>
+                        </div>
+                        <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarImgTipo.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
+                            <input type="file" name="addImg" id="addImg">
+                            <input type="submit" value="Enviar" name="btnAddImg" id="btnAddImg">
+                        </form>
+
                     </div>
                 </div>
             </div>
 
-            <div class="botonRgServicio">
-                <input type="submit" value="Actualizar" class="btnInputSubmit">
-            </div>
-
-            </form>
         <?php
                     endforeach;
 
         ?>
 
-
         </div>
     </div>
+
+
 
 
     <!-- Modal de actualizar imagenes -->
@@ -144,15 +156,39 @@ $idTipo = $_GET['id'];
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header fondo-modal">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar foto</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar foto</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="contenidoImg">
-                    
+
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- ALERTAS -->
+
+    <?php
+
+    if (isset($_SESSION['msjError'])) :
+    ?>
+        <div class="alert alert-danger alerta" role="alert">
+            <strong><i class="bi bi-exclamation-triangle-fill"></i><?php echo $_SESSION['msjError'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjError']);
+    endif;
+
+    if (isset($_SESSION['msjExito'])) :
+    ?>
+        <div class="alert alert-success alerta" role="alert">
+            <strong><i class="bi bi-check-circle-fill"></i><?php echo $_SESSION['msjExito'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjExito']);
+    endif;
+    ?>
 
 </body>
 
