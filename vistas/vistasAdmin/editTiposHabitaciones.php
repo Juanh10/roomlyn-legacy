@@ -58,9 +58,11 @@ $idTipo = $_GET['id'];
 
                             <!-- FORMULARIO PARA ACTUALIZAR LOS TIPOS DE HABITACIONES  -->
 
-                            <form action="../../procesos/registroHabitaciones/registroTipos/conRegistroTipos.php" method="post" enctype="multipart/form-data" id="formularioReg">
+                            <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
 
                                 <h2>Información</h2>
+
+                                <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
 
                                 <label for="nombreTipo" class="form-label">Tipo de habitacion</label>
                                 <input type="text" name="nombreTipo" id="nombreTipo" value="<?php echo $row['tipoHabitacion'] ?>" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" require>
@@ -89,9 +91,9 @@ $idTipo = $_GET['id'];
                                     </div>
                                 </div>
                                 <div class="botonRgServicio">
-                                    <input type="submit" value="Actualizar" class="btnInputSubmit">
+                                    <input type="submit" name="actTipo" value="Actualizar" class="btnInputSubmit">
                                 </div>
-                                </form>
+                            </form>
                         </div>
                 </div>
 
@@ -100,7 +102,17 @@ $idTipo = $_GET['id'];
                     <div class="serviciosHabitaciones">
                         <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
 
+                        <?php
+                            $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = ".$idTipo."";
 
+                            foreach($dbh -> query($sqlServicios) as $rowServ):
+                                ?>
+
+                                
+
+                                <?php
+                            endforeach;
+                        ?>
 
                     </div>
 
@@ -117,13 +129,13 @@ $idTipo = $_GET['id'];
                         <?php
                         // mostrar las imagenes por medio del foreach
                         foreach ($dbh->query($sqlImg) as $row) :
-                            if($row['estado'] == 1):
+                            if ($row['estado'] == 1) :
                         ?>
-                            <div class="listImg2" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg">
-                                <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="Fotos de las habitaciones">
-                            </div>
+                                <div class="listImg2" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg">
+                                    <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="Fotos de las habitaciones">
+                                </div>
                         <?php
-                        endif;
+                            endif;
                         endforeach;
                         ?>
                         <div class="addImg">

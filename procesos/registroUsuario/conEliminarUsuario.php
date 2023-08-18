@@ -18,7 +18,7 @@ if($sql -> execute()){
     $_SESSION['msj2'] = "Deshabilitado";
 }else{
     header("location: ../../vistas/vistasAdmin/usuarios.php");
-    $_SESSION['msj2'] = "ERROR";
+    $_SESSION['msj2'] = "Ocurrió un error";
 }
 
 

@@ -33,10 +33,10 @@ $sql -> bindParam(':contra', $contraseña);
 
 if($sql -> execute()){
     header("location: ../../vistas/vistasAdmin/usuarios.php");
-    $_SESSION['msj2'] = "Actualizado";
+    $_SESSION['msj2'] = "Datos actualizados";
 }else{
     header("location: ../../vistas/vistasAdmin/usuarios.php");
-    $_SESSION['msj2'] = "ERROR";
+    $_SESSION['msj2'] = "Ocurrió un error";
 }
 
 

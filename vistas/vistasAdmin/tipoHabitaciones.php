@@ -44,30 +44,31 @@ echo $_SESSION['tipoUsuario']; */
                     <div class="cardHabitacion">
 
                         <?php
-
                         include "../../procesos/config/conex.php";
 
-                        $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
+                        $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
 
                         foreach ($dbh->query($sql) as $row) :
+                            if ($row[2] == 1) :
                         ?>
-                            <div class="cardHab">
-                                <?php
-                                if ($row['estado'] == 1) :
-                                ?>
-                                    <div class="imgHab">
-                                        <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="">
+                                <div class="cardHab">
+                                    <?php
+                                    if ($row[4] == 1) :
+                                    ?>
+                                        <div class="imgHab">
+                                            <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="">
+                                        </div>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <div class="tipoHab">
+                                        <span><?php echo $row['tipoHabitacion'] ?></span>
+                                        <button data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
                                     </div>
-                                <?php
-                                endif;
-                                ?>
-                                <div class="tipoHab">
-                                    <span><?php echo $row['tipoHabitacion'] ?></span>
-                                    <button data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
                                 </div>
-                            </div>
 
                         <?php
+                            endif;
                         endforeach;
                         ?>
                     </div>
@@ -88,12 +89,37 @@ echo $_SESSION['tipoUsuario']; */
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Deshabilitar</button>
+                    <form action="../../procesos/registroHabitaciones/registroTipos/conEliminarTipo.php" method="post" id="formularioElimarTipo">
+                        <input type="hidden" value="" name="idTipoHab" id="idTipoHabElm">
+                        <input type="submit" value="Deshabilitar" name="btnDeshabilitar" id="btnDeshabilitar" class="btn btn-danger btnDeshabilitar">
+                    </form>
                     <a href="" id="editTipo" class="btn btn-warning">Editar </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- ALERTAS  -->
+
+    <?php
+    if (isset($_SESSION['msjError'])) :
+    ?>
+        <div class="alert alert-danger alerta" role="alert">
+            <strong><i class="bi bi-exclamation-triangle-fill"></i><?php echo $_SESSION['msjError'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjError']);
+    endif;
+
+    if (isset($_SESSION['msjExito'])) :
+    ?>
+        <div class="alert alert-success alerta" role="alert">
+            <strong><i class="bi bi-check-circle-fill"></i><?php echo $_SESSION['msjExito'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjExito']);
+    endif;
+    ?>
 
 </body>
 

@@ -9,20 +9,20 @@ $(document).ready(function () {
 
   let enlacePrincipal = $('.enlacePrincipal');
 
-  enlacePrincipal.click(function() {
+  enlacePrincipal.click(function () {
     $('.flecha').toggleClass('flechaActivo');// agregar clase
-  
+
     let height = 0;
     let menu = this.nextElementSibling; // seleccionar al hermano adyacente del elemento con la clase enlacePrincipal
 
-    if(menu.clientHeight == 0){
+    if (menu.clientHeight == 0) {
       height = menu.scrollHeight;
     }
 
     menu.style.height = `${height}px`;
 
   });
-  
+
 
 
   $(document).click(function (event) {
@@ -51,11 +51,11 @@ $(document).ready(function () {
 
 
   //* Agregar clase activo al menu desplegable del submenu
-  $('.enlaceMenuSecund').each(function(){ 
+  $('.enlaceMenuSecund').each(function () {
     let href = $(this).attr('href');
     let submenu = $('.menuDesplegable');
 
-    if(urlActual.endsWith(href)){
+    if (urlActual.endsWith(href)) {
       submenu.addClass('activo');
       return false;
     }
@@ -75,44 +75,44 @@ $(document).ready(function () {
 
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
 
   //! Alertas
 
-  $('.formularioEliminar').submit(function(e) {
+  $('.formularioEliminar').submit(function (e) {
     e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
     Swal.fire({
-        title: '¿Estas seguro?',
-        text: "¡No podrás revertir esto!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Deshabilitar'
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Deshabilitar'
     }).then((result) => {
-        if (result.isConfirmed) {
-            this.submit(); // sirve para enivar los datos del formulario
-        }
+      if (result.isConfirmed) {
+        this.submit(); // sirve para enivar los datos del formulario
+      }
     });
-});
+  });
 
 
-setTimeout(function(){
-  $('.alerta').fadeOut(500)
-}, 2000)
+  setTimeout(function () {
+    $('.alerta').fadeOut(500)
+  }, 2000)
 
   //* Mostrar datos de usuarios para editar
 
-  $('.botonEditar').click(function(e){
+  $('.botonEditar').click(function (e) {
     let tr = e.target.parentElement.parentElement.parentElement; // seleccionar al tr
     let td = [...tr.children]; // convertir en arreglo
 
-    let datos = td.map(function(element){ // recorre los td
+    let datos = td.map(function (element) { // recorre los td
       return $(element).text(); // combierte los elementos del td en texto
     })
 
     let nombreSeparados = datos[1].split(" "); // separa el nombre y lo convierte en un arreglo
-    
+
     $('#id_usuario').val(datos[0]);
     $('#pNombre').val(nombreSeparados[0]);
     $('#sNombre').val(nombreSeparados[1]);
@@ -127,12 +127,12 @@ setTimeout(function(){
 
   //* MOSTRAR DATOS DE SERVICIOS DE HABITACIONES PARA EDITAR
 
-  $('.editServiciosBtn').click(function(e){
+  $('.editServiciosBtn').click(function (e) {
 
     let elemento = e.target.parentElement.children;
     let arregloElemento = [...elemento];
-    
-    let datos = arregloElemento.map(function(element){
+
+    let datos = arregloElemento.map(function (element) {
       return $(element).text();
     });
 
@@ -143,24 +143,24 @@ setTimeout(function(){
 
   //* BUSCADOR
 
-  $('#buscador').keyup(function(e){
+  $('#buscador').keyup(function (e) {
 
     let busqueda = e.target.value.toLowerCase(); // convertir en minuscula lo que se escribe en el buscador
 
-    $('.filas').each(function(i, filas){ // ciclo foreach para recorrer todas las filas
+    $('.filas').each(function (i, filas) { // ciclo foreach para recorrer todas las filas
 
-      let busquedaEncontrada = false; 
+      let busquedaEncontrada = false;
 
-      $(filas).find('.datos').each(function(j, elementos){ // ciclo foreach para recorrer todos los elementos que contiene la clase datos
+      $(filas).find('.datos').each(function (j, elementos) { // ciclo foreach para recorrer todos los elementos que contiene la clase datos
         let elementosTextMin = elementos.textContent.toLowerCase();
-        if(elementosTextMin.includes(busqueda)){ // comparar lo que hay en elementos con lo que se escribe en el buscador con esto se obtiene true o false
+        if (elementosTextMin.includes(busqueda)) { // comparar lo que hay en elementos con lo que se escribe en el buscador con esto se obtiene true o false
           busquedaEncontrada = true;
         }
       });
-      
+
       if (busquedaEncontrada) { // si esto llega ser verdadero me tiene que aparecer solo la fila que contenga lo que se buscó
         $(filas).removeClass('filtro');
-      }else{ // si es falso se oculta las demas filas
+      } else { // si es falso se oculta las demas filas
         $(filas).addClass('filtro');
       }
 
@@ -169,17 +169,17 @@ setTimeout(function(){
   });
 
   //* Paginacion de tablas
-  
+
   let pagActual = 1;
   let filasTotalPagina = 5;
 
-  function mostrarFilas(){
+  function mostrarFilas() {
 
-    $('.filas').each(function(i, filas){
+    $('.filas').each(function (i, filas) {
 
-      if(i >= (pagActual - 1) * filasTotalPagina && i < pagActual * filasTotalPagina){
+      if (i >= (pagActual - 1) * filasTotalPagina && i < pagActual * filasTotalPagina) {
         $(filas).removeClass('paginacion');
-      }else{
+      } else {
         $(filas).addClass('paginacion');
       }
 
@@ -191,18 +191,18 @@ setTimeout(function(){
 
   //* Botones de siguiente y anterior de la paginacion de tablas
 
-  $('#btnSiguiente').click(function(){
+  $('#btnSiguiente').click(function () {
     let totalFilas = $('.filas').length;
     let totalPag = Math.ceil(totalFilas / filasTotalPagina);
-    if(pagActual < totalPag){
+    if (pagActual < totalPag) {
       pagActual++;
       mostrarFilas();
-    }else{
+    } else {
     }
   });
 
-  $('#btnAnterior').click(function(){
-    if(pagActual > 1){
+  $('#btnAnterior').click(function () {
+    if (pagActual > 1) {
       pagActual--;
       mostrarFilas();
     }
@@ -210,10 +210,11 @@ setTimeout(function(){
 
   //*quitar clase de paginacion en el momento de que se este buscando algo
 
-  $('#buscador').on('input',function(e){;
-    if(e.target.value.length > 0){
+  $('#buscador').on('input', function (e) {
+    ;
+    if (e.target.value.length > 0) {
       $('.filas').removeClass('paginacion');
-    }else{
+    } else {
       mostrarFilas();
     }
   });
@@ -221,9 +222,9 @@ setTimeout(function(){
   //* Contador de registros
 
   let contadorRegistro = 0;
-  
-  function totalRegistro(filaTabla){
-    $(filaTabla).each(function(i, filasUsuario){
+
+  function totalRegistro(filaTabla) {
+    $(filaTabla).each(function (i, filasUsuario) {
       contadorRegistro++;
     });
     $('#totalRegistro').text(`Total datos: ${contadorRegistro}`);
@@ -235,7 +236,7 @@ setTimeout(function(){
 });
 
 
-$(document).ready(function(){
+$(document).ready(function () {
 
   //* SCRIPTS DE LA PARTE PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO VAMOS A USAR fetch para el envio del ID del tipo que se esta seleccionando
 
@@ -243,17 +244,19 @@ $(document).ready(function(){
   const contCrud = $('#contenidoDelCrud');
   const btnEditTipo = $('#editTipo');
 
-  crud.click(function(e){
+  crud.click(function (e) {
     let id = e.target.dataset.id; // obtener el valor del data-id en la cual es el id que seleccionó en el crud
 
     let url = `editTiposHabitaciones.php?id=${id}`; // obtenemos la url para editar los tipos de habitaciones
 
-    btnEditTipo.attr('href',url);
+    $('#idTipoHabElm').val(id);
+
+    btnEditTipo.attr('href', url);
 
     fetch(`../../vistas/vistasAdmin/tiposHabitaciones/mostrarTiposHabitaciones.php?id=${id}`) // usamos fetch para el envio de dtos
-    .then(res => res.text()) // recibe la respuesta del servidor
-    .then(datos => contCrud.html(datos)) // mostramos la respuesta
-    .catch()
+      .then(res => res.text()) // recibe la respuesta del servidor
+      .then(datos => contCrud.html(datos)) // mostramos la respuesta
+      .catch()
   });
 
 
@@ -261,28 +264,27 @@ $(document).ready(function(){
   const contenidoImg = $('#contenidoImg');
   const formularioRegTipoHabi = $('.formularioRegTipoHabi');
 
-  btnActImg.click(function(e){
+  btnActImg.click(function (e) {
 
     let idImg = e.target.id;
     let idTipoHab = formularioRegTipoHabi[0].id;
-    
+
     fetch(`../../vistas/vistasAdmin/tiposHabitaciones/mostrarImgTipo.php?id=${idImg}&&idTipo=${idTipoHab}`) // enviamos el id al servidor por medio de fetch
-    .then(res => res.text())
-    .then(datos => contenidoImg.html(datos))
-    .catch()
+      .then(res => res.text())
+      .then(datos => contenidoImg.html(datos))
+      .catch()
   });
 
   //* script para añadir una imagen en la parte de editar los tipos de habitaciones
 
-  $('.addImg').click(function(){
+  $('.addImg').click(function () {
     $('#addImg').click(); // abrir el input de añadir imagen
   });
 
-  $('#addImg').on('change', function(e){
-    if(e.target.files[0]){
+  $('#addImg').on('change', function (e) {
+    if (e.target.files[0]) {
       $('#btnAddImg').click();
     }
   });
-
 
 });
