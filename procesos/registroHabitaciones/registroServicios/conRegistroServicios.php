@@ -1,6 +1,6 @@
 <?php
 
-include "../../config/conex.php";
+include_once "../../config/conex.php";
 
 if(isset($_POST['registrarServicio'])){
     if(!empty($_POST['servicio'])){

@@ -1,6 +1,6 @@
 <?php
 
-include "../../config/conex.php";
+include_once "../../config/conex.php";
 session_start();
 
 if (isset($_POST['actulizarImagen'])) {

@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../../../procesos/config/conex.php";
+include_once "../../../procesos/config/conex.php";
 
 $id = $_GET['id']; // recibimos por medio de fetch el id
 

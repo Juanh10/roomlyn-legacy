@@ -234,12 +234,6 @@
     top: 10px;
 }
 
-.metReservas .btnReservar p{
-    color: red;
-    font-size: 13px;
-    font-weight: bold;
-}
-
 .metReservas .btnReservar a{
     position: absolute;
     text-decoration: none;

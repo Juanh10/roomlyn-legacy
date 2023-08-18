@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../procesos/config/conex.php";
+include_once "../procesos/config/conex.php";
 
 $sql = $dbh->prepare("SELECT tipoUsuario FROM usuarios WHERE tipoUsuario = 'administrador'"); // consulta sobre el tipo de usuario
 
@@ -84,10 +84,8 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
                                 <?php
                                 endif;
                                 ?>
-
                                 <a href="olvConrtraseña.php">¿Olvidaste tu contraseña?</a>
                             </div>
-
                         </div>
                     </form>
                 </div>

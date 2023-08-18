@@ -3,7 +3,7 @@
 $id = $_GET['id'];
 $idTipo = $_GET['idTipo'];
 
-include "../../../procesos/config/conex.php";
+include_once "../../../procesos/config/conex.php";
 
 $sql = "SELECT ruta, estado FROM habitaciones_imagenes WHERE id = " . $id . "";
 

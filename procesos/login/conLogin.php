@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../config/conex.php";
+include_once "../config/conex.php";
 
 //* HACER LA VALIDACION DEL INICIO DE SESION SI LOS CAMPOS NO ESTAN VACIOS SE HACE LA CONSULTA A LA BD
 

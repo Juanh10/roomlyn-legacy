@@ -238,7 +238,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-  //* SCRIPTS DE LA PARTE PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO VAMOS A USAR fetch para el envio del ID del tipo que se esta seleccionando
+  //* SCRIPTS DE LA PARTE PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO SE USA LA API fetch para el envio del ID del tipo que se esta seleccionando
 
   const crud = $('.tipoHab button');
   const contCrud = $('#contenidoDelCrud');
@@ -274,8 +274,6 @@ $(document).ready(function () {
       .then(datos => contenidoImg.html(datos))
       .catch()
   });
-
-  //* script para añadir una imagen en la parte de editar los tipos de habitaciones
 
   $('.addImg').click(function () {
     $('#addImg').click(); // abrir el input de añadir imagen

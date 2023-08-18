@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../config/conex.php";
+include_once "../config/conex.php";
 
 if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty($_POST['tipoDocumento']) && !empty($_POST['primerApellido']) && !empty($_POST['documento']) && !empty($_POST['celular']) && !empty($_POST['email']) && !empty($_POST['tipoUsuario']) && !empty($_POST['usuario']) && !empty($_POST['contraseña']) ){
 

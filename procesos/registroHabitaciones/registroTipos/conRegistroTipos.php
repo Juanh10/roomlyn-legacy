@@ -1,6 +1,6 @@
 <?php
 
-include "../../config/conex.php";
+include_once "../../config/conex.php";
 
 if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_POST['cantidadPersonas']) && !empty($_POST['precioVentilador']) && !empty($_POST['precioAire']) && !empty($_FILES['imagenes']) && !empty($_POST['opcionesServ'])) {
 

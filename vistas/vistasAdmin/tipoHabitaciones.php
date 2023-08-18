@@ -11,6 +11,10 @@ echo $_SESSION['pNombre'];
 echo $_SESSION['pApellido'];
 echo $_SESSION['tipoUsuario']; */
 
+include_once "../../procesos/config/conex.php";
+
+$sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +40,7 @@ echo $_SESSION['tipoUsuario']; */
         </div>
     </header>
 
-    <div class="contenido">
+    <main class="contenido">
         <div class="container lisTiposHb">
             <h1>Tipos de habitaciones</h1>
             <div class="row">
@@ -44,10 +48,6 @@ echo $_SESSION['tipoUsuario']; */
                     <div class="cardHabitacion">
 
                         <?php
-                        include "../../procesos/config/conex.php";
-
-                        $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
-
                         foreach ($dbh->query($sql) as $row) :
                             if ($row[2] == 1) :
                         ?>
@@ -75,7 +75,7 @@ echo $_SESSION['tipoUsuario']; */
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
 
     <!-- Modal -->

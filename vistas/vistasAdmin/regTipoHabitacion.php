@@ -70,8 +70,8 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                                 </div>
                             </div>
 
-                            <label for="formFileMultiple" class="form-label mt-3">Adjuntar imagenes</label>
-                            <input class="form-control" name="imagenes[]" id="imagenes" type="file" id="formFileMultiple" accept="image/*" multiple required>
+                            <label for="imagenes" class="form-label mt-3">Adjuntar imagenes</label>
+                            <input class="form-control" name="imagenes[]" id="imagenes" type="file" accept="image/*" multiple required>
                             <p></p>
 
                             <div class="row">

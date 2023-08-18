@@ -1,6 +1,6 @@
 <?php
 
-include "../../config/conex.php";
+include_once "../../config/conex.php";
 
 $idServicio = $_POST['idServicio'];
 $servicioAct = $_POST['servicioAct'];
