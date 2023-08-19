@@ -15,6 +15,18 @@ include_once "../../procesos/config/conex.php";
 
 $idTipo = $_GET['id'];
 
+// Consulta para obtener información del tipo de habitación
+$SqlTipo = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire, estado, fecha_sys FROM habitaciones_tipos WHERE id = " . $idTipo . "";
+
+// Consulta para obtener imágenes relacionadas con el tipo de habitación
+$sqlImg = "SELECT habitaciones_imagenes.id, habitaciones_imagenes.nombre, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_imagenes INNER JOIN habitaciones_tipos ON habitaciones_imagenes.idTipoHabitacion = habitaciones_tipos.id WHERE habitaciones_imagenes.idTipoHabitacion = " . $idTipo . "";
+
+// consulta para obtener los servicios que estan relacionados con el tipo de habitacion
+$sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = ".$idTipo."";
+
+// consulta para obtener todos los servicios
+$sqlServicios2 = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
+
 ?>
 
 <!DOCTYPE html>
@@ -44,11 +56,6 @@ $idTipo = $_GET['id'];
                 <div class="col-md-7 me-5">
 
                     <?php
-                    // Consulta para obtener información del tipo de habitación
-                    $SqlTipo = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire, estado, fecha_sys FROM habitaciones_tipos WHERE id = " . $idTipo . "";
-
-                    // Consulta para obtener imágenes relacionadas con el tipo de habitación
-                    $sqlImg = "SELECT habitaciones_imagenes.id, habitaciones_imagenes.nombre, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_imagenes INNER JOIN habitaciones_tipos ON habitaciones_imagenes.idTipoHabitacion = habitaciones_tipos.id WHERE habitaciones_imagenes.idTipoHabitacion = " . $idTipo . "";
 
                     foreach ($dbh->query($SqlTipo) as $row) :
                     ?>
@@ -101,19 +108,25 @@ $idTipo = $_GET['id'];
 
                     <div class="serviciosHabitaciones">
                         <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
-
+                        <ul class="listaServTipo">
                         <?php
-                            $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = ".$idTipo."";
-
+                        // mostrar datos de los servicios
                             foreach($dbh -> query($sqlServicios) as $rowServ):
+                                if($rowServ['estado'] == 1):
                                 ?>
-
-                                
-
+                                    <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
+                                    <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
+                                    <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
+                                        <input type="hidden" name="idServicio" value="<?php echo $rowServ['id'] ?>">
+                                        <button type="submit" name="btnElmServ"><i class="bi bi-trash" title="Deshabilitar"></i></button>
+                                    </form>
+                                    </li>
                                 <?php
+                                endif;
                             endforeach;
                         ?>
-
+                        <li class="btnAñadirServ"><button>Añadir</button></li>
+                        </ul>
                     </div>
 
                     <div>
@@ -158,6 +171,18 @@ $idTipo = $_GET['id'];
         ?>
 
         </div>
+        <?php
+        foreach($dbh -> query($sqlServicios) as $rowServicios):
+            foreach($dbh -> query($sqlServicios2) as $rowServicios2):
+
+                if($rowServicios2['elemento'] != $rowServicios['elemento']){
+                    echo $rowServicios2['elemento'];
+                }
+
+            endforeach;
+        endforeach;
+        
+        ?>
     </div>
 
 

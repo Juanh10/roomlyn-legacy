@@ -24,7 +24,7 @@
     top: 55%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    color: #fff;
+    color: #000;
     width: 100%;
     font-size: 29px;
     text-align: center;
@@ -40,16 +40,29 @@
 .imagen1{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/entradaPrincipal.webp);
+    background: url(../img/entradaPrincipal.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
 }
 
+.imagen1::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: black; /* Color de superposición */
+    opacity: 0.2; /* Ajusta la opacidad para controlar el contraste */
+    pointer-events: none;
+}
+
 .imagen2{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/entrada3.webp);
+    background: url(../img/entrada3.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
@@ -58,7 +71,7 @@
 .imagen3{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/recepcion.webp);
+    background: url(../img/recepcion.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;
@@ -67,7 +80,7 @@
 .imagen4{
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .50), rgb(0, 0, 0, .50)), url(../img/solarRecepcion.webp);
+    background: url(../img/solarRecepcion.webp);
 	background-position: center;
 	background-size: cover;
     background-attachment: fixed;

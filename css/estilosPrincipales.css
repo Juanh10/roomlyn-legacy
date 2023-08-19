@@ -82,7 +82,7 @@
 }
 
 .navegacion ul li a:hover, .navegacion .activo{
-    color: #643e33;
+    color: #000000;
 }
 
 .navegacion ul li a:after{
@@ -90,7 +90,7 @@
     position: absolute;
     width: 0%;
     height: 2px;
-    background-color: #643e33;
+    background-color: rgb(0, 0, 0);
     bottom: 0;
     left: 0;
     transition: all .5s;
