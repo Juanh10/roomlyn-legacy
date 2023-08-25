@@ -238,7 +238,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-  //* SCRIPTS DE LA PARTE PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO SE USA LA API fetch para el envio del ID del tipo que se esta seleccionando
+  //* SCRIPTS PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO SE USA LA API fetch para el envio del ID del tipo que se esta seleccionando
 
   const crud = $('.tipoHab button');
   const contCrud = $('#contenidoDelCrud');
@@ -259,7 +259,7 @@ $(document).ready(function () {
       .catch()
   });
 
-
+  //* Enviar al servidor por medio de la api FETCH el id de la imagen para mostrarlo en el modal
   const btnActImg = $('.listImg2');
   const contenidoImg = $('#contenidoImg');
   const formularioRegTipoHabi = $('.formularioRegTipoHabi');
@@ -275,14 +275,31 @@ $(document).ready(function () {
       .catch()
   });
 
-  $('.addImg').click(function () {
+  //* Eventos clic para agregar la foto sin tener que presionar un boton
+
+  $('.addFoto').click(function () {
     $('#addImg').click(); // abrir el input de añadir imagen
   });
 
   $('#addImg').on('change', function (e) {
     if (e.target.files[0]) {
-      $('#btnAddImg').click();
+      $('#btnAddImg').click(); // evento de dar clic al boton de agregar cuando se agrega una imagen en el input file
     }
+  });
+
+  //* Enviar al servidor por medio de la api FETCH el id de la habitacion para la seccion de añadir imagen
+
+  const btnAddServ = $('#btnAddServ');
+  const contenidoServ = $('#modalAddServ2');
+
+  btnAddServ.click(function(e){
+
+    let idTipoHab = e.target.id;
+    
+    fetch(`../vistasAdmin/tiposHabitaciones/mostrarServicios.php?id=${idTipoHab}`)// enviar el id al servidor por fetch
+    .then(res => res.text()) // recibir los datos del servidor
+    .then(datos => contenidoServ.html(datos)) // mostrar los datos
+    .catch() 
   });
 
 });

@@ -22,10 +22,7 @@ $SqlTipo = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, precioV
 $sqlImg = "SELECT habitaciones_imagenes.id, habitaciones_imagenes.nombre, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_imagenes INNER JOIN habitaciones_tipos ON habitaciones_imagenes.idTipoHabitacion = habitaciones_tipos.id WHERE habitaciones_imagenes.idTipoHabitacion = " . $idTipo . "";
 
 // consulta para obtener los servicios que estan relacionados con el tipo de habitacion
-$sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = ".$idTipo."";
-
-// consulta para obtener todos los servicios
-$sqlServicios2 = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
+$sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = " . $idTipo . "";
 
 ?>
 
@@ -109,28 +106,24 @@ $sqlServicios2 = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                     <div class="serviciosHabitaciones">
                         <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
                         <ul class="listaServTipo">
-                        <?php
-                        // mostrar datos de los servicios
-                            foreach($dbh -> query($sqlServicios) as $rowServ):
-                                if($rowServ['estado'] == 1):
-                                ?>
+                            <?php
+                            // mostrar datos de los servicios
+                            foreach ($dbh->query($sqlServicios) as $rowServ) :
+                                if ($rowServ['estado'] == 1) :
+                            ?>
                                     <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
-                                    <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
-                                    <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
-                                        <input type="hidden" name="idServicio" value="<?php echo $rowServ['id'] ?>">
-                                        <button type="submit" name="btnElmServ"><i class="bi bi-trash" title="Deshabilitar"></i></button>
-                                    </form>
+                                        <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
+                                            <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
+                                            <input type="hidden" name="idServicio" value="<?php echo $rowServ['id'] ?>">
+                                            <button type="submit" name="btnElmServ" title="Deshabilitar"><i class="bi bi-trash"></i></button>
+                                        </form>
                                     </li>
-                                <?php
+                            <?php
                                 endif;
                             endforeach;
-                        ?>
-                        <li class="btnAñadirServ"><button>Añadir</button></li>
+                            ?>
+                            <li class="btnAñadirServ" id="btnAddServ" title="Añadir servicio"><button data-bs-toggle="modal" data-bs-target="#modalAddServ" id="<?php echo $row['id'] ?>">Añadir</button></li>
                         </ul>
-                    </div>
-
-                    <div>
-                        <span id="mensajeErrorServicio">Debes seleccionar al menos un servicio</span>
                     </div>
                 </div>
             </div>
@@ -144,16 +137,16 @@ $sqlServicios2 = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                         foreach ($dbh->query($sqlImg) as $row) :
                             if ($row['estado'] == 1) :
                         ?>
-                                <div class="listImg2" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg">
+                                <div class="listImg2" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg" title="Editar imagen">
                                     <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="Fotos de las habitaciones">
                                 </div>
                         <?php
                             endif;
                         endforeach;
                         ?>
-                        <div class="addImg">
+                        <div class="addFoto" title="Añadir imagen">
                             <i class="bi bi-camera"></i>
-                            <p>Añadir</p>
+                            <label for="addImg">Añadir</label>
                         </div>
                         <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarImgTipo.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
@@ -164,25 +157,10 @@ $sqlServicios2 = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                     </div>
                 </div>
             </div>
-
         <?php
                     endforeach;
-
         ?>
-
         </div>
-        <?php
-        foreach($dbh -> query($sqlServicios) as $rowServicios):
-            foreach($dbh -> query($sqlServicios2) as $rowServicios2):
-
-                if($rowServicios2['elemento'] != $rowServicios['elemento']){
-                    echo $rowServicios2['elemento'];
-                }
-
-            endforeach;
-        endforeach;
-        
-        ?>
     </div>
 
 
@@ -199,6 +177,21 @@ $sqlServicios2 = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                 <div class="modal-body" id="contenidoImg">
 
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL DE AÑADIR MAS SERVICIOS-->
+
+    <div class="modal fade" id="modalAddServ" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir servicios</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalAddServ2"></div>
             </div>
         </div>
     </div>
