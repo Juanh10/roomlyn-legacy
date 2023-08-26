@@ -150,7 +150,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elem
                         </div>
                         <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarImgTipo.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
-                            <input type="file" name="addImg" id="addImg">
+                            <input type="file" accept="image/*" name="addImg" id="addImg">
                             <input type="submit" value="Enviar" name="btnAddImg" id="btnAddImg">
                         </form>
 

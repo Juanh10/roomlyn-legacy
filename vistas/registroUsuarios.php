@@ -12,6 +12,8 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     $validarTipoUsuario = true;
 }
 
+$sql2 = "SELECT id, documento FROM tipo_documento WHERE 1";
+
 ?>
 
 
@@ -80,11 +82,15 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
                     <label for="tDocumento">Tipo de Documento</label>
                     <select class="formularioInput" name="tipoDocumento" id="tDocumento" required>
                         <option disabled selected value="">Seleccione</option>
-                        <option value="cc">Cédula de Ciudadanía</option>
-                        <option value="ti">Tarjeta de Identidad</option>
-                        <option value="ce">Cédula de Extranjería</option>
-                        <option value="pp">Pasaporte</option>
-                        <option value="nit">NIT</option>
+                        <?php
+
+                        foreach($dbh -> query($sql2) as $row):
+                            ?>
+                                <option value="<?php echo $row['id'] ?>"><?php echo $row['documento'] ?></option>
+                            <?php
+                        endforeach;
+
+                        ?>
                     </select>
                     <p></p>
                 </div>

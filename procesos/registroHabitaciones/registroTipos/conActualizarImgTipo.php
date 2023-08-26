@@ -5,32 +5,42 @@ session_start();
 
 if (isset($_POST['actulizarImagen'])) {
 
-
+    
     $idTipoHab = $_POST['idTipoHab'];
 
     if (isset($_FILES['imgNueva']) && $_FILES['imgNueva']['error'] == 0) {
 
-        $idImg = $_POST['idImg']; // capturar el id de la imagen
+        $tipoArchivo = $_FILES['imgNueva']['type'];
 
-        $imagenNueva = $_FILES['imgNueva']['name'];
-        $nombreImagen = pathinfo($imagenNueva, PATHINFO_FILENAME); // capturar el nombre de la imagen
-        $extensionImg = pathinfo($imagenNueva, PATHINFO_EXTENSION); // capturar la extension de la imagen
-        $tmpImg = $_FILES['imgNueva']['tmp_name']; // guardar la ruta temporal donde guarda el servidor la img
+        $tiposPermitidos = array('image/jpeg', 'image/jpg', 'image/png', 'image/bmp', 'image/webp', 'image/tiff', 'image/svg');
 
-        $rutaImg = $nombreImagen . "." . $extensionImg;
+        if (in_array($tipoArchivo, $tiposPermitidos)) {
 
-        $sqlImg = $dbh->prepare("UPDATE habitaciones_imagenes SET nombre= :nombre, ruta= :ruta WHERE id = :id");
+            $idImg = $_POST['idImg']; // capturar el id de la imagen
 
-        $sqlImg->bindParam(':nombre', $nombreImagen);
-        $sqlImg->bindParam(':ruta', $rutaImg);
-        $sqlImg->bindParam(':id', $idImg);
+            $imagenNueva = $_FILES['imgNueva']['name'];
+            $nombreImagen = pathinfo($imagenNueva, PATHINFO_FILENAME); // capturar el nombre de la imagen
+            $extensionImg = pathinfo($imagenNueva, PATHINFO_EXTENSION); // capturar la extension de la imagen
+            $tmpImg = $_FILES['imgNueva']['tmp_name']; // guardar la ruta temporal donde guarda el servidor la img
 
-        if ($sqlImg->execute()) {
-            move_uploaded_file($tmpImg, "../../../imgServidor/" . $rutaImg);
-            $_SESSION['msjExito'] = "Actualizado :)";
-            header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
+            $rutaImg = $nombreImagen . "." . $extensionImg;
+
+            $sqlImg = $dbh->prepare("UPDATE habitaciones_imagenes SET nombre= :nombre, ruta= :ruta WHERE id = :id");
+
+            $sqlImg->bindParam(':nombre', $nombreImagen);
+            $sqlImg->bindParam(':ruta', $rutaImg);
+            $sqlImg->bindParam(':id', $idImg);
+
+            if ($sqlImg->execute()) {
+                move_uploaded_file($tmpImg, "../../../imgServidor/" . $rutaImg);
+                $_SESSION['msjExito'] = "Actualizado :)";
+                header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
+            } else {
+                $_SESSION['msjError'] = "Ocurrió un error";
+                header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
+            }
         } else {
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Tipo de archivo no permitido";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         }
     } else {
@@ -39,66 +49,71 @@ if (isset($_POST['actulizarImagen'])) {
     }
 }
 
-if(isset($_POST['eliminarImagen'])){
+if (isset($_POST['eliminarImagen'])) {
 
-    session_start();
-    
-    if(!empty($_POST['idImg']) && !empty($_POST['idTipoHab']))  {
+    if (!empty($_POST['idImg']) && !empty($_POST['idTipoHab'])) {
 
         $idImg2 = $_POST['idImg'];
         $idTipoHab = $_POST['idTipoHab'];
 
         $estadoElm = 0;
 
-        $sqlElmImg = $dbh -> prepare("UPDATE habitaciones_imagenes SET estado = :estadoElm WHERE id = :idImgElm");
+        $sqlElmImg = $dbh->prepare("UPDATE habitaciones_imagenes SET estado = :estadoElm WHERE id = :idImgElm");
 
-        $sqlElmImg -> bindParam(':estadoElm', $estadoElm);
-        $sqlElmImg -> bindParam('idImgElm', $idImg2);
+        $sqlElmImg->bindParam(':estadoElm', $estadoElm);
+        $sqlElmImg->bindParam('idImgElm', $idImg2);
 
-        if($sqlElmImg -> execute()){
+        if ($sqlElmImg->execute()) {
             $_SESSION['msjExito'] = "Deshabilitado";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
-        }else{
+        } else {
             $_SESSION['msjError'] = "Ocurrió un error";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         }
-
     }
-
 }
 
 
 if (isset($_POST['btnAddImg'])) {
 
-    session_start();
+    $idTipoHab2 = $_POST['idTipoHab'];
 
-    $idTipoHab2 = $_POST['idTipoHab']; 
+    if ($_FILES['addImg']['error'] == 0) {
 
-    $estadoImgNueva = 1;
+        echo $tipoArchivo = $_FILES['addImg']['type'];
 
-    $imagenNueva = $_FILES['addImg']['name']; // capturar el nombre de la imagen junto con la extension
-    $rutaTmp = $_FILES['addImg']['tmp_name'];
+        $tiposPermitidos = array('image/jpeg', 'image/jpg', 'image/png', 'image/bmp', 'image/webp', 'image/tiff', 'image/svg');
 
-    $nombreImgNueva = pathinfo($imagenNueva, PATHINFO_FILENAME); // guardar unicamente el nombre de la imagen
-    $extensionImgNueva = pathinfo($imagenNueva, PATHINFO_EXTENSION); // guardar unicamente la extension de la imagen
+        if (in_array($tipoArchivo, $tiposPermitidos)) { // comparar el arreglo con el tipo de archivo
 
-    $rutaNuevaImg = $nombreImgNueva . "." . $extensionImgNueva; // crear la nueva ruta donde se va guardar la iamgen
+            $imagenNueva = $_FILES['addImg']['name']; // capturar el nombre de la imagen junto con la extension
+            $rutaTmp = $_FILES['addImg']['tmp_name'];
 
-    $sqlImgNueva = $dbh -> prepare("INSERT INTO habitaciones_imagenes(idTipoHabitacion, nombre, ruta, estado) VALUES (:idTip, :nombre, :ruta, :estado)");
+            $estadoImgNueva = 1;
 
-    $sqlImgNueva -> bindParam(':idTip', $idTipoHab2);
-    $sqlImgNueva -> bindParam('nombre', $nombreImgNueva);
-    $sqlImgNueva -> bindParam(':ruta', $rutaNuevaImg);
-    $sqlImgNueva -> bindParam(':estado', $estadoImgNueva);
+            $nombreImgNueva = pathinfo($imagenNueva, PATHINFO_FILENAME); // guardar unicamente el nombre de la imagen
+            $extensionImgNueva = pathinfo($imagenNueva, PATHINFO_EXTENSION); // guardar unicamente la extension de la imagen
 
-    if($sqlImgNueva -> execute()){
-        move_uploaded_file($rutaTmp, "../../../imgServidor/" . $rutaNuevaImg);
-        $_SESSION['msjExito'] = "Foto insertada";
-        header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
-    }else{
-        $_SESSION['msjError'] = "Ocurrió un error";
-        header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
+            $rutaNuevaImg = $nombreImgNueva . "." . $extensionImgNueva; // crear la nueva ruta donde se va guardar la iamgen
+
+            $sqlImgNueva = $dbh->prepare("INSERT INTO habitaciones_imagenes(idTipoHabitacion, nombre, ruta, estado) VALUES (:idTip, :nombre, :ruta, :estado)");
+
+            $sqlImgNueva->bindParam(':idTip', $idTipoHab2);
+            $sqlImgNueva->bindParam('nombre', $nombreImgNueva);
+            $sqlImgNueva->bindParam(':ruta', $rutaNuevaImg);
+            $sqlImgNueva->bindParam(':estado', $estadoImgNueva);
+
+            if ($sqlImgNueva->execute()) {
+                move_uploaded_file($rutaTmp, "../../../imgServidor/" . $rutaNuevaImg);
+                $_SESSION['msjExito'] = "Foto insertada";
+                header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
+            } else {
+                $_SESSION['msjError'] = "Ocurrió un error";
+                header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
+            }
+        } else {
+            $_SESSION['msjError'] = "Tipo de archivo no permitido";
+            header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
+        }
     }
-
-
 }

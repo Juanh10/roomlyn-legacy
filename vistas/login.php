@@ -106,6 +106,17 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
         unset($_SESSION['mjscontraseña']);
     }
 
+    if (isset($_SESSION['mjsError'])) {
+        ?>
+    
+            <script>
+                Swal.fire('<?php echo $_SESSION['mjsError']; ?>')
+            </script>
+    
+        <?php
+            unset($_SESSION['mjsError']);
+        }
+
     ?>
 
     <script src="../librerias/jquery-3.7.0.min.js"></script>

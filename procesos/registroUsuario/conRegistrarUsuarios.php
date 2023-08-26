@@ -22,7 +22,7 @@ if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty(
 
 
     //* INSERTAR LA INFORMACION DEL USUARIO
-    $insertarInforUsuarios = "INSERT INTO infousuarios(tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
+    $insertarInforUsuarios = "INSERT INTO infousuarios(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
 
     //* INSERTAR EL USUARIO
     $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, usuario, contraseña, tipoUsuario, estado, fecha, hora, fecha_sys) VALUES (:idInfo,:usu,:contra,:tUsu,:estado,:fecha,:hora,now())";

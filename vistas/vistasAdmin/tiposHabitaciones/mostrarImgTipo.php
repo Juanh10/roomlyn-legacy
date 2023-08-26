@@ -36,7 +36,7 @@ $sql = "SELECT ruta, estado FROM habitaciones_imagenes WHERE id = " . $id . "";
     <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarImgTipo.php" method="post" enctype="multipart/form-data" id="formActImg">
         <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
         <input type="hidden" name="idImg" value="<?php echo $id ?>">
-        <input type="file" name="imgNueva" class="form-control inputFileImg">
+        <input type="file" name="imgNueva" accept="image/*" class="form-control inputFileImg">
         <div class="btnInputs">
             <input type="submit" name="eliminarImagen" value="Deshabilitar" class="btnElmImg">
             <input type="submit" name="actulizarImagen" value="Actualizar" class="btnActImg">
