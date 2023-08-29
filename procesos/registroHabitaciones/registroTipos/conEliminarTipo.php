@@ -1,31 +1,27 @@
 <?php
 
+session_start();
+
 include_once "../../config/conex.php";
 
-if(isset($_POST['btnDeshabilitar'])){
+if (!empty($_POST['idTipoHab'])) {
 
-    session_start();
+    $idTipo = $_POST['idTipoHab'];
 
-    if(!empty($_POST['idTipoHab'])){
-        
-        $idTipo = $_POST['idTipoHab'];
+    $estado = 0;
 
-        $estado = 0;
+    $sql = $dbh->prepare("UPDATE habitaciones_tipos SET estado=:estado WHERE id = :idTipo");
 
-        $sql = $dbh -> prepare("UPDATE habitaciones_tipos SET estado=:estado WHERE id = :idTipo");
+    $sql->bindParam(':estado', $estado);
+    $sql->bindParam(':idTipo', $idTipo);
 
-        $sql -> bindParam(':estado', $estado);
-        $sql -> bindParam(':idTipo', $idTipo);
-
-        if($sql -> execute()){
-            $_SESSION['msjExito'] = "Deshabilitado";
-            header("location: ../../../vistas/vistasAdmin/tipoHabitaciones.php");
-        }else{
-            echo "OCURRIÓ UN ERROR";
-            $_SESSION['msjError'] = "Ocurrió un error";
-            header("location: ../../../vistas/vistasAdmin/tipoHabitaciones.php");
-        }
-
+    if ($sql->execute()) {
+        $_SESSION['msjExito'] = "Deshabilitado";
+        header("location: ../../../vistas/vistasAdmin/tipoHabitaciones.php");
+    } else {
+        echo "OCURRIÓ UN ERROR";
+        $_SESSION['msjError'] = "Ocurrió un error";
+        header("location: ../../../vistas/vistasAdmin/tipoHabitaciones.php");
     }
 }
 

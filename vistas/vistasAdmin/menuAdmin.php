@@ -71,7 +71,7 @@
                             <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Listado tipo de habitaciones">
                             <i class="bi bi-card-checklist"></i>
                             </a>
-                            <a class="enlaceMenuSecund" href="regHabitaciones.php" title="Habitaciones">
+                            <a class="enlaceMenuSecund" href="habitaciones.php" title="Habitaciones">
                             <i class="bi bi-key-fill"></i>
                             </a>
                         </div>
@@ -162,7 +162,7 @@
                             <i class="bi bi-card-checklist"></i>
                             <span>Listado tipo de habitaciones</span>
                             </a>
-                            <a class="enlaceMenuSecund" href="regHabitaciones.php">
+                            <a class="enlaceMenuSecund" href="habitaciones.php">
                             <i class="bi bi-key-fill"></i>
                             <span>Habitaciones</span>
                             </a>

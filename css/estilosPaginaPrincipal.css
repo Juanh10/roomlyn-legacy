@@ -118,13 +118,15 @@
 }
 
 .flex-control-nav li a:hover{
-    background-color: #9d8076; /* CAMBIAR COLOR */
+    background-color: #75544d; /* CAMBIAR COLOR */
     transform: scale(1.3);
+    color: #fff;
 }
 
 .flex-control-nav li a.flex-active{
-    background-color: #9d8076; /* CAMBIAR COLOR */
+    background-color: #75544d; /* CAMBIAR COLOR */
     transform: scale(1.3);
+    color: #fff;
 }
 
 /** ESTILOS PARA LAS FLECHAS DEL CONTROLADOR DEL CARRUSEL */

@@ -77,7 +77,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
         </div>
     </main>
 
-
+ 
     <!-- Modal -->
     <div class="modal fade" id="modalInfor" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -91,7 +91,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
                 <div class="modal-footer">
                     <form action="../../procesos/registroHabitaciones/registroTipos/conEliminarTipo.php" method="post" id="formularioElimarTipo">
                         <input type="hidden" value="" name="idTipoHab" id="idTipoHabElm">
-                        <input type="submit" value="Deshabilitar" name="btnDeshabilitar" id="btnDeshabilitar" class="btn btn-danger btnDeshabilitar">
+                        <input type="submit" value="Deshabilitar" name="btnDeshabilitar" id="btnDeshabilitar" class="btn btn-danger">
                     </form>
                     <a href="" id="editTipo" class="btn btn-warning">Editar </a>
                 </div>

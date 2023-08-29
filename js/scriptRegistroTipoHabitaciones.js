@@ -108,7 +108,6 @@ const validarinputFile = ((input,idCampo,message) => { // validar las imagenes
 formularioInput.forEach((input) => {
     input.addEventListener('keyup', validarFormulario);
     input.addEventListener('blur', validarFormulario);
-
 });
 
 //* validaciones de los input checkbox
@@ -116,10 +115,7 @@ formularioInput.forEach((input) => {
 
 formularioTipoHab.addEventListener('submit', function (e) {
     let inputcheck = document.querySelectorAll('.serviciosCheck input:checked');
-
-    console.log(inputcheck);
-
-
+    
     e.preventDefault(); // no dejar enviar el formulario
     
     if (estadoInput.nombreTipo && estadoInput.cantidadCamas && estadoInput.cantidadPersonas && estadoInput.precioAire && estadoInput.precioVentilador && estadoInput.imagenes && inputcheck.length >= 1) {

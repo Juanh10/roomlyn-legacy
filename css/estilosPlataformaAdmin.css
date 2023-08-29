@@ -715,6 +715,38 @@ body {
     background-color: #b49d91;
 }
 
+/*! ESTILOS PARA LA SECCION DE HABITACIONES  */
+
+.btnBuscador{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btnBuscador input{
+    width: 250px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btnBuscador span{
+    background-color: #1cc78d;
+    border: none;
+    color: #fff;
+}
+
+.btnBuscador span{
+    background-color: #1cc78d;
+    border: none;
+    box-shadow: 0px 1px 2px #1cc78d;
+    color: #fff;
+}
+
+.btnBuscador span:hover{
+    background-color: #23a97c;
+    color: #fff;
+}
+
 @media only screen and (max-width: 600px) {
     .contenido {
         padding-top: 80px;

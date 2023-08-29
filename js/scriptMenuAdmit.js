@@ -259,6 +259,27 @@ $(document).ready(function () {
       .catch()
   });
 
+
+  //* Alerta de verificacion de tipos de habitaciones
+
+  $('#formularioElimarTipo').submit(function(e){
+    e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Deshabilitar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit(); // sirve para enivar los datos del formulario
+      }
+    }); 
+  });
+
+
   //* Enviar al servidor por medio de la api FETCH el id de la imagen para mostrarlo en el modal
   const btnActImg = $('.listImg2');
   const contenidoImg = $('#contenidoImg');

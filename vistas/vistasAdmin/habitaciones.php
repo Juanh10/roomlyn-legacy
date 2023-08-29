@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(empty($_SESSION['idUsuario'])){ //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
 
@@ -10,71 +10,121 @@ echo $_SESSION['pNombre'];
 echo $_SESSION['pApellido'];
 echo $_SESSION['tipoUsuario']; */
 
+include_once "../../procesos/config/conex.php";
+
+$sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1";
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
     <?php require_once "menuAdmin.php"; ?>
-    <title>Habitaciones</title>
 </head>
+
 <body>
 
+    <header class="cabeceraMenu">
+        <div class="iconoMenu">
+            <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
+            <span>HABITACIONES</span>
+        </div>
+        <div class="usuPlat">
+            <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>
+        </div>
+    </header>
+
+    <div class="contenido">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="btnBuscador">
+                        <span class="btn" data-bs-toggle="modal" data-bs-target="#addHabitacion">Añadir habitacion</span>
+                        <input type="text" id="buscador" class="form-control" placeholder="Buscar">
+                    </div>
+                    <div class="table-responsive tabla-usuarios">
+                        <table class="table table-hover table-borderless text-center">
+                            <thead class="tabla-background">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Habitación</th>
+                                    <th>Tipo</th>
+                                    <th>Observaciones</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>Habitacion tipo 1</td>
+                                    <td>Habitacion muy comoda</td>
+                                    <td>Disponible</td>
+                                    <td>Editar,deshabilitar,estado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!--* SECCION PARA LAS ALERTAS  -->
+    <!-- MODAL DE AÑADIR HABITACION -->
 
-<?php
+    <div class="modal fade" id="addHabitacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir habitación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
-if(isset($_SESSION['msjRegistradoServicio'])){
-    ?>
-    <script>
-        Swal.fire({
-            position: '',
-            icon: 'success',
-            title: '<?php echo $_SESSION['msjRegistradoServicio']; ?>',
-            showConfirmButton: false,
-            timer: 1000
-        });;
-    </script>
-<?php
-    unset($_SESSION['msjRegistradoServicio']);
-}
+                    <form action="../../procesos/registroHabitaciones/registroHabi/conRegistroHabitaciones.php" method="post" id="formRegHab">
 
-if(isset($_SESSION['msjActualizadoServicio'])){
-    ?>
-    <script>
-        Swal.fire({
-            position: '',
-            icon: 'success',
-            title: '<?php echo $_SESSION['msjActualizadoServicio']; ?>',
-            showConfirmButton: false,
-            timer: 1000
-        });;
-    </script>
-<?php
-    unset($_SESSION['msjActualizadoServicio']);
-}
+                        <label for="numHabitacion">Número de la habitación</label>
+                        <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacion" required>
+                        <p></p>
 
-if(isset($_SESSION['msjRegistradoTipoH'])){
-    ?>
-    <script>
-        Swal.fire({
-            position: '',
-            icon: 'success',
-            title: '<?php echo $_SESSION['msjRegistradoTipoH']; ?>',
-            showConfirmButton: false,
-            timer: 1000
-        });;
-    </script>
-<?php
-    unset($_SESSION['msjRegistradoTipoH']);
-}
+                        <label for="tipoHab" class="mt-2">Tipo de habitación</label>
+                        <select class="form-select mt-2" name="tipoHab" id="tipoHab" required>
+                            <option disabled selected value="">Escoja una opción</option>
+                            <?php
+                                foreach($dbh -> query($sql) as $row):
+                                    ?>
+                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['tipoHabitacion'] ?></option>
+                                    <?php
+                                endforeach;
+                            ?>
+                        </select>
+                        <p></p>
 
-?>
-    
+                        <label for="observaciones" class="mt-2">Observaciones</label>
+                        <textarea class="form-control mt-2" name="observaciones" id="observaciones" required></textarea>
+                        <p></p>
+                </div>
+                <div class="formularioMensaje">
+                <p>¡Por favor rellene todos los campos!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <input type="submit" value="Añadir" name="Añadir" class="btn boton-guardar">
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../../js/scriptRegistroHabitaciones.js"></script>
+
 </body>
+
 </html>

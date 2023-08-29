@@ -68,7 +68,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elem
 
                                 <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
 
-                                <label for="nombreTipo" class="form-label">Tipo de habitacion</label>
+                                <label for="nombreTipo" class="form-label">Tipo de habitación</label>
                                 <input type="text" name="nombreTipo" id="nombreTipo" value="<?php echo $row['tipoHabitacion'] ?>" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" require>
 
                                 <div class="row">

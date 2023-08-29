@@ -52,7 +52,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 
                             <h2>Información</h2>
 
-                            <label for="nombreTipo" class="form-label">Tipo de habitacion</label>
+                            <label for="nombreTipo" class="form-label">Tipo de habitación</label>
                             <input type="text" name="nombreTipo" id="nombreTipo" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" required>
                             <p></p>
 
@@ -217,7 +217,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
     ?>
 
 
-    <script src="../../js/scriptRegistroHabitacion.js"></script>
+    <script src="../../js/scriptRegistroTipoHabitaciones.js"></script>
 
 
 </body>

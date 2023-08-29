@@ -218,7 +218,7 @@
 /** ESTILOS PIE DE PAGINA */
 
 footer{
-    background-color: #795850;
+    background-color: #75544d;
 }
 
 .piePagina{
@@ -247,12 +247,13 @@ footer{
     font-size: 18px;
     font-weight: bold;
     padding: 10px;
+    color: #fff;
 }
 
 .contenidoPiePagina a{
     display: block;
     margin-top: 20PX;
-    color: #000;
+    color: #fff;
     font-size: 18px;
 }
 

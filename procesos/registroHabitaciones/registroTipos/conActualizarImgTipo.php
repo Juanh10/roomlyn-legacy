@@ -33,7 +33,7 @@ if (isset($_POST['actulizarImagen'])) {
 
             if ($sqlImg->execute()) {
                 move_uploaded_file($tmpImg, "../../../imgServidor/" . $rutaImg);
-                $_SESSION['msjExito'] = "Actualizado :)";
+                $_SESSION['msjExito'] = "Foto actualizada";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             } else {
                 $_SESSION['msjError'] = "Ocurrió un error";
