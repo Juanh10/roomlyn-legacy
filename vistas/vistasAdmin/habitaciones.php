@@ -14,6 +14,7 @@ include_once "../../procesos/config/conex.php";
 
 $sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1";
 
+$sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.tipoHabitacion, habitaciones.observacion, habitaciones_estado.estado FROM habitaciones INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id WHERE 1";
 
 ?>
 
@@ -49,7 +50,6 @@ $sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1
                         <table class="table table-hover table-borderless text-center">
                             <thead class="tabla-background">
                                 <tr>
-                                    <th>#</th>
                                     <th>Habitación</th>
                                     <th>Tipo</th>
                                     <th>Observaciones</th>
@@ -58,14 +58,27 @@ $sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Habitacion tipo 1</td>
-                                    <td>Habitacion muy comoda</td>
-                                    <td>Disponible</td>
-                                    <td>Editar,deshabilitar,estado</td>
-                                </tr>
+                                <?php
+                                foreach ($dbh->query($sql2) as $rowHab) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $rowHab['nHabitacion'] ?></td>
+                                        <td><?php echo $rowHab['tipoHabitacion'] ?></td>
+                                        <td><?php echo $rowHab['observacion'] ?></td>
+                                        <td><?php echo $rowHab['estado'] ?></td>
+                                        <td class="botones-Config">
+                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar"></span>
+                                            <span class="bi bi-gear btn btn-secondary btn-sm"></span>
+                                            <form action="" method="post">
+                                                <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php
+                                endforeach;
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -96,11 +109,11 @@ $sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1
                         <select class="form-select mt-2" name="tipoHab" id="tipoHab" required>
                             <option disabled selected value="">Escoja una opción</option>
                             <?php
-                                foreach($dbh -> query($sql) as $row):
-                                    ?>
-                                        <option value="<?php echo $row['id'] ?>"><?php echo $row['tipoHabitacion'] ?></option>
-                                    <?php
-                                endforeach;
+                            foreach ($dbh->query($sql) as $row) :
+                            ?>
+                                <option value="<?php echo $row['id'] ?>"><?php echo $row['tipoHabitacion'] ?></option>
+                            <?php
+                            endforeach;
                             ?>
                         </select>
                         <p></p>
@@ -110,17 +123,43 @@ $sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1
                         <p></p>
                 </div>
                 <div class="formularioMensaje">
-                <p>¡Por favor rellene todos los campos!</p>
+                    <p>¡Por favor rellene todos los campos!</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" value="Añadir" name="Añadir" class="btn boton-guardar">
+                    <input type="submit" value="Añadir" name="añadirHab" class="btn boton-guardar">
                 </div>
                 </form>
 
             </div>
         </div>
     </div>
+
+
+
+    <!-- ALERTAS -->
+
+    <?php
+
+    if (isset($_SESSION['msjExito'])) :
+    ?>
+        <div class="alert alert-success alerta" role="alert">
+            <strong><i class="bi bi-check-circle-fill"></i><?php echo $_SESSION['msjExito'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjExito']);
+    endif;
+
+    if (isset($_SESSION['msjError'])) :
+    ?>
+        <div class="alert alert-danger alerta" role="alert">
+            <strong><i class="bi bi-exclamation-triangle-fill"></i><?php echo $_SESSION['msjError'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjError']);
+    endif;
+
+    ?>
 
 
     <script src="../../js/scriptRegistroHabitaciones.js"></script>
