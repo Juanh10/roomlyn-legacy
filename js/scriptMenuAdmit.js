@@ -262,7 +262,7 @@ $(document).ready(function () {
 
   //* Alerta de verificacion de tipos de habitaciones
 
-  $('#formularioElimarTipo').submit(function(e){
+  $('#formularioElimarTipo').submit(function (e) {
     e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
     Swal.fire({
       title: '¿Estas seguro?',
@@ -276,7 +276,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         this.submit(); // sirve para enivar los datos del formulario
       }
-    }); 
+    });
   });
 
 
@@ -313,14 +313,31 @@ $(document).ready(function () {
   const btnAddServ = $('#btnAddServ');
   const contenidoServ = $('#modalAddServ2');
 
-  btnAddServ.click(function(e){
+  btnAddServ.click(function (e) {
 
     let idTipoHab = e.target.id;
-    
+
     fetch(`../vistasAdmin/tiposHabitaciones/mostrarServicios.php?id=${idTipoHab}`)// enviar el id al servidor por fetch
-    .then(res => res.text()) // recibir los datos del servidor
-    .then(datos => contenidoServ.html(datos)) // mostrar los datos
-    .catch() 
+      .then(res => res.text()) // recibir los datos del servidor
+      .then(datos => contenidoServ.html(datos)) // mostrar los datos
+      .catch()
   });
+
+  //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
+  const btnEditHab = $('.btnEditHab');
+  const contenidoEditHab = $('#modalEditHab');
+
+  btnEditHab.click(function(e){
+
+    let idHabitacion = e.target.parentElement.id;
+    
+    fetch(`../vistasAdmin/habitaciones/editarHabitaciones.php?id=${idHabitacion}`)
+    .then(res => res.text())
+    .then(datos => contenidoEditHab.html(datos))
+    .catch()
+
+  });
+
+
 
 });

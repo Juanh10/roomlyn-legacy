@@ -66,8 +66,8 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                                         <td><?php echo $rowHab['tipoHabitacion'] ?></td>
                                         <td><?php echo $rowHab['observacion'] ?></td>
                                         <td><?php echo $rowHab['estado'] ?></td>
-                                        <td class="botones-Config">
-                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar"></span>
+                                        <td class="botones-Config" id="<?php echo $rowHab['id'] ?>">
+                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHab"></span>
                                             <span class="bi bi-gear btn btn-secondary btn-sm"></span>
                                             <form action="" method="post">
                                                 <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
@@ -131,6 +131,20 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                 </div>
                 </form>
 
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL PARA EDITAR LAS HABITACIONES -->
+    <div class="modal fade" id="editarHab" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar habitación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalEditHab"></div>
             </div>
         </div>
     </div>
