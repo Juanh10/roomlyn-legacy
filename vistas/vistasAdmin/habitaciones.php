@@ -68,7 +68,7 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                                         <td><?php echo $rowHab['estado'] ?></td>
                                         <td class="botones-Config" id="<?php echo $rowHab['id'] ?>">
                                             <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHab"></span>
-                                            <span class="bi bi-gear btn btn-secondary btn-sm"></span>
+                                            <span class="bi bi-gear btn btn-secondary btn-sm btnCambEstado" id="<?php echo $rowHab['id'] ?>" data-bs-toggle="modal" data-bs-target="#cambiarEstado"></span>
                                             <form action="" method="post">
                                                 <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
                                                     <i class="bi bi-trash"></i>
@@ -149,6 +149,19 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
         </div>
     </div>
 
+
+    <!-- MODAL PARA CAMBIAR EL ESTADO DE LA HABITACIÓN -->
+    <div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar estado</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalCambEstado"></div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- ALERTAS -->

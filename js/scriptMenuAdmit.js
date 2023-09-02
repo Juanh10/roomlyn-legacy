@@ -23,8 +23,6 @@ $(document).ready(function () {
 
   });
 
-
-
   $(document).click(function (event) {
 
     let menuLateral = $(".menuLateral");
@@ -338,6 +336,20 @@ $(document).ready(function () {
 
   });
 
+  //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
+  const btnCambiarEstado = $('.btnCambEstado');
+  const contenidoEstado = $('#modalCambEstado');
 
+  btnCambiarEstado.click(function(e){
+
+    let idHabitacion = e.target.parentElement.id;
+    console.log(idHabitacion);
+
+    fetch(`../vistasAdmin/habitaciones/cambiarEstado.php?id=${idHabitacion}`)
+    .then(res => res.text())
+    .then(datos => contenidoEstado.html(datos))
+    .catch()
+
+  });  
 
 });
