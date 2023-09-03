@@ -90,3 +90,5 @@ if(isset($_POST['actualizarEstado'])){
         echo "Campos vacíos";
     }
 }
+
+?>

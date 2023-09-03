@@ -352,4 +352,24 @@ $(document).ready(function () {
 
   });  
 
+  
+  //* Alerta de verificacion de las habitaciones
+
+  $('#desHabitacion').submit(function (e) {
+    e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Deshabilitar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit(); // sirve para enivar los datos del formulario
+      }
+    });
+  });
+
 });
