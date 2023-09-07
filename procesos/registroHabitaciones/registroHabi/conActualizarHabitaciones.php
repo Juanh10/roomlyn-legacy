@@ -56,7 +56,7 @@ if (isset($_POST['btnActualizar'])) {
 
                 if (!$existe && $sql->execute()) {
                     $_SESSION['msjExito'] = "¡La habitación se ha actualizado exitosamente!";
-                        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+                    header("location: ../../../vistas/vistasAdmin/habitaciones.php");
                 } else {
                     $_SESSION['msjError'] = "Ocurrió un error";
                     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
@@ -80,14 +80,17 @@ if(isset($_POST['actualizarEstado'])){
         $sql -> bindParam(":idHab", $idHabitacion);
 
         if($sql -> execute()){
-            echo "NICEEE";
+            $_SESSION['msjExito'] = "¡Se ha cambiado el estado exitosamente!";
+            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }else{
-            echo "Ocurrió un error";
+            $_SESSION['msjError'] = "Ocurrió un error";
+            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
 
 
     }else{
-        echo "Campos vacíos";
+        $_SESSION['msjError'] = "Campos vacíos";
+        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }
 

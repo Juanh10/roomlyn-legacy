@@ -355,7 +355,7 @@ $(document).ready(function () {
   
   //* Alerta de verificacion de las habitaciones
 
-  $('#desHabitacion').submit(function (e) {
+  $('.desHabitacion').submit(function (e) {
     e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
     Swal.fire({
       title: '¿Estas seguro?',
