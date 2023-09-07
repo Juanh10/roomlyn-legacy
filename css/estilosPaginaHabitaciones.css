@@ -208,23 +208,23 @@
 }
 
 .precios .precioVent p{
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
 .precios .precioVent span{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     color: #633121;
 }
 
 .precios .precioAire p{
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
 .precios .precioAire span{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     color: #633121;
 }
@@ -285,6 +285,73 @@
     .buscador.activoBuscador input{
         box-shadow: 0 1px 10px rgb(0, 0, 0, .3);
         width: 250px;
+    }
+
+    /** ESTILOS CARD DE HABITACIONES RESPONSIVE  */
+
+    .resHabitaciones h1{
+        margin-top: 100px;
+        padding: 20px;
+        text-align: center;
+        font-size: 35px;
+    }
+
+    .contCardHab{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cardHab{
+        width: 95%;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        border-radius: 10px;
+    }
+
+    .imgCard{
+        display: none;
+    }
+
+    .contenidoCard{
+        margin: 0 10px;
+    }
+
+    .tituloHab{
+        margin: 0;
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tituloHab h2{
+        padding: 0;
+        font-size: 18px;
+    }
+
+    .tituloHab .btnImgHab{
+        padding: 0;
+        font-size: 22px;
+        color: #000;
+        display: block;
+    }
+
+    .contenidoCard p{
+        font-size: 13px;
+    }
+
+    .infoCard .filtrosHab li{
+        padding: 2px;
+        font-size: 12px;
+    }
+
+    .precioInfo{
+        justify-content: space-between;
     }
 
 }

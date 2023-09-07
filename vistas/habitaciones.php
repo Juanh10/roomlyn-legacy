@@ -72,10 +72,44 @@ include_once "../procesos/config/conex.php";
 
             <div class="contCardHab">
 
-            <?php
+                <div class="cardHab">
+                    <div class="imgCard">
+                        <img src="../img/1camaAire2.webp" alt="">
+                    </div>
 
+                    <div class="contenidoCard">
+                        
+                        <div class="tituloHab">
+                            <h2>Habitacion 1</h2>
+                            <a class="btnImgHab" href="../img/1camaAire2.webp" data-lightbox="image-1" title="Ver imagen"><i
+                                    class="bi bi-image"></i></a>
+                        </div>
 
-?>
+                        <div class="infoCard">
+                            <p><span>Cantidad: </span>habitacion de 1 cama</p>
+                            <ul class="filtrosHab">
+                                <li>Ventilador</li>
+                                <li>Aire acondicionado</li>
+                        </div>
+
+                        <div class="precioInfo">
+                            <div class="precios">
+                                <div class="precioVent">
+                                    <p>Precio por dia con ventilador</p>
+                                    <span>COP 70.000 + IVA</span>
+                                </div>
+                                <div class="precioAire">
+                                    <p>Precio por dia con aire acondicionado</p>
+                                    <span>COP 70.000 + IVA</span>
+                                </div>
+                            </div>
+                            <div class="btnInfo">
+                                <a href="#" class="btnVermas" title="Ver lista de las habitaciones">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="cardHab">
                     <div class="imgCard">
@@ -86,7 +120,7 @@ include_once "../procesos/config/conex.php";
                         
                         <div class="tituloHab">
                             <h2>Habitacion 1</h2>
-                            <a class="btnImgHab" href="../img/1camaAire2.webp" data-lightbox="image-1"><i
+                            <a class="btnImgHab" href="../img/1camaAire2.webp" data-lightbox="image-1" title="Ver imagen"><i
                                     class="bi bi-image"></i></a>
                         </div>
 
