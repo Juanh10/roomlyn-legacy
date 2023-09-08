@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
     <link rel="stylesheet" href="../../css/estilosMenuAdmin.css">
     <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
+    <link rel="stylesheet" href="../../librerias/datatables/css/jquery.dataTables.min.css">
     <title>ROOMLYN</title>
 </head>
 
@@ -218,6 +219,8 @@
     <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
     <script src="../../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <script src="../../js/scriptMenuAdmit.js"></script>
+    <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script>    
+    
 
 </body>
 

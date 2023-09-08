@@ -139,8 +139,11 @@ $(document).ready(function () {
 
   });
 
-  //* BUSCADOR
 
+
+
+  //* BUSCADOR
+/* 
   $('#buscador').keyup(function (e) {
 
     let busqueda = e.target.value.toLowerCase(); // convertir en minuscula lo que se escribe en el buscador
@@ -229,7 +232,7 @@ $(document).ready(function () {
   }
 
   totalRegistro('.filasUsuario');
-  totalRegistro('.filasServicio');
+  totalRegistro('.filasServicio'); */
 
 });
 
@@ -370,6 +373,42 @@ $(document).ready(function () {
         this.submit(); // sirve para enivar los datos del formulario
       }
     });
+  });
+
+});
+
+
+//! INICIALIZAR DATATABLES
+
+$(document).ready(function () {
+
+  $('#tablaUsuarios').DataTable({
+
+    responsive: true,
+    
+    "language": {
+      "sEmptyTable": "No se encontraron registros",
+      "sInfo": "Total: _TOTAL_ registros",
+      "sInfoEmpty": "Mostrando 0 de 0 de un total de 0 registros",
+      "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix": "",
+      "sInfoThousands": ",",
+      "sLengthMenu": "Mostrar _MENU_ registros por página",
+      "sLoadingRecords": "Cargando...",
+      "sProcessing": "Procesando...",
+      "sSearch": "Buscar:",
+      "sZeroRecords": "No se encontraron registros",
+      "oPaginate": {
+          "sFirst": "Primero",
+          "sLast": "Último",
+          "sNext": "Siguiente",
+          "sPrevious": "Anterior"
+      },
+      "oAria": {
+          "sSortAscending": ": Activar para ordenar la columna ascendente",
+          "sSortDescending": ": Activar para ordenar la columna descendente"
+      }
+  }
   });
 
 });

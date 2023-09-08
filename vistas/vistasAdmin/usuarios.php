@@ -44,10 +44,10 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
                         <div class="botonAgregar">
                             <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir Usuario</a>
                         </div>
-                        <input type="search" class="buscador form-control" id="buscador" name="buscador" placeholder="Buscar">
+<!--                         <input type="search" class="buscador form-control" id="buscador" name="buscador" placeholder="Buscar"> -->
                     </div>
                     <div class="table-responsive tabla-usuarios">
-                        <table class="table table-hover table-borderless text-center">
+                        <table class="table table-hover table-borderless text-center" id="tablaUsuarios">
                             <thead class="tabla-background">
                                 <tr>
                                     <th>#</th>
@@ -121,10 +121,10 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
                             <span id="totalRegistro"></span>
                             <span id="pagActual"></span>
                         </div>
-                        <div class=botonesPaginacion">
+<!--                         <div class=botonesPaginacion">
                             <button class="btn colorBtn" id="btnAnterior"><i class="bi bi-caret-left-fill"></i> Anterior</button>
                             <button class="btn colorBtn" id="btnSiguiente">Siguiente <i class="bi bi-caret-right-fill"></i></button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
