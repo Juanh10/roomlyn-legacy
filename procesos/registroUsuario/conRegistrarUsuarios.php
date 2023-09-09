@@ -20,6 +20,8 @@ if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty(
     $usuario = $_POST['usuario'];
     $contraseña = $_POST['contraseña'];
 
+    $contraEncriptada = password_hash($contraseña, PASSWORD_DEFAULT);
+
 
     //* INSERTAR LA INFORMACION DEL USUARIO
     $insertarInforUsuarios = "INSERT INTO infousuarios(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
@@ -82,7 +84,7 @@ if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty(
         //enlazar los marcadores con las variables
         $insertUsu -> bindParam(':idInfo',$ultID);
         $insertUsu -> bindParam(':usu',$usuario);
-        $insertUsu -> bindParam(':contra',$contraseña);
+        $insertUsu -> bindParam(':contra',$contraEncriptada);
         $insertUsu -> bindParam(':tUsu',$tipoUsuario);
         $insertUsu -> bindParam(':estado',$estado);
         $insertUsu -> bindParam(':fecha',$fecha);
