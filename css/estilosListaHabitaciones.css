@@ -1,0 +1,177 @@
+/** MENU DE NAVEGACION  */
+
+.cabeceraHab{
+    background-color: #9d8076;
+    position: fixed;
+    padding: 15px 22px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+
+.cabeceraHab a{
+    color: #000;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.navContenedorHab{
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.logoPlahotHab{
+    width: 196px;
+    height: 100px;
+    padding: 0;
+    position: absolute;   
+    left: 0;  
+    display: flex;
+    align-items: center;
+}
+
+.logoPlahotHab img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navegacionHab ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navegacionHab ul li{
+    display: inline-block;
+}
+
+.navegacionHab ul li a{
+    display: block;
+    padding: 18px;
+}
+
+/** BUSCADOR DEL MENU DE HABITACIONES  */
+
+.buscador{
+    padding: 5px;
+    position: relative;
+}
+
+.buscador input{
+    box-shadow: 0 1px 10px rgb(0, 0, 0, .3);
+    width: 240px;
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    font-size: 15px;
+    border-radius: 30px;
+    outline: none;
+    transition: .5s;
+}
+
+.btnBuscar{
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #9d8076;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btnFiltro{
+    font-size: 20px;
+}
+
+/** ESTILOS A LA SECCION DE LA LISTA DE HABITACIONES  */
+
+.tituloTipoHab{
+    margin-top: 130px;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.seccionHabitaciones{
+    margin-bottom: 50px;
+    background-color: #cbbbb6;
+    border-radius: 10px;
+}
+
+.listServicios{
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.listServicios li{
+    margin-left: 2px;
+    margin-bottom: 25px;
+}
+
+
+.listadoHab{
+    margin: 60px 0 30px 10px;
+    height: 500px;
+    overflow: auto;
+}
+
+.listadoHab::-webkit-scrollbar{
+    width: 5px;
+}
+
+.listadoHab::-webkit-scrollbar-thumb{
+    background-color: #000;
+}
+
+.cardHabitaciones{
+    width: 710px;
+    margin-bottom: 20px;
+    background-color: #a89188;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inforHabitacion{
+    width: 80%;
+}
+
+.inforHabitacion h3{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.inforHabitacion p{
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.btnSelecHab{
+    margin-top: 30px;
+    text-decoration: none;
+    color: #000;
+    padding: 4px 8px;
+    background-color: #866154;
+    transition: .3s ease;
+}
+
+.btnSelecHab:hover{
+    background-color: #715247;
+}

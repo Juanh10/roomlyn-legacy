@@ -382,33 +382,38 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-  $('#tablaUsuarios').DataTable({
-
-    responsive: true,
-    
-    "language": {
-      "sEmptyTable": "No se encontraron registros",
-      "sInfo": "Total: _TOTAL_ registros",
-      "sInfoEmpty": "Mostrando 0 de 0 de un total de 0 registros",
-      "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sInfoPostFix": "",
-      "sInfoThousands": ",",
-      "sLengthMenu": "Mostrar _MENU_ registros por página",
-      "sLoadingRecords": "Cargando...",
-      "sProcessing": "Procesando...",
-      "sSearch": "Buscar:",
-      "sZeroRecords": "No se encontraron registros",
-      "oPaginate": {
-          "sFirst": "Primero",
-          "sLast": "Último",
-          "sNext": "Siguiente",
-          "sPrevious": "Anterior"
-      },
-      "oAria": {
-          "sSortAscending": ": Activar para ordenar la columna ascendente",
-          "sSortDescending": ": Activar para ordenar la columna descendente"
-      }
+  function initDatatables($tablaID){
+    $($tablaID).DataTable({
+  
+      responsive: true,
+      
+      "language": {
+        "sEmptyTable": "No se encontraron registros",
+        "sInfo": "Total de registros: _TOTAL_",
+        "sInfoEmpty": "Mostrando 0 de 0 de un total de 0 registros",
+        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ",",
+        "sLengthMenu": "Mostrar _MENU_ registros por página",
+        "sLoadingRecords": "Cargando...",
+        "sProcessing": "Procesando...",
+        "sSearch": "Buscar:",
+        "sZeroRecords": "No se encontraron registros",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna ascendente",
+            "sSortDescending": ": Activar para ordenar la columna descendente"
+        }
+    }
+    });
   }
-  });
+
+  initDatatables($('#tablaUsuarios'));
+  initDatatables($('#tablaHabitaciones'));
 
 });

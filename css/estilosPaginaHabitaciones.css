@@ -183,14 +183,37 @@
     padding: 10px 0;
 }
 
-.infoCard .filtrosHab li{
+.check{
+    display: none;
+}
+
+.infoCard .filtrosHab li label{
     margin-right: 5px;
     padding: 4px;
     font-size: 12px;
     border-radius: 5px;
     border: 1px solid #7f7d7d;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease
 }
+
+.infoCard .filtrosHab li label:hover {
+    background-color: #ccc;
+    border-color: #555;
+    color: #333;
+}
+
+.infoCard .filtrosHab li input[type="checkbox"]:checked + label{
+    background-color: #000;
+    color: #fff;
+}
+
+.infoCard .filtrosHab li input[type="checkbox"]:checked + label::after {
+    content: "\2713";
+    margin-left: 5px;
+    font-weight: bold;
+}
+
 
 .precioInfo{
     display: flex;
@@ -199,7 +222,7 @@
 }
 
 .precios{
-    width: 70%;
+    width: 68%;
     margin-right: 20px;
 }
 
@@ -242,8 +265,9 @@
     border-radius: 5px;
     background-color: #753b29;
     color: #fff;
-    font-size: 15px;
+    font-size: 14px;
     transition: background-color .3s ease;
+    cursor: pointer;
 }
 
 .btnInfo .btnVermas:hover{

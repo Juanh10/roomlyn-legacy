@@ -44,10 +44,9 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                 <div class="col">
                     <div class="btnBuscador">
                         <span class="btn" data-bs-toggle="modal" data-bs-target="#addHabitacion">Añadir habitacion</span>
-                        <input type="text" id="buscador" class="form-control" placeholder="Buscar">
                     </div>
                     <div class="table-responsive tabla-usuarios">
-                        <table class="table table-hover table-borderless text-center">
+                        <table class="table table-hover table-borderless text-center" id="tablaHabitaciones">
                             <thead class="tabla-background">
                                 <tr>
                                     <th>Habitación</th>

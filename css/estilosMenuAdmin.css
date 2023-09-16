@@ -110,11 +110,11 @@ body.activoBackground::before{
     overflow-y: auto;
 }
 
-.menuLateralFijo .list::-webkit-scrollbar{ /* Estolos para el scroll */
+.menuLateralFijo .list::-webkit-scrollbar{ /* Estilos para el scroll */
     width: 5px;
 }
 
-.menuLateralFijo .list::-webkit-scrollbar-thumb{  /* Estolos para el scroll */
+.menuLateralFijo .list::-webkit-scrollbar-thumb{  /* Estilos para el scroll */
     background-color: #000;
 }
 

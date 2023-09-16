@@ -1,32 +1,48 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 include_once "../config/conex.php";
 session_start();
 
 if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se preciono el boton
 
     if (!empty($_POST["usuario"]) && !empty($_POST["documento"])) { // esta funcion es para saber si los campos estan vacios
+        
+        include "../../vistas/inicioSesion/msjCorreo.php";
 
-        $docu = $_POST["documento"];
-        $user = $_POST["usuario"];
+        include "../../librerias/phpMailer/PHPMailer.php"; 
+        include "../../librerias/phpMailer/SMTP.php";
 
-        $SQL = $dbh->prepare("SELECT usuarios.contraseña FROM usuarios JOIN infousuarios ON usuarios.id_infoUsuario = infousuarios.id_infoUsuario WHERE usuarios.usuario = :usuario AND infousuarios.documento = :documento"); //esta funcion sirve para preparar una consulta de la base de de datos
+        $emailUser = "juanchohernandez200518@gmail.com";
+        $emailContra = "3183683155Juan";
+        $msj = "HOLA MUNDO";
+        $emailEnvio = "juanchohernandez200518@gmail.com";
+        $fromName = 'CHAO MUNDO';
+        
+        $phpmailer = new PHPMailer();
+        $phpmailer -> Username = $emailUser;
+        $phpmailer -> Password = $emailContra;
+        $phpmailer -> SMTPSecure = 'ssl';
+        $phpmailer -> Host = '';
+        $phpmailer -> Port = 465;
+        $phpmailer -> isSMTP();
+        $phpmailer -> SMTPAuth = true;
+        $phpmailer -> setFrom($phpmailer->Username,$fromName);
+        $phpmailer -> addAddress($emailEnvio);
+        $phpmailer -> FromName = "HOLA A TODOS";
+        $phpmailer -> Subject = $msj;
+        $phpmailer -> Body .= $mensaje_correo;
+        $phpmailer -> isHTML(true);
 
-        $SQL->bindParam(':usuario', $user); //para vincular los marcadores":usu" con las variables
-        $SQL->bindParam(':documento', $docu);
-
-        if ($SQL->execute()) { // para ejecutar la consulta
-            if ($con = $SQL->fetch()) { //buscar datos de la base de datos
-                header("location: ../../vistas/login.php");
-                $_SESSION['mjscontraseña'] = $con['contraseña'];
-            } else {
-                header("location: ../../vistas/login.php");
-                $_SESSION['mjsError'] = "El usuario o documento son incorrectos";
-            }
-        } else {
-            header("location: ../../vistas/login.php");
-            $_SESSION['mjsError'] = "Ocurrió un error";
+        if(!$phpmailer->send()){
+            echo "ERROR";
+        }else{
+            echo "OK";
         }
+
+
+        
 
     } else {
         header("location: ../../vistas/login.php");

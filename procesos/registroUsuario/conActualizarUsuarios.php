@@ -18,7 +18,7 @@ $contraseña = $_POST['contraseña'];
 
 //* SQL de actualizar 
 
-$sql = $dbh -> prepare("UPDATE infousuarios, usuarios SET infousuarios.documento= :documento, infousuarios.pNombre= :pNombre, infousuarios.sNombre= :sNombre, infousuarios.pApellido= :pApellido, infousuarios.sApellido= :sApellido, infousuarios.celular= :celular, infousuarios.email= :email, usuarios.usuario= :usuario, usuarios.contraseña= :contra, usuarios.fecha_sys = now()  WHERE usuarios.idUsuario = :id and infousuarios.id_infoUsuario = usuarios.id_infoUsuario");
+$sql = $dbh -> prepare("UPDATE infousuarios, usuarios SET infousuarios.documento= :documento, infousuarios.pNombre= :pNombre, infousuarios.sNombre= :sNombre, infousuarios.pApellido= :pApellido, infousuarios.sApellido= :sApellido, infousuarios.celular= :celular, infousuarios.email= :email, usuarios.usuario= :usuario, usuarios.fecha_sys = now()  WHERE usuarios.idUsuario = :id and infousuarios.id_infoUsuario = usuarios.id_infoUsuario");
 
 $sql -> bindParam(':id', $idUsuario);
 $sql -> bindParam(':pNombre', $pNombre);
@@ -29,7 +29,6 @@ $sql -> bindParam(':documento', $documento);
 $sql -> bindParam(':celular', $telefono);
 $sql -> bindParam(':email', $email);
 $sql -> bindParam(':usuario', $usuario);
-$sql -> bindParam(':contra', $contraseña);
 
 if($sql -> execute()){
     header("location: ../../vistas/vistasAdmin/usuarios.php");

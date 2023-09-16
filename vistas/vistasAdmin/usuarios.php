@@ -157,18 +157,16 @@ if (strtolower($_SESSION['tipoUsuario']) == "administrador") :  // verificamos e
                                         <input type="text" id="pApellido" class="form-control mt-2" name="primerApellidoUsuario">
                                         <label for="sApellido" class="mt-2">Segundo apellido</label>
                                         <input type="text" id="sApellido" class="form-control mt-2" name="segundoApellidoUsuario">
-                                        <label for="documento" class="mt-2">Documento</label>
-                                        <input type="text" id="documento" class="form-control mt-2" name="documentoUsuario">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="documento">Telefono</label>
                                         <input type="text" id="telefono" class="form-control mt-2" name="telefonoUsuario">
                                         <label for="email" class="mt-2">Email</label>
                                         <input type="email" id="email" class="form-control mt-2" name="emailUsuario">
+                                        <label for="documento" class="mt-2">Documento</label>
+                                        <input type="text" id="documento" class="form-control mt-2" name="documentoUsuario">
                                         <label for="usuario" class="mt-2">Usuario</label>
                                         <input type="text" id="usuario" class="form-control mt-2" name="usuario">
-                                        <label for="contraseñaUsuario" class="mt-2">Contraseña</label>
-                                        <input type="text" id="contraseñaUsuario" class="form-control mt-2" name="contraseña">
                                     </div>
                                 </div>
                         </div>
