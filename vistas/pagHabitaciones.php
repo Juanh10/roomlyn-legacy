@@ -50,13 +50,14 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
             </div>
             <nav class="navegacionHab">
                 <ul>
-                    <li id="activoBucador">
+                    <!-- <li id="activoBucador">
                         <div class="buscador">
                             <div class="btnBuscar">
                                 <i class="bi bi-search"></i>
                             </div>
                             <div class="inputBuscador">
-                                <input type="text" placeholder="Buscar tipo de habitación">
+                                <label for="buscador" class="buscadorHidden">Buscar</label>
+                                <input type="text" id="buscador" placeholder="Buscar tipo de habitación">
                             </div>
                         </div>
                     </li>
@@ -64,7 +65,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                         <div class="btnFiltro">
                             <a class="filtro" href="#filtro"><i class="bi bi-funnel"></i></a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </div>

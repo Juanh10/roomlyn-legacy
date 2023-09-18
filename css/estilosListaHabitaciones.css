@@ -3,7 +3,7 @@
 .cabeceraHab{
     background-color: #9d8076;
     position: fixed;
-    padding: 15px 22px;
+    padding: 20px 22px;
     top: 0;
     left: 0;
     right: 0;
@@ -93,6 +93,10 @@
     cursor: pointer;
 }
 
+.inputBuscador label{
+    display: none;
+}
+
 .btnFiltro{
     font-size: 20px;
 }
@@ -166,7 +170,7 @@
 .btnSelecHab{
     margin-top: 30px;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     padding: 4px 8px;
     background-color: #866154;
     transition: .3s ease;

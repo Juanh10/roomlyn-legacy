@@ -51,13 +51,13 @@ body {
 .botonAgregar a {
     margin-top: 5px;
     background-color: #1cc78d;
-    color: #fff;
+    color: #000;
     box-shadow: 0px 1px 2px #1cc78d;
 }
 
 .botonAgregar a:hover {
     background-color: #23a97c;
-    color: #fff;
+    color: #000;
 }
 
 /* .buscador {
@@ -758,19 +758,13 @@ body {
 .btnBuscador span{
     background-color: #1cc78d;
     border: none;
-    color: #fff;
-}
-
-.btnBuscador span{
-    background-color: #1cc78d;
-    border: none;
     box-shadow: 0px 1px 2px #1cc78d;
-    color: #fff;
+    color: #000;
 }
 
 .btnBuscador span:hover{
     background-color: #23a97c;
-    color: #fff;
+    color: #000;
 }
 
 .botones-Config{

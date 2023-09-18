@@ -51,15 +51,16 @@ include_once "../../procesos/config/conex.php";
                                 <i class="bi bi-search"></i>
                             </div>
                             <div class="inputBuscador">
-                                <input type="text" placeholder="Buscar tipo de habitación">
+                                <label for="buscador">Buscar</label>
+                                <input type="text" id="buscador" placeholder="Buscar tipo de habitación">
                             </div>
                         </div>
                     </li>
-                    <li>
+                   <!--  <li>
                         <div class="btnFiltro">
                             <a class="filtro" href="#filtro"><i class="bi bi-funnel"></i></a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </div>

@@ -43,7 +43,7 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
             <div class="row">
                 <div class="col">
                     <div class="btnBuscador">
-                        <span class="btn" data-bs-toggle="modal" data-bs-target="#addHabitacion">Añadir habitacion</span>
+                        <span class="btn" data-bs-toggle="modal" data-bs-target="#addHabitacion">Añadir habitación</span>
                     </div>
                     <div class="table-responsive tabla-usuarios">
                         <table class="table table-hover table-borderless text-center" id="tablaHabitaciones">

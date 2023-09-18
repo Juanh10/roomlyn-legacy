@@ -1,13 +1,11 @@
 <?php
 
 $id = $_POST['idTipoHab'];
-
 include "listaHabitaciones.php";
 
 if(isset($_POST['btnVerInfor'])){
     if(!empty($_POST['opServicios'])){
         $opServicio = $_POST['opServicios'];
-
         $ventSelec = false;
         $aireSelec = false;
 
@@ -18,7 +16,6 @@ if(isset($_POST['btnVerInfor'])){
                 $aireSelec = true;
             }
         }
-        
 
         if($ventSelec && $aireSelec):
             mostrarDatosHabitaciones("ambas",$id);
@@ -27,10 +24,8 @@ if(isset($_POST['btnVerInfor'])){
         elseif($aireSelec):
             mostrarDatosHabitaciones("aire",$id);
         endif;
-
     }else{
         echo "CAMPOS VACIOS";
     }
 }
-
 ?>

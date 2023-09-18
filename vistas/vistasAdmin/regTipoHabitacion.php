@@ -169,7 +169,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                 <div class="modal-body">
                     <form action="../../procesos/registroHabitaciones/registroServicios/conActualizarServicios.php" method="post">
                         <input type="hidden" class="form-control mt-2" id="idServicio" name="idServicio">
-                        <label for="servicio">Servicio</label>
+                        <label for="servicioAct">Servicio</label>
                         <input type="text" class="form-control mt-2" id="servicioAct" name="servicioAct">
                 </div>
                 <div class="modal-footer">

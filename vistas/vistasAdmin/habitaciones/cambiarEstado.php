@@ -20,7 +20,7 @@ $sql2 = "SELECT id, estado FROM habitaciones_estado WHERE 1"; // consulta de los
 
     <section class="formCambiarEstado ms-2">
 
-        <h1 class="fs-6 mb-2">Estados de las habitaciones</h1>
+        <h1 class="fs-6 mb-2">Estado de la habitación</h1>
 
         <form action="../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php" method="post">
             <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
