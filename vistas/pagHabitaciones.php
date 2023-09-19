@@ -1,6 +1,7 @@
 <?php
 
 include_once "../procesos/config/conex.php";
+include "vistasHabitaciones/funcionesIconos.php";
 
 $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.precioVentilador, habitaciones_tipos.precioAire, habitaciones_tipos.estado, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.idTipoHabitacion = habitaciones_tipos.id WHERE 1 GROUP BY habitaciones_imagenes.idTipoHabitacion";
 
@@ -80,6 +81,8 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                 <?php
 
                 foreach ($dbh->query($sqlTiposHab) as $row) :
+                    $cantCama = $row['cantidadCamas'];
+                    $capacidadPerson = $row['capacidadPersonas']
                 ?>
                     <div class="cardHab">
                         <div class="imgCard">
@@ -94,7 +97,8 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                             </div>
 
                             <div class="infoCard">
-                                <p><span>Cantidad: </span>habitacion de <?php echo $row['cantidadCamas'] ?> cama</p>
+                                <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
+                                <p><span>Capacidad: </span><?php iconCapacidad($capacidadPerson); ?></p>
                                 <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="post">
                                     <input type="hidden" value="<?php echo $row['id']?>" name="idTipoHab">
                                     <ul class="filtrosHab">

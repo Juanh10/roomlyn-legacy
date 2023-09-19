@@ -120,6 +120,13 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                         </select>
                         <p></p>
 
+
+                        <div id="inputAgregado">
+                        <?php
+                            include "habitaciones/formCrearHabitaciones.php"; // incluimos para añadir los demas inputs segun el tipo de habitacion escogida
+                        ?>
+                        </div>
+
                         <label for="observaciones" class="mt-2">Observaciones</label>
                         <textarea class="form-control mt-2" name="observaciones" id="observaciones" required></textarea>
                         <p></p>
@@ -191,7 +198,8 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
     ?>
 
 
-    <script src="../../js/scriptRegistroHabitaciones.js"></script>
+    <script src="../../js/validarRegistroHabitaciones.js"></script>
+    
 
 </body>
 

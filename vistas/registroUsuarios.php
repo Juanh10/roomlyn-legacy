@@ -164,7 +164,7 @@ $sql2 = "SELECT id, documento FROM tipo_documento WHERE 1";
     </div>
 
 
-    <script src="../js/scriptRegistroUsuario.js"></script>
+    <script src="../js/validarRegistroUsuario.js"></script>
 
 </body>
 

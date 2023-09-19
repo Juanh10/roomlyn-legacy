@@ -417,3 +417,24 @@ $(document).ready(function () {
   initDatatables($('#tablaHabitaciones'));
 
 });
+
+
+//* CONSULTA AJAX PARA FORMULARIO DEL REGISTRO DE HABITACIONES
+
+$(document).ready(function(){
+
+  let tipoHab = $('#tipoHab');
+  let inputAdd = $('#inputAgregado');
+
+  tipoHab.on('change', function(){
+
+    let seleccion = tipoHab.val();
+    
+    fetch(`../vistasAdmin/habitaciones/formCrearHabitaciones.php?id=${seleccion}`)
+    .then(res => res.text())
+    .then(datos => inputAdd.html(datos))
+    .catch()
+
+  });
+
+});

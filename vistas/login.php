@@ -120,8 +120,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     ?>
 
     <script src="../librerias/jquery-3.7.0.min.js"></script>
-
-    <script src="../js/scriptLogin.js"></script>
+    <script src="../js/validarLogin.js"></script>
 
 
 </body>
