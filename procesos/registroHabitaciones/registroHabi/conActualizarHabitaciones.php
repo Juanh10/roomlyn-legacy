@@ -3,6 +3,7 @@
 include_once "../../config/conex.php";
 session_start();
 
+
 if (isset($_POST['btnActualizar'])) {
     if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POST['observaciones']) && !empty($_POST['idHab'])) { // Comparar si los datos no estan vacios
 
@@ -29,38 +30,12 @@ if (isset($_POST['btnActualizar'])) {
                     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
                     $existe = true;
                 } else {
-                    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, observacion=:observacion, fecha_sys=now() WHERE id = :id");
-
-
-                    $sql->bindParam(":id", $idHabitacion);
-                    $sql->bindParam(":nHab", $numHab);
-                    $sql->bindParam(":idTipo", $tipoHab);
-                    $sql->bindParam(":observacion", $observ);
-
-                    if (!$existe && $sql->execute()) {
-                        $_SESSION['msjExito'] = "¡La habitación se ha actualizado exitosamente!";
-                        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-                    } else {
-                        $_SESSION['msjError'] = "Ocurrió un error";
-                        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+                    if(!$existe){
+                        actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ);
                     }
                 }
             } else {
-                $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, observacion=:observacion, fecha_sys=now() WHERE id = :id");
-
-
-                $sql->bindParam(":id", $idHabitacion);
-                $sql->bindParam(":nHab", $numHab);
-                $sql->bindParam(":idTipo", $tipoHab);
-                $sql->bindParam(":observacion", $observ);
-
-                if (!$existe && $sql->execute()) {
-                    $_SESSION['msjExito'] = "¡La habitación se ha actualizado exitosamente!";
-                    header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-                } else {
-                    $_SESSION['msjError'] = "Ocurrió un error";
-                    header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-                }
+                actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ);
             }
         }
     } else {
@@ -70,26 +45,58 @@ if (isset($_POST['btnActualizar'])) {
 }
 
 
-if(isset($_POST['actualizarEstado'])){
-    if(!empty($_POST['opcion']) && !empty($_POST['idHab'])){
+if (isset($_POST['actualizarEstado'])) {
+    if (!empty($_POST['opcion']) && !empty($_POST['idHab'])) {
         $opcion = $_POST['opcion'];
         $idHabitacion = $_POST['idHab'];
 
-        $sql = $dbh -> prepare("UPDATE habitaciones SET id_hab_estado=:idEstado, fecha_sys=now() WHERE id = :idHab");
-        $sql -> bindParam(":idEstado", $opcion);
-        $sql -> bindParam(":idHab", $idHabitacion);
+        $sql = $dbh->prepare("UPDATE habitaciones SET id_hab_estado=:idEstado, fecha_sys=now() WHERE id = :idHab");
+        $sql->bindParam(":idEstado", $opcion);
+        $sql->bindParam(":idHab", $idHabitacion);
 
-        if($sql -> execute()){
+        if ($sql->execute()) {
             $_SESSION['msjExito'] = "¡Se ha cambiado el estado exitosamente!";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-        }else{
+        } else {
             $_SESSION['msjError'] = "Ocurrió un error";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
-
-
-    }else{
+    } else {
         $_SESSION['msjError'] = "Campos vacíos";
+        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+    }
+}
+
+
+function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ){
+
+    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, observacion=:observacion, tipoCama=:tipoCama, fecha_sys=now() WHERE id = :id");
+
+
+    $sql->bindParam(":id", $idHabitacion);
+    $sql->bindParam(":nHab", $numHab);
+    $sql->bindParam(":idTipo", $tipoHab);
+    $sql->bindParam(":observacion", $observ);
+
+    $valorTipoCama = "";
+
+    foreach ($_POST as $nmCampo => $valorSelect) {
+        if (strpos($nmCampo, "tipoCama") === 0) {
+            // Asigna el valor a :tipoCama en lugar de volver a vincularlo
+            $valorTipoCama .= $valorSelect.","; // concatenar el valor de la variable con "valorSelect"
+        }
+    }
+
+    // funcion "rtrim" Elimina la coma y el espacio en blanco al final si existen
+    $valorTipoCama = rtrim($valorTipoCama, ', ');
+
+    $sql->bindParam(":tipoCama", $valorTipoCama);
+
+    if ($sql->execute()) {
+        $_SESSION['msjExito'] = "¡La habitación se ha actualizado exitosamente!";
+        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+    } else {
+        $_SESSION['msjError'] = "Ocurrió un error";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }

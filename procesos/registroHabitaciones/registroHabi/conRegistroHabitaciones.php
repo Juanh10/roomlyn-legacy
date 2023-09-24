@@ -1,5 +1,4 @@
 <?php
-
 include_once "../../config/conex.php";
 date_default_timezone_set("America/Bogota");
 session_start();
@@ -25,29 +24,44 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         $existe = true;
     } else {
-        $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_tipo, id_hab_estado, observacion, estado, fecha, hora, fecha_sys) VALUES (:nHab, :idTipo, :idHabEstado, :observacion, :estado, :fecha, :hora, now())");
+
+        $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, observacion, estado, fecha, hora, fecha_sys) VALUES (:nHab, :idTipo, :idHabEstado, :tipoCama, :cantPersonas, :observacion, :estado, :fecha, :hora, now())");
 
         $sql->bindParam(":nHab", $numHab);
         $sql->bindParam(":idTipo", $tipoHab);
         $sql->bindParam(":idHabEstado", $estadoHab);
+        $sql->bindParam(":cantPersonas", $estado);
         $sql->bindParam(":observacion", $descripcionHab);
         $sql->bindParam(":estado", $estado);
         $sql->bindParam(":fecha", $fecha);
         $sql->bindParam(":hora", $hora);
 
+        $valorTipoCama = "";
+
+        foreach ($_POST as $nmCampo => $valorSelect) {
+            if (strpos($nmCampo, "tipoCama") === 0) {
+                // Asigna el valor a :tipoCama en lugar de volver a vincularlo
+                $valorTipoCama .= $valorSelect.","; // concatenar el valor de la variable con "valorSelect"
+            }
+        }
+
+        // funcion "rtrim" Elimina la coma y el espacio en blanco al final si existen
+        $valorTipoCama = rtrim($valorTipoCama, ', ');
+
+
+        $sql->bindParam(":tipoCama", $valorTipoCama);
+
         if (!$existe && $sql->execute()) {
-            $_SESSION['msjExito'] = "Habitación registrada con exito";
+            $_SESSION['msjExito'] = "Habitación registrada con éxito";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         } else {
             $_SESSION['msjError'] = "Ocurrió un error";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
-    }
 
+    }
 } else {
     $_SESSION['msjError'] = "Campos vacíos";
     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
 }
-
-
 ?>

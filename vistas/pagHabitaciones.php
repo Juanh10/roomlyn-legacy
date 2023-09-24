@@ -82,38 +82,44 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
 
                 foreach ($dbh->query($sqlTiposHab) as $row) :
                     $cantCama = $row['cantidadCamas'];
-                    $capacidadPerson = $row['capacidadPersonas']
+                    $capacidadPerson = $row['capacidadPersonas'];
+                    if ($row['estado'] === 1) :
                 ?>
-                    <div class="cardHab">
-                        <div class="imgCard">
-                            <img src="../img/<?php echo $row['ruta'] ?>" alt="">
-                        </div>
-
-                        <div class="contenidoCard">
-
-                            <div class="tituloHab">
-                                <h2><?php echo $row['tipoHabitacion'] ?></h2>
-                                <a class="btnImgHab" href="../img/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
+                        <div class="cardHab">
+                            <div class="imgCard">
+                                <img src="../img/<?php echo $row['ruta'] ?>" alt="">
                             </div>
 
-                            <div class="infoCard">
-                                <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
-                                <p><span>Capacidad: </span><?php iconCapacidad($capacidadPerson); ?></p>
-                                <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="post">
-                                    <input type="hidden" value="<?php echo $row['id']?>" name="idTipoHab">
-                                    <ul class="filtrosHab">
-                                        <li>
-                                            <input type="checkbox" name="opServicios[]" value="ventilador" id="checkVentilador<?php echo $row['id']?>" class="check">
-                                            <label for="checkVentilador<?php echo $row['id']?>">Ventilador</label>
-                                        </li>
-                                        <li>
-                                        <input type="checkbox" name="opServicios[]" value="aire" id="checkAire<?php echo $row['id']?>" class="check">
-                                        <label for="checkAire<?php echo $row['id']?>">Aire acondicionado</label>
-                                        </li>
-                                    </ul>
-                            </div>
+                            <div class="contenidoCard">
 
-                            <div class="precioInfo">
+                                <div class="tituloHab">
+                                    <h2><?php echo $row['tipoHabitacion'] ?></h2>
+                                    <a class="btnImgHab" href="../img/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
+                                </div>
+
+                                <div class="infoCard">
+                                    <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
+                                    <p><span>Capacidad: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
+                                    <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="post">
+                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="idTipoHab">
+                                        <p class="selFiltro">Seleccione: </p>
+                                        <ul class="filtrosHab">
+                                            <li>
+                                                <input type="checkbox" name="opServicios[]" value="ventilador" id="checkVentilador<?php echo $row['id'] ?>" class="check">
+                                                <label for="checkVentilador<?php echo $row['id'] ?>">Ventilador</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" name="opServicios[]" value="aire" id="checkAire<?php echo $row['id'] ?>" class="check">
+                                                <label for="checkAire<?php echo $row['id'] ?>">Aire acondicionado</label>
+                                            </li>
+                                        </ul>
+                                        <div class="btnInfo">
+                                            <button type="submit" class="btnVermas" title="Ver lista de las habitaciones" name="btnVerInfor"> Ver más </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
                                 <div class="precios">
                                     <div class="precioVent">
                                         <p>Precio por dia con ventilador</p>
@@ -124,16 +130,13 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                                         <span>COP <?php echo number_format($row['precioAire'], 0, ',', '.') ?> + IVA</span>
                                     </div>
                                 </div>
-                                <div class="btnInfo">
-                                    <button type="submit" class="btnVermas" title="Ver lista de las habitaciones" name="btnVerInfor">Ver más</button>
-                                </div>
-                                </form>
+
                             </div>
+
                         </div>
 
-                    </div>
-
                 <?php
+                    endif;
                 endforeach;
 
                 ?>

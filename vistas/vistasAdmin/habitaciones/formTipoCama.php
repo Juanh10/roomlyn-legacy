@@ -15,8 +15,13 @@ if(!empty($_GET['id'])){
 
     for ($i=1; $i <= $cantidadCamas ; $i++) { 
         ?>
-        <label for="">Tipo de la cama <?php echo $i ?></label>
-            <input type="text" name="tipoCama" class="form-control w-50 mt-2">
+            <label for="tipoCama mb-3">Tipo de la cama <?php echo $i ?></label>
+            <select name="tipoCama<?php echo $i ?>" id="tipoCama<?php echo $i ?>" class="form-select mb-3 mt-2">
+                <option disabled selected value="">Escoja una opción</option>
+                <option value="Simple">Simple</option>
+                <option value="Doble">Doble</option>
+            </select>
+            <p></p>
         <?php
     }
 

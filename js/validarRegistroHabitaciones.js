@@ -10,7 +10,8 @@ const expresiones = {
 const estadoInput = {
     numHabitacion: false,
     tipoHab: false,
-    observaciones: false
+    observaciones: false,
+    tipoCama: false
 }
 
 const validarFormulario = (e) => {

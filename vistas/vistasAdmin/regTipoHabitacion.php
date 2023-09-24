@@ -142,7 +142,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 
                     <form action="../../procesos/registroHabitaciones/registroServicios/conRegistroServicios.php" method="post">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nameServicio" name="servicio" placeholder="Servicio">
+                            <input type="text" class="form-control" id="nameServicio" name="servicio" placeholder="Servicio" required>
                             <label for="nameServicio">Servicio</label>
                         </div>
 
@@ -212,6 +212,16 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
     <?php
         unset($_SESSION['msj2']);
     }
+
+    // Alerta de errores
+    if (isset($_SESSION['msjError'])) :
+    ?>
+        <div class="alert alert-danger alerta" role="alert">
+            <strong><i class="bi bi-exclamation-triangle-fill"></i><?php echo $_SESSION['msjError'] ?></strong>
+        </div>
+    <?php
+        unset($_SESSION['msjError']);
+    endif;
 
 
     ?>

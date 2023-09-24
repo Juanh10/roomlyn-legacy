@@ -4,7 +4,7 @@ include_once "../../../procesos/config/conex.php";
 
 $idHab = $_GET['id'];
 
-$sql = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones.id_tipo, habitaciones.id_hab_estado, habitaciones.observacion, habitaciones_estado.estado, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id WHERE habitaciones.id = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
+$sql = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones.id_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.observacion, habitaciones_estado.estado, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id WHERE habitaciones.id = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
 
 $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; // consulta de los tipos de habitaciones
 
@@ -29,8 +29,8 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
                     <label for="numHabitacion">Número de la habitación</label>
                     <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacion" value="<?php echo $rowHab['nHabitacion'] ?>" required>
 
-                    <label for="tipoHab" class="mt-2">Tipo de habitación</label>
-                    <select class="form-select mt-2" name="tipoHab" id="tipoHab" required>
+                    <label for="tipoHabEdit" class="mt-2">Tipo de habitación</label>
+                    <select class="form-select mt-2 mb-3" name="tipoHab" id="tipoHabEdit" required>
                         <option selected value="<?php echo $rowHab['id_tipo'] ?>"><?php echo $rowHab['tipoHabitacion'] ?></option>
                         <?php
                         foreach ($dbh->query($sql2) as $rowTipo) :
@@ -43,8 +43,14 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
                         ?>
                     </select>
 
+                    <div id="addSelect">
+                        <?php
+                            include "editTipoCama.php";
+                        ?>
+                    </div>
+
                     <label for="observaciones" class="mt-2">Observaciones</label>
-                    <textarea class="form-control mt-2" name="observaciones" id="observaciones" required><?php echo $rowHab['observacion'] ?></textarea>
+                    <textarea class="form-control mt-2 mb-3" name="observaciones" id="observaciones" required><?php echo $rowHab['observacion'] ?></textarea>
                 <?php
                 endforeach;
                 ?>
@@ -52,6 +58,10 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
             </form>
         </div>
     </div>
+
+
+    <script src="../../librerias/jquery-3.7.0.min.js"></script>
+    <script src="../../js/scriptModalAdmit.js"></script>
 
 </body>
 

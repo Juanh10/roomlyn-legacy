@@ -25,7 +25,7 @@ if(isset($_POST['btnVerInfor'])){
             mostrarDatosHabitaciones("aire",$id);
         endif;
     }else{
-        echo "CAMPOS VACIOS";
+        mostrarDatosHabitaciones("ambas",$id);
     }
 }
 ?>
