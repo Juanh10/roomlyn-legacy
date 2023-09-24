@@ -21,11 +21,13 @@ if (isset($_POST['btnActualizar'])) {
 
         if ($datos = $consulta->fetch()) { // obtener datos de la consulta
             if ($datos['nHabitacion'] != $numHab) {
-                $consulta2 = $dbh->prepare("SELECT id, nHabitacion FROM habitaciones WHERE nHabitacion = :numHab");
+                $consulta2 = $dbh->prepare("SELECT id, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
                 $consulta2->bindParam(":numHab", $numHab);
                 $consulta2->execute();
 
-                if ($consulta2->rowCount() > 0) {
+                $filas = $consulta2 -> fetch();
+
+                if ($consulta2->rowCount() > 0 && $filas['estado'] === 1) {
                     $_SESSION['msjError'] = "Error: El número de habitación ya ha sido registrado anteriormente.";
                     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
                     $existe = true;
@@ -70,7 +72,7 @@ if (isset($_POST['actualizarEstado'])) {
 
 function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ){
 
-    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, observacion=:observacion, tipoCama=:tipoCama, fecha_sys=now() WHERE id = :id");
+    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id = :id");
 
 
     $sql->bindParam(":id", $idHabitacion);
@@ -79,13 +81,20 @@ function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $obs
     $sql->bindParam(":observacion", $observ);
 
     $valorTipoCama = "";
-
+    $cantPersonas = 0;
     foreach ($_POST as $nmCampo => $valorSelect) {
         if (strpos($nmCampo, "tipoCama") === 0) {
+            if($valorSelect === "Simple"){
+                $cantPersonas += 1;
+            }else if($valorSelect === "Doble"){
+                $cantPersonas += 2;
+            }
             // Asigna el valor a :tipoCama en lugar de volver a vincularlo
             $valorTipoCama .= $valorSelect.","; // concatenar el valor de la variable con "valorSelect"
         }
     }
+
+    $sql->bindParam(":cantPersonas", $cantPersonas);
 
     // funcion "rtrim" Elimina la coma y el espacio en blanco al final si existen
     $valorTipoCama = rtrim($valorTipoCama, ', ');

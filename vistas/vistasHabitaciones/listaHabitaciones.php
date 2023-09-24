@@ -52,7 +52,7 @@ include_once "../../procesos/config/conex.php";
                             </div>
                             <div class="inputBuscador">
                                 <label for="buscador">Buscar</label>
-                                <input type="text" id="buscador" placeholder="Buscar tipo de habitación">
+                                <input type="text" id="buscador" placeholder="Buscar habitación">
                             </div>
                         </div>
                     </li>

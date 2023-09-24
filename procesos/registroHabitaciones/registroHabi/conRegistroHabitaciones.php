@@ -15,11 +15,11 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
 
     $existe = false;
 
-    $consulta = $dbh->prepare("SELECT id, nHabitacion FROM habitaciones WHERE nHabitacion = :numHab");
-    $consulta->bindParam(":numHab", $numHab);
-    $consulta->execute();
-
-    if ($consulta->rowCount() > 0) {
+    $consulta = $dbh->prepare("SELECT id, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
+    $consulta->bindParam(":numHab", $numHab); // enlazar el marcador con la variable
+    $consulta->execute(); // ejecutar la consulta
+    $fila = $consulta -> fetch(); // para acceder a los datos de la BD
+    if ($consulta->rowCount() > 0 && $fila['estado'] === 1) {
         $_SESSION['msjError'] = "Esta habitación ya existe";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         $existe = true;
@@ -30,20 +30,26 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
         $sql->bindParam(":nHab", $numHab);
         $sql->bindParam(":idTipo", $tipoHab);
         $sql->bindParam(":idHabEstado", $estadoHab);
-        $sql->bindParam(":cantPersonas", $estado);
         $sql->bindParam(":observacion", $descripcionHab);
         $sql->bindParam(":estado", $estado);
         $sql->bindParam(":fecha", $fecha);
         $sql->bindParam(":hora", $hora);
 
         $valorTipoCama = "";
-
+        $cantPersonas = 0;
         foreach ($_POST as $nmCampo => $valorSelect) {
             if (strpos($nmCampo, "tipoCama") === 0) {
+                if($valorSelect === "Simple"){
+                    $cantPersonas += 1;
+                }else if($valorSelect === "Doble"){
+                    $cantPersonas += 2;
+                }
                 // Asigna el valor a :tipoCama en lugar de volver a vincularlo
                 $valorTipoCama .= $valorSelect.","; // concatenar el valor de la variable con "valorSelect"
             }
         }
+
+        $sql->bindParam(":cantPersonas", $cantPersonas);
 
         // funcion "rtrim" Elimina la coma y el espacio en blanco al final si existen
         $valorTipoCama = rtrim($valorTipoCama, ', ');

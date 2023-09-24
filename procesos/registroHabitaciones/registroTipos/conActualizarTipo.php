@@ -2,23 +2,8 @@
 
 include_once "../../config/conex.php";
 
-// actulizar los datos de los tipos de habitaciones
-
-if (isset($_POST['actTipo'])) {
-
-    session_start();
-
-    if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_POST['cantidadPersonas']) && !empty($_POST['precioVentilador']) && !empty($_POST['precioAire'])) { // condicion para saber si los campos no vienen vacios
-
-        // capturamos todos los datos del formulario
-        $idTipoHab = $_POST['idTipoHab'];
-        $nombreTipo = $_POST['nombreTipo'];
-        $cantidadCamas = $_POST['cantidadCamas'];
-        $cantidadPersonas = $_POST['cantidadPersonas'];
-        $precioVentilador = $_POST['precioVentilador'];
-        $precioAire = $_POST['precioAire'];
-
-        $sql = $dbh->prepare("UPDATE habitaciones_tipos SET tipoHabitacion= :tipoHab, cantidadCamas= :cantidadCama, capacidadPersonas= :cantidadPersona, precioVentilador= :precioVentilador, precioAire= :precioAire WHERE id = :idTipo"); // consulta sql
+function actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas, $precioVentilador, $precioAire, $idTipoHab){
+    $sql = $dbh->prepare("UPDATE habitaciones_tipos SET tipoHabitacion= :tipoHab, cantidadCamas= :cantidadCama, capacidadPersonas= :cantidadPersona, precioVentilador= :precioVentilador, precioAire= :precioAire WHERE id = :idTipo"); // consulta sql
 
         // vinculamos los marcadores con las variables
         $sql->bindParam(':tipoHab', $nombreTipo);
@@ -36,6 +21,50 @@ if (isset($_POST['actTipo'])) {
             $_SESSION['msjError'] = "Ocurrió un error";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         }
+}
+
+// actulizar los datos de los tipos de habitaciones
+
+if (isset($_POST['actTipo'])) {
+
+    session_start();
+
+    if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_POST['cantidadPersonas']) && !empty($_POST['precioVentilador']) && !empty($_POST['precioAire'])) { // condicion para saber si los campos no vienen vacios
+
+        // capturamos todos los datos del formulario
+        $idTipoHab = $_POST['idTipoHab'];
+        $nombreTipo = $_POST['nombreTipo'];
+        $cantidadCamas = $_POST['cantidadCamas'];
+        $cantidadPersonas = $_POST['cantidadPersonas'];
+        $precioVentilador = $_POST['precioVentilador'];
+        $precioAire = $_POST['precioAire'];
+        $existe = false; // boolean para saber si existe el tipo de habitacion 
+
+        $consultaTipo = $dbh->prepare("SELECT id, tipoHabitacion, estado FROM habitaciones_tipos WHERE id = :idTipo");
+        $consultaTipo -> bindParam(":idTipo",$idTipoHab);
+        $consultaTipo -> execute(); //ejecutar la consulta
+        $fila1 = $consultaTipo -> fetch(); // obtener datos de la consulta
+
+        if($fila1['tipoHabitacion'] != $nombreTipo){
+            $consulta2 = $dbh->prepare("SELECT id, tipoHabitacion, estado FROM habitaciones_tipos WHERE tipoHabitacion = :nmTipo");
+            $consulta2 -> bindParam("nmTipo", $nombreTipo);
+            $consulta2 -> execute(); //ejecutar la consula
+            $fila2 = $consulta2 -> fetch(); // obtener datos de la consula
+
+            if($consulta2 -> rowCount() > 0 && $fila2['estado'] === 1){
+                $_SESSION['msjError'] = "Error: El tipo de habitación ya ha sido registrado anteriormente.";
+                header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
+                $existe = true;
+            }else{
+                if(!$existe){
+                    actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas, $precioVentilador, $precioAire, $idTipoHab);
+                }
+            }
+
+        }else{
+            actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas, $precioVentilador, $precioAire, $idTipoHab);
+        }
+
     } else {
         $_SESSION['msjError'] = "Campos vacíos";
         header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");

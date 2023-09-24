@@ -163,7 +163,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
             </div>
             <div class="contenidoPiePagina">
                 <a href="https://wa.link/3qaw9d">Contacto</a>
-                <a href="#hola">Como funciona PLAHOT</a>
+                <a href="#hola">Como funciona ROOMLYN</a>
                 <a href="#">Politicas de privacidad</a>
             </div>
         </div>
