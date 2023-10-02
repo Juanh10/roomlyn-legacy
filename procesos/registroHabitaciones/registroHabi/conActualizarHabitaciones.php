@@ -11,6 +11,7 @@ if (isset($_POST['btnActualizar'])) {
         $idHabitacion = $_POST['idHab'];
         $numHab = $_POST['numHabitacion'];
         $tipoHab = $_POST['tipoHab'];
+        $sisClimatizacion = $_POST['sisClimatizacion'];
         $observ = $_POST['observaciones'];
 
         $existe = false;
@@ -33,11 +34,11 @@ if (isset($_POST['btnActualizar'])) {
                     $existe = true;
                 } else {
                     if(!$existe){
-                        actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ);
+                        actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sisClimatizacion, $observ);
                     }
                 }
             } else {
-                actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ);
+                actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sisClimatizacion, $observ);
             }
         }
     } else {
@@ -70,14 +71,15 @@ if (isset($_POST['actualizarEstado'])) {
 }
 
 
-function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $observ){
+function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sisClimatizacion, $observ){
 
-    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id = :id");
+    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, tipoServicio= :tipoServ, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id = :id");
 
 
     $sql->bindParam(":id", $idHabitacion);
     $sql->bindParam(":nHab", $numHab);
     $sql->bindParam(":idTipo", $tipoHab);
+    $sql->bindParam(":tipoServ", $sisClimatizacion);
     $sql->bindParam(":observacion", $observ);
 
     $valorTipoCama = "";

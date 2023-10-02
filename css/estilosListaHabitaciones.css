@@ -164,7 +164,18 @@
 
 .inforHabitacion p{
     font-size: 14px;
-    margin-top: 10px;
+}
+
+.datosHabitacion{
+    display: flex;
+}
+
+.datosHabitacion p{
+    margin-right: 10px;
+}
+
+.datosHabitacion span{
+    font-weight: bold;
 }
 
 .btnSelecHab{
@@ -178,4 +189,17 @@
 
 .btnSelecHab:hover{
     background-color: #715247;
+}
+
+/** ESTILOS PARA EL CARRUSEL DE IMAGENES  */
+
+.coverImg{
+    width: 100%;
+    height: 238px;
+}
+
+.coverImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

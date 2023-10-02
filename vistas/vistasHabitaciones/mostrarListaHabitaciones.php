@@ -18,14 +18,14 @@ if(isset($_POST['btnVerInfor'])){
         }
 
         if($ventSelec && $aireSelec):
-            mostrarDatosHabitaciones("ambas",$id);
+            mostrarDatosHabitaciones("ambas",$id, $dbh);
         elseif($ventSelec):
-            mostrarDatosHabitaciones("ventilador",$id);
+            mostrarDatosHabitaciones("ventilador",$id, $dbh);
         elseif($aireSelec):
-            mostrarDatosHabitaciones("aire",$id);
+            mostrarDatosHabitaciones("aire",$id, $dbh);
         endif;
     }else{
-        mostrarDatosHabitaciones("ambas",$id);
+        mostrarDatosHabitaciones("ambas",$id, $dbh);
     }
 }
 ?>

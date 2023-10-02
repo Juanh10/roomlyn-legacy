@@ -14,7 +14,7 @@ include_once "../../procesos/config/conex.php";
 
 $sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; //consulta para el modal de añadir habitaciones
 
-$sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.tipoHabitacion, habitaciones.tipoCama, habitaciones.cantidadPersonasHab, habitaciones.observacion, habitaciones.estado, habitaciones_estado.estado FROM habitaciones INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id WHERE 1 ORDER BY habitaciones.id"; // consulta para mostrar todos los datos relacionados con las habitacione.
+$sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.tipoHabitacion, habitaciones.tipoCama, habitaciones.cantidadPersonasHab, habitaciones.tipoServicio, habitaciones.observacion, habitaciones.estado, habitaciones_estado.estado FROM habitaciones INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id WHERE 1 ORDER BY habitaciones.id"; // consulta para mostrar todos los datos relacionados con las habitacione.
 
 ?>
 
@@ -51,7 +51,7 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                                 <tr>
                                     <th>Habitación</th>
                                     <th>Tipo habitación</th>
-                                    <th>Tipo cama</th>
+                                    <th>Sistema de climatización</th>
                                     <th class="col-3">Observaciones</th>
                                     <th>Estado</th>
                                     <th>Acción</th>
@@ -60,12 +60,12 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                             <tbody>
                                 <?php
                                 foreach ($dbh->query($sql2) as $rowHab) :
-                                    if($rowHab[6] == 1):
+                                    if($rowHab[7] == 1):
                                 ?>
                                     <tr>
                                         <td><?php echo $rowHab['nHabitacion'] ?></td>
                                         <td><?php echo $rowHab['tipoHabitacion'] ?></td>
-                                        <td><?php echo $rowHab['tipoCama'] ?></td>
+                                        <td><?php echo ($rowHab['tipoServicio'] == 0) ? "Ventilador" : "Aire acondicionado"; ?></td>
                                         <td><?php echo $rowHab['observacion'] ?></td>
                                         <td><?php echo $rowHab['estado'] ?></td>
                                         <td class="botones-Config" id="<?php echo $rowHab['id'] ?>">
@@ -128,6 +128,13 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                             include "habitaciones/formTipoCama.php"; // incluimos para añadir los demas inputs segun el tipo de habitacion escogida
                         ?>
                         </div>
+
+                        <label class="mt-2" for="serv">Seleccione el sistema de climatización</label>
+                        <select class="form-select mt-2" name="sisClimatizacion" id="servicio">
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="0">Ventilador</option>
+                            <option value="1">Aire acondicionado</option>
+                        </select>
 
                         <label for="observaciones" class="mt-2">Observaciones</label>
                         <textarea class="form-control mt-2" name="observaciones" id="observaciones" required></textarea>

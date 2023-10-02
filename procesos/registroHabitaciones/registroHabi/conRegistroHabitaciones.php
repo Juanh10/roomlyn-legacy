@@ -7,6 +7,7 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
 
     $numHab =  $_POST['numHabitacion'];
     $tipoHab = $_POST['tipoHab'];
+    $sisClimatizacion = $_POST['sisClimatizacion'];
     $descripcionHab = $_POST['observaciones'];
     $estadoHab = 1; // los diferentes tipos de estados que tiene la habitacion 1: disponible, 2: limpieza, 3: mantenimiento, 4: ocupado
     $estado = 1; // estado si la habitacion esta deshabilitada o no
@@ -25,11 +26,12 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
         $existe = true;
     } else {
 
-        $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, observacion, estado, fecha, hora, fecha_sys) VALUES (:nHab, :idTipo, :idHabEstado, :tipoCama, :cantPersonas, :observacion, :estado, :fecha, :hora, now())");
+        $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado, fecha, hora, fecha_sys) VALUES (:nHab, :idTipo, :idHabEstado, :tipoCama, :cantPersonas, :tipoServicio, :observacion, :estado, :fecha, :hora, now())");
 
         $sql->bindParam(":nHab", $numHab);
         $sql->bindParam(":idTipo", $tipoHab);
         $sql->bindParam(":idHabEstado", $estadoHab);
+        $sql->bindParam(":tipoServicio", $sisClimatizacion);
         $sql->bindParam(":observacion", $descripcionHab);
         $sql->bindParam(":estado", $estado);
         $sql->bindParam(":fecha", $fecha);

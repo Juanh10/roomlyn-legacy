@@ -4,7 +4,7 @@ include_once "../../../procesos/config/conex.php";
 
 $idHab = $_GET['id'];
 
-$sql = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones.id_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.observacion, habitaciones_estado.estado, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id WHERE habitaciones.id = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
+$sql = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones.id_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.tipoServicio, habitaciones.observacion, habitaciones_estado.estado, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id WHERE habitaciones.id = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
 
 $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; // consulta de los tipos de habitaciones
 
@@ -25,7 +25,7 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
                 <?php
                 foreach ($dbh->query($sql) as $rowHab) : // mostrar datos
                 ?>
-                    <input type="hidden" name="idHab" value="<?php echo $idHab?>">
+                    <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
                     <label for="numHabitacion">Número de la habitación</label>
                     <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacion" value="<?php echo $rowHab['nHabitacion'] ?>" required>
 
@@ -45,9 +45,26 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
 
                     <div id="addSelect">
                         <?php
-                            include "editTipoCama.php";
+                        include "editTipoCama.php";
                         ?>
                     </div>
+
+                    <label class="mt-2" for="serv">Sistema de climatización</label>
+                    <select class="form-select mt-2" name="sisClimatizacion" id="servicio">
+                        <?php
+                        if ($rowHab['tipoServicio'] == 0) :
+                        ?>
+                            <option value="0" selected>Ventilador</option>
+                            <option value="1">Aire acondicionado</option>
+                        <?php
+                        else :
+                        ?>
+                            <option value="1" selected>Aire acondicionado</option>
+                            <option value="0">Ventilador</option>
+                        <?php
+                        endif;
+                        ?>
+                    </select>
 
                     <label for="observaciones" class="mt-2">Observaciones</label>
                     <textarea class="form-control mt-2 mb-3" name="observaciones" id="observaciones" required><?php echo $rowHab['observacion'] ?></textarea>
