@@ -1,10 +1,16 @@
 <?php
 
-function iconCantidadCama($cantCama){
+function iconCantidadCama($tipoCama){
 
-    for ($i=0; $i < $cantCama ; $i++) { 
-        echo "<img src='../iconos/cama.png' alt='Cama'>";
-    }
+   $arrTipoCama = explode(",", $tipoCama);
+
+   for ($i=0; $i <count($arrTipoCama) ; $i++) { 
+        if(strtolower($arrTipoCama[$i]) === "simple"){
+            echo "<img src='../../iconos/camaSimple.png' alt='cama sencilla' title='Sencilla'>  ";
+        }else{
+            echo "<img src='../../iconos/camaDoble.png' alt='cama doble' title='Doble'> ";
+        }
+   }
 
 }
 

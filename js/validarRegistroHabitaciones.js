@@ -1,3 +1,5 @@
+//! VALIDAR LOS CAMPOS DEL FORMULARIO DE REGISTRO DE HAITACIONES
+
 const formulario = document.getElementById('formRegHab');
 const inputForm = document.querySelectorAll('#formRegHab input');
 const selectDato = document.querySelectorAll('#formRegHab select');
@@ -11,6 +13,7 @@ const estadoInput = {
     numHabitacion: false,
     tipoHab: false,
     observaciones: false,
+    sisClimatizacion: false,
     tipoCama: false
 }
 
@@ -26,6 +29,10 @@ const validarFormulario = (e) => {
 
         case 'tipoHab':
             validarSelect(datoInput, 'tipoHab', 'Debes escoger una opción');
+            break;
+
+        case 'sisClimatizacion':
+            validarSelect(datoInput, 'sisClimatizacion', 'Debes escoger una opción');
             break;
 
         case 'observaciones':
@@ -101,7 +108,7 @@ formulario.addEventListener('submit', (e) =>{
 
     e.preventDefault(); // No dejar enviar el formulario
 
-    if(estadoInput.numHabitacion && estadoInput.tipoHab && estadoInput.observaciones){
+    if(estadoInput.numHabitacion && estadoInput.tipoHab && estadoInput.sisClimatizacion && estadoInput.observaciones){
         formulario.submit();
     }else{
         document.querySelector(".formularioMensaje").classList.add("activoMensaje");

@@ -1,7 +1,7 @@
 <?php
 
 include_once "../../procesos/config/conex.php";
-
+include "funcionesIconos.php";
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +73,7 @@ include_once "../../procesos/config/conex.php";
 
             if ($filtro === "ventilador") {
                 $tipoServ = 0;
-            } else {
+            } else if($filtro === "aire"){
                 $tipoServ = 1;
             }
 
@@ -115,7 +115,7 @@ include_once "../../procesos/config/conex.php";
                                                 </div>
 
                                             <?php
-                                            $primeraImg = false;
+                                                $primeraImg = false;
                                             endforeach;
                                             ?>
                                         </div>
@@ -152,14 +152,23 @@ include_once "../../procesos/config/conex.php";
                             <div class="listadoHab">
                                 <?php
                                 foreach ($dbh->query($sqlHabitacion) as $row3) :
+                                    $capacidadPerson = $row3['cantidadPersonasHab'];
+                                    $tipoCama = $row3['tipoCama'];
                                     if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
                                 ?>
                                         <div class="cardHabitaciones">
                                             <div class="inforHabitacion">
                                                 <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
                                                 <div class="datosHabitacion">
-                                                    <p><span>Tipo de cama:</span> <img src="../../iconos/camaSimple.png" alt="cama sencilla" title="Sencilla"> <img src="../../iconos/camaDoble.png" alt="cama doble" title="Doble"> </p>
-                                                    <p><span>Cantidad:</span> <i class="bi bi-person-fill"></i></p>
+                                                    <p>
+                                                        <span>Tipo de cama:</span>
+                                                        <?php iconCantidadCama($tipoCama); ?>
+                                                    </p>
+
+                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                        <span>Capacidad:</span>
+                                                        <?php iconCapacidad($capacidadPerson) ?>
+                                                    </p>
                                                 </div>
                                                 <p><?php echo $row3['observacion'] ?></p>
                                             </div>
@@ -175,7 +184,7 @@ include_once "../../procesos/config/conex.php";
             <?php
             } else if ($filtro === "aire") {
             ?>
-                 <section class="container seccionHabitaciones">
+                <section class="container seccionHabitaciones">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="informacionList">
@@ -183,7 +192,7 @@ include_once "../../procesos/config/conex.php";
                                 <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con aire acondicionado</h2>
 
                                 <div class="imgTipo">
-                                    <div id="carruselImagenesTipoHab2" class="carousel slide" data-bs-ride="carousel">
+                                    <div id="carruselImagenesTipoHab" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <?php
                                             $primeraImg = true;
@@ -197,15 +206,15 @@ include_once "../../procesos/config/conex.php";
                                                 </div>
 
                                             <?php
-                                            $primeraImg = false;
+                                                $primeraImg = false;
                                             endforeach;
                                             ?>
                                         </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="prev">
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="next">
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
@@ -218,7 +227,7 @@ include_once "../../procesos/config/conex.php";
                                     <li><?php echo $row['cantidadCamas'] ?> Cama sencilla o doble</li>
                                     <?php
                                     foreach ($dbh->query($sqlServicios) as $row2) :
-                                        if (strtolower($row2['elemento']) != "aire acondicionado") :
+                                        if (strtolower($row2['elemento']) != "ventilador") :
                                     ?>
                                             <li><?php echo $row2['elemento'] ?></li>
                                     <?php
@@ -234,12 +243,25 @@ include_once "../../procesos/config/conex.php";
                             <div class="listadoHab">
                                 <?php
                                 foreach ($dbh->query($sqlHabitacion) as $row3) :
+                                    $capacidadPerson = $row3['cantidadPersonasHab'];
+                                    $tipoCama = $row3['tipoCama'];
                                     if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
                                 ?>
                                         <div class="cardHabitaciones">
                                             <div class="inforHabitacion">
                                                 <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nam mollitia.</p>
+                                                <div class="datosHabitacion">
+                                                    <p>
+                                                        <span>Tipo de cama:</span>
+                                                        <?php iconCantidadCama($tipoCama); ?>
+                                                    </p>
+
+                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                        <span>Capacidad:</span>
+                                                        <?php iconCapacidad($capacidadPerson) ?>
+                                                    </p>
+                                                </div>
+                                                <p><?php echo $row3['observacion'] ?></p>
                                             </div>
                                             <a href="#" class="btnSelecHab">Seleccionar</a>
                                         </div>
@@ -253,7 +275,7 @@ include_once "../../procesos/config/conex.php";
             <?php
             } else {
             ?>
-                <section class="container seccionHabitaciones">
+               <section class="container seccionHabitaciones">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="informacionList">
@@ -275,7 +297,7 @@ include_once "../../procesos/config/conex.php";
                                                 </div>
 
                                             <?php
-                                            $primeraImg = false;
+                                                $primeraImg = false;
                                             endforeach;
                                             ?>
                                         </div>
@@ -312,12 +334,25 @@ include_once "../../procesos/config/conex.php";
                             <div class="listadoHab">
                                 <?php
                                 foreach ($dbh->query($sqlHabitacion) as $row3) :
+                                    $capacidadPerson = $row3['cantidadPersonasHab'];
+                                    $tipoCama = $row3['tipoCama'];
                                     if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
                                 ?>
                                         <div class="cardHabitaciones">
                                             <div class="inforHabitacion">
                                                 <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nam mollitia.</p>
+                                                <div class="datosHabitacion">
+                                                    <p>
+                                                        <span>Tipo de cama:</span>
+                                                        <?php iconCantidadCama($tipoCama); ?>
+                                                    </p>
+
+                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                        <span>Capacidad:</span>
+                                                        <?php iconCapacidad($capacidadPerson) ?>
+                                                    </p>
+                                                </div>
+                                                <p><?php echo $row3['observacion'] ?></p>
                                             </div>
                                             <a href="#" class="btnSelecHab">Seleccionar</a>
                                         </div>
@@ -337,7 +372,7 @@ include_once "../../procesos/config/conex.php";
                                 <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con aire acondicionado</h2>
 
                                 <div class="imgTipo">
-                                    <div id="carruselImagenesTipoHab2" class="carousel slide" data-bs-ride="carousel">
+                                    <div id="carruselImagenesTipoHab" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <?php
                                             $primeraImg = true;
@@ -351,15 +386,15 @@ include_once "../../procesos/config/conex.php";
                                                 </div>
 
                                             <?php
-                                            $primeraImg = false;
+                                                $primeraImg = false;
                                             endforeach;
                                             ?>
                                         </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="prev">
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="next">
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
@@ -372,7 +407,7 @@ include_once "../../procesos/config/conex.php";
                                     <li><?php echo $row['cantidadCamas'] ?> Cama sencilla o doble</li>
                                     <?php
                                     foreach ($dbh->query($sqlServicios) as $row2) :
-                                        if (strtolower($row2['elemento']) != "aire acondicionado") :
+                                        if (strtolower($row2['elemento']) != "ventilador") :
                                     ?>
                                             <li><?php echo $row2['elemento'] ?></li>
                                     <?php
@@ -388,12 +423,25 @@ include_once "../../procesos/config/conex.php";
                             <div class="listadoHab">
                                 <?php
                                 foreach ($dbh->query($sqlHabitacion) as $row3) :
+                                    $capacidadPerson = $row3['cantidadPersonasHab'];
+                                    $tipoCama = $row3['tipoCama'];
                                     if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
                                 ?>
                                         <div class="cardHabitaciones">
                                             <div class="inforHabitacion">
                                                 <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, nam mollitia.</p>
+                                                <div class="datosHabitacion">
+                                                    <p>
+                                                        <span>Tipo de cama:</span>
+                                                        <?php iconCantidadCama($tipoCama); ?>
+                                                    </p>
+
+                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                        <span>Capacidad:</span>
+                                                        <?php iconCapacidad($capacidadPerson) ?>
+                                                    </p>
+                                                </div>
+                                                <p><?php echo $row3['observacion'] ?></p>
                                             </div>
                                             <a href="#" class="btnSelecHab">Seleccionar</a>
                                         </div>
@@ -404,6 +452,7 @@ include_once "../../procesos/config/conex.php";
                             </div>
                         </div>
                 </section>
+                                
         <?php
             }
         }

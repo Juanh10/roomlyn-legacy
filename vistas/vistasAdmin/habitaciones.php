@@ -130,11 +130,12 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                         </div>
 
                         <label class="mt-2" for="serv">Seleccione el sistema de climatización</label>
-                        <select class="form-select mt-2" name="sisClimatizacion" id="servicio">
+                        <select class="form-select mt-2" name="sisClimatizacion" id="sisClimatizacion">
                             <option value="" disabled selected>Seleccione una opción</option>
                             <option value="0">Ventilador</option>
                             <option value="1">Aire acondicionado</option>
                         </select>
+                        <p></p>
 
                         <label for="observaciones" class="mt-2">Observaciones</label>
                         <textarea class="form-control mt-2" name="observaciones" id="observaciones" required></textarea>

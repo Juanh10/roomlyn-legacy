@@ -203,3 +203,43 @@
     height: 100%;
     object-fit: cover;
 }
+
+
+/*! ESTILOS RESPOSIVES*/
+
+@media only screen and (max-width: 580px){
+
+    .tituloTipoHab{
+        font-size: 35px;
+    }
+
+    .listServicios li{
+        margin-left: 2px;
+        margin-bottom: 10px;
+    }
+
+    .listadoHab{
+        margin: 40px 0 30px 10px;
+    }
+
+    .cardHabitaciones{
+        width: 100%;
+        display: block;
+    }
+
+    .inforHabitacion{
+        width: 100%;
+    }
+
+    .inforHabitacion p{
+        font-size: 12px;
+    }
+
+    .btnSelecHab{
+       margin-bottom: 10px;
+       display: flex;
+       justify-content: center; 
+    }
+    
+
+}

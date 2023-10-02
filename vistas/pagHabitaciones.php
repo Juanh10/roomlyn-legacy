@@ -87,7 +87,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                 ?>
                         <div class="cardHab">
                             <div class="imgCard">
-                                <img src="../img/<?php echo $row['ruta'] ?>" alt="">
+                                <img src="../img/<?php echo $row['ruta'] ?>" alt="Imagen del tipo de habitación">
                             </div>
 
                             <div class="contenidoCard">
