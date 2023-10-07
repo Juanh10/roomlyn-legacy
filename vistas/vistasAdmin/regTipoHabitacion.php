@@ -99,10 +99,22 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                         foreach ($dbh->query($sql) as $row) :
                         ?>
                             <div class="form-check serviciosCheck border border-bottom">
+
+                                <?php
+
+                                $elemento = strtolower($row['elemento']);
+
+                                $seleccionado = ($elemento == "ventilador" || $elemento == "aire acondicionado") ? "checked" : "";
+
+                                ?>
                                 <label for="" class="ocularIdServi"><?php echo $row['id'] ?></label>
-                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['id'] ?>" name="opcionesServ[]">
+
+                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['id'] ?>" name="opcionesServ[]" <?php echo $seleccionado; ?>>
+
                                 <label class="form-check-label" for="<?php echo $row['elemento'] ?>"><?php echo $row['elemento'] ?></label>
+
                                 <span class="btn btn-sm editServiciosBtn bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#actualizarServicios" title="Editar"></span>
+
                             </div>
                         <?php
                         endforeach;
@@ -184,7 +196,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 
     <!-- ALERTAS -->
 
-    <?php 
+    <?php
 
     // registro de servicios
     if (isset($_SESSION['mensaje'])) :
@@ -199,8 +211,8 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
     // registro de tipos de habitaciones
 
     if (isset($_SESSION['msj2'])) {
-    ?>  
-    <script>
+    ?>
+        <script>
             Swal.fire({
                 position: '',
                 icon: 'success',

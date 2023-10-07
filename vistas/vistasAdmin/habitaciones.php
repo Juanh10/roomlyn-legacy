@@ -109,7 +109,7 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                         <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacion" required>
                         <p></p>
 
-                        <label for="tipoHab" class="mt-2">Tipo de habitación</label>
+                        <label for="tipoHab">Tipo de habitación</label>
                         <select class="form-select mt-2" name="tipoHab" id="tipoHab" required>
                             <option disabled selected value="">Escoja una opción</option>
                             <?php

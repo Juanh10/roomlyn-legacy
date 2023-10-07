@@ -7,6 +7,9 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
 
     $numHab =  $_POST['numHabitacion'];
     $tipoHab = $_POST['tipoHab'];
+    $tipoCama = $_POST['tipoCama'];
+    $cantTipoSimple = $_POST['cantTipoSimple'];
+    $cantTipoDoble = $_POST['cantTipoDoble'];
     $sisClimatizacion = $_POST['sisClimatizacion'];
     $descripcionHab = $_POST['observaciones'];
     $estadoHab = 1; // los diferentes tipos de estados que tiene la habitacion 1: disponible, 2: limpieza, 3: mantenimiento, 4: ocupado
@@ -20,9 +23,12 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
     $consulta->bindParam(":numHab", $numHab); // enlazar el marcador con la variable
     $consulta->execute(); // ejecutar la consulta
     $fila = $consulta -> fetch(); // para acceder a los datos de la BD
+
     if ($consulta->rowCount() > 0 && $fila['estado'] === 1) {
         $_SESSION['msjError'] = "Esta habitación ya existe";
+
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+        
         $existe = true;
     } else {
 
@@ -37,24 +43,30 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
         $sql->bindParam(":fecha", $fecha);
         $sql->bindParam(":hora", $hora);
 
-        $valorTipoCama = "";
-        $cantPersonas = 0;
-        foreach ($_POST as $nmCampo => $valorSelect) {
-            if (strpos($nmCampo, "tipoCama") === 0) {
-                if($valorSelect === "Simple"){
-                    $cantPersonas += 1;
-                }else if($valorSelect === "Doble"){
-                    $cantPersonas += 2;
-                }
-                // Asigna el valor a :tipoCama en lugar de volver a vincularlo
-                $valorTipoCama .= $valorSelect.","; // concatenar el valor de la variable con "valorSelect"
+        $valorCampo = "";
+        $cantPersonaSimple = 0;
+        $cantPersonaDoble = 0;
+        $totalCantPersonas = 0;
+        $total1 = 0;
+        $total2 = 0;
+    
+        foreach($tipoCama as $tipo){
+            if($tipo == "simple"){
+                $cantPersonaSimple += 1;
+                $total1 = $cantPersonaSimple * $cantTipoSimple;
+                $valorCampo.= $cantTipoSimple." ".$tipo.",";
+            }else if($tipo == "doble"){
+                $cantPersonaDoble += 2;
+                $total2 = $cantPersonaDoble * $cantTipoDoble;
+                $valorCampo.= $cantTipoDoble." ".$tipo." ";
             }
+            $totalCantPersonas = $total1 + $total2;
         }
 
-        $sql->bindParam(":cantPersonas", $cantPersonas);
+        $sql->bindParam(":cantPersonas", $totalCantPersonas);
 
         // funcion "rtrim" Elimina la coma y el espacio en blanco al final si existen
-        $valorTipoCama = rtrim($valorTipoCama, ', ');
+        $valorTipoCama = rtrim($valorCampo, ', ');
 
 
         $sql->bindParam(":tipoCama", $valorTipoCama);

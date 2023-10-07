@@ -11,6 +11,9 @@ if (isset($_POST['btnActualizar'])) {
         $idHabitacion = $_POST['idHab'];
         $numHab = $_POST['numHabitacion'];
         $tipoHab = $_POST['tipoHab'];
+        $tipoCama = $_POST['tipoCama'];
+        $cantTipoSimple = $_POST['cantTipoSimple'];
+        $cantTipoDoble = $_POST['cantTipoDoble'];
         $sisClimatizacion = $_POST['sisClimatizacion'];
         $observ = $_POST['observaciones'];
 
@@ -34,11 +37,11 @@ if (isset($_POST['btnActualizar'])) {
                     $existe = true;
                 } else {
                     if(!$existe){
-                        actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sisClimatizacion, $observ);
+                        actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
                     }
                 }
             } else {
-                actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sisClimatizacion, $observ);
+                actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
             }
         }
     } else {
@@ -71,7 +74,7 @@ if (isset($_POST['actualizarEstado'])) {
 }
 
 
-function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sisClimatizacion, $observ){
+function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ){
 
     $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, tipoServicio= :tipoServ, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id = :id");
 
@@ -82,24 +85,31 @@ function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sis
     $sql->bindParam(":tipoServ", $sisClimatizacion);
     $sql->bindParam(":observacion", $observ);
 
-    $valorTipoCama = "";
-    $cantPersonas = 0;
-    foreach ($_POST as $nmCampo => $valorSelect) {
-        if (strpos($nmCampo, "tipoCama") === 0) {
-            if($valorSelect === "Simple"){
-                $cantPersonas += 1;
-            }else if($valorSelect === "Doble"){
-                $cantPersonas += 2;
-            }
-            // Asigna el valor a :tipoCama en lugar de volver a vincularlo
-            $valorTipoCama .= $valorSelect.","; // concatenar el valor de la variable con "valorSelect"
+    $valorCampo = "";
+    $cantPersonaSimple = 0;
+    $cantPersonaDoble = 0;
+    $totalCantPersonas = 0;
+    $total1 = 0;
+    $total2 = 0;
+
+    foreach($tipoCama as $tipo){
+        if($tipo == "simple"){
+            $cantPersonaSimple += 1;
+            $total1 = $cantPersonaSimple * $cantTipoSimple;
+            $valorCampo.= $cantTipoSimple." ".$tipo.",";
+        }else if($tipo == "doble"){
+            $cantPersonaDoble += 2;
+            $total2 = $cantPersonaDoble * $cantTipoDoble;
+            $valorCampo.= $cantTipoDoble." ".$tipo." ";
         }
+        $totalCantPersonas = $total1 + $total2;
     }
 
-    $sql->bindParam(":cantPersonas", $cantPersonas);
+    $sql->bindParam(":cantPersonas", $totalCantPersonas);
 
     // funcion "rtrim" Elimina la coma y el espacio en blanco al final si existen
-    $valorTipoCama = rtrim($valorTipoCama, ', ');
+    $valorTipoCama = rtrim($valorCampo, ', ');
+
 
     $sql->bindParam(":tipoCama", $valorTipoCama);
 
@@ -111,5 +121,3 @@ function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $sis
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }
-
-?>

@@ -1,30 +1,45 @@
 <?php
 
-if(!empty($_GET['id'])){
-    
+if (!empty($_GET['id'])) {
+
     include_once "../../../procesos/config/conex.php";
 
     $id = $_GET['id'];
-    
-    $sql = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, estado FROM habitaciones_tipos WHERE id = ".$id."";
+
+    $sql = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, estado FROM habitaciones_tipos WHERE id = " . $id . "";
 
     foreach ($dbh->query($sql) as $rowTipoHab) {
         $cantidadCamas = $rowTipoHab['cantidadCamas'];
     }
+?>
+    <p class="mensajeCantidad">Cantidad de camas disponibles en este tipo de habitación: <?php echo $cantidadCamas ?></p>
+    <p>Seleccione los tipos de cama y la cantidad para cada tipo:</p>
+    
+    <div class="tiposDeCamas mb-2">
+    <div class="tipoSimple">
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple">
+                <label for="simple">Simple</label>
+            </div>
+            <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+        </div>
+    </div>
 
+    <div class="tipoDoble">
+        <div class="input-group">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble">
+                <label for="doble">Doble</label>
+            </div>
+            <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+        </div>
+    </div>
+    <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>
+    <p id="msjErrorTipoCama2">La cantidad de camas no coincide con el tipo de habitación.</p>
+    </div>
 
-    for ($i=1; $i <= $cantidadCamas ; $i++) { 
-        ?>
-            <label for="tipoCama mb-3">Tipo de la cama <?php echo $i ?></label>
-            <select name="tipoCama<?php echo $i ?>" id="tipoCama<?php echo $i ?>" class="form-select mb-3 mt-2">
-                <option disabled selected value="">Escoja una opción</option>
-                <option value="Simple">Simple</option>
-                <option value="Doble">Doble</option>
-            </select>
-            <p></p>
-        <?php
-    }
-
+<?php
 
 }
 

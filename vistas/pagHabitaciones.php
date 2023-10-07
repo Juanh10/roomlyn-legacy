@@ -87,14 +87,14 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                 ?>
                         <div class="cardHab">
                             <div class="imgCard">
-                                <img src="../img/<?php echo $row['ruta'] ?>" alt="Imagen del tipo de habitación">
+                                <img src="../imgServidor/<?php echo $row['ruta'] ?>" alt="Imagen del tipo de habitación">
                             </div>
 
                             <div class="contenidoCard">
 
                                 <div class="tituloHab">
                                     <h2><?php echo $row['tipoHabitacion'] ?></h2>
-                                    <a class="btnImgHab" href="../img/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
+                                    <a class="btnImgHab" href="../imgServidor/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
                                 </div>
 
                                 <div class="infoCard">

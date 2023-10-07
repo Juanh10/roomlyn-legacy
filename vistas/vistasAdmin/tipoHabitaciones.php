@@ -62,7 +62,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
                                     endif;
                                     ?>
                                     <div class="tipoHab">
-                                        <span><?php echo $row['tipoHabitacion'] ?></span>
+                                        <span class="nombreTipo"><?php echo $row['tipoHabitacion'] ?></span>
                                         <button data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
                                     </div>
                                 </div>
