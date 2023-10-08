@@ -46,9 +46,6 @@ if (!empty($_GET['idselect'])) {
 
     $arregloOpciones = [];
 
-    /* $subArreglo1 = explode(" ", $arregloTipoCama[0]);
-    $subArreglo2 = explode(" ", $arregloTipoCama[1]); */
-
     $nuevoArreglo = array();
 
     foreach ($arregloTipoCama as $elemento) {
@@ -79,13 +76,13 @@ if (!empty($_GET['idselect'])) {
     if ($tieneSimple && $tieneDoble) {
         // Acceder al primer elemento (índice 0)
         $primerElemento = $nuevoArreglo[0];
-        $cantidadDelPrimerElemento = $primerElemento["cantidad"]; // 1
-        $tipoDelPrimerElemento = $primerElemento["tipo"]; // "simple"
+        $cantidadDelPrimerElemento = $primerElemento["cantidad"];
+        $tipoDelPrimerElemento = $primerElemento["tipo"];
 
         // Acceder al segundo elemento (índice 1)
         $segundoElemento = $nuevoArreglo[1];
-        $cantidadDelSegundoElemento = $segundoElemento["cantidad"]; // 1
-        $tipoDelSegundoElemento = $segundoElemento["tipo"]; // "doble"
+        $cantidadDelSegundoElemento = $segundoElemento["cantidad"];
+        $tipoDelSegundoElemento = $segundoElemento["tipo"];
     ?>
         <div class="tiposDeCamas mb-2">
             <div class="tipoSimple">
@@ -114,8 +111,8 @@ if (!empty($_GET['idselect'])) {
     } else if ($tieneSimple) {
         // Acceder al primer elemento (índice 0)
         $primerElemento = $nuevoArreglo[0];
-        $cantidadDelPrimerElemento = $primerElemento["cantidad"]; // 1
-        $tipoDelPrimerElemento = $primerElemento["tipo"]; // "simple"
+        $cantidadDelPrimerElemento = $primerElemento["cantidad"];
+        $tipoDelPrimerElemento = $primerElemento["tipo"];
     ?>
         <div class="tiposDeCamas mb-2">
             <div class="tipoSimple">
@@ -144,8 +141,8 @@ if (!empty($_GET['idselect'])) {
     } else if ($tieneDoble) {
         // Acceder al segundo elemento (índice 1)
         $segundoElemento = $nuevoArreglo[0];
-        $cantidadDelSegundoElemento = $segundoElemento["cantidad"]; // 1
-        $tipoDelSegundoElemento = $segundoElemento["tipo"]; // "doble"
+        $cantidadDelSegundoElemento = $segundoElemento["cantidad"];
+        $tipoDelSegundoElemento = $segundoElemento["tipo"];
         ?>
             <div class="tipoDoble">
                 <div class="input-group">

@@ -67,13 +67,28 @@ include "funcionesIconos.php";
     </header>
 
     <main>
+
+        <?php
+        function mostrarTituloTipo($id, $dbh)
+        {
+            $sqlTipoHabitacion = "SELECT id, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
+
+            foreach ($dbh->query($sqlTipoHabitacion) as $row) {
+        ?>
+                <h1 class="tituloTipoHab"><?php echo $row['tipoHabitacion'] ?></h1>
+        <?php
+            }
+        }
+
+        ?>
+
         <?php
         function mostrarDatosHabitaciones($filtro, $id, $dbh)
         {
 
             if ($filtro === "ventilador") {
                 $tipoServ = 0;
-            } else if($filtro === "aire"){
+            } else if ($filtro === "aire") {
                 $tipoServ = 1;
             }
 
@@ -85,11 +100,8 @@ include "funcionesIconos.php";
 
             $sqlHabitacion = "SELECT id, nHabitacion, id_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_tipo = " . $id . " AND tipoServicio = " . $tipoServ . ""; // Capturar toda la informacion de la habitacion
 
-            foreach ($dbh->query($sqlTipoHabitacion) as $row) {
-        ?>
-                <h1 class="tituloTipoHab"><?php echo $row['tipoHabitacion'] ?></h1>
-            <?php
-            }
+
+            $row = $dbh->query($sqlTipoHabitacion) -> fetch(); // Obtener datos
 
             if ($filtro === "ventilador") {
             ?>
@@ -275,7 +287,7 @@ include "funcionesIconos.php";
             <?php
             } else {
             ?>
-               <section class="container seccionHabitaciones">
+                <section class="container seccionHabitaciones">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="informacionList">
@@ -452,7 +464,7 @@ include "funcionesIconos.php";
                             </div>
                         </div>
                 </section>
-                                
+
         <?php
             }
         }

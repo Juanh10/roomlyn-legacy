@@ -1,0 +1,119 @@
+.cabeceraHab {
+    background-color: #9d8076;
+    position: fixed;
+    padding: 40px 35px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+
+.cabeceraHab a {
+    color: #000;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.navContenedorHab {
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.logoPlahotHab {
+    width: 196px;
+    height: 100px;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.logoPlahotHab img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ESTILOS AL CONTENEDOR DE PREGUNTAS */
+
+.contenedorPreguntas {
+    max-width: 100em;
+    padding: 20PX;
+    margin-top: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 98%;
+    border-radius: 5px;
+    background-color: #cabbb6;
+}
+
+.tituloPrincipal {
+    text-align: left;
+}
+
+.tituloPrincipal h1 {
+    margin: 20px 0 20px 10px;
+    font-size: 20px;
+}
+
+.acordeon label{
+    display: block;
+    padding: 20px;
+    font-size: 20px;
+    background-color: #a89189;
+    cursor: pointer;
+    margin-bottom: 2px;
+    border-radius: 10px;
+    transition: all 300ms ease;
+    position: relative;
+}
+
+.acordeon label i{
+    position: absolute;
+    right: 40px;
+}
+
+.contenido-acordeon{
+    padding: 0px;
+    margin: 10px 0px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 300ms ease;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.btn-acordeon:checked ~ .contenido-acordeon{
+    max-height: 600px;
+    padding: 15px 15px;
+}
+
+.btn-acordeon{
+    display: none;
+}
+
+@media only screen and (max-width: 470px){
+
+    .acordeon label{
+        font-size: 16px;
+    }
+
+    .acordeon label i{
+        display: none;
+    }
+
+    .contenido-acordeon{
+        font-size: 14px;
+    }
+
+
+}

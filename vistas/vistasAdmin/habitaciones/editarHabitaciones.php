@@ -21,7 +21,7 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
 
     <div class="container">
         <div class="formEditHab">
-            <form action="../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php" method="post">
+            <form action="../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php" method="post" id="formRegHab">
                 <?php
                 foreach ($dbh->query($sql) as $rowHab) : // mostrar datos
                 ?>

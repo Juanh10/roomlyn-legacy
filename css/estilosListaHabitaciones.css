@@ -143,7 +143,7 @@
 }
 
 .cardHabitaciones{
-    width: 710px;
+    width: 100%;
     margin-bottom: 20px;
     background-color: #a89188;
     padding: 15px;
@@ -166,20 +166,12 @@
     font-size: 14px;
 }
 
-.datosHabitacion{
-    display: flex;
-}
-
-.datosHabitacion p{
-    margin-right: 10px;
-}
-
 .datosHabitacion span{
     font-weight: bold;
 }
 
 .btnSelecHab{
-    margin-top: 30px;
+    margin-top: 80px;
     text-decoration: none;
     color: #fff;
     padding: 4px 8px;
@@ -236,6 +228,7 @@
     }
 
     .btnSelecHab{
+        margin-top: 10px;
        margin-bottom: 10px;
        display: flex;
        justify-content: center; 

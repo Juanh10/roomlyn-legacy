@@ -383,6 +383,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 
   function initDatatables($tablaID) {
+    
     $($tablaID).DataTable({
 
       responsive: true,

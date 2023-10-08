@@ -1,39 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="librerias/bootstrap-icons-1.11.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/estilosPrincipales.css">
+    <link rel="stylesheet" href="css/estilosPreguntasFrecuentes.css">
     <title>HOLA</title>
 </head>
+
 <body>
 
-    <div class="container">
+    <div class="contenedorPreloader" id="onload">
+        <div class="lds-default">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <header class="cabeceraHab">
+        <div class="contenedorHab navContenedorHab">
+            <div class="logoPlahotHab">
+                <a href="index.html"><img src="iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="contenedorPreguntas">
         <div class="tituloPrincipal">
             <h1>COMO FUNCIONA ROOMLYN</h1>
         </div>
-        <div class="preguntas">
-            <div class="priPregunta">
-                <a href="#">¿Como puedo reservar una habitacion?</a>
+
+        <div class="acordeon">
+            <input type="radio" name="acordeon" id="btn-acordeon1" class="btn-acordeon">
+            <label for="btn-acordeon1">¿Como puedo reservar una habitacion? <i class="bi bi-plus-circle-fill"></i></label>
+            <div class="contenido-acordeon">
                 <p>Primero escoger la habitación que desees y el número de personas a hospedarse, luego ingresar la fecha de llegada y la fecha de salida del establecimiento, diligenciar el formulario con todos los datos solicitados y luego comunicarse con el hotel para realizar el pago y finalizar la reserva.</p>
             </div>
-            <div class="segPregunta">
-                <a href="#">¿Si hay algún error en mi registro de reserva que hago?</a>
+        </div>
+
+        <div class="acordeon">
+            <input type="radio" name="acordeon" id="btn-acordeon2" class="btn-acordeon">
+            <label for="btn-acordeon2">¿Si hay algún error en mi registro de reserva que hago? <i class="bi bi-plus-circle-fill"></i></label>
+            <div class="contenido-acordeon">
                 <p>Debes comunicarte directamente con el hotel, para eliminar tu registro y asi podrás diligenciarlo correctamente.</p>
             </div>
-            <div class="terPregunta">
-                <a href="#">¿Como puedo saber que habitaciones estan disponibles?</a>
-                <p>se debe ingresar en la sección de reservas en donde se encuentran todos los tipos de habitaciones con las que cuenta el hotel, luego seleccionar la opción ver más para observar el listado de habitaciones disponibles.</p>
+        </div>
+
+        <div class="acordeon">
+            <input type="radio" name="acordeon" id="btn-acordeon3" class="btn-acordeon">
+            <label for="btn-acordeon3">¿Como puedo saber que habitaciones estan disponibles? <i class="bi bi-plus-circle-fill"></i></label>
+            <div class="contenido-acordeon">
+                <p>Se debe ingresar en la sección de reservas en donde se encuentran todos los tipos de habitaciones con las que cuenta el hotel, luego seleccionar la opción ver más para observar el listado de habitaciones disponibles.</p>
             </div>
-            <div class="cuaPregunta">
-                <a href="#">¿Como se debe realizar el pago de la reserva?</a>
+        </div>
+
+        <div class="acordeon">
+            <input type="radio" name="acordeon" id="btn-acordeon4" class="btn-acordeon">
+            <label for="btn-acordeon4">¿Como se debe realizar el pago de la reserva? <i class="bi bi-plus-circle-fill"></i></label>
+            <div class="contenido-acordeon">
                 <p>Para realizar el pago debes comunicarte directamente con el hotel, a través de los números de teléfonos proporcionados en la sección de contacto de la plataforma web.</p>
             </div>
-            <div class="quiPregunta">
-                <a href="#">¿Como puedo saber si el pago de mi habitacion ya se realizo?</a>
+        </div>
+
+        <div class="acordeon">
+            <input type="radio" name="acordeon" id="btn-acordeon5" class="btn-acordeon">
+            <label for="btn-acordeon5">¿Como puedo saber si el pago de mi habitacion ya se realizo? <i class="bi bi-plus-circle-fill"></i></label>
+            <div class="contenido-acordeon">
                 <p>En el momento en que te comunicas con el hotel y ralizas el pago de tu reserva te daran la respuesta inmediatamente si tu reserva fue habilitada o no.</p>
             </div>
         </div>
     </div>
 
+
+    <footer>
+        <div class="piePagina">
+            <div class="copyPiePagina">
+                <div class="logoPiePagina">
+                    <img src="iconos/logoPlahot2.png" alt="Logo de la plataforma web">
+                </div>
+                <p>Copyright 2023 PLAHOT | Todos los derechos reservados</p>
+            </div>
+            <div class="contenidoPiePagina">
+                <div class="redes-sociales">
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61550262616792" class="face"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/hotelcolonialci2/" class="insta"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="#" class="twit"><i class="bi bi-twitter-x"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="tiktok"><i class="bi bi-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                <a href="comoFunciona.html">Como funciona ROOMLYN</a>
+                <a href="#">Politicas de privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="librerias/jquery-3.7.0.min.js"></script>
+    <script src="js/scriptPreguntasFrecuentes.js"></script>
+
 </body>
+
 </html>

@@ -18,14 +18,20 @@ if(isset($_POST['btnVerInfor'])){
         }
 
         if($ventSelec && $aireSelec):
-            mostrarDatosHabitaciones("ambas",$id, $dbh);
+            mostrarTituloTipo($id,$dbh);
+            mostrarDatosHabitaciones("ventilador",$id, $dbh);
+            mostrarDatosHabitaciones("aire",$id, $dbh);
         elseif($ventSelec):
+            mostrarTituloTipo($id,$dbh);
             mostrarDatosHabitaciones("ventilador",$id, $dbh);
         elseif($aireSelec):
+            mostrarTituloTipo($id,$dbh);
             mostrarDatosHabitaciones("aire",$id, $dbh);
         endif;
     }else{
-        mostrarDatosHabitaciones("ambas",$id, $dbh);
+        mostrarTituloTipo($id,$dbh);
+        mostrarDatosHabitaciones("ventilador",$id, $dbh);
+        mostrarDatosHabitaciones("aire",$id, $dbh);
     }
 }
 ?>

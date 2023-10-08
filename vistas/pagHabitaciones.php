@@ -99,7 +99,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
 
                                 <div class="infoCard">
                                     <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
-                                    <p><span>Capacidad: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
+                                    <p><span>Capacidad máxima: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
                                     <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="post">
                                         <input type="hidden" value="<?php echo $row['id'] ?>" name="idTipoHab">
                                         <p class="selFiltro">Seleccione: </p>

@@ -4,21 +4,15 @@ function iconCantidadCama($tipoCama){
 
    $arrTipoCama = explode(",", $tipoCama);
 
-   for ($i=0; $i <count($arrTipoCama) ; $i++) { 
-        if(strtolower($arrTipoCama[$i]) === "simple"){
-            echo "<img src='../../iconos/camaSimple.png' alt='cama sencilla' title='Sencilla'>  ";
-        }else{
-            echo "<img src='../../iconos/camaDoble.png' alt='cama doble' title='Doble'> ";
-        }
+   for ($i=0; $i < count($arrTipoCama) ; $i++) { 
+        echo $arrTipoCama[$i]." ";
    }
 
 }
 
 function iconCapacidad($capacidadPerson){
 
-    for ($i=0; $i < $capacidadPerson ; $i++) { 
-        echo "<i class='bi bi-person-fill'></i>";
-    }
+    echo ($capacidadPerson > 1)? $capacidadPerson." Personas": $capacidadPerson." Persona";
 
 }
 
