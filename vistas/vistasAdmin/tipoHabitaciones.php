@@ -77,7 +77,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
         </div>
     </main>
 
- 
+
     <!-- Modal -->
     <div class="modal fade" id="modalInfor" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -98,6 +98,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
             </div>
         </div>
     </div>
+
 
     <!-- ALERTAS  -->
 

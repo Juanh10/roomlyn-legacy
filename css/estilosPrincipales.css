@@ -1,6 +1,7 @@
 :root{
     --facebook: #3b5999;
     --instagram: #e4405f;
+    --what: #37dc16;
     --t: #260f14;
 }
 
@@ -253,7 +254,7 @@ footer{
     font-size: 18px;
     font-weight: bold;
     padding: 10px;
-    color: #fff;
+    color: #fff5e1;
 }
 
 .redes-sociales ul{
@@ -270,8 +271,8 @@ footer{
     text-align: center;
 }
 
-.redes-sociales ul li:nth-child(n+2){
-    margin: 0 10px;
+.redes-sociales ul li{
+    margin-right: 10px;
 }
 
 .redes-sociales ul li a{
@@ -284,6 +285,11 @@ footer{
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .2);    
     transition: .2s;
     border-radius: 50%;
+}
+
+.redes-sociales ul li a i{
+    text-align: center;
+    font-size: 18px;
 }
 
 .redes-sociales ul li a:hover{
@@ -300,6 +306,10 @@ footer{
     background: var(--instagram);
 }
 
+.redes-sociales ul li .what:hover{
+    background: var(--what);
+}
+
 .redes-sociales ul li .tiktok:hover{
     background: var(--t);
 }
@@ -307,7 +317,7 @@ footer{
 .contenidoPiePagina a{
     display: block;
     margin-top: 20px;
-    color: #fff;
+    color: #fff5e1;
     font-size: 18px;
 }
 

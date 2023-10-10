@@ -61,13 +61,13 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
                         }
                         ?>
 
-                        <label class="userInput" for="user">
+                        <label class="userInput" for="user" aria-label="Usuario">
                             <i class="bi bi-person"></i>
                             <input class="usuarioInput" type="text" placeholder="Usuario" id="user" name="usuario" required>
                             <span></span>
                         </label>
 
-                        <label class="passInput" for="pass">
+                        <label class="passInput" for="pass" aria-label="Contraseña">
                             <i class="bi bi-lock"></i>
                             <span class="verContraseña"><i class="bi bi-eye"></i></span>
                             <input class="contraseñaInput" type="password" placeholder="Contraseña" id="pass" name="contraseña" required>

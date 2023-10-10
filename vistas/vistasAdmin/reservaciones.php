@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(empty($_SESSION['idUsuario'])){ //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
 
@@ -14,6 +14,7 @@ echo $_SESSION['tipoUsuario']; */
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,11 +22,18 @@ echo $_SESSION['tipoUsuario']; */
     <?php require_once "menuAdmin.php"; ?>
     <title>Reservas</title>
 </head>
+
 <body>
 
-<div class="contenido">
-    <h1>RESERVACIONES</h1>
-</div>
-    
+    <div class="contenido">
+        <h1>RESERVACIONES</h1>
+    </div>
+
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
+
 </body>
+
 </html>

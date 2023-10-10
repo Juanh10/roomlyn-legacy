@@ -60,27 +60,27 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                             <tbody>
                                 <?php
                                 foreach ($dbh->query($sql2) as $rowHab) :
-                                    if($rowHab[7] == 1):
+                                    if ($rowHab[7] == 1) :
                                 ?>
-                                    <tr>
-                                        <td><?php echo $rowHab['nHabitacion'] ?></td>
-                                        <td><?php echo $rowHab['tipoHabitacion'] ?></td>
-                                        <td><?php echo ($rowHab['tipoServicio'] == 0) ? "Ventilador" : "Aire acondicionado"; ?></td>
-                                        <td><?php echo $rowHab['observacion'] ?></td>
-                                        <td><?php echo $rowHab['estado'] ?></td>
-                                        <td class="botones-Config" id="<?php echo $rowHab['id'] ?>">
-                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHab" title="Editar habitación"></span>
-                                            <span class="bi bi-gear btn btn-secondary btn-sm btnCambEstado" id="<?php echo $rowHab['id'] ?>" data-bs-toggle="modal" data-bs-target="#cambiarEstado" title="Cambiar de estado"></span>
-                                            <form action="../../procesos/registroHabitaciones/registroHabi/conDeshabilitarHabitaciones.php" method="post" class="desHabitacion">
-                                                <input type="hidden" name="idHab" value="<?php echo $rowHab['id'] ?>">
-                                                <button type="submit" name="elmHab" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?php echo $rowHab['nHabitacion'] ?></td>
+                                            <td><?php echo $rowHab['tipoHabitacion'] ?></td>
+                                            <td><?php echo ($rowHab['tipoServicio'] == 0) ? "Ventilador" : "Aire acondicionado"; ?></td>
+                                            <td><?php echo $rowHab['observacion'] ?></td>
+                                            <td><?php echo $rowHab['estado'] ?></td>
+                                            <td class="botones-Config" id="<?php echo $rowHab['id'] ?>">
+                                                <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHab" title="Editar habitación"></span>
+                                                <span class="bi bi-gear btn btn-secondary btn-sm btnCambEstado" id="<?php echo $rowHab['id'] ?>" data-bs-toggle="modal" data-bs-target="#cambiarEstado" title="Cambiar de estado"></span>
+                                                <form action="../../procesos/registroHabitaciones/registroHabi/conDeshabilitarHabitaciones.php" method="post" class="desHabitacion">
+                                                    <input type="hidden" name="idHab" value="<?php echo $rowHab['id'] ?>">
+                                                    <button type="submit" name="elmHab" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                 <?php
-                                endif;
+                                    endif;
                                 endforeach;
                                 ?>
                             </tbody>
@@ -124,9 +124,9 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
 
 
                         <div id="inputAgregado">
-                        <?php
+                            <?php
                             include "habitaciones/formTipoCama.php"; // incluimos para añadir los demas inputs segun el tipo de habitacion escogida
-                        ?>
+                            ?>
                         </div>
 
                         <label class="mt-2" for="serv">Seleccione el sistema de climatización</label>
@@ -209,7 +209,7 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
 
 
     <script src="../../js/validarRegistroHabitaciones.js"></script>
-    
+
 
 </body>
 

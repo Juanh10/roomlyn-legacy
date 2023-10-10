@@ -180,6 +180,7 @@ if (strtolower($_SESSION['tipoUsuario']) == "administrador") :  // verificamos e
             </div>
         </div>
 
+
         <!-- MOSTRAR MENSAJE DE CONFIRMACION -->
 
         <?php

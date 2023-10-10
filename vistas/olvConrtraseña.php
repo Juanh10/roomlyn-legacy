@@ -14,7 +14,7 @@
 <body>
 
     <div class="contenedorPrin">
-        <a href="../index.html"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
+        <a href="login.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
         <div class="contenedorLogin">
             <div class="ConImgLogin">
                 <div class="imgLogin">
@@ -27,12 +27,12 @@
                     <h1 class="recuperarh1">RECUPERAR CONTRASEÑA</h1>
                     <form action="../procesos/login/conOlvContraseña.php" method="post" id="form">
 
-                        <label class="userInput">
+                        <label class="userInput" aria-label="Usuario">
                             <input type="text" class="usuarioInput" placeholder="Usuario" id="usuario" name="usuario" required>
                             <i class="bi bi-person"></i>
                         </label>
 
-                        <label for="documento" class="passInput">
+                        <label for="documento" class="passInput" aria-label="Documento">
                             <input type="text" class="contraseñaInput" placeholder="Documento" id="documento" name="documento" required>
                             <i class="bi bi-file-earmark-medical"></i>
                         </label>

@@ -193,7 +193,6 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
         </div>
     </div>
 
-
     <!-- ALERTAS -->
 
     <?php

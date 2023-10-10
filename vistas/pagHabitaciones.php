@@ -162,8 +162,15 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
                 <p>Copyright 2023 PLAHOT | Todos los derechos reservados</p>
             </div>
             <div class="contenidoPiePagina">
-                <a href="https://wa.link/3qaw9d">Contacto</a>
-                <a href="#hola">Como funciona ROOMLYN</a>
+                <div class="redes-sociales">
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61550262616792" class="face" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/hotelcolonialci2/" class="insta" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="what" target="_blank" title="Whatsapp"><i class="bi bi-whatsapp"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="tiktok" target="_blank" title="Tik tok"><i class="bi bi-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                <a href="comoFunciona.html">Como funciona ROOMLYN</a>
                 <a href="#">Politicas de privacidad</a>
             </div>
         </div>
