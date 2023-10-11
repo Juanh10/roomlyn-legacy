@@ -35,6 +35,9 @@ $sql2 = "SELECT id, documento FROM tipo_documento WHERE 1";
     <!-- FORMULARIO DE REGISTRAR A LOS USUARIOS  -->
 
     <div class="contenedorPrincipal">
+        <div class="fondoRegistro">
+            <img src="../img/fondoRegistro.png" alt="Foto">
+        </div>
 
     <?php
         if($validarTipoUsuario){

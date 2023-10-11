@@ -393,7 +393,6 @@ body.activoBackground::before{
     width: calc(100% - 90px);
     height: 40px;
     text-align: center;
-    background-color: #fff;
 }
 
 .pie-de-pagina p{
