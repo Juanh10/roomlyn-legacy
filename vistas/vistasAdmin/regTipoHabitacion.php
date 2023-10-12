@@ -39,8 +39,8 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
 
     <div class="contenido">
         <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-7 me-5">
+            <div class="row contenedorFila">
+                <div class="col-md-7 me-5 responsiveGestion">
 
                     <h1 class="tituloPrincipal mb-4">Gestión de tipos de habitaciones</h1>
 
@@ -56,8 +56,8 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                             <input type="text" name="nombreTipo" id="nombreTipo" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" required>
                             <p></p>
 
-                            <div class="row">
-                                <div class="col-5">
+                            <div class="row responsiveRowInput">
+                                <div class="col-5 responsiveInput">
                                     <label for="cantidadCamas" class="form-label mt-3">Cantidad de camas</label>
                                     <input type="number" name="cantidadCamas" id="cantidadCamas" min="0" class="form-control p-2 inputPeque" required>
                                     <p></p>
@@ -74,8 +74,8 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                             <input class="form-control" name="imagenes[]" id="imagenes" type="file" accept="image/*" multiple required>
                             <p></p>
 
-                            <div class="row">
-                                <div class="col-5">
+                            <div class="row responsiveRowInput">
+                                <div class="col-5 responsiveInput">
                                     <label for="precioVentilador" class="form-label mt-3">Costo con ventilador</label>
                                     <input type="number" name="precioVentilador" id="precioVentilador" min="0" class="form-control p-2 inputPeque" required>
                                     <p></p>
@@ -90,7 +90,7 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-4 responsiveServicios">
 
                     <div class="serviciosHabitaciones">
                         <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios <span class="checkSpan">(Seleccione al menos una opción)</span></h1>

@@ -15,7 +15,7 @@ $sqlImg = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE idTipoHa
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

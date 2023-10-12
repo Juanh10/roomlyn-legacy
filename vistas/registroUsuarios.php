@@ -117,7 +117,7 @@ $sql2 = "SELECT id, documento FROM tipo_documento WHERE 1";
                 </div>
 
                 <div class="grupoTipoUsuario" id="grupoTipoUsuario">
-                    <label for="tipoUsuario">Tipo de usuario*</label>
+                    <label for="deshabilitado">Tipo de usuario*</label>
                     <?php if (!$validarTipoUsuario) {
                     ?>
                         <input class="formularioInput" id="deshabilitado" type="text" value="Administrador" name="tipoUsuario" readonly="readonly">

@@ -18,7 +18,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

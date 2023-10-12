@@ -386,6 +386,8 @@ $(document).ready(function () {
     
     $($tablaID).DataTable({
 
+      "lengthMenu": [5, 10, 20, 30],
+
       responsive: true,
 
       "language": {

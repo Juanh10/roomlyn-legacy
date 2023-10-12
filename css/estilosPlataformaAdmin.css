@@ -138,11 +138,11 @@ body {
 
 /*! SECCION SERVICIOS DE HABITACIONES  */
 
-.buscadorInputServicios{
+/* .buscadorInputServicios{
     display: flex;
     justify-content: end;
 }
-
+ */
 
 /*! SECCION DE REGISTRO TIPOS DE HABITACIONES  */
 
@@ -805,6 +805,24 @@ body {
     margin-bottom: 10px;
 }
 
+
+@media only screen and (max-width: 996px) {
+    .contenedorFila{
+        display: block;
+    }
+
+    .responsiveGestion{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+
+    .responsiveServicios{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .contenido {
         padding-top: 80px;
@@ -813,6 +831,31 @@ body {
 }
 
 @media only screen and (max-width: 470px){
+
+    /* Responsive registro tipo de habitaciones */
+
+    .responsiveRowInput{
+        display: block;
+    }
+
+    .responsiveRowInput input{
+        width: 100%;
+    }
+
+    .responsiveInput{
+        width: 100%;
+    }
+
+
+    .botonRgServicio .btnInputSubmit{
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .modal-dialog {
+        z-index: 1000;
+        max-height: 90vh;
+    }
 
     .dataTables_length label{
         display: none;
