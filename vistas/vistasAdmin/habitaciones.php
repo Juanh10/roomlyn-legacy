@@ -12,9 +12,9 @@ echo $_SESSION['tipoUsuario']; */
 
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; //consulta para el modal de añadir habitaciones
+$sql = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; //consulta para el modal de añadir habitaciones
 
-$sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.tipoHabitacion, habitaciones.tipoCama, habitaciones.cantidadPersonasHab, habitaciones.tipoServicio, habitaciones.observacion, habitaciones.estado, habitaciones_estado.estado FROM habitaciones INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id WHERE 1 ORDER BY habitaciones.id"; // consulta para mostrar todos los datos relacionados con las habitacione.
+$sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaciones_tipos.tipoHabitacion, habitaciones.tipoCama, habitaciones.cantidadPersonasHab, habitaciones.tipoServicio, habitaciones.observacion, habitaciones.estado, habitaciones_estado.estado_habitacion FROM habitaciones INNER JOIN habitaciones_tipos ON habitaciones.id_hab_tipo = habitaciones_tipos.id_hab_tipo INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id_hab_estado WHERE 1 ORDER BY habitaciones.id_habitaciones"; // consulta para mostrar todos los datos relacionados con las habitacione.
 
 ?>
 
@@ -60,19 +60,19 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                             <tbody>
                                 <?php
                                 foreach ($dbh->query($sql2) as $rowHab) :
-                                    if ($rowHab[7] == 1) :
+                                    if ($rowHab['estado'] == 1) :
                                 ?>
                                         <tr>
                                             <td><?php echo $rowHab['nHabitacion'] ?></td>
                                             <td><?php echo $rowHab['tipoHabitacion'] ?></td>
                                             <td><?php echo ($rowHab['tipoServicio'] == 0) ? "Ventilador" : "Aire acondicionado"; ?></td>
                                             <td><?php echo $rowHab['observacion'] ?></td>
-                                            <td><?php echo $rowHab['estado'] ?></td>
-                                            <td class="botones-Config" id="<?php echo $rowHab['id'] ?>">
+                                            <td><?php echo $rowHab['estado_habitacion'] ?></td>
+                                            <td class="botones-Config" id="<?php echo $rowHab['id_habitaciones'] ?>">
                                                 <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHab" title="Editar habitación"></span>
-                                                <span class="bi bi-gear btn btn-secondary btn-sm btnCambEstado" id="<?php echo $rowHab['id'] ?>" data-bs-toggle="modal" data-bs-target="#cambiarEstado" title="Cambiar de estado"></span>
+                                                <span class="bi bi-gear btn btn-secondary btn-sm btnCambEstado" id="<?php echo $rowHab['id_habitaciones'] ?>" data-bs-toggle="modal" data-bs-target="#cambiarEstado" title="Cambiar de estado"></span>
                                                 <form action="../../procesos/registroHabitaciones/registroHabi/conDeshabilitarHabitaciones.php" method="post" class="desHabitacion">
-                                                    <input type="hidden" name="idHab" value="<?php echo $rowHab['id'] ?>">
+                                                    <input type="hidden" name="idHab" value="<?php echo $rowHab['id_habitaciones'] ?>">
                                                     <button type="submit" name="elmHab" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
@@ -115,7 +115,7 @@ $sql2 = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones_tipos.ti
                             <?php
                             foreach ($dbh->query($sql) as $row) :
                             ?>
-                                <option value="<?php echo $row['id'] ?>"><?php echo $row['tipoHabitacion'] ?></option>
+                                <option value="<?php echo $row['id_hab_tipo'] ?>"><?php echo $row['tipoHabitacion'] ?></option>
                             <?php
                             endforeach;
                             ?>

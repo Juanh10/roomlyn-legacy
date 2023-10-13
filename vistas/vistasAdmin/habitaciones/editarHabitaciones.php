@@ -4,9 +4,9 @@ include_once "../../../procesos/config/conex.php";
 
 $idHab = $_GET['id'];
 
-$sql = "SELECT habitaciones.id, habitaciones.nHabitacion, habitaciones.id_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.tipoServicio, habitaciones.observacion, habitaciones_estado.estado, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id INNER JOIN habitaciones_tipos ON habitaciones.id_tipo = habitaciones_tipos.id WHERE habitaciones.id = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
+$sql = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaciones.id_hab_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.tipoServicio, habitaciones.observacion, habitaciones_estado.estado, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id INNER JOIN habitaciones_tipos ON habitaciones.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones.id_habitaciones = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
 
-$sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; // consulta de los tipos de habitaciones
+$sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; // consulta de los tipos de habitaciones
 
 ?>
 
@@ -31,12 +31,12 @@ $sql2 = "SELECT id, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 
 
                     <label for="tipoHabEdit" class="mt-2">Tipo de habitación</label>
                     <select class="form-select mt-2 mb-3" name="tipoHab" id="tipoHabEdit" required>
-                        <option selected value="<?php echo $rowHab['id_tipo'] ?>"><?php echo $rowHab['tipoHabitacion'] ?></option>
+                        <option selected value="<?php echo $rowHab['id_hab_tipo'] ?>"><?php echo $rowHab['tipoHabitacion'] ?></option>
                         <?php
                         foreach ($dbh->query($sql2) as $rowTipo) :
-                            if ($rowHab['id_tipo'] != $rowTipo['id']) :
+                            if ($rowHab['id_hab_tipo'] != $rowTipo['id_hab_tipo']) :
                         ?>
-                                <option value="<?php echo $rowTipo['id'] ?>"><?php echo $rowTipo['tipoHabitacion'] ?></option>
+                                <option value="<?php echo $rowTipo['id_hab_tipo'] ?>"><?php echo $rowTipo['tipoHabitacion'] ?></option>
                         <?php
                             endif;
                         endforeach;

@@ -19,7 +19,7 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
 
     $existe = false;
 
-    $consulta = $dbh->prepare("SELECT id, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
+    $consulta = $dbh->prepare("SELECT id_habitaciones, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
     $consulta->bindParam(":numHab", $numHab); // enlazar el marcador con la variable
     $consulta->execute(); // ejecutar la consulta
     $fila = $consulta -> fetch(); // para acceder a los datos de la BD
@@ -32,7 +32,7 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
         $existe = true;
     } else {
 
-        $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado, fecha, hora, fecha_sys) VALUES (:nHab, :idTipo, :idHabEstado, :tipoCama, :cantPersonas, :tipoServicio, :observacion, :estado, :fecha, :hora, now())");
+        $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado, fecha, hora, fecha_sys) VALUES (:nHab, :idTipo, :idHabEstado, :tipoCama, :cantPersonas, :tipoServicio, :observacion, :estado, :fecha, :hora, now())");
 
         $sql->bindParam(":nHab", $numHab);
         $sql->bindParam(":idTipo", $tipoHab);

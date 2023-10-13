@@ -6,7 +6,7 @@ if (!empty($_GET['id'])) {
 
     $id = $_GET['id'];
 
-    $sql = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, estado FROM habitaciones_tipos WHERE id = " . $id . "";
+    $sql = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, capacidadPersonas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . "";
 
     foreach ($dbh->query($sql) as $rowTipoHab) {
         $cantidadCamas = $rowTipoHab['cantidadCamas'];

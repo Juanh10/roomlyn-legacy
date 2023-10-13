@@ -5,7 +5,7 @@ if (!empty($_GET['idselect'])) {
 
     $idSelect = $_GET['idselect'];
 
-    $sql = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, estado FROM habitaciones_tipos WHERE id = " . $idSelect . "";
+    $sql = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, capacidadPersonas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $idSelect . "";
 
     foreach ($dbh->query($sql) as $rowTipoHab) {
         $cantidadCamas = $rowTipoHab['cantidadCamas'];

@@ -19,13 +19,13 @@ if (isset($_POST['btnActualizar'])) {
 
         $existe = false;
 
-        $consulta = $dbh->prepare("SELECT id, nHabitacion FROM habitaciones WHERE id = :idHab"); // consulta sql
+        $consulta = $dbh->prepare("SELECT id_habitaciones, nHabitacion FROM habitaciones WHERE id_habitaciones = :idHab"); // consulta sql
         $consulta->bindParam(":idHab", $idHabitacion); // enlazar el marcador con la variable
         $consulta->execute(); // ejecutar la consulta
 
         if ($datos = $consulta->fetch()) { // obtener datos de la consulta
             if ($datos['nHabitacion'] != $numHab) {
-                $consulta2 = $dbh->prepare("SELECT id, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
+                $consulta2 = $dbh->prepare("SELECT id_habitaciones, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
                 $consulta2->bindParam(":numHab", $numHab);
                 $consulta2->execute();
 
@@ -56,7 +56,7 @@ if (isset($_POST['actualizarEstado'])) {
         $opcion = $_POST['opcion'];
         $idHabitacion = $_POST['idHab'];
 
-        $sql = $dbh->prepare("UPDATE habitaciones SET id_hab_estado=:idEstado, fecha_sys=now() WHERE id = :idHab");
+        $sql = $dbh->prepare("UPDATE habitaciones SET id_hab_estado=:idEstado, fecha_sys=now() WHERE id_habitaciones = :idHab");
         $sql->bindParam(":idEstado", $opcion);
         $sql->bindParam(":idHab", $idHabitacion);
 
@@ -76,7 +76,7 @@ if (isset($_POST['actualizarEstado'])) {
 
 function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ){
 
-    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_tipo= :idTipo, tipoServicio= :tipoServ, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id = :id");
+    $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_hab_tipo= :idTipo, tipoServicio= :tipoServ, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id_habitaciones = :id");
 
 
     $sql->bindParam(":id", $idHabitacion);
