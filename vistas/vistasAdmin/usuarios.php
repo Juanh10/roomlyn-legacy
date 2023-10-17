@@ -180,6 +180,11 @@ if (strtolower($_SESSION['tipoUsuario']) == "administrador") :  // verificamos e
             </div>
         </div>
 
+        <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
+
 
         <!-- MOSTRAR MENSAJE DE CONFIRMACION -->
 

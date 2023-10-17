@@ -278,6 +278,7 @@ body {
     outline: none;
     border: none;
     border-radius: 5px;
+    margin-bottom: 50px;
 }
 
 .botonRgServicio .btnInputSubmit:hover{
@@ -797,6 +798,10 @@ body {
     display: none;
 }
 
+.dataTables_wrapper{
+    margin-bottom: 90px;
+}
+
 /** MODAL DE REGISTRO DE HABITACIONES  */
 
 .mensajeCantidad {
@@ -869,6 +874,22 @@ body {
 
     .dataTables_info{
         display: none;
+    }
+
+    .lisTiposHb h1{
+        margin-top: 10px;
+    }
+
+    .cardHabitacion{
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 30px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .cardHab{
+        width: 100%;
     }
 
 

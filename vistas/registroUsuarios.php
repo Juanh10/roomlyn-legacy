@@ -12,7 +12,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     $validarTipoUsuario = true;
 }
 
-$sql2 = "SELECT id, documento FROM tipo_documento WHERE 1";
+$sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
 
 ?>
 
@@ -88,9 +88,11 @@ $sql2 = "SELECT id, documento FROM tipo_documento WHERE 1";
                         <?php
 
                         foreach($dbh -> query($sql2) as $row):
+                            if(strtolower($row['documento']) != "tarjeta de identidad"):
                             ?>
-                                <option value="<?php echo $row['id'] ?>"><?php echo $row['documento'] ?></option>
+                                <option value="<?php echo $row['id_tipoDocumento'] ?>"><?php echo $row['documento'] ?></option>
                             <?php
+                            endif;
                         endforeach;
 
                         ?>

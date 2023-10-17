@@ -25,7 +25,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
 
     $existeDato = false;
 
-    $consultaNm = $dbh -> prepare("SELECT id, tipoHabitacion, estado FROM habitaciones_tipos WHERE tipoHabitacion = :nmTipo AND estado = :nmEstado");
+    $consultaNm = $dbh -> prepare("SELECT id_hab_tipo, tipoHabitacion, estado FROM habitaciones_tipos WHERE tipoHabitacion = :nmTipo AND estado = :nmEstado");
     $consultaNm -> bindParam(":nmTipo", $nombreTipo);
     $consultaNm -> bindParam(":nmEstado", $estado);
     $consultaNm -> execute();
@@ -50,7 +50,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
     
         if (!$existeDato && $sql->execute()) {
     
-            $sql2 = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_habitacion_tipo, id_elemento, estado) VALUES (:idTipo, :idElemento, :estadoServ)"); // consulta de la tabla habitaciones_tipos_elementos de la BD
+            $sql2 = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_hab_tipo, id_hab_elemento, estado) VALUES (:idTipo, :idElemento, :estadoServ)"); // consulta de la tabla habitaciones_tipos_elementos de la BD
     
             $estadoServ = 1;
             $ultID = $dbh->lastInsertId('habitaciones_tipos'); // funcion para capturar el ultimo id de la tabla habitaciones_tipos

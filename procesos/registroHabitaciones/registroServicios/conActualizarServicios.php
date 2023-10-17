@@ -5,7 +5,7 @@ include_once "../../config/conex.php";
 $idServicio = $_POST['idServicio'];
 $servicioAct = $_POST['servicioAct'];
 
-$sql = $dbh -> prepare("UPDATE habitaciones_elementos SET elemento=:servicio,fecha_sys=now() WHERE id = :idServicios");
+$sql = $dbh -> prepare("UPDATE habitaciones_elementos SET elemento =:servicio,fecha_sys=now() WHERE id_hab_elemento = :idServicios");
 
 $sql -> bindParam(':servicio',$servicioAct);
 $sql -> bindParam(':idServicios',$idServicio);

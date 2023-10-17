@@ -25,7 +25,7 @@ if (isset($_POST['actulizarImagen'])) {
 
             $rutaImg = $nombreImagen . "." . $extensionImg;
 
-            $sqlImg = $dbh->prepare("UPDATE habitaciones_imagenes SET nombre= :nombre, ruta= :ruta WHERE id = :id");
+            $sqlImg = $dbh->prepare("UPDATE habitaciones_imagenes SET nombre= :nombre, ruta= :ruta WHERE id_hab_imagen = :id");
 
             $sqlImg->bindParam(':nombre', $nombreImagen);
             $sqlImg->bindParam(':ruta', $rutaImg);
@@ -58,7 +58,7 @@ if (isset($_POST['eliminarImagen'])) {
 
         $estadoElm = 0;
 
-        $sqlElmImg = $dbh->prepare("UPDATE habitaciones_imagenes SET estado = :estadoElm WHERE id = :idImgElm");
+        $sqlElmImg = $dbh->prepare("UPDATE habitaciones_imagenes SET estado = :estadoElm WHERE id_hab_imagen = :idImgElm");
 
         $sqlElmImg->bindParam(':estadoElm', $estadoElm);
         $sqlElmImg->bindParam('idImgElm', $idImg2);
@@ -96,7 +96,7 @@ if (isset($_POST['btnAddImg'])) {
 
             $rutaNuevaImg = $nombreImgNueva . "." . $extensionImgNueva; // crear la nueva ruta donde se va guardar la iamgen
 
-            $sqlImgNueva = $dbh->prepare("INSERT INTO habitaciones_imagenes(idTipoHabitacion, nombre, ruta, estado) VALUES (:idTip, :nombre, :ruta, :estado)");
+            $sqlImgNueva = $dbh->prepare("INSERT INTO habitaciones_imagenes(id_hab_tipo, nombre, ruta, estado) VALUES (:idTip, :nombre, :ruta, :estado)");
 
             $sqlImgNueva->bindParam(':idTip', $idTipoHab2);
             $sqlImgNueva->bindParam('nombre', $nombreImgNueva);

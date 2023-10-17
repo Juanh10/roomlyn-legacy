@@ -5,7 +5,7 @@ $idTipo = $_GET['idTipo'];
 
 include_once "../../../procesos/config/conex.php";
 
-$sql = "SELECT ruta, estado FROM habitaciones_imagenes WHERE id = " . $id . "";
+$sql = "SELECT ruta, estado FROM habitaciones_imagenes WHERE id_hab_imagen = " . $id . "";
 
 ?>
 

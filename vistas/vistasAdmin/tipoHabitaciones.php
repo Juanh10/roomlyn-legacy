@@ -13,7 +13,7 @@ echo $_SESSION['tipoUsuario']; */
 
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id = habitaciones_imagenes.idTipoHabitacion WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.idTipoHabitacion)";
+$sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id_hab_tipo = habitaciones_imagenes.id_hab_tipo WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.id_hab_tipo)";
 
 ?>
 
@@ -63,7 +63,7 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
                                     ?>
                                     <div class="tipoHab">
                                         <span class="nombreTipo"><?php echo $row['tipoHabitacion'] ?></span>
-                                        <button data-id="<?php echo $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
+                                        <button data-id="<?php echo $row['id_hab_tipo']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
                                     </div>
                                 </div>
 
@@ -98,6 +98,11 @@ $sql = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitac
             </div>
         </div>
     </div>
+
+      <!-- PIE DE PAGINA -->
+      <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
 
 
     <!-- ALERTAS  -->

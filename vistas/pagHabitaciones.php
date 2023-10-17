@@ -3,7 +3,7 @@
 include_once "../procesos/config/conex.php";
 include "vistasHabitaciones/funcionesIconos.php";
 
-$sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.precioVentilador, habitaciones_tipos.precioAire, habitaciones_tipos.estado, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.idTipoHabitacion = habitaciones_tipos.id WHERE 1 GROUP BY habitaciones_imagenes.idTipoHabitacion";
+$sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.precioVentilador, habitaciones_tipos.precioAire, habitaciones_tipos.estado, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE 1 GROUP BY habitaciones_imagenes.id_hab_tipo";
 
 
 
@@ -94,23 +94,23 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id, habitaciones_tipos.tipoHabitacion,
 
                                 <div class="tituloHab">
                                     <h2><?php echo $row['tipoHabitacion'] ?></h2>
-                                    <a class="btnImgHab" href="../imgServidor/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
+                                    <a class="btnImgHab" href="../imgServidor/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id_hab_tipo'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
                                 </div>
 
                                 <div class="infoCard">
                                     <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
                                     <p><span>Capacidad máxima: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
                                     <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="post">
-                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="idTipoHab">
+                                        <input type="hidden" value="<?php echo $row['id_hab_tipo'] ?>" name="idTipoHab">
                                         <p class="selFiltro">Seleccione: </p>
                                         <ul class="filtrosHab">
                                             <li>
-                                                <input type="checkbox" name="opServicios[]" value="ventilador" id="checkVentilador<?php echo $row['id'] ?>" class="check">
-                                                <label for="checkVentilador<?php echo $row['id'] ?>">Ventilador</label>
+                                                <input type="checkbox" name="opServicios[]" value="ventilador" id="checkVentilador<?php echo $row['id_hab_tipo'] ?>" class="check">
+                                                <label for="checkVentilador<?php echo $row['id_hab_tipo'] ?>">Ventilador</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" name="opServicios[]" value="aire" id="checkAire<?php echo $row['id'] ?>" class="check">
-                                                <label for="checkAire<?php echo $row['id'] ?>">Aire acondicionado</label>
+                                                <input type="checkbox" name="opServicios[]" value="aire" id="checkAire<?php echo $row['id_hab_tipo'] ?>" class="check">
+                                                <label for="checkAire<?php echo $row['id_hab_tipo'] ?>">Aire acondicionado</label>
                                             </li>
                                         </ul>
                                         <div class="btnInfo">

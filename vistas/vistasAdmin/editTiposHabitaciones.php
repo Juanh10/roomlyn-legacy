@@ -16,13 +16,13 @@ include_once "../../procesos/config/conex.php";
 $idTipo = $_GET['id'];
 
 // Consulta para obtener información del tipo de habitación
-$SqlTipo = "SELECT id, tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire, estado, fecha_sys FROM habitaciones_tipos WHERE id = " . $idTipo . "";
+$SqlTipo = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire, estado, fecha_sys FROM habitaciones_tipos WHERE id_hab_tipo = " . $idTipo . "";
 
 // Consulta para obtener imágenes relacionadas con el tipo de habitación
-$sqlImg = "SELECT habitaciones_imagenes.id, habitaciones_imagenes.nombre, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_imagenes INNER JOIN habitaciones_tipos ON habitaciones_imagenes.idTipoHabitacion = habitaciones_tipos.id WHERE habitaciones_imagenes.idTipoHabitacion = " . $idTipo . "";
+$sqlImg = "SELECT habitaciones_imagenes.id_hab_imagen, habitaciones_imagenes.nombre, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_imagenes INNER JOIN habitaciones_tipos ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones_imagenes.id_hab_tipo = " . $idTipo . "";
 
 // consulta para obtener los servicios que estan relacionados con el tipo de habitacion
-$sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = " . $idTipo . "";
+$sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habitaciones_tipos_elementos.id_hab_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_hab_elemento = habitaciones_elementos.id_hab_elemento WHERE habitaciones_tipos_elementos.id_hab_tipo = " . $idTipo . "";
 
 ?>
 
@@ -114,7 +114,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elem
                                     <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
                                         <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
                                             <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
-                                            <input type="hidden" name="idServicio" value="<?php echo $rowServ['id'] ?>">
+                                            <input type="hidden" name="idServicio" value="<?php echo $rowServ['id_hab_tipo_elemento'] ?>">
                                             <button type="submit" name="btnElmServ" title="Deshabilitar"><i class="bi bi-trash"></i></button>
                                         </form>
                                     </li>
@@ -122,7 +122,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elem
                                 endif;
                             endforeach;
                             ?>
-                            <li class="btnAñadirServ" id="btnAddServ" title="Añadir servicio"><button data-bs-toggle="modal" data-bs-target="#modalAddServ" id="<?php echo $row['id'] ?>">Añadir</button></li>
+                            <li class="btnAñadirServ" id="btnAddServ" title="Añadir servicio"><button data-bs-toggle="modal" data-bs-target="#modalAddServ" id="<?php echo $row['id_hab_tipo'] ?>">Añadir</button></li>
                         </ul>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id, habitaciones_tipos_elem
                         foreach ($dbh->query($sqlImg) as $row) :
                             if ($row['estado'] == 1) :
                         ?>
-                                <div class="listImg2" id="<?php echo $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg" title="Editar imagen">
+                                <div class="listImg2" id="<?php echo $row['id_hab_imagen'] ?>" data-bs-toggle="modal" data-bs-target="#modalImg" title="Editar imagen">
                                     <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="Fotos de las habitaciones">
                                 </div>
                         <?php

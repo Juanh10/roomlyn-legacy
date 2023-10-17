@@ -509,14 +509,42 @@ footer{
         }
     
         .contenidoPiePagina{
+            display: block;
+           
+        }
+
+        .contPreguntas{
             display: flex;
-            justify-content: center;
         }
 
         .contenidoPiePagina a{
             text-align: center;
             font-size: 15px;
             margin: 10px;
+        }
+
+        .redes-sociales ul{
+            justify-content: center;
+        }
+
+        .redes-sociales ul li{
+            display: inline-block;
+            margin-bottom: 10px;
+            width: 60px;
+            height: 40px;
+            text-align: center;
+        }
+
+        .redes-sociales ul li a{
+            display: block;
+            padding: 0 10px;
+            background-color: #000;
+            color: #fff;
+            line-height: 40px;
+            font-size: 18px;
+            box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .2);    
+            transition: .2s;
+            border-radius: 50%;
         }
 
 }

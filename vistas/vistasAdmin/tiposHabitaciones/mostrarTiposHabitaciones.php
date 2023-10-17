@@ -6,11 +6,11 @@ include_once "../../../procesos/config/conex.php";
 
 $id = $_GET['id']; // recibimos por medio de fetch el id
 
-$sql = "SELECT tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire FROM habitaciones_tipos WHERE id = " . $id . ""; // sql de la tabla habitaciones_tipos
+$sql = "SELECT tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . ""; // sql de la tabla habitaciones_tipos
 
-$sqlServi = "SELECT habitaciones_tipos_elementos.id_habitacion_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id WHERE habitaciones_tipos_elementos.id_habitacion_tipo = " . $id . ""; // sql de los servicios de los tipos de habitaciones
+$sqlServi = "SELECT habitaciones_tipos_elementos.id_hab_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_hab_elemento = habitaciones_elementos.id_hab_elemento WHERE habitaciones_tipos_elementos.id_hab_tipo = " . $id . ""; // sql de los servicios de los tipos de habitaciones
 
-$sqlImg = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE idTipoHabitacion = " . $id . ""; // sql de las imagenes de los tipos de habitaciones
+$sqlImg = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE id_hab_tipo = " . $id . ""; // sql de las imagenes de los tipos de habitaciones
 
 ?>
 

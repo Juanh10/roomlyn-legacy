@@ -4,7 +4,7 @@ $idTipoHab = $_GET['id'];
 include_once "../../../procesos/config/conex.php";
 
 // consulta para obtener todos los servicios
-$sql = "SELECT habitaciones_elementos.id, habitaciones_elementos.elemento FROM habitaciones_elementos LEFT JOIN habitaciones_tipos_elementos ON habitaciones_tipos_elementos.id_elemento = habitaciones_elementos.id AND habitaciones_tipos_elementos.id_habitacion_tipo = ".$idTipoHab." AND habitaciones_tipos_elementos.estado = 1 WHERE habitaciones_tipos_elementos.id_elemento IS NULL";
+$sql = "SELECT habitaciones_elementos.id_hab_elemento, habitaciones_elementos.elemento FROM habitaciones_elementos LEFT JOIN habitaciones_tipos_elementos ON habitaciones_tipos_elementos.id_hab_elemento = habitaciones_elementos.id_hab_elemento AND habitaciones_tipos_elementos.id_hab_tipo = ".$idTipoHab." AND habitaciones_tipos_elementos.estado = 1 WHERE habitaciones_tipos_elementos.id_hab_elemento IS NULL";
 
 ?>
 
@@ -31,7 +31,7 @@ $sql = "SELECT habitaciones_elementos.id, habitaciones_elementos.elemento FROM h
                 ?>
 
                     <div class="listServicios">
-                        <input type="checkbox" value="<?php echo $row['id'] ?>" name="listaServi[]" id="<?php echo $row['elemento'] ?>">
+                        <input type="checkbox" value="<?php echo $row['id_hab_elemento'] ?>" name="listaServi[]" id="<?php echo $row['elemento'] ?>">
                         <label for="<?php echo $row['elemento'] ?>"><?php echo $row['elemento'] ?></label>
                     </div>
 

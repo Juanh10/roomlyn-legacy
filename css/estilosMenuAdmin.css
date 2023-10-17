@@ -396,6 +396,7 @@ body.activoBackground::before{
 }
 
 .pie-de-pagina p{
+    margin-bottom: 20px;
     line-height: 40px;
     font-size: 14px;
 }
@@ -428,6 +429,15 @@ body.activoBackground::before{
 
     .menuLateralFijo{
         display: none;
+    }
+
+    .pie-de-pagina{
+        width: 100%;
+        left: 0;
+    }
+
+    .pie-de-pagina p{
+        font-size: 12px;
     }
 
 }

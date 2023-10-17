@@ -3,7 +3,7 @@
 include_once "../../config/conex.php";
 
 function actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas, $precioVentilador, $precioAire, $idTipoHab){
-    $sql = $dbh->prepare("UPDATE habitaciones_tipos SET tipoHabitacion= :tipoHab, cantidadCamas= :cantidadCama, capacidadPersonas= :cantidadPersona, precioVentilador= :precioVentilador, precioAire= :precioAire WHERE id = :idTipo"); // consulta sql
+    $sql = $dbh->prepare("UPDATE habitaciones_tipos SET tipoHabitacion= :tipoHab, cantidadCamas= :cantidadCama, capacidadPersonas= :cantidadPersona, precioVentilador= :precioVentilador, precioAire= :precioAire WHERE id_hab_tipo = :idTipo"); // consulta sql
 
         // vinculamos los marcadores con las variables
         $sql->bindParam(':tipoHab', $nombreTipo);
@@ -40,13 +40,13 @@ if (isset($_POST['actTipo'])) {
         $precioAire = $_POST['precioAire'];
         $existe = false; // boolean para saber si existe el tipo de habitacion 
 
-        $consultaTipo = $dbh->prepare("SELECT id, tipoHabitacion, estado FROM habitaciones_tipos WHERE id = :idTipo");
+        $consultaTipo = $dbh->prepare("SELECT id_hab_tipo, tipoHabitacion, estado FROM habitaciones_tipos WHERE id_hab_tipo = :idTipo");
         $consultaTipo -> bindParam(":idTipo",$idTipoHab);
         $consultaTipo -> execute(); //ejecutar la consulta
         $fila1 = $consultaTipo -> fetch(); // obtener datos de la consulta
 
         if($fila1['tipoHabitacion'] != $nombreTipo){
-            $consulta2 = $dbh->prepare("SELECT id, tipoHabitacion, estado FROM habitaciones_tipos WHERE tipoHabitacion = :nmTipo");
+            $consulta2 = $dbh->prepare("SELECT id_hab_tipo, tipoHabitacion, estado FROM habitaciones_tipos WHERE tipoHabitacion = :nmTipo");
             $consulta2 -> bindParam("nmTipo", $nombreTipo);
             $consulta2 -> execute(); //ejecutar la consula
             $fila2 = $consulta2 -> fetch(); // obtener datos de la consula
@@ -85,7 +85,7 @@ if (isset($_POST['btnElmServ'])) {
 
         $estadoElmServ = 0;
 
-        $sqlElmServ = $dbh->prepare("UPDATE habitaciones_tipos_elementos SET estado=:estado WHERE id = :idServ"); // consulta sql
+        $sqlElmServ = $dbh->prepare("UPDATE habitaciones_tipos_elementos SET estado=:estado WHERE id_hab_tipo_elemento = :idServ"); // consulta sql
 
         $sqlElmServ->bindParam(':estado', $estadoElmServ); // vincular los marcadores con las variables
         $sqlElmServ->bindParam(':idServ', $idServicios);
@@ -118,7 +118,7 @@ if (isset($_POST['añadirServ'])) {
             $tipoServ = $_POST['listaServi'];
             $estado = 1;
 
-            $sql = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_habitacion_tipo, id_elemento, estado) VALUES (:idTipoHab, :idElemento, :estado)"); // consulta sql
+            $sql = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_hab_tipo, id_hab_elemento, estado) VALUES (:idTipoHab, :idElemento, :estado)"); // consulta sql
 
             $sql->bindParam(':idTipoHab', $idTipoHab); // vincular los marcadores con las variables
             $sql->bindParam(':estado', $estado);

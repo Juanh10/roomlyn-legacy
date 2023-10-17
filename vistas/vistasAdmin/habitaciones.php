@@ -182,6 +182,11 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
     </div>
     </div>
 
+      <!-- PIE DE PAGINA -->
+      <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
+
 
     <!-- ALERTAS -->
 

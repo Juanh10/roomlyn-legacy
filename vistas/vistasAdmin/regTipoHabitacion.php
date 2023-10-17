@@ -13,7 +13,7 @@ echo $_SESSION['tipoUsuario']; */
 
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
+$sql = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
 
 ?>
 
@@ -107,9 +107,9 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
                                 $seleccionado = ($elemento == "ventilador" || $elemento == "aire acondicionado") ? "checked" : "";
 
                                 ?>
-                                <label for="" class="ocularIdServi"><?php echo $row['id'] ?></label>
+                                <label for="" class="ocularIdServi"><?php echo $row['id_hab_elemento'] ?></label>
 
-                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['id'] ?>" name="opcionesServ[]" <?php echo $seleccionado; ?>>
+                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['id_hab_elemento'] ?>" name="opcionesServ[]" <?php echo $seleccionado; ?>>
 
                                 <label class="form-check-label" for="<?php echo $row['elemento'] ?>"><?php echo $row['elemento'] ?></label>
 
@@ -192,6 +192,11 @@ $sql = "SELECT id, elemento FROM habitaciones_elementos WHERE 1";
             </div>
         </div>
     </div>
+
+      <!-- PIE DE PAGINA -->
+      <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
 
     <!-- ALERTAS -->
 

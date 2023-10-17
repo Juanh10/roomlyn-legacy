@@ -10,7 +10,7 @@ if (!empty($_POST['idTipoHab'])) {
 
     $estado = 0;
 
-    $sql = $dbh->prepare("UPDATE habitaciones_tipos SET estado=:estado WHERE id = :idTipo");
+    $sql = $dbh->prepare("UPDATE habitaciones_tipos SET estado=:estado WHERE id_hab_tipo = :idTipo");
 
     $sql->bindParam(':estado', $estado);
     $sql->bindParam(':idTipo', $idTipo);
