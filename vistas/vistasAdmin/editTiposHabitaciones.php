@@ -50,7 +50,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
     <div class="contenido">
         <div class="container mt-3">
             <div class="row">
-                <div class="col-md-7 me-5">
+                <div class="col-md-7 me-5 responsive-informacion">
 
                     <?php
 
@@ -71,8 +71,8 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                                 <label for="nombreTipo" class="form-label">Tipo de habitación</label>
                                 <input type="text" name="nombreTipo" id="nombreTipo" value="<?php echo $row['tipoHabitacion'] ?>" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" require>
 
-                                <div class="row">
-                                    <div class="col-5">
+                                <div class="row responsiveRowInput">
+                                    <div class="col-5 responsiveInput">
                                         <label for="cantidadCamas" class="form-label mt-3">Cantidad de camas</label>
                                         <input type="number" name="cantidadCamas" id="cantidadCamas" value="<?php echo $row['cantidadCamas'] ?>" min="0" class="form-control p-2 inputPeque" required>
                                     </div>
@@ -83,8 +83,8 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-5">
+                                <div class="row responsiveRowInput">
+                                    <div class="col-5 responsiveInput">
                                         <label for="precioVentilador" class="form-label mt-3">Costo con ventilador</label>
                                         <input type="number" name="precioVentilador" id="precioVentilador" value="<?php echo $row['precioVentilador'] ?>" min="0" class="form-control p-2 inputPeque" required>
                                     </div>
@@ -101,7 +101,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                         </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-4 responsiveServicios">
 
                     <div class="serviciosHabitaciones">
                         <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
@@ -128,10 +128,10 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row respisive-row-fotos">
                 <div class="col-md-7 mt-4 border border-1 cardFotos">
                     <h2>Fotos</h2>
-                    <div class="actImg">
+                    <div class="actImg responsive-card-fotos">
                         <?php
                         // mostrar las imagenes por medio del foreach
                         foreach ($dbh->query($sqlImg) as $row) :
