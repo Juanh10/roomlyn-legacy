@@ -83,7 +83,8 @@ include "funcionesIconos.php";
         ?>
 
         <?php
-        function mostrarDatosHabitaciones($filtro, $id, $dbh){
+        function mostrarDatosHabitaciones($filtro, $id, $dbh)
+        {
 
             if ($filtro === "ventilador") {
                 $tipoServ = 0;
@@ -100,10 +101,10 @@ include "funcionesIconos.php";
             $sqlHabitacion = "SELECT id_habitaciones, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND tipoServicio = " . $tipoServ . ""; // Capturar toda la informacion de la habitacion
 
 
-            $row = $dbh->query($sqlTipoHabitacion) -> fetch(); // Obtener datos
+            $row = $dbh->query($sqlTipoHabitacion)->fetch(); // Obtener datos
 
             if ($filtro === "ventilador") {
-            ?>
+        ?>
                 <section class="container seccionHabitaciones">
                     <div class="row">
                         <div class="col-md-4">
@@ -162,32 +163,42 @@ include "funcionesIconos.php";
                         <div class="col-md-8">
                             <div class="listadoHab">
                                 <?php
-                                foreach ($dbh->query($sqlHabitacion) as $row3) :
-                                    $capacidadPerson = $row3['cantidadPersonasHab'];
-                                    $tipoCama = $row3['tipoCama'];
-                                    if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
-                                ?>
-                                        <div class="cardHabitaciones">
-                                            <div class="inforHabitacion">
-                                                <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                <div class="datosHabitacion">
-                                                    <p>
-                                                        <span>Tipo de cama:</span>
-                                                        <?php iconCantidadCama($tipoCama); ?>
-                                                    </p>
 
-                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                        <span>Capacidad:</span>
-                                                        <?php iconCapacidad($capacidadPerson) ?>
-                                                    </p>
+                                $resulFilasHabitaciones = $dbh->query($sqlHabitacion);
+                                if ($resulFilasHabitaciones->rowCount() > 0) :
+                                    foreach ($resulFilasHabitaciones as $row3) :
+                                        $capacidadPerson = $row3['cantidadPersonasHab'];
+                                        $tipoCama = $row3['tipoCama'];
+                                        if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
+                                ?>
+                                            <div class="cardHabitaciones">
+                                                <div class="inforHabitacion">
+                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                    <div class="datosHabitacion">
+                                                        <p>
+                                                            <span>Tipo de cama:</span>
+                                                            <?php iconCantidadCama($tipoCama); ?>
+                                                        </p>
+
+                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                            <span>Capacidad:</span>
+                                                            <?php iconCapacidad($capacidadPerson) ?>
+                                                        </p>
+                                                    </div>
+                                                    <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <p><?php echo $row3['observacion'] ?></p>
+                                                <a href="#" class="btnSelecHab">Seleccionar</a>
                                             </div>
-                                            <a href="#" class="btnSelecHab">Seleccionar</a>
-                                        </div>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                else :
+                                    ?>
+                                    <div class="hab-no-disponibles">
+                                        <span>No se encontraron habitaciones disponibles</span>
+                                    </div>
                                 <?php
-                                    endif;
-                                endforeach;
+                                endif;
                                 ?>
                             </div>
                         </div>
@@ -253,38 +264,48 @@ include "funcionesIconos.php";
                         <div class="col-md-8">
                             <div class="listadoHab">
                                 <?php
-                                foreach ($dbh->query($sqlHabitacion) as $row3) :
-                                    $capacidadPerson = $row3['cantidadPersonasHab'];
-                                    $tipoCama = $row3['tipoCama'];
-                                    if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
-                                ?>
-                                        <div class="cardHabitaciones">
-                                            <div class="inforHabitacion">
-                                                <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                <div class="datosHabitacion">
-                                                    <p>
-                                                        <span>Tipo de cama:</span>
-                                                        <?php iconCantidadCama($tipoCama); ?>
-                                                    </p>
 
-                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                        <span>Capacidad:</span>
-                                                        <?php iconCapacidad($capacidadPerson) ?>
-                                                    </p>
+                                $resulFilasHabitaciones = $dbh->query($sqlHabitacion);
+                                if ($resulFilasHabitaciones->rowCount() > 0) :
+                                    foreach ($resulFilasHabitaciones as $row3) :
+                                        $capacidadPerson = $row3['cantidadPersonasHab'];
+                                        $tipoCama = $row3['tipoCama'];
+                                        if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
+                                ?>
+                                            <div class="cardHabitaciones">
+                                                <div class="inforHabitacion">
+                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                    <div class="datosHabitacion">
+                                                        <p>
+                                                            <span>Tipo de cama:</span>
+                                                            <?php iconCantidadCama($tipoCama); ?>
+                                                        </p>
+
+                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                            <span>Capacidad:</span>
+                                                            <?php iconCapacidad($capacidadPerson) ?>
+                                                        </p>
+                                                    </div>
+                                                    <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <p><?php echo $row3['observacion'] ?></p>
+                                                <a href="#" class="btnSelecHab">Seleccionar</a>
                                             </div>
-                                            <a href="#" class="btnSelecHab">Seleccionar</a>
-                                        </div>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                else :
+                                    ?>
+                                    <div class="hab-no-disponibles">
+                                        <span>No se encontraron habitaciones disponibles</span>
+                                    </div>
                                 <?php
-                                    endif;
-                                endforeach;
+                                endif;
                                 ?>
                             </div>
                         </div>
                 </section>
-            <?php
-            } 
+        <?php
+            }
         }
         ?>
     </main>

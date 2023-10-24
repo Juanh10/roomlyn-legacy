@@ -272,6 +272,257 @@
     font-weight: bold;
 }
 
+/* ESTILOS A LOS FILTROS */
+
+.filtros-habitaciones{
+    position: relative;
+    width: 90%;
+    height: 80px;
+    display: flex;
+    border-radius: 8px;
+    border: 2px solid #9d8076;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .2);
+    background-color: #fff;
+    margin-bottom: 30px;
+}
+
+.filtros-fecha-huespedes{
+    margin-left: 20px;
+    margin-top: 14px;
+}
+
+.filtros-fecha-huespedes form{
+    width: 100%;
+    display: flex;
+}
+
+/* ESTILOS AL INPUT DEL CALENDARIO*/
+
+.grupo-rango-fechas{
+    position: relative;
+    width: 310px;
+    height: 45px;
+    line-height: 45px;
+    margin-right: 20px;
+}
+
+.grupo-rango-fechas input{
+    position: absolute;
+    width: 100%;
+    line-height: 45px;
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #bcbcbc;
+}
+
+.label-fechas{
+    position: absolute;
+    font-size: 15px;
+    height: 10px;
+    line-height: 10px;
+    padding: 0 5px;
+    transform: translate(-4.5px, -4.5px) scale(0.8);
+    z-index: 99;
+    background-color: #fff;
+}
+
+/* ESTILOS AL CALENDARIO */
+
+.drp-buttons .cancelBtn{
+    background-color: transparent;
+    border: none;
+}
+
+.drp-buttons .applyBtn{
+    background-color: #000;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover{
+    background-color: #000;
+}
+
+.daterangepicker td.active, .daterangepicker td.active{
+    background-color: #000;
+}
+
+
+/* ESTILOS AL INPUT DE HUESPEDES */
+
+.huespedes{
+    position: relative;
+}
+
+.grupo-huespedes{
+    position: relative;
+    width: 310px;
+    height: 45px;
+    line-height: 45px;
+}
+
+.grupo-huespedes input{
+    position: absolute;
+    width: 100%;
+    line-height: 45px;
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #bcbcbc;
+    outline: none;
+}
+
+.label-huespedes{
+    position: absolute;
+    font-size: 15px;
+    height: 10px;
+    line-height: 10px;
+    padding: 0 5px;
+    transform: translate(-18px, -4.5px) scale(0.8);
+    z-index: 99;
+    background-color: #fff;
+}
+
+.modalHuespedes{
+    position: absolute;
+    display: none;
+    width: 350px;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .2);
+    z-index: 100;
+}
+
+.filtro-huespedes{
+    padding: 25px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.filtro-huespedes span{
+    margin-right: 25px;
+    font-size: 18px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.grupo-cantidad-huespedes{
+    position: relative;
+    width: 90px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.grupo-cantidad-huespedes input{
+    position: absolute;
+    width: 100%;
+    line-height: 35px;
+    padding: 0 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #bcbcbc;
+    outline: none;
+}
+
+.cant-huespedes{
+    position: absolute;
+    font-size: 15px;
+    height: 10px;
+    line-height: 10px;
+    padding: 0 5px;
+    transform: translate(-5px, -4.5px) scale(0.8);
+    z-index: 99;
+    background-color: #fff;
+}
+
+.btn-añadir-guardar{
+    padding: 10px;
+    display: flex;
+    justify-content: right;
+    border-top: 1px solid #bfbfbf;
+}
+
+.btn-cancelar-habitacion{
+    padding: 0 5px;
+    height: 35px;
+    line-height: 35px;
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.btn-aplicar-cambios{
+    padding: 0 10px;
+    height: 35px;
+    line-height: 35px;
+    background-color: #9d8076;
+    color: #000;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* estilos al select de climatizacion */
+
+.tipo-climatizacion{
+    margin-left: 20px;
+}
+
+.grupo-climatizacion{
+    position: relative;
+    width: 310px;
+    height: 45px;
+    line-height: 45px;
+}
+
+.grupo-climatizacion select{
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #bcbcbc;
+    outline: none;
+}
+
+.label-huespedes{
+    position: absolute;
+    font-size: 15px;
+    height: 10px;
+    line-height: 10px;
+    padding: 0 5px;
+    transform: translate(-18px, -4.5px) scale(0.8);
+    z-index: 99;
+    background-color: #fff;
+}
+
+.btn-buscar-filtro{
+    padding: 0 20px;
+    height: 45px;
+    background-color: #9d8076;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.btn-buscar-filtro:hover{
+    background-color: #947971;
+}
+
+
 @media only screen and (max-width: 982px) {
 
     .cabeceraHab {

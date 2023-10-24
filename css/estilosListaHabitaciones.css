@@ -183,6 +183,12 @@
     background-color: #715247;
 }
 
+/* ESTILOS PARA EL MENSAJE DE HABITACIONES NO DISPONIBLES */
+.hab-no-disponibles{
+    text-align: center;
+    font-size: 18px;
+}
+
 /** ESTILOS PARA EL CARRUSEL DE IMAGENES  */
 
 .coverImg{

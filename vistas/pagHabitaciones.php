@@ -20,6 +20,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <link rel="icon" href="../iconos/logo_icono.png">
     <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../librerias/lightbox2/dist/css/lightbox.css">
+    <link rel="stylesheet" href="../librerias/datarangepicker/css/daterangepicker.css">
     <link rel="stylesheet" href="../css/estilosPrincipales.css">
     <link rel="stylesheet" href="../css/estilosPaginaHabitaciones.css">
     <title>Habitaciones</title>
@@ -74,7 +75,58 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
 
     <main>
         <section class="resHabitaciones">
+
             <h1>HABITACIONES</h1>
+
+            <div class="filtros-habitaciones">
+                <div class="filtros-fecha-huespedes">
+                    <form action="vistasHabitaciones/listaHabitacionesFiltro.php" method="post">
+                        <div class="fechas">
+                            <div class="grupo-rango-fechas">
+                                <input type="text" name="fechasRango" id="rangoFechas" readonly>
+                                <label for="rangoFechas" class="label-fechas">Seleccionar fechas</label>
+                            </div>
+                        </div>
+                        <div class="huespedes">
+                            <div class="grupo-huespedes">
+                                <label for="inputHuespedes" class="label-huespedes">Seleccionar cantidad de huéspedes</label>
+                                <input type="text" name="huespedes" id="inputHuespedes" value="1 huésped" readonly>
+                            </div>
+                            <div class="modalHuespedes">
+                                <div class="infor-modal-huespedes">
+                                    <div class="filtro-huespedes">
+                                        <span>Habitación 1</span>
+                                        <div class="grupo-cantidad-huespedes">
+                                            <label for="inputCantHuespedes" class="cant-huespedes">Huespedes</label>
+                                            <input type="number" name="cantHuespedes" id="inputCantHuespedes" min="0" max="6" value="1">
+                                        </div>
+                                    </div>
+                                    <div class="btn-añadir-guardar">
+                                        <span class="btn-cancelar-habitacion">Cancelar</span>
+                                        <span class="btn-aplicar-cambios">Aplicar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tipo-climatizacion">
+                            <div class="grupo-climatizacion">
+                                <label for="selectClima" class="label-huespedes">Seleccionar el sistema de climatización</label>    
+
+                                <select name="selectClima" id="selectClima">
+                                    <option value="0">Ventilador</option>
+                                    <option value="1">Aire acondicionado</option>
+                                </select>
+                               
+                            </div>
+                        </div>
+
+                        <div class="botones-filtro">
+                            <input type="submit" value="Buscar" class="btn-buscar-filtro">
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <div class="contCardHab">
 
@@ -180,6 +232,8 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <script src="../librerias/jquery-3.7.0.min.js"></script>
     <script src="../librerias/lightbox2/dist/js/lightbox.js"></script>
     <script src="../librerias/scrollreveal.js"></script>
+    <script src="../librerias/datarangepicker/js/moment.min.js"></script>
+    <script src="../librerias/datarangepicker/js/daterangepicker.js"></script>
     <script src="../js/scriptHabitaciones.js"></script>
 
 

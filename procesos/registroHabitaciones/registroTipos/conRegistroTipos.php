@@ -71,7 +71,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
             //* SECCION PARA SUBIR LAS IMAGENES A LA BASE DE DATOS
     
     
-            $sql3 = $dbh->prepare("INSERT INTO habitaciones_imagenes(idTipoHabitacion, nombre, ruta, estado) VALUES (:idTipo, :nombre, :ruta, :estadoImg)"); // preparar la consulta de la tabla de las imagenes
+            $sql3 = $dbh->prepare("INSERT INTO habitaciones_imagenes(id_hab_tipo, nombre, ruta, estado) VALUES (:idTipo, :nombre, :ruta, :estadoImg)"); // preparar la consulta de la tabla de las imagenes
             $estadoImg = 1;
     
             $imagenesNombre = $_FILES['imagenes']['name']; // capturar el nombre de la imagen esto me da con la extension tambien (imagen.png)
