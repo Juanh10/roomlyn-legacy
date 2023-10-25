@@ -94,7 +94,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     </div>
 
     <?php
-
+/* 
     if (isset($_SESSION['mjscontraseña'])) {
     ?>
 
@@ -104,7 +104,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
 
     <?php
         unset($_SESSION['mjscontraseña']);
-    }
+    } */
 
     if (isset($_SESSION['mjsError'])) {
         ?>

@@ -98,7 +98,7 @@ include "funcionesIconos.php";
 
             $sqlImagenesTipoHab = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = " . $id . ""; //Capturar la ruta de las imagenes de los tipos de habitaciones
 
-            $sqlHabitacion = "SELECT id_habitaciones, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND tipoServicio = " . $tipoServ . ""; // Capturar toda la informacion de la habitacion
+            $sqlHabitacion = "SELECT id_habitaciones, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND tipoServicio = " . $tipoServ . " AND id_hab_estado = 1 AND estado = 1"; // Capturar toda la informacion de la habitacion
 
 
             $row = $dbh->query($sqlTipoHabitacion)->fetch(); // Obtener datos

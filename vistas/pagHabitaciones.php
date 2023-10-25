@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once "../procesos/config/conex.php";
 include "vistasHabitaciones/funcionesIconos.php";
 
@@ -23,6 +25,8 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <link rel="stylesheet" href="../librerias/datarangepicker/css/daterangepicker.css">
     <link rel="stylesheet" href="../css/estilosPrincipales.css">
     <link rel="stylesheet" href="../css/estilosPaginaHabitaciones.css">
+    <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
+    <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <title>Habitaciones</title>
 </head>
 
@@ -111,13 +115,13 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
 
                         <div class="tipo-climatizacion">
                             <div class="grupo-climatizacion">
-                                <label for="selectClima" class="label-huespedes">Seleccionar el sistema de climatización</label>    
+                                <label for="selectClima" class="label-huespedes">Seleccionar el sistema de climatización</label>
 
                                 <select name="selectClima" id="selectClima">
                                     <option value="0">Ventilador</option>
                                     <option value="1">Aire acondicionado</option>
                                 </select>
-                               
+
                             </div>
                         </div>
 
@@ -203,6 +207,22 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
         <a href="https://wa.me/573132219883" target="_blank" class="btnWha" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
     </div>
 
+    <!-- ALERTAS -->
+
+    <?php
+    if (isset($_SESSION['msjError'])) {
+    ?>
+
+        <script>
+            Swal.fire('<?php echo $_SESSION['msjError']; ?>')
+        </script>
+
+    <?php
+        unset($_SESSION['msjError']);
+    }
+
+    ?>
+
     <!--* PIE DE PAGINA -->
 
     <footer>
@@ -227,7 +247,6 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
             </div>
         </div>
     </footer>
-
 
     <script src="../librerias/jquery-3.7.0.min.js"></script>
     <script src="../librerias/lightbox2/dist/js/lightbox.js"></script>
