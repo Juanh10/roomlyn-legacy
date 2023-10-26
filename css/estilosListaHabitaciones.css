@@ -189,6 +189,12 @@
     font-size: 18px;
 }
 
+.hab-no-disponibles-buscador{
+    text-align: center;
+    font-size: 18px;
+    display: none;
+}
+
 /** ESTILOS PARA EL CARRUSEL DE IMAGENES  */
 
 .coverImg{

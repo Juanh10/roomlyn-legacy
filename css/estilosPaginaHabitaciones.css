@@ -284,6 +284,7 @@
     box-shadow: 0 2px 15px rgba(0, 0, 0, .2);
     background-color: #fff;
     margin-bottom: 30px;
+    display: none;
 }
 
 .filtros-fecha-huespedes{
@@ -770,6 +771,45 @@
 
     .precioInfo {
         justify-content: space-between;
+    }
+
+    .filtros-fecha-huespedes{
+        padding: 10px 5px;
+    }
+
+    .fechas{
+        width: 100%;
+    }
+
+    .grupo-rango-fechas{
+        width: 100%;
+    }
+
+    .huespedes{
+        width: 100%;
+    }
+
+    .grupo-huespedes{
+        width: 100%;
+    }
+
+    .tipo-climatizacion{
+        width: 100%;
+    }
+
+    .grupo-climatizacion{
+        width: 100%;
+    }
+
+    .botones-filtro{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-buscar-filtro{
+        position: relative;
+        padding: 0 30px;
     }
 
 }

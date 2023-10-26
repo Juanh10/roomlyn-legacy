@@ -5,6 +5,7 @@ $(document).ready(function () {
   $('.cabeceraHab').show(); //TODO Muestra el elemento
   $('.btnWha').show();
   $('.flexslider').show();
+  $('.filtros-habitaciones').show();
 });
 
 $(document).ready(function () {
@@ -111,14 +112,14 @@ $(document).ready(function () {
 
   // Añadir mas habitaciones en el modal de huespedes
 
-  $(".btn-cancelar-habitacion").click(function(){
+  $(".btn-cancelar-habitacion").click(function () {
     $(".modalHuespedes").hide();
   });
 
   let inputCantHuespedes = $('#inputCantHuespedes');
   let inputHuespedes = $('#inputHuespedes');
 
-  $(".btn-aplicar-cambios").click(function(){
+  $(".btn-aplicar-cambios").click(function () {
     let valorInputCantH = inputCantHuespedes.val();
 
     let valorInputHuespedes = (valorInputCantH > 1) ? valorInputCantH + " huéspedes" : valorInputCantH + " huésped";
@@ -127,4 +128,35 @@ $(document).ready(function () {
     $(".modalHuespedes").hide();
   });
 
+});
+
+// BUSCADOR EN TIEMPO REAL
+
+// Funcion para quitar las tildes
+function removeDiacritics(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+$(document).ready(function () {
+  $('#buscador').on('input', function () {
+      const inputBuscador = removeDiacritics($(this).val().toLowerCase()); // obtener el valor del input
+      let resultadoBusqueda = false;
+      
+      $('.cardHabitaciones').each(function () {
+          const cardContenido = removeDiacritics($(this).text().toLowerCase()); // obtener el valor de los card de las habitaciones
+          if (cardContenido.includes(inputBuscador)) { // condicion para saber si encontró alguna coincidencia
+              $(this).show();
+              resultadoBusqueda = true;
+          } else {
+              $(this).hide();
+          }
+      });
+
+      // Mostrar el mensaje si no se encuentran resultados
+      if (!resultadoBusqueda) {
+          $('.hab-no-disponibles').show();
+      } else {
+          $('.hab-no-disponibles').hide();
+      }
+  });
 });

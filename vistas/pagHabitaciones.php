@@ -139,7 +139,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                 foreach ($dbh->query($sqlTiposHab) as $row) :
                     $cantCama = $row['cantidadCamas'];
                     $capacidadPerson = $row['capacidadPersonas'];
-                    if ($row['estado'] === 1) :
+                    if ($row['estado'] == 1) :
                 ?>
                         <div class="cardHab">
                             <div class="imgCard">
