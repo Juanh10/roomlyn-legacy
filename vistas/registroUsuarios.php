@@ -2,7 +2,7 @@
 
 include "../procesos/config/conex.php";
 
-$sql = $dbh->prepare("SELECT tipoUsuario  FROM usuarios WHERE tipoUsuario = 'Administrador'"); // consulta sobre el tipo de usuario
+$sql = $dbh->prepare("SELECT id_rol  FROM usuarios WHERE id_rol = 1"); // consulta sobre el tipo de usuario
 
 $sql->execute();
 
@@ -120,15 +120,17 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
 
                 <div class="grupoTipoUsuario" id="grupoTipoUsuario">
                     <label for="deshabilitado">Tipo de usuario*</label>
+                    <select class="formularioInput" name="tipoUsuario" id="deshabilitado" >
                     <?php if (!$validarTipoUsuario) {
                     ?>
-                        <input class="formularioInput" id="deshabilitado" type="text" value="Administrador" name="tipoUsuario" readonly="readonly">
+                        <option value="1">Administrador</option>
                     <?php
                     } else {
                     ?>
-                        <input class="formularioInput" id="deshabilitado" type="text" value="Recepcionista" name="tipoUsuario" readonly="readonly">
+                        <option value="2">Recepcionista</option>
                     <?php
                     } ?>
+                    </select>
                     <p></p>
                 </div>
 

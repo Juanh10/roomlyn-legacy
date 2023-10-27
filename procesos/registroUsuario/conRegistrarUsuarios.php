@@ -27,7 +27,7 @@ if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty(
     $insertarInforUsuarios = "INSERT INTO infousuarios(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
 
     //* INSERTAR EL USUARIO
-    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, usuario, contraseña, tipoUsuario, estado, fecha, hora, fecha_sys) VALUES (:idInfo,:usu,:contra,:tUsu,:estado,:fecha,:hora,now())";
+    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, usuario, contraseña, id_rol, estado, fecha, hora, fecha_sys) VALUES (:idInfo,:usu,:contra,:tUsu,:estado,:fecha,:hora,now())";
 
    
    //*CONSULTA DEL USUARIO
@@ -35,9 +35,9 @@ if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty(
    $consultaUsuario -> bindParam(':usuario', $usuario);// enlazar marcador con la variable
    $consultaUsuario -> execute(); // realiza la consulta
 
-    //* CONSULTA TIPO USUARIO
-   $consultarTipoUsuario = $dbh -> prepare("SELECT tipoUsuario FROM usuarios WHERE tipoUsuario = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
-   $marcTipoUsuario = 'Administrador';
+    //* CONSULTA TIPO ROL
+   $consultarTipoUsuario = $dbh -> prepare("SELECT id_rol FROM usuarios WHERE id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
+   $marcTipoUsuario = 1;
    $consultarTipoUsuario -> bindParam(':tipoUsuario', $marcTipoUsuario);
    $consultarTipoUsuario -> execute(); // realiza la consulta
 

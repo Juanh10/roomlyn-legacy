@@ -20,7 +20,7 @@ $sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usu
 <?php
 //! SECCION UNICAMENTE PARA EL ADMINISTRADOR
 
-if (strtolower($_SESSION['tipoUsuario']) == "administrador") :  // verificamos el tipo de usuario
+if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
 ?>
 
     <!DOCTYPE html>
@@ -79,7 +79,7 @@ if (strtolower($_SESSION['tipoUsuario']) == "administrador") :  // verificamos e
                                         $documento = $row['documento'];
                                         $email = $row['email'];
                                         $celular = $row['celular'];
-                                        $tipoUsuario = $row['tipoUsuario'];
+                                        $tipoUsuario = $row['id_rol'];
                                         $usuario = $row['usuario'];
                                         // $contraseña = $row['contraseña'];
                                         $estado = $row['estado'];
@@ -94,7 +94,7 @@ if (strtolower($_SESSION['tipoUsuario']) == "administrador") :  // verificamos e
                                                 <td class="datos"><?php echo $documento ?></td>
                                                 <td class="datos"><?php echo $celular ?></td>
                                                 <td class="datos"><?php echo $email ?></td>
-                                                <td class="datos"><?php echo $tipoUsuario ?></td>
+                                                <td class="datos"><?php echo ($tipoUsuario == 1) ? "Administrador" : "Recepcionista"; ?></td>
                                                 <td class="datos"><?php echo $usuario ?></td>
                                                 <td>
                                                     <div class="accion">

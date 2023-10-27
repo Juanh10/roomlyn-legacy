@@ -187,7 +187,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="#" class="btnSelecHab">Seleccionar</a>
+                                                <a href="reservas/fromularioReservas.php?id=<?php echo $row3['id_habitaciones'] ?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;
@@ -288,7 +288,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="#" class="btnSelecHab">Seleccionar</a>
+                                                <a href="reservas/fromularioReservas.php" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;

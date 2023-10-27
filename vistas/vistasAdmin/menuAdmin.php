@@ -92,7 +92,7 @@
 
             //* comparar si el tipo de usuario es igual a administrador para asi mostrar otra opcion del menu que solo se le muestra si es administrador
 
-            if (strtolower($_SESSION['tipoUsuario']) == "administrador") :
+            if ($_SESSION['tipoUsuario'] == 1) :
 
             ?>
 
@@ -184,7 +184,7 @@
 
             //* comparar si el tipo de usuario es igual a administrador para asi mostrar otra opcion del menu que solo se le muestra si es administrador
 
-            if (strtolower($_SESSION['tipoUsuario']) == "administrador") :
+            if ($_SESSION['tipoUsuario'] == 1) :
 
             ?>
 
