@@ -26,8 +26,17 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
         $url .= "mostrarListaHabitaciones.php?idTipoHab=" . $tipoHabitacion . "";
     }
 
-    $sqlHabitacion = "";
-    $sqlTipoHab = "";
+    $sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
+
+    $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
+
+    $sqlTipoHab = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHabitacion . " AND estado = 1";
+
+    $rowTipoHab = $dbh -> query($sqlTipoHab) -> fetch();
+
+    $sqlimagenesTipoHab = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = " . $tipoHabitacion . "";
+
+    $rowImgTipoHab = $dbh -> query($sqlimagenesTipoHab) -> fetch();
 
     $estadoId = true;
 } else {
@@ -102,41 +111,77 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                         <div class="row">
                             <div class="col-4">
                                 <div class="imagenes">
-                                    <img src="../../imgServidor/1camaAire2.jpg" alt="">
+                                    <img src="../../imgServidor/<?php echo $rowImgTipoHab['ruta'] ?>" alt="">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="informacion">
                                     <div class="habitacion">
-                                        <h1>Habitación 1 | Habitaciones individuales</h1>
+                                        <h1>Habitación <?php echo $rowHabitacion['nHabitacion'] ?> | <?php echo $rowTipoHab['tipoHabitacion'] ?></h1>
                                     </div>
                                     <div class="servicios">
                                         <p>
-                                            <span>Tipo de cama:</span> 1 simple
+                                            <span>Tipo de cama:</span> <?php iconCantidadCama($rowHabitacion['tipoCama']) ?>
                                         </p>
                                         <p>
-                                            <span>Capacidad:</span> 1 persona
+                                            <span>Capacidad:</span> <?php echo iconCapacidad($rowHabitacion['cantidadPersonasHab']) ?>
                                         </p>
                                     </div>
                                     <div class="descripcion">
-                                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam neque</p>
+                                        <p><?php echo $rowHabitacion['observacion']; ?></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="formularioReserva">
-                        <form action="">
-                            <h1>HOLA</h1>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi, animi! Neque praesentium rerum odit ex eveniet voluptatibus, odio debitis! Quibusdam, minus. Voluptate impedit consectetur qui illum alias iure nihil dolorem!
-                            Eveniet cumque aliquid dolorum laborum excepturi quidem repudiandae consectetur impedit rerum labore eius explicabo odio, provident sit nesciunt. Perspiciatis laborum harum ea illum quaerat dolore qui ipsa nemo aperiam minus?
-                            Porro reprehenderit repudiandae harum, ullam eaque necessitatibus illum placeat explicabo veniam enim at cum animi commodi provident perspiciatis dolorum adipisci saepe libero ratione! Alias ut, aperiam minus saepe officia molestiae.
-                            Nisi a, ducimus beatae quisquam quod autem enim maxime quos, tempore ut distinctio possimus ipsum dolores libero odit ad aperiam quam fuga atque totam! Molestiae cumque est expedita! Fuga, voluptatibus.
-                            Ipsa, perferendis veniam eum temporibus aperiam tenetur cum quis velit debitis ullam maiores distinctio? Ipsam perspiciatis ipsa dolorum veritatis alias, totam blanditiis minus impedit facere commodi tenetur architecto. Veritatis, impedit?Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, blanditiis ab. Minus beatae ducimus odit quia explicabo unde, eveniet delectus magni tenetur fugit eaque, at temporibus fuga eius. Minus, quam.
-                            Veritatis quae repellendus architecto quod. Quos sunt ipsum culpa repudiandae dolorum ipsam voluptatibus modi ipsa tempora aperiam? Error sapiente officia iusto reiciendis ab necessitatibus numquam repudiandae, facilis vero omnis maiores.
-                            Fugit adipisci, illum sunt voluptas a praesentium incidunt excepturi pariatur quibusdam sapiente quis nobis cupiditate sit voluptatum id nihil? Itaque magnam, corporis natus neque ipsum commodi deserunt officiis molestiae quas?
-                            Cumque vitae amet a dolore voluptatibus non! Necessitatibus quos magnam nostrum velit qui libero optio fugit id, veniam dolore quia maiores unde dolorum vero culpa hic consequatur molestiae ipsam aliquid.
-                            Rerum, dolorem minus! Cumque numquam vel id aperiam assumenda amet excepturi eveniet, corrupti, deserunt voluptas quam odio eos ad ipsa magni facilis, atque praesentium. Reiciendis itaque unde non placeat temporibus.
+                        <h2>Datos</h2>
+                        <form action="" method="post">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Nombres</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="date" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Fecha de llegada</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Documento</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Sexo</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Apellidos</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="date" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Fecha de salida</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Teléfono</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Nacionalidad</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btnReservar">
+                                <input type="submit" name="btnReservar" value="Reservar">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -151,7 +196,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                         </div>
                         <div class="detallesFactura">
                             <div class="btnAbrirDetalles">
-                                <span class="btnAbrirDet">Detalles de la estancia <i class="bi bi-caret-down-fill flechaDetalles"></i></span>
+                                <span class="btnAbrirDet">Detalles de la reserva <i class="bi bi-caret-down-fill flechaDetalles"></i></span>
                             </div>
                             <div class="inforDetalles">
                                 <div class="fechasCheck">
