@@ -27,7 +27,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <link rel="stylesheet" href="../css/estilosPaginaHabitaciones.css">
     <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
     <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
-    <title>Habitaciones</title>
+    <title>Habitaciones | Hotel Colonial City</title>
 </head>
 
 <body>
@@ -84,7 +84,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
 
             <div class="filtros-habitaciones">
                 <div class="filtros-fecha-huespedes">
-                    <form action="vistasHabitaciones/listaHabitacionesFiltro.php" method="post">
+                    <form action="vistasHabitaciones/listaHabitacionesFiltro.php" method="get">
                         <div class="fechas">
                             <div class="grupo-rango-fechas">
                                 <input type="text" name="fechasRango" id="rangoFechas" readonly>
@@ -101,7 +101,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                                     <div class="filtro-huespedes">
                                         <span>Habitación 1</span>
                                         <div class="grupo-cantidad-huespedes">
-                                            <label for="inputCantHuespedes" class="cant-huespedes">Huespedes</label>
+                                            <label for="inputCantHuespedes" class="cant-huespedes">Huéspedes</label>
                                             <input type="number" name="cantHuespedes" id="inputCantHuespedes" min="0" max="6" value="1">
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                                 <div class="infoCard">
                                     <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
                                     <p><span>Capacidad máxima: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
-                                    <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="post">
+                                    <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="get">
                                         <input type="hidden" value="<?php echo $row['id_hab_tipo'] ?>" name="idTipoHab">
                                         <p class="selFiltro">Seleccione: </p>
                                         <ul class="filtrosHab">
@@ -170,7 +170,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                                             </li>
                                         </ul>
                                         <div class="btnInfo">
-                                            <button type="submit" class="btnVermas" title="Ver lista de las habitaciones" name="btnVerInfor"> Ver más </button>
+                                            <button type="submit" class="btnVermas" title="Ver lista de las habitaciones"> Ver más </button>
                                         </div>
                                     </form>
                                 </div>

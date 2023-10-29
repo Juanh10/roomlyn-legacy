@@ -85,7 +85,7 @@ $(document).ready(function () {
         ],
       },
       startDate: moment(), // Establece la fecha de inicio como la fecha actual
-      endDate: moment(),
+      endDate: moment().add(1, 'day'),
       minDate: moment().startOf('month'),
       minDate: moment().startOf('day')
     });
@@ -110,11 +110,14 @@ $(document).ready(function () {
     }
   });
 
-  // Añadir mas habitaciones en el modal de huespedes
+  // Boton de cancelar que cierra el modal
 
   $(".btn-cancelar-habitacion").click(function () {
     $(".modalHuespedes").hide();
   });
+
+
+  // Guardar la informacion del modal en el input
 
   let inputCantHuespedes = $('#inputCantHuespedes');
   let inputHuespedes = $('#inputHuespedes');
@@ -128,35 +131,4 @@ $(document).ready(function () {
     $(".modalHuespedes").hide();
   });
 
-});
-
-// BUSCADOR EN TIEMPO REAL
-
-// Funcion para quitar las tildes
-function removeDiacritics(text) {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-$(document).ready(function () {
-  $('#buscador').on('input', function () {
-      const inputBuscador = removeDiacritics($(this).val().toLowerCase()); // obtener el valor del input
-      let resultadoBusqueda = false;
-      
-      $('.cardHabitaciones').each(function () {
-          const cardContenido = removeDiacritics($(this).text().toLowerCase()); // obtener el valor de los card de las habitaciones
-          if (cardContenido.includes(inputBuscador)) { // condicion para saber si encontró alguna coincidencia
-              $(this).show();
-              resultadoBusqueda = true;
-          } else {
-              $(this).hide();
-          }
-      });
-
-      // Mostrar el mensaje si no se encuentran resultados
-      if (!resultadoBusqueda) {
-          $('.hab-no-disponibles').show();
-      } else {
-          $('.hab-no-disponibles').hide();
-      }
-  });
 });

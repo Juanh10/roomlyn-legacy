@@ -53,7 +53,7 @@ $sql = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
                             <h2>Información</h2>
 
                             <label for="nombreTipo" class="form-label">Tipo de habitación</label>
-                            <input type="text" name="nombreTipo" id="nombreTipo" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" required>
+                            <input type="text" name="nombreTipo" id="nombreTipo" class="form-control p-2" placeholder="Nombre del tipo de la habitación" required>
                             <p></p>
 
                             <div class="row responsiveRowInput">
@@ -64,7 +64,7 @@ $sql = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
                                 </div>
 
                                 <div class="col">
-                                    <label for="cantidadPersonas" class="form-label mt-3">Cantidad maxima de huespedes</label>
+                                    <label for="cantidadPersonas" class="form-label mt-3">Cantidad maxima de huéspedes</label>
                                     <input type="number" name="cantidadPersonas" id="cantidadPersonas" min="0" class="form-control p-2 inputPeque" required>
                                     <p></p>
                                 </div>

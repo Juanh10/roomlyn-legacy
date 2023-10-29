@@ -10,13 +10,8 @@ include "funcionesIconos.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../iconos/logo_icono.png">
-    <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../librerias/lightbox2/dist/css/lightbox.css">
-    <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/estilosListaHabitaciones.css">
-    <link rel="stylesheet" href="../../css/estilosPrincipales.css">
-    <title>Habitaciones</title>
+    <?php require_once "dependecias.php" ?>
+    <title>Habitaciones | Hotel Colonial City</title>
 </head>
 
 <body>
@@ -187,7 +182,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="reservas/fromularioReservas.php?id=<?php echo $row3['id_habitaciones'] ?>" class="btnSelecHab">Seleccionar</a>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;
@@ -288,7 +283,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="reservas/fromularioReservas.php" class="btnSelecHab">Seleccionar</a>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;
@@ -311,11 +306,6 @@ include "funcionesIconos.php";
     </main>
 
 
-    <script src="../../librerias/jquery-3.7.0.min.js"></script>
-    <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
-    <script src="../../librerias/lightbox2/dist/js/lightbox.js"></script>
-    <script src="../../librerias/scrollreveal.js"></script>
-    <script src="../../js/scriptHabitaciones.js"></script>
 </body>
 
 </html>

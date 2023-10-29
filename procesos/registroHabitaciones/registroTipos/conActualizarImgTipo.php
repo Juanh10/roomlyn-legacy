@@ -33,7 +33,7 @@ if (isset($_POST['actulizarImagen'])) {
 
             if ($sqlImg->execute()) {
                 move_uploaded_file($tmpImg, "../../../imgServidor/" . $rutaImg);
-                $_SESSION['msjExito'] = "Foto actualizada";
+                $_SESSION['msjExito'] = "La foto se ha actualizado con éxito.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             } else {
                 $_SESSION['msjError'] = "Ocurrió un error";
@@ -64,7 +64,7 @@ if (isset($_POST['eliminarImagen'])) {
         $sqlElmImg->bindParam('idImgElm', $idImg2);
 
         if ($sqlElmImg->execute()) {
-            $_SESSION['msjExito'] = "Deshabilitado";
+            $_SESSION['msjExito'] = "¡Se ha deshabilitado correctamente!";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         } else {
             $_SESSION['msjError'] = "Ocurrió un error";
@@ -105,7 +105,7 @@ if (isset($_POST['btnAddImg'])) {
 
             if ($sqlImgNueva->execute()) {
                 move_uploaded_file($rutaTmp, "../../../imgServidor/" . $rutaNuevaImg);
-                $_SESSION['msjExito'] = "Foto insertada";
+                $_SESSION['msjExito'] = "La foto se ha insertado exitosamente.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
             } else {
                 $_SESSION['msjError'] = "Ocurrió un error";

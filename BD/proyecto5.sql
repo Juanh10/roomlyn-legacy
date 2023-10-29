@@ -107,13 +107,13 @@ INSERT INTO `habitaciones_estado` (`id_hab_estado`, `estado_habitacion`) VALUES
 -- Estructura de tabla para la tabla `habitaciones_imagenes`
 --
 
-CREATE TABLE `habitaciones_imagenes` (
-  `id_hab_imagen` int(11) NOT NULL,
-  `id_hab_tipo` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL COMMENT 'Nombre de la imagen	',
-  `ruta` varchar(200) NOT NULL COMMENT 'Ruta de la imagen',
-  `estado` tinyint(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CREATE TABLE `habitaciones_imagenes` (
+    `id_hab_imagen` int(11) NOT NULL,
+    `id_hab_tipo` int(11) NOT NULL,
+    `nombre` varchar(100) NOT NULL COMMENT 'Nombre de la imagen	',
+    `ruta` varchar(200) NOT NULL COMMENT 'Ruta de la imagen',
+    `estado` tinyint(2) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `habitaciones_imagenes`

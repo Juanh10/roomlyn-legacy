@@ -107,7 +107,7 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
                 </div>
 
                 <div class="grupoCelular" id="grupoCelular">
-                    <label for="nCelular">Celular*</label>
+                    <label for="nCelular">Teléfono*</label>
                     <input class="formularioInput" type="text" name="celular" id="nCelular" placeholder="Celular" maxlength="15" pattern="[0-9]*" title="Ingresa solo números" required>
                     <p></p>
                 </div>

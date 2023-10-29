@@ -5,9 +5,9 @@ session_start();
 include_once "../../procesos/config/conex.php";
 include "funcionesIconos.php";
 
-$fechaRango = $_POST['fechasRango'];
-$huespedes = $_POST['huespedes'];
-$sisClimatizacion = $_POST['selectClima'];
+$fechaRango = $_GET['fechasRango'];
+$huespedes = $_GET['huespedes'];
+$sisClimatizacion = $_GET['selectClima'];
 
 $arrayFechas = explode(" - ", $fechaRango);
 
@@ -43,18 +43,13 @@ if ($resultHabitacion->rowCount() > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../iconos/logo_icono.png">
-    <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../librerias/lightbox2/dist/css/lightbox.css">
-    <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/estilosListaHabitaciones.css">
-    <link rel="stylesheet" href="../../css/estilosPrincipales.css">
-    <title>Habitaciones</title>
+    <?php require_once "dependecias.php" ?>
+    <title>Habitaciones | Hotel Colonial City</title>
 </head>
 
 <body>
 
-    <!--     <div class="contenedorPreloader" id="onload">
+    <div class="contenedorPreloader" id="onload">
         <div class="lds-default">
             <div></div>
             <div></div>
@@ -69,7 +64,7 @@ if ($resultHabitacion->rowCount() > 0) {
             <div></div>
             <div></div>
         </div>
-    </div> -->
+    </div>
 
     <header class="cabeceraHab">
         <div class="contenedorHab navContenedorHab">
@@ -199,7 +194,7 @@ if ($resultHabitacion->rowCount() > 0) {
                                                         </div>
                                                         <p><?php echo $row3['observacion'] ?></p>
                                                     </div>
-                                                    <a href="#" class="btnSelecHab">Seleccionar</a>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $row['id_hab_tipo'] ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
                                                 </div>
                                         <?php
                                             endif;
@@ -301,7 +296,7 @@ if ($resultHabitacion->rowCount() > 0) {
                                                         </div>
                                                         <p><?php echo $row3['observacion'] ?></p>
                                                     </div>
-                                                    <a href="#" class="btnSelecHab">Seleccionar</a>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $row['id_hab_tipo'] ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>& sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
                                                 </div>
                                         <?php
                                             endif;
@@ -334,11 +329,7 @@ if ($resultHabitacion->rowCount() > 0) {
 
     </main>
 
-    <script src="../../librerias/jquery-3.7.0.min.js"></script>
-    <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
-    <script src="../../librerias/lightbox2/dist/js/lightbox.js"></script>
-    <script src="../../librerias/scrollreveal.js"></script>
-    <script src="../../js/scriptHabitaciones.js"></script>
+
 </body>
 
 </html>

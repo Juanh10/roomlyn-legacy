@@ -1,11 +1,11 @@
 <?php
 
-$id = $_POST['idTipoHab'];
+$id = $_GET['idTipoHab'];
 include "listaHabitaciones.php";
 
-if(isset($_POST['btnVerInfor'])){
-    if(!empty($_POST['opServicios'])){
-        $opServicio = $_POST['opServicios'];
+
+    if(!empty($_GET['opServicios'])){
+        $opServicio = $_GET['opServicios'];
         $ventSelec = false;
         $aireSelec = false;
 
@@ -33,5 +33,5 @@ if(isset($_POST['btnVerInfor'])){
         mostrarDatosHabitaciones("ventilador",$id, $dbh);
         mostrarDatosHabitaciones("aire",$id, $dbh);
     }
-}
+
 ?>

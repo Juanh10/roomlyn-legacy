@@ -78,7 +78,7 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                                     </div>
 
                                     <div class="col">
-                                        <label for="cantidadPersonas" class="form-label mt-3">Cantidad maxima de huespedes</label>
+                                        <label for="cantidadPersonas" class="form-label mt-3">Cantidad maxima de huéspedes</label>
                                         <input type="number" name="cantidadPersonas" id="cantidadPersonas" value="<?php echo $row['capacidadPersonas'] ?>" min="0" class="form-control p-2 inputPeque" required>
                                     </div>
                                 </div>
