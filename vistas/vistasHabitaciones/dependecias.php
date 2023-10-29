@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/estilosListaHabitaciones.css">
 <link rel="stylesheet" href="../../css/estilosPrincipales.css">
+<link rel="stylesheet" href="../../css/estilosSeccionReservas.css">
 
 <script src="../../librerias/jquery-3.7.0.min.js"></script>
 <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>

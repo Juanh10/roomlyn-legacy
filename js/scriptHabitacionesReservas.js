@@ -2,6 +2,18 @@ $(document).ready(function () {
     $('#onload').fadeOut(); //TODO Desaparece el elemento
     $('.cabeceraHab').show(); //TODO Muestra el elemento
 
+    $('.btnAbrirDetalles').click(function(){
+        let detalles = $(this).next('.inforDetalles');
+        console.log(detalles);
+        if (detalles.is(':visible')) {
+            $('.flechaDetalles').removeClass('active');
+            detalles.hide();
+        } else {
+            $('.flechaDetalles').addClass('active');
+            detalles.show();
+        }
+    })
+
 });
 
 // BUSCADOR EN TIEMPO REAL

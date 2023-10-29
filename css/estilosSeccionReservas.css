@@ -1,0 +1,154 @@
+body{
+    background-color: #f2f2f5;
+}
+
+main{
+    margin-top: 130px;
+}
+
+.rowPrincipal{
+    padding: 10px;
+}
+
+.col-informacion{
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.card-infor-reserva{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #c6ceda;
+    background-color: #fff;
+}
+
+.imagenes{
+    width: 100%;
+    height: 100%;
+}
+
+.imagenes img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.informacion{
+    padding: 8px;
+}
+
+.habitacion h1{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.servicios{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.servicios p{
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.servicios p span{
+    font-weight: bold;
+}
+
+.descripcion p{
+    font-size: 14px;
+}
+
+.col-factura{
+    padding: 10px;
+}
+
+.facturaReserva{
+    position: fixed;
+    width: 350px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #c6ceda;
+    background-color: #fff;
+}
+
+.totalReserva{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #cdcdcd;
+}
+
+.totalReserva .precioTotal{
+    padding: 10px 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.fechaHospedaje{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detallesFactura{
+    margin-left: 10px;
+}
+
+.btnAbrirDetalles{
+    margin-bottom: 10px;
+}
+
+.btnAbrirDetalles span{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.flechaDetalles.active{
+    transform: rotate(180deg);
+}
+
+.inforDetalles{
+    display: none;
+}
+
+.inforDetalles .fechasCheck{
+    margin-top: 10px;
+}
+
+.inforDetalles .fechasCheck p{
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.inforDetalles .inforHab{
+    margin-top: 10px;
+    border-top: 1px solid #cdcdcd;
+}
+
+.inforDetalles .inforHab p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inforDetalles .inforHab p span{
+    font-size: 14px;
+}
+
+.inforDetalles .totalFactura{
+    margin-top: 10px;
+    border-top: 1px solid #cdcdcd;
+}
+
+.inforDetalles .totalFactura p{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+}
