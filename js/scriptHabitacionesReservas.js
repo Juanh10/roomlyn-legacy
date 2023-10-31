@@ -2,9 +2,8 @@ $(document).ready(function () {
     $('#onload').fadeOut(); //TODO Desaparece el elemento
     $('.cabeceraHab').show(); //TODO Muestra el elemento
 
-    $('.btnAbrirDetalles').click(function(){
+    $('.btnAbrirDetalles').click(function () {
         let detalles = $(this).next('.inforDetalles');
-        console.log(detalles);
         if (detalles.is(':visible')) {
             $('.flechaDetalles').removeClass('active');
             detalles.hide();
@@ -45,4 +44,34 @@ $(document).ready(function () {
             $('.hab-no-disponibles').hide();
         }
     });
+
+    // FECHAS CHECKIN Y CHECKOUT
+
+    let factura = $('.col-factura');
+
+    // Escuchar el evento change en ambos campos
+    $("#fechaSalida, #fechaEntrada").on("change", function () {
+        let fechaSalida = $("#fechaSalida").val(); // obtenemos la fecha
+        let fechaEntrada = $("#fechaEntrada").val(); // obtenemos la fecha
+
+        let rangoFechas = fechaEntrada + " - " + fechaSalida;
+
+        // Verificar si ambos campos tienen valores
+        if (fechaSalida && fechaEntrada) {
+            // Realizar la petición AJAX
+            realizarPeticion(rangoFechas);
+        }
+
+    });
+
+    // Función para realizar la petición AJAX
+  function realizarPeticion(rangoFechas) {
+    fetch(`reservas/facturaReserva.php?fechasRango=${rangoFechas}`)
+    .then(res => res.text())
+    .then(datos => factura.html(datos))
+    .catch();
+  }
+
+
+
 });

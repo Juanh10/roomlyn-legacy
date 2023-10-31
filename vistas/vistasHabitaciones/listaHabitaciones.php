@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Bogota'); // Establecer la zona horaria
+
 include_once "../../procesos/config/conex.php";
 include "funcionesIconos.php";
 ?>
@@ -66,6 +68,8 @@ include "funcionesIconos.php";
         <?php
         function mostrarTituloTipo($id, $dbh)
         {
+
+            
             $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
 
             foreach ($dbh->query($sqlTipoHabitacion) as $row) {
@@ -80,6 +84,12 @@ include "funcionesIconos.php";
         <?php
         function mostrarDatosHabitaciones($filtro, $id, $dbh)
         {
+
+            $fechaActual = date('Y-m-d');
+
+            $fechaSiguiente = date("Y-m-d", strtotime($fechaActual . " +1 day")); // Calcula la fecha del día siguiente
+
+            $rangoFecha = $fechaActual." - ".$fechaSiguiente;
 
             if ($filtro === "ventilador") {
                 $tipoServ = 0;
@@ -182,7 +192,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>" class="btnSelecHab">Seleccionar</a>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>&fechasRango=<?php echo $rangoFecha?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;

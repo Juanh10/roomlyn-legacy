@@ -2,6 +2,8 @@
 
 session_start();
 
+date_default_timezone_set('America/Bogota'); // Establecer la zona horaria
+
 include_once "../../procesos/config/conex.php";
 include "funcionesIconos.php";
 
@@ -21,8 +23,24 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
         $huespedes = $_GET['huespedes'];
         $sisClimatizacion = $_GET['sisClimatizacion'];
 
+        $arrayFechas = explode(" - ", $fechaRango);
+
+        $checkin = $arrayFechas[0];
+
+        $checkin = str_replace("/", "-", $checkin); // Reemplazamos "/" por "-"
+
+        $checkout = $arrayFechas[1];
+
+        $checkout = str_replace("/", "-", $checkout); // Reemplazamos "/" por "-"
+
         $url .= "listaHabitacionesFiltro.php?fechasRango=" . $fechaRango . "&huespedes=" . $huespedes . "&selectClima=" . $sisClimatizacion . "";
     } else {
+
+        $fechaRango = $_GET['fechasRango'];
+        $arrayFechas = explode(" - ", $fechaRango);
+        $checkin = $arrayFechas[0];
+        $checkout = $arrayFechas[1];
+        
         $url .= "mostrarListaHabitaciones.php?idTipoHab=" . $tipoHabitacion . "";
     }
 
@@ -32,11 +50,11 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 
     $sqlTipoHab = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHabitacion . " AND estado = 1";
 
-    $rowTipoHab = $dbh -> query($sqlTipoHab) -> fetch();
+    $rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
 
     $sqlimagenesTipoHab = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = " . $tipoHabitacion . "";
 
-    $rowImgTipoHab = $dbh -> query($sqlimagenesTipoHab) -> fetch();
+    $rowImgTipoHab = $dbh->query($sqlimagenesTipoHab)->fetch();
 
     $estadoId = true;
 } else {
@@ -144,8 +162,18 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         <label for="floatingInput">Nombres</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="date" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Fecha de llegada</label>
+                                        <?php
+                                        if ($pagFiltro) :
+                                        ?>
+                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin ?>">
+                                        <?php
+                                        else :
+                                        ?>
+                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin?>">
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <label for="fechaEntrada">Fecha de llegada</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
@@ -157,7 +185,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Email</label>
+                                        <label for="floatingInput">Ciudad de origen</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -166,8 +194,18 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         <label for="floatingInput">Apellidos</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="date" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Fecha de salida</label>
+                                    <?php
+                                        if ($pagFiltro) :
+                                        ?>
+                                            <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>">
+                                        <?php
+                                        else :
+                                        ?>
+                                            <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>">
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <label for="fechaSalida">Fecha de salida</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
@@ -176,6 +214,10 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
                                         <label for="floatingInput">Nacionalidad</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <label for="floatingInput">Email</label>
                                     </div>
                                 </div>
                             </div>
@@ -186,42 +228,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                     </div>
                 </div>
                 <div class="col col-factura">
-                    <div class="facturaReserva">
-                        <div class="totalReserva">
-                            <span class="precioTotal">202.000 COP</span>
-                            <div class="fechaHospedaje">
-                                <p>10/10/2023 - 10/10/2023</p>
-                                <p>1 día</p>
-                            </div>
-                        </div>
-                        <div class="detallesFactura">
-                            <div class="btnAbrirDetalles">
-                                <span class="btnAbrirDet">Detalles de la reserva <i class="bi bi-caret-down-fill flechaDetalles"></i></span>
-                            </div>
-                            <div class="inforDetalles">
-                                <div class="fechasCheck">
-                                    <p>Entrada: 29/10/2023</p>
-                                    <p>Salida: 30/10/2023</p>
-                                </div>
-                                <div class="inforHab">
-                                    <p>
-                                        <span>Habitación 1 | 1 día</span>
-                                        <span>170.000</span>
-                                    </p>
-                                    <p>
-                                        <span>IVA </span>
-                                        <span>32.000</span>
-                                    </p>
-                                </div>
-                                <div class="totalFactura">
-                                    <p>
-                                        <span>TOTAL </span>
-                                        <span>202.000</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   <?php include "reservas/facturaReserva.php"; ?>
                 </div>
             </div>
         </main>
