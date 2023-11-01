@@ -66,12 +66,13 @@ main{
 }
 
 .facturaReserva{
-    position: fixed;
-    width: 350px;
+    position: sticky;
+    top: 100px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #c6ceda;
     background-color: #fff;
+    margin-bottom: 30px;
 }
 
 .totalReserva{
@@ -189,4 +190,21 @@ main{
 
 .formularioReserva .btnReservar input:hover{
     background-color: #866d65;
+}
+
+.msjAlert{
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 684px) {
+
+    .col-informacion{
+        width: 100%;
+    }
+
+    .responsive-col-img{
+        display: none;
+    }
+
 }

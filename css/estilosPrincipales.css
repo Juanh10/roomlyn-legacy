@@ -226,6 +226,7 @@
 
 footer{
     background-color: #75544d;
+    font-family: 'Times New Roman';
 }
 
 .piePagina{
@@ -262,6 +263,7 @@ footer{
     display: flex;
     list-style: none;
     transition: .3s ease;
+    padding: 0;
 }
 
 .redes-sociales ul li{
@@ -515,7 +517,7 @@ footer{
         }
 
         .contPreguntas{
-            display: flex;
+            display: block;
         }
 
         .contenidoPiePagina a{

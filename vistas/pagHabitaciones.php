@@ -242,7 +242,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                         <li><a href="https://www.tiktok.com/@colonialespinal2023" class="tiktok" target="_blank" title="Tik tok"><i class="bi bi-tiktok"></i></a></li>
                     </ul>
                 </div>
-                <a href="comoFunciona.html">Como funciona ROOMLYN</a>
+                <a href="../comoFunciona.html">Como funciona ROOMLYN</a>
                 <a href="#">Politicas de privacidad</a>
             </div>
         </div>

@@ -127,7 +127,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                 <div class="col-8 col-informacion">
                     <div class="card-infor-reserva">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-4 responsive-col-img">
                                 <div class="imagenes">
                                     <img src="../../imgServidor/<?php echo $rowImgTipoHab['ruta'] ?>" alt="">
                                 </div>
@@ -156,7 +156,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                         <h2>Datos</h2>
                         <form action="" method="post">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6 responsive-col-form">
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
                                         <label for="floatingInput">Nombres</label>
@@ -238,6 +238,30 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 
     ?>
 
+<footer>
+        <div class="piePagina">
+            <div class="copyPiePagina">
+                <div class="logoPiePagina">
+                    <img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web">
+                </div>
+                <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+            </div>
+            <div class="contenidoPiePagina">
+                <div class="redes-sociales">
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61550262616792" class="face" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/hotelcolonialci2/" class="insta" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="what" target="_blank" title="Whatsapp"><i class="bi bi-whatsapp"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="tiktok" target="_blank" title="Tik tok"><i class="bi bi-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                <div class="contPreguntas">
+                    <a href="../../comoFunciona.html">Como funciona ROOMLYN</a>
+                    <a href="#">Politicas de privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 

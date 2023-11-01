@@ -2,6 +2,13 @@ $(document).ready(function () {
     $('#onload').fadeOut(); //TODO Desaparece el elemento
     $('.cabeceraHab').show(); //TODO Muestra el elemento
 
+    //* EVENTO CLICK BUSCADOR PARA AGREGAR Y QUITAR CLASE AL DIV BUSCADOR Y EL DIV DEL LOGO
+
+    $('.btnBuscar').click(function () {
+        $('.buscador').toggleClass('activoBuscador');
+        $('.logoPlahotHab').toggleClass('estadoLogo');
+    });
+
     $('.btnAbrirDetalles').click(function () {
         let detalles = $(this).next('.inforDetalles');
         if (detalles.is(':visible')) {
@@ -65,12 +72,12 @@ $(document).ready(function () {
     });
 
     // Función para realizar la petición AJAX
-  function realizarPeticion(rangoFechas) {
-    fetch(`reservas/facturaReserva.php?fechasRango=${rangoFechas}`)
-    .then(res => res.text())
-    .then(datos => factura.html(datos))
-    .catch();
-  }
+    function realizarPeticion(rangoFechas) {
+        fetch(`reservas/facturaReserva.php?fechasRango=${rangoFechas}`)
+            .then(res => res.text())
+            .then(datos => factura.html(datos))
+            .catch();
+    }
 
 
 

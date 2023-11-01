@@ -14,8 +14,8 @@ $diferenciaDias = round($diferenciaDias);
 
 $total = 0;
 
-if($rowHabitacion['tipoServicio'] == 0){
-    
+if ($rowHabitacion['tipoServicio'] == 0) {
+
     $precioTipo = $rowTipoHab['precioVentilador'];
 
     $subtotal1 = $precioTipo * $diferenciaDias;
@@ -23,8 +23,7 @@ if($rowHabitacion['tipoServicio'] == 0){
     $iva = $subtotal1 * 0.19;
 
     $totalFactura = $subtotal1 + $iva;
-
-}else{ 
+} else {
     $total = 4;
 }
 
@@ -62,6 +61,9 @@ if($rowHabitacion['tipoServicio'] == 0){
                     <span>TOTAL </span>
                     <span><?php echo number_format($totalFactura, 0, ',', '.')  ?> COP</span>
                 </p>
+                <div class="alert alert-success msjAlert" role="alert">
+                Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al 318-654-7890 para más detalles.
+                </div>
             </div>
         </div>
     </div>
