@@ -1,5 +1,29 @@
 <?php
 
+include_once "../../../procesos/config/conex.php";
+
+$fechasRango = $_GET['fechasRango'];
+$tipoHab = $_GET['tipoHab'];
+$habitacion = $_GET['habitacion'];
+
+$sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
+
+$rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
+
+$sqlTipoHab = "SELECT id_hab_tipo, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHab . " AND estado = 1";
+
+$rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
+
+$arrayFechas = explode(" - ", $fechasRango);
+
+$checkin = $arrayFechas[0];
+
+$checkin = str_replace("/", "-", $checkin); // Reemplazamos "/" por "-"
+
+$checkout = $arrayFechas[1];
+
+$checkout = str_replace("/", "-", $checkout); // Reemplazamos "/" por "-"
+
 // CONVERTIR FECHAS EN DIAS
 $timestampInicio = strtotime($checkin);
 $timestampFin = strtotime($checkout);
@@ -39,7 +63,7 @@ if ($rowHabitacion['tipoServicio'] == 0) {
     </div>
     <div class="detallesFactura">
         <div class="btnAbrirDetalles">
-            <span class="btnAbrirDet">Detalles de la reserva <i class="bi bi-caret-down-fill flechaDetalles"></i></span>
+            <span class="btnAbrirDet">Detalles de la reserva <i class="bi bi-caret-up-fill flechaDetalles"></i></span>
         </div>
         <div class="inforDetalles">
             <div class="fechasCheck">
@@ -62,9 +86,23 @@ if ($rowHabitacion['tipoServicio'] == 0) {
                     <span><?php echo number_format($totalFactura, 0, ',', '.')  ?> COP</span>
                 </p>
                 <div class="alert alert-success msjAlert" role="alert">
-                Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al 318-654-7890 para más detalles.
+                    Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href="#">318-654-7890</a> para más detalles.
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+        $('.btnAbrirDetalles').click(function () {
+        let detalles = $(this).next('.inforDetalles');
+        if (detalles.is(':visible')) {
+            $('.flechaDetalles').addClass('active');
+            detalles.hide();
+        } else {
+            $('.flechaDetalles').removeClass('active');
+
+            detalles.show();
+        }
+    })
+</script>

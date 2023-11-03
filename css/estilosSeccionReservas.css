@@ -112,10 +112,6 @@ main{
     transform: rotate(180deg);
 }
 
-.inforDetalles{
-    display: none;
-}
-
 .inforDetalles .fechasCheck{
     margin-top: 10px;
 }

@@ -40,7 +40,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
         $arrayFechas = explode(" - ", $fechaRango);
         $checkin = $arrayFechas[0];
         $checkout = $arrayFechas[1];
-        
+
         $url .= "mostrarListaHabitaciones.php?idTipoHab=" . $tipoHabitacion . "";
     }
 
@@ -157,6 +157,10 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                         <form action="" method="post">
                             <div class="row">
                                 <div class="col-6 responsive-col-form">
+
+                                    <input type="hidden" id="tipoHab" name="tipoHab" value="<?php echo $tipoHabitacion ?>">
+                                    <input type="hidden" id="habitacion" name="habitacion" value="<?php echo $habitacion ?>">
+
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
                                         <label for="floatingInput">Nombres</label>
@@ -169,7 +173,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         <?php
                                         else :
                                         ?>
-                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin?>">
+                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin ?>">
                                         <?php
                                         endif;
                                         ?>
@@ -180,7 +184,11 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         <label for="floatingInput">Documento</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected disabled>Escoja una opción</option>
+                                            <option value="1">Masculino</option>
+                                            <option value="2">Femenino</option>
+                                        </select>
                                         <label for="floatingInput">Sexo</label>
                                     </div>
                                     <div class="form-floating mb-3">
@@ -194,7 +202,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         <label for="floatingInput">Apellidos</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                    <?php
+                                        <?php
                                         if ($pagFiltro) :
                                         ?>
                                             <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>">
@@ -228,7 +236,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                     </div>
                 </div>
                 <div class="col col-factura">
-                   <?php include "reservas/facturaReserva.php"; ?>
+
                 </div>
             </div>
         </main>
@@ -238,7 +246,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 
     ?>
 
-<footer>
+    <footer>
         <div class="piePagina">
             <div class="copyPiePagina">
                 <div class="logoPiePagina">

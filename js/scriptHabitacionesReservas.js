@@ -9,16 +9,13 @@ $(document).ready(function () {
         $('.logoPlahotHab').toggleClass('estadoLogo');
     });
 
-    $('.btnAbrirDetalles').click(function () {
-        let detalles = $(this).next('.inforDetalles');
-        if (detalles.is(':visible')) {
-            $('.flechaDetalles').removeClass('active');
-            detalles.hide();
-        } else {
-            $('.flechaDetalles').addClass('active');
-            detalles.show();
-        }
-    })
+
+    // Establecer desde la fecha actual el calendario de la fecha de entrada y salida
+
+    let fechaActual = new Date().toISOString().split('T')[0];
+
+    $('#fechaEntrada').attr('min', fechaActual);
+    $('#fechaSalida').attr('min', fechaActual);
 
 });
 
@@ -52,28 +49,47 @@ $(document).ready(function () {
         }
     });
 
-    // FECHAS CHECKIN Y CHECKOUT
+    // FECHAS CHECKIN Y CHECKOUT 
 
-    let factura = $('.col-factura');
-
-    // Escuchar el evento change en ambos campos
-    $("#fechaSalida, #fechaEntrada").on("change", function () {
+    function recibirFechasRango() {
         let fechaSalida = $("#fechaSalida").val(); // obtenemos la fecha
         let fechaEntrada = $("#fechaEntrada").val(); // obtenemos la fecha
+        let tipoHab = $("#tipoHab").val();
+        let habitacion = $("#habitacion").val();
 
         let rangoFechas = fechaEntrada + " - " + fechaSalida;
 
         // Verificar si ambos campos tienen valores
         if (fechaSalida && fechaEntrada) {
             // Realizar la petición AJAX
-            realizarPeticion(rangoFechas);
+            realizarPeticion(rangoFechas, tipoHab, habitacion);
+        }
+    }
+
+    recibirFechasRango();
+
+    // Escuchar el evento change en ambos campos
+    $("#fechaSalida, #fechaEntrada").on("change", function () {
+        let fechaSalida = $("#fechaSalida").val(); // obtenemos la fecha
+        let fechaEntrada = $("#fechaEntrada").val(); // obtenemos la fecha
+        let tipoHab = $("#tipoHab").val();
+        let habitacion = $("#habitacion").val();
+
+        let rangoFechas = fechaEntrada + " - " + fechaSalida;
+
+        // Verificar si ambos campos tienen valores
+        if (fechaSalida && fechaEntrada) {
+            // Realizar la petición AJAX
+            realizarPeticion(rangoFechas, tipoHab, habitacion);
         }
 
     });
 
+    let factura = $('.col-factura');
+
     // Función para realizar la petición AJAX
-    function realizarPeticion(rangoFechas) {
-        fetch(`reservas/facturaReserva.php?fechasRango=${rangoFechas}`)
+    function realizarPeticion(rangoFechas, tipoHab, habitacion) {
+        fetch(`reservas/facturaReserva.php?fechasRango=${rangoFechas}&tipoHab=${tipoHab}&habitacion=${habitacion}`)
             .then(res => res.text())
             .then(datos => factura.html(datos))
             .catch();

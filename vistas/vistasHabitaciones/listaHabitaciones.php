@@ -293,7 +293,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>" class="btnSelecHab">Seleccionar</a>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>&fechasRango=<?php echo $rangoFecha?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;
