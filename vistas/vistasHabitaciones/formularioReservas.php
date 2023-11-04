@@ -10,12 +10,13 @@ include "funcionesIconos.php";
 $estadoId = false;
 $pagFiltro = false;
 
+// Obtener la URL de la pagina actual
+$urlActual = $_SERVER['HTTP_REFERER'];
+
 if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion para saber si los campos no estan vacios
 
     $habitacion = $_GET['idHabitacion']; // capturar por medio de GET
     $tipoHabitacion = $_GET['idTipoHab'];
-
-    $url = "";
 
     if (!empty($_GET['filtro'])) {
         $pagFiltro = true;
@@ -26,22 +27,16 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
         $arrayFechas = explode(" - ", $fechaRango);
 
         $checkin = $arrayFechas[0];
-
         $checkin = str_replace("/", "-", $checkin); // Reemplazamos "/" por "-"
 
         $checkout = $arrayFechas[1];
-
         $checkout = str_replace("/", "-", $checkout); // Reemplazamos "/" por "-"
 
-        $url .= "listaHabitacionesFiltro.php?fechasRango=" . $fechaRango . "&huespedes=" . $huespedes . "&selectClima=" . $sisClimatizacion . "";
     } else {
-
         $fechaRango = $_GET['fechasRango'];
         $arrayFechas = explode(" - ", $fechaRango);
         $checkin = $arrayFechas[0];
         $checkout = $arrayFechas[1];
-
-        $url .= "mostrarListaHabitaciones.php?idTipoHab=" . $tipoHabitacion . "";
     }
 
     $sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
@@ -104,18 +99,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                 <nav class="navegacionHab">
                     <ul>
                         <li id="vinculoVolver">
-                            <?php
-
-                            if ($pagFiltro) :
-                            ?>
-                                <a href="<?php echo $url ?>">Volver</a>
-                            <?php
-                            else :
-                            ?>
-                                <a href="<?php echo $url ?>">Volver</a>
-                            <?php
-                            endif;
-                            ?>
+                            <a href="<?php echo $urlActual ?>">Volver</a>
                         </li>
                     </ul>
                 </nav>
@@ -154,7 +138,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                     </div>
                     <div class="formularioReserva">
                         <h2>Datos</h2>
-                        <form action="" method="post">
+                        <form action="../../procesos/registroReservas/conRegistroReservas.php" method="post" id="form">
                             <div class="row">
                                 <div class="col-6 responsive-col-form">
 
@@ -162,73 +146,120 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                     <input type="hidden" id="habitacion" name="habitacion" value="<?php echo $habitacion ?>">
 
                                     <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Nombres</label>
+                                        <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres" required>
+                                        <p></p>
+                                        <label for="nombres">Nombres</label>
                                     </div>
+
                                     <div class="form-floating mb-3">
                                         <?php
                                         if ($pagFiltro) :
                                         ?>
-                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin ?>">
+                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin ?>" required>
                                         <?php
                                         else :
                                         ?>
-                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin ?>">
+                                            <input type="date" class="form-control" id="fechaEntrada" placeholder="Nombres" name="checkIn" value="<?php echo $checkin ?>" required>
                                         <?php
                                         endif;
                                         ?>
+                                        <p></p>
                                         <label for="fechaEntrada">Fecha de llegada</label>
                                     </div>
+
                                     <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Documento</label>
+                                        <input type="text" name="documento" class="form-control" id="documento" placeholder="Documento" required>
+                                        <p></p>
+                                        <label for="documento">Documento</label>
                                     </div>
+
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected disabled>Escoja una opción</option>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+                                        <p></p>
+                                        <label for="email">Email</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" name="nacionalidad" id="nacionalidad" required>
+                                            <option selected disabled value="">Escoja una opción</option>
+                                            <?php
+                                            $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidad WHERE 1";
+
+                                            foreach ($dbh->query($sqlNacionalidad) as $rowNacionalidad) :
+                                                if ($rowNacionalidad['id_nacionalidad'] != 1) :
+                                            ?>
+                                                    <option value="<?php echo $rowNacionalidad['id_nacionalidad'] ?>"><?php echo $rowNacionalidad['nacionalidad'] ?></option>
+                                            <?php
+                                                endif;
+                                            endforeach;
+
+                                            ?>
+                                        </select>
+                                        <label for="nacionalidad">Nacionalidad</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3" id="selectCiudad">
+                                        <select class="form-select" name="ciudad" id="ciudad" required>
+
+                                        </select>
+                                        <label for="ciudad">Ciudad de origen</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Apellidos" required>
+                                        <p></p>
+                                        <label for="apellidos">Apellidos</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <?php
+                                        if ($pagFiltro) :
+                                        ?>
+                                            <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>" required>
+                                        <?php
+                                        else :
+                                        ?>
+                                            <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>" required>
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <p></p>
+                                        <label for="fechaSalida">Fecha de salida</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="telefono" class="form-control" id="telefono" placeholder="Teléfono" required>
+                                        <p></p>
+                                        <label for="telefono">Teléfono</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" name="sexo" id="sexo" required>
+                                            <option selected disabled value="">Escoja una opción</option>
                                             <option value="1">Masculino</option>
                                             <option value="2">Femenino</option>
                                         </select>
-                                        <label for="floatingInput">Sexo</label>
+                                        <p></p>
+                                        <label for="sexo">Sexo</label>
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Ciudad de origen</label>
+
+                                    <div class="form-floating mb-3" id="selectDepartamento">
+                                        <select class="form-select" name="departamento" id="departamento" required>
+
+                                        </select>
+                                        <label for="departamento">Departamento</label>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Apellidos</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <?php
-                                        if ($pagFiltro) :
-                                        ?>
-                                            <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>">
-                                        <?php
-                                        else :
-                                        ?>
-                                            <input type="date" class="form-control" id="fechaSalida" placeholder="Nombres" name="checkOut" value="<?php echo $checkout ?>">
-                                        <?php
-                                        endif;
-                                        ?>
-                                        <label for="fechaSalida">Fecha de salida</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Teléfono</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Nacionalidad</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" id="floatingInput" placeholder="Nombres">
-                                        <label for="floatingInput">Email</label>
-                                    </div>
+
                                 </div>
                             </div>
+
+                            <div class="formularioMensaje">
+                                <p><i class="bi bi-exclamation-circle-fill"></i>¡Por favor rellene los campos correctamente!</p>
+                            </div>
+
                             <div class="btnReservar">
                                 <input type="submit" name="btnReservar" value="Reservar">
                             </div>
@@ -270,6 +301,29 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
             </div>
         </div>
     </footer>
+
+    <!-- ALERTAS -->
+
+    <?php
+
+    if (isset($_SESSION['msjReservasExito'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '¡RESERVA REGISTRADA!',
+                html: "<p>Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href='#'>3186547890</a> para más detalles.</p>",
+                showConfirmButton: true
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjReservasExito']);
+    endif;
+
+    ?>
+
+    <script src="../../js/validarRegistroReserva.js"></script>
 
 </body>
 

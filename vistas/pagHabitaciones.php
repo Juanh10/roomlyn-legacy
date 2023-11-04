@@ -254,6 +254,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <script src="../librerias/datarangepicker/js/moment.min.js"></script>
     <script src="../librerias/datarangepicker/js/daterangepicker.js"></script>
     <script src="../js/scriptHabitaciones.js"></script>
+    
 
 
 </body>

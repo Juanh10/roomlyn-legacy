@@ -193,6 +193,57 @@ main{
     margin-bottom: 0;
 }
 
+.validarInput{
+    border: 2px solid red;
+    box-shadow: 0 0 3px red;
+}
+
+.inputError{
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.formularioMensaje{
+    background-color: #f66060;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 900;
+    display: none;
+    margin-bottom: 10px;
+}
+
+.formularioMensaje.activoMensaje{
+    display: block;
+}
+
+.select2-container{
+    height: 55px;
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 100%;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 68px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 54px;
+    position: absolute;
+    top: 8px;
+    right: 1px;
+    width: 20px;
+}
+
+
 @media only screen and (max-width: 684px) {
 
     .col-informacion{

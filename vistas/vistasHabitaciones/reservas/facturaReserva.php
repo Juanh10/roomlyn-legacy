@@ -48,7 +48,13 @@ if ($rowHabitacion['tipoServicio'] == 0) {
 
     $totalFactura = $subtotal1 + $iva;
 } else {
-    $total = 4;
+    $precioTipo = $rowTipoHab['precioAire'];
+
+    $subtotal1 = $precioTipo * $diferenciaDias;
+
+    $iva = $subtotal1 * 0.19;
+
+    $totalFactura = $subtotal1 + $iva;
 }
 
 ?>
@@ -86,7 +92,7 @@ if ($rowHabitacion['tipoServicio'] == 0) {
                     <span><?php echo number_format($totalFactura, 0, ',', '.')  ?> COP</span>
                 </p>
                 <div class="alert alert-success msjAlert" role="alert">
-                    Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href="#">318-654-7890</a> para más detalles.
+                    Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href="#">3186547890</a> para más detalles.
                 </div>
             </div>
         </div>

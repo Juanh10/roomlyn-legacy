@@ -12,10 +12,19 @@ $(document).ready(function () {
 
     // Establecer desde la fecha actual el calendario de la fecha de entrada y salida
 
-    let fechaActual = new Date().toISOString().split('T')[0];
+    // Obtener la fecha actual en UTC
+    let fechaActualUTC = new Date();
 
-    $('#fechaEntrada').attr('min', fechaActual);
-    $('#fechaSalida').attr('min', fechaActual);
+    // Ajustar el desplazamiento horario a UTC-5 (Colombia)
+    fechaActualUTC.setUTCHours(fechaActualUTC.getUTCHours() - 5);
+
+    // Formatear la fecha en el formato deseado (YYYY-MM-DD)
+    let fechaActualColombia = fechaActualUTC.toISOString().split('T')[0];
+
+    // Establecer la fecha en los elementos HTML
+    $('#fechaEntrada').attr('min', fechaActualColombia);
+    $('#fechaSalida').attr('min', fechaActualColombia);
+
 
 });
 
@@ -94,6 +103,62 @@ $(document).ready(function () {
             .then(datos => factura.html(datos))
             .catch();
     }
+
+
+    // INICIALIZAR LA LIBRERIA DE SELECT2
+
+    $('#nacionalidad').select2();
+    $('#departamento').select2();
+    $('#ciudad').select2();
+
+    // FUNCION PARA RECARGAR LA LISTA DE DEPARTAMENTOS Y CIUDADES POR MEDIO DE AJAX O FETCH
+    function listaOrigenDepartamento() {
+        let valorNacionalidad = $('#nacionalidad').val();
+        let divDepartamento = $('#departamento');
+        let divCiudad = $('#ciudad');
+    
+        // Realizar una consulta fetch para mostrar los departamentos
+        fetch(`reservas/selectOrigen.php?valorNa=${valorNacionalidad}`)
+            .then(res => res.text())
+            .then(datos => {
+                divDepartamento.html(datos);
+    
+                // Si el valor de nacionalidad no es igual a 43, que cargue la opcion "No requerido"
+                if (valorNacionalidad != 43) {
+                    fetch(`reservas/selectOrigenCiudad.php?valorDe=0`)
+                        .then(resCiudad => resCiudad.text())
+                        .then(datosCiudad => divCiudad.html(datosCiudad))
+                        .catch();
+                }
+            })
+            .catch();
+    }
+    
+    listaOrigenDepartamento(); // Ejecutar la funcion
+    
+    $('#nacionalidad').change(function() { // evento change para saber cuando hay un cambio en el select
+        listaOrigenDepartamento();
+    });
+    
+    // Funcion para mostrar la lista de las ciudades segun el departamento esto lo hacemos por medio de FETCH
+
+    function listaOrigenCiudad() { 
+        let valorDepartamento = $('#departamento').val();
+        let divCiudad = $('#ciudad');
+    
+        // Realiza una única llamada a la función fetch para cargar las ciudades
+        fetch(`reservas/selectOrigenCiudad.php?valorDe=${valorDepartamento}`) // realizar consulta fetch
+            .then(res => res.text())
+            .then(datos => divCiudad.html(datos))
+            .catch();
+    }
+    
+    listaOrigenCiudad(); // ejecutar la funcion
+    
+    $('#departamento').change(function() { // evento change para saber cuando hay un cambio en el select
+        listaOrigenCiudad();
+    });
+    
 
 
 
