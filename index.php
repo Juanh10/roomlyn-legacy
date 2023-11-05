@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,8 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Bienvenido al hotel colonial city, Contamos con habitaciones cuidadosamente adaptadas para nuestros huéspedes, una ubicación estratégica y un ambiente tranquilo que garantizan una estadía agradable y relajante.">
+    <meta name="description" content="Bienvenido al hotel colonial city, Contamos con habitaciones cuidadosamente adaptadas para nuestros huéspedes, una ubicación estratégica y un ambiente tranquilo que garantizan una estadía agradable y relajante.">
     <link rel="icon" href="iconos/logo_icono.png">
     <link rel="stylesheet" href="librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="librerias/lightbox2/dist/css/lightbox.css">
@@ -36,43 +43,98 @@
         </div>
     </div>
 
+
     <!--* MENU DE NAVEGACION -->
-    <header class="cabecera">
-        <div class="contenedor navContenedor">
-            <div class="logoPlahot">
-                <a href="index.html"><img src="iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
-            </div>
-            <div class="menuRespon">
-                <div class="icono">
-                    <div></div>
-                    <div></div>
-                    <div></div>
+    <?php
+
+    if (!empty($_SESSION['id_cliente_registrado'])) :
+        $nombres = explode(" ", $_SESSION['nombres']);
+        $apellidos = explode(" ", $_SESSION['apellidos']);
+        
+        $primerNombre = $nombres[0];
+        $primerApellido = $apellidos[0];
+    ?>
+        <header class="cabecera">
+            <div class="contenedor navContenedor">
+                <div class="logoPlahot">
+                    <a href="index.php"><img src="iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
                 </div>
+                <div class="menuRespon">
+                    <div class="icono">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <nav class="navegacion">
+                    <ul>
+                        <li>
+                            <a class="enlaceMenu activo" href="#inicioPagina">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="#idServicios">Servicios</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="#idFotos">Fotos</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="#ubicacionHotel2">Ubicación</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="vistas/pagHabitaciones.php">Reservar</a>
+                        </li>
+                        <li class="inicioSesionCliente" title="Conectado">
+                            <a href="vistas/vistasRegistroClientes/configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre." ".$primerApellido ?></a>
+                        </li>
+                        <li class="cerrarSesionCliente" title="Cerrar sesión">
+                            <a href="procesos/login/conCerrarSesion2.php"><i class="bi bi-box-arrow-left"></i></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <nav class="navegacion">
-                <ul>
-                    <li>
-                        <a class="enlaceMenu activo" href="#inicioPagina">Inicio</a>
-                    </li>
-                    <li>
-                        <a class="enlaceMenu" href="#idServicios">Servicios</a>
-                    </li>
-                    <li>
-                        <a class="enlaceMenu" href="#idFotos">Fotos</a>
-                    </li>
-                    <li>
-                        <a class="enlaceMenu" href="#ubicacionHotel2">Ubicación</a>
-                    </li>
-                    <li>
-                        <a class="enlaceMenu" href="vistas/pagHabitaciones.php">Reservar</a>
-                    </li>
-                    <li class="ingresarAdmin">
-                        <a href="vistas/login.php" class="ingresoLogin" title="Ingresar"><i class="bi bi-person-circle"></i></a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+        </header>
+    <?php
+    else :
+    ?>
+        <header class="cabecera">
+            <div class="contenedor navContenedor">
+                <div class="logoPlahot">
+                    <a href="index.php"><img src="iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                </div>
+                <div class="menuRespon">
+                    <div class="icono">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <nav class="navegacion">
+                    <ul>
+                        <li>
+                            <a class="enlaceMenu activo" href="#inicioPagina">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="#idServicios">Servicios</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="#idFotos">Fotos</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="#ubicacionHotel2">Ubicación</a>
+                        </li>
+                        <li>
+                            <a class="enlaceMenu" href="vistas/pagHabitaciones.php">Reservar</a>
+                        </li>
+                        <li class="ingresarAdmin">
+                            <a href="vistas/login.php" class="ingresoLogin" title="Ingresar"><i class="bi bi-person-circle"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    <?php
+    endif;
+    ?>
 
     <!--* CARRUSEL DE IMAGENES -->
 
@@ -122,8 +184,7 @@
                         <p>Parqueadero privado</p>
                     </div>
 
-                    <div class="cafeteria cardServicios"
-                        title="La cafeteria ofrece agua, aromática y tinto sin costo adicional">
+                    <div class="cafeteria cardServicios" title="La cafeteria ofrece agua, aromática y tinto sin costo adicional">
                         <span class="bi bi-shop-window"></span>
                         <p>Cafetería</p>
                     </div>
@@ -217,10 +278,7 @@
                         <div class="cargandoMapa" id="cargandoMapa2">
                             <p>Cargando mapa...</p>
                         </div>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15917.355151849!2d-74.9043468610737!3d4.153623487724419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3ed3224428a7a3%3A0xa14c8cf77f4ed81e!2sHotel%20Colonial!5e0!3m2!1ses-419!2sco!4v1684197653463!5m2!1ses-419!2sco"
-                            width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" title="Mapa del hotel colonial city"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15917.355151849!2d-74.9043468610737!3d4.153623487724419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3ed3224428a7a3%3A0xa14c8cf77f4ed81e!2sHotel%20Colonial!5e0!3m2!1ses-419!2sco!4v1684197653463!5m2!1ses-419!2sco" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa del hotel colonial city"></iframe>
                     </div>
                 </div>
             </div>

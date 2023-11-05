@@ -52,7 +52,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <header class="cabeceraHab">
         <div class="contenedorHab navContenedorHab">
             <div class="logoPlahotHab">
-                <a href="../index.html"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                <a href="../index.php"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
             </div>
             <nav class="navegacionHab">
                 <ul>
@@ -223,6 +223,26 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
 
     ?>
 
+
+    <?php
+
+    if (isset($_SESSION['msjReservasExito'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '¡RESERVA REGISTRADA!',
+                html: "<p>Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href='#'>3186547890</a> para más detalles.</p>",
+                showConfirmButton: true
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjReservasExito']);
+    endif;
+
+    ?>
+
     <!--* PIE DE PAGINA -->
 
     <footer>
@@ -254,7 +274,7 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <script src="../librerias/datarangepicker/js/moment.min.js"></script>
     <script src="../librerias/datarangepicker/js/daterangepicker.js"></script>
     <script src="../js/scriptHabitaciones.js"></script>
-    
+
 
 
 </body>

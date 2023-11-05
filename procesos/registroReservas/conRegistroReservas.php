@@ -26,103 +26,119 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
     $fecha = date('Y-m-d'); // Obtener la fecha actual
     $hora = date('H:i:s'); // obtener la hora actual
 
+    if ($checkIn < $checkOut) { // VALIDAR LAS FECHAS YA QUE TIENE QUE SER MENOR LE FECHA DE ENTRADA A LA DE SALIDA
 
-    // CONSULTA PARA OBTENER EL TOTAL DE LA RESERVA
+        // CONSULTA PARA OBTENER EL TOTAL DE LA RESERVA
 
-    $sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
+        $sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
 
-    $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
+        $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
 
+        $sqlTipoHab = "SELECT id_hab_tipo, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHab . " AND estado = 1";
 
+        $rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
 
-    $sqlTipoHab = "SELECT id_hab_tipo, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHab . " AND estado = 1";
+        // CONVERTIR FECHAS EN DIAS
+        $timestampInicio = strtotime($checkIn);
+        $timestampFin = strtotime($checkOut);
 
-    $rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
+        // Calcular la diferencia en segundos
+        $diferenciaSegundos = $timestampFin - $timestampInicio;
 
-    // CONVERTIR FECHAS EN DIAS
-    $timestampInicio = strtotime($checkIn);
-    $timestampFin = strtotime($checkOut);
+        // Convertir la diferencia en segundos a días
+        $diferenciaDias = $diferenciaSegundos / 86400;
 
-    // Calcular la diferencia en segundos
-    $diferenciaSegundos = $timestampFin - $timestampInicio;
+        $diferenciaDias = round($diferenciaDias);
 
-    // Convertir la diferencia en segundos a días
-    $diferenciaDias = $diferenciaSegundos / 86400;
+        $total = 0;
 
-    $diferenciaDias = round($diferenciaDias);
+        if ($rowHabitacion['tipoServicio'] == 0) {
 
-    $total = 0;
+            $precioTipo = $rowTipoHab['precioVentilador'];
 
-    if ($rowHabitacion['tipoServicio'] == 0) {
+            $subtotal1 = $precioTipo * $diferenciaDias;
 
-        $precioTipo = $rowTipoHab['precioVentilador'];
+            $iva = $subtotal1 * 0.19;
 
-        $subtotal1 = $precioTipo * $diferenciaDias;
+            $totalFactura = $subtotal1 + $iva;
+        } else {
+            $precioTipo = $rowTipoHab['precioAire'];
 
-        $iva = $subtotal1 * 0.19;
+            $subtotal1 = $precioTipo * $diferenciaDias;
 
-        $totalFactura = $subtotal1 + $iva;
-    } else {
-        $precioTipo = $rowTipoHab['precioAire'];
+            $iva = $subtotal1 * 0.19;
 
-        $subtotal1 = $precioTipo * $diferenciaDias;
+            $totalFactura = $subtotal1 + $iva;
+        }
 
-        $iva = $subtotal1 * 0.19;
-
-        $totalFactura = $subtotal1 + $iva;
-    }
-
-    // CONSULTA PARA VERIFICAR SI EL CLIENTE YA ESTA REGISTRADO EN LA BD
-
+        // CONSULTA PARA VERIFICAR SI EL CLIENTE YA ESTA REGISTRADO EN LA BD
 
 
-    // CONSULTAS PARA INSERTAR LOS REGISTROS
 
-    $sqlInforCliente = $dbh->prepare("INSERT INTO info_clientes(id_nacionalidad, id_departamento, id_municipio, documento, nombres, apellidos, celular, sexo, email, estadoRegistro, estado, fecha, hora, fecha_sys) VALUES (:id_nacionalidad,:id_departamento,:id_municipio,:documento,:nombres,:apellidos,:celular,:sexo,:email,:estadoRegistro,:estado,:fecha,:hora,now())"); // preparar la consulta
+        // CONSULTAS PARA INSERTAR LOS REGISTROS
 
-    // ENLAZAR LOS MARCADORES CON LAS VARIABLES
+        $sqlInforCliente = $dbh->prepare("INSERT INTO info_clientes(id_nacionalidad, id_departamento, id_municipio, documento, nombres, apellidos, celular, sexo, email, estadoRegistro, estado, fecha, hora, fecha_sys) VALUES (:id_nacionalidad,:id_departamento,:id_municipio,:documento,:nombres,:apellidos,:celular,:sexo,:email,:estadoRegistro,:estado,:fecha,:hora,now())"); // preparar la consulta
 
-    $sqlInforCliente->bindParam(':id_nacionalidad', $nacionalidad);
-    $sqlInforCliente->bindParam(':id_departamento', $departamento);
-    $sqlInforCliente->bindParam(':id_municipio', $ciudad);
-    $sqlInforCliente->bindParam(':documento', $documento);
-    $sqlInforCliente->bindParam(':nombres', $nombres);
-    $sqlInforCliente->bindParam(':apellidos', $apellidos);
-    $sqlInforCliente->bindParam(':celular', $telefono);
-    $sqlInforCliente->bindParam(':sexo', $sexo);
-    $sqlInforCliente->bindParam(':email', $email);
-    $sqlInforCliente->bindParam(':estadoRegistro', $estadoRegistro);
-    $sqlInforCliente->bindParam(':estado', $estado);
-    $sqlInforCliente->bindParam(':fecha', $fecha);
-    $sqlInforCliente->bindParam(':hora', $hora);
+        // ENLAZAR LOS MARCADORES CON LAS VARIABLES
 
-    $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitaciones, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
+        $sqlInforCliente->bindParam(':id_nacionalidad', $nacionalidad);
+        $sqlInforCliente->bindParam(':id_departamento', $departamento);
+        $sqlInforCliente->bindParam(':id_municipio', $ciudad);
+        $sqlInforCliente->bindParam(':documento', $documento);
+        $sqlInforCliente->bindParam(':nombres', $nombres);
+        $sqlInforCliente->bindParam(':apellidos', $apellidos);
+        $sqlInforCliente->bindParam(':celular', $telefono);
+        $sqlInforCliente->bindParam(':sexo', $sexo);
+        $sqlInforCliente->bindParam(':email', $email);
+        $sqlInforCliente->bindParam(':estadoRegistro', $estadoRegistro);
+        $sqlInforCliente->bindParam(':estado', $estado);
+        $sqlInforCliente->bindParam(':fecha', $fecha);
+        $sqlInforCliente->bindParam(':hora', $hora);
 
-    if ($sqlInforCliente->execute()) {
-        $ultIDCliente = $dbh->lastInsertId('info_clientes'); // obtener el ultimo ID de la tabla infoClientes
+        $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitaciones, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
 
-        // ENLAZAR LOS MARCADORES DE LA CONSULTA DE LA INFORMACION DE LA RESERVA CON LAS VARIABLES
+        $sqlActHabitacion = $dbh->prepare("UPDATE habitaciones SET id_hab_estado = 5 WHERE nHabitacion = :habitacion");
 
-        $sqlInforReserva->bindParam(':id_cliente', $ultIDCliente);
-        $sqlInforReserva->bindParam(':id_habitaciones', $habitacion);
-        $sqlInforReserva->bindParam(':fecha_ingreso', $checkIn);
-        $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
-        $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
-        $sqlInforReserva->bindParam(':total_reserva', $totalFactura);
-        $sqlInforReserva->bindParam(':estado', $estado);
+        if ($sqlInforCliente->execute()) {
+            $ultIDCliente = $dbh->lastInsertId('info_clientes'); // obtener el ultimo ID de la tabla infoClientes
 
-        if ($sqlInforReserva->execute()) {
-            $_SESSION['msjReservasExito'] = "";
+            // ENLAZAR LOS MARCADORES DE LA CONSULTA DE LA INFORMACION DE LA RESERVA CON LAS VARIABLES
 
-            header("Location: $urlActual");
-            exit;
+            $sqlInforReserva->bindParam(':id_cliente', $ultIDCliente);
+            $sqlInforReserva->bindParam(':id_habitaciones', $habitacion);
+            $sqlInforReserva->bindParam(':id_estado_reserva', $estado);
+            $sqlInforReserva->bindParam(':fecha_ingreso', $checkIn);
+            $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
+            $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
+            $sqlInforReserva->bindParam(':total_reserva', $totalFactura);
+            $sqlInforReserva->bindParam(':estado', $estado);
+
+            if ($sqlInforReserva->execute()) {
+
+
+                $sqlActHabitacion->bindParam(':habitacion', $habitacion);
+
+                if ($sqlActHabitacion->execute()) {
+                    $_SESSION['msjReservasExito'] = "";
+                    header("Location: ../../vistas/pagHabitaciones.php");
+                    exit;
+                } else {
+                    $_SESSION['msjReservas'] = "Ocurrió un error";
+                    header("Location: $urlActual");
+                    exit;
+                }
+            } else {
+                $_SESSION['msjReservas'] = "Ocurrió un error";
+                header("Location: $urlActual");
+                exit;
+            }
         } else {
             $_SESSION['msjReservas'] = "Ocurrió un error";
             header("Location: $urlActual");
             exit;
         }
     } else {
-        $_SESSION['msjReservas'] = "Ocurrió un error";
+        $_SESSION['msjReservas'] = "La fecha de llegada debe ser anterior a la fecha de salida. Por favor, corrige las fechas.";
         header("Location: $urlActual");
         exit;
     }

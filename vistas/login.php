@@ -35,7 +35,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
 <body>
 
     <div class="contenedorPrin">
-        <a href="../index.html"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
+        <a href="../index.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
         <div class="contenedorLogin">
             <div class="ConImgLogin">
                 <div class="imgLogin">
@@ -84,6 +84,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
                                 <?php
                                 endif;
                                 ?>
+                                <a href="registroClientes.php">Registrar |</a>
                                 <a href="olvConrtraseña.php">¿Olvidaste tu contraseña?</a>
                             </div>
                         </div>
@@ -94,7 +95,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     </div>
 
     <?php
-/* 
+    /* 
     if (isset($_SESSION['mjscontraseña'])) {
     ?>
 
@@ -107,21 +108,32 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     } */
 
     if (isset($_SESSION['mjsError'])) {
-        ?>
-    
-            <script>
-                Swal.fire('<?php echo $_SESSION['mjsError']; ?>')
-            </script>
-    
-        <?php
-            unset($_SESSION['mjsError']);
-        }
+    ?>
+
+        <script>
+            Swal.fire('<?php echo $_SESSION['mjsError']; ?>')
+        </script>
+
+    <?php
+        unset($_SESSION['mjsError']);
+    }
+
+    if (isset($_SESSION['msjCliente'])) {
+    ?>
+
+        <script>
+            Swal.fire('<?php echo $_SESSION['msjCliente']; ?>')
+        </script>
+
+    <?php
+        unset($_SESSION['msjCliente']);
+    }
 
     ?>
 
     <script src="../librerias/jquery-3.7.0.min.js"></script>
     <script src="../js/validarLogin.js"></script>
-    
+
 
 
 </body>

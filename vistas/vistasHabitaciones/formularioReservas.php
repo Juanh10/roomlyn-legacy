@@ -239,8 +239,8 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="sexo" id="sexo" required>
                                             <option selected disabled value="">Escoja una opción</option>
-                                            <option value="1">Masculino</option>
-                                            <option value="2">Femenino</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
                                         </select>
                                         <p></p>
                                         <label for="sexo">Sexo</label>
@@ -248,7 +248,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 
                                     <div class="form-floating mb-3" id="selectDepartamento">
                                         <select class="form-select" name="departamento" id="departamento" required>
-
+                                    
                                         </select>
                                         <label for="departamento">Departamento</label>
                                     </div>
@@ -306,19 +306,19 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 
     <?php
 
-    if (isset($_SESSION['msjReservasExito'])) :
+    if (isset($_SESSION['msjReservas'])) :
     ?>
         <script>
             Swal.fire({
                 position: '',
-                icon: 'success',
-                title: '¡RESERVA REGISTRADA!',
-                html: "<p>Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href='#'>3186547890</a> para más detalles.</p>",
+                icon: 'error',
+                title: '¡Ocurrió un error!',
+                text: '<?php echo $_SESSION['msjReservas']; ?>',
                 showConfirmButton: true
             });
         </script>
     <?php
-        unset($_SESSION['msjReservasExito']);
+        unset($_SESSION['msjReservas']);
     endif;
 
     ?>
