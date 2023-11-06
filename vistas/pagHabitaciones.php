@@ -23,8 +23,8 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
     <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../librerias/lightbox2/dist/css/lightbox.css">
     <link rel="stylesheet" href="../librerias/datarangepicker/css/daterangepicker.css">
-    <link rel="stylesheet" href="../css/estilosPrincipales.css">
     <link rel="stylesheet" href="../css/estilosPaginaHabitaciones.css">
+    <link rel="stylesheet" href="../css/estilosPrincipales.css">
     <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
     <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <title>Habitaciones | Hotel Colonial City</title>
@@ -49,14 +49,49 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
         </div>
     </div>
 
-    <header class="cabeceraHab">
-        <div class="contenedorHab navContenedorHab">
-            <div class="logoPlahotHab">
-                <a href="../index.php"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+    <?php
+
+    if (!empty($_SESSION['id_cliente_registrado'])) :
+        $nombres = explode(" ", $_SESSION['nombres']);
+        $apellidos = explode(" ", $_SESSION['apellidos']);
+
+        $primerNombre = $nombres[0];
+        $primerApellido = $apellidos[0];
+    ?>
+
+        <header class="cabecera cabeceraHabCli">
+            <div class="contenedor navContenedor">
+                <div class="logoPlahot">
+                    <a href="../index.php"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                </div>
+                <div class="menuRespon">
+                    <div class="icono">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <nav class="navegacion">
+                    <ul>
+                        <li class="inicioSesionCliente" title="Conectado">
+                            <a href="vistasRegistroClientes/configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre . " " . $primerApellido ?></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <nav class="navegacionHab">
-                <ul>
-                    <!-- <li id="activoBucador">
+        </header>
+
+    <?php
+    else :
+    ?>
+        <header class="cabeceraHab">
+            <div class="contenedorHab navContenedorHab">
+                <div class="logoPlahotHab">
+                    <a href="../index.php"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                </div>
+                <nav class="navegacionHab">
+                    <ul>
+                        <!-- <li id="activoBucador">
                         <div class="buscador">
                             <div class="btnBuscar">
                                 <i class="bi bi-search"></i>
@@ -72,10 +107,14 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                             <a class="filtro" href="#filtro"><i class="bi bi-funnel"></i></a>
                         </div>
                     </li> -->
-                </ul>
-            </nav>
-        </div>
-    </header>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+    <?php
+    endif;
+    ?>
 
     <main>
         <section class="resHabitaciones">

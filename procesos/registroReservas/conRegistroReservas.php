@@ -109,7 +109,6 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
             $sqlInforReserva->bindParam(':id_estado_reserva', $estado);
             $sqlInforReserva->bindParam(':fecha_ingreso', $checkIn);
             $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
-            $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
             $sqlInforReserva->bindParam(':total_reserva', $totalFactura);
             $sqlInforReserva->bindParam(':estado', $estado);
 

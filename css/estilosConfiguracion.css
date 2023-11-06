@@ -1,27 +1,76 @@
-main{
-    margin-top: 120px;
+.cabecera{
+    padding: 15px 30px !important;
 }
 
-.contenedorPrincipal{
+main {
+    margin-top: 110px;
+}
+
+.fondo-modal {
+    background-color: #c4ac9f;
+}
+
+.boton-guardar {
+    background-color: #c4ac9f;
+    transition: .3s ease;
+}
+
+.boton-guardar:hover {
+    background-color: #b49d91;
+}
+
+.verContraseña2 {
+    cursor: pointer;
+    color: #555;
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.verContraseña {
+    cursor: pointer;
+    color: #555;
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.msjVerificacion {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 900;
+    display: none;
+    background-color: #f66060;
+}
+
+.contenedorPrincipal {
     margin-bottom: 200px;
 }
 
-.contenedorPrincipal h1{
-    font-size: 25px;
-    margin-bottom: 30px;
+.contenedorPrincipal h1 {
+    font-size: 35px;
+    margin-bottom: 0px !important;
 }
 
-.cardDatos{
+.cardDatos {
     padding: 10px;
     border: 1px solid #cfcece;
     margin-bottom: 20px;
 }
 
-.iconoCard{
+.iconoCard {
     margin-top: 10px;
 }
 
-.iconoCard i{
+.iconoCard i {
     margin-top: 40px;
     padding: 8px 10px;
     border-radius: 50%;
@@ -29,35 +78,35 @@ main{
     background-color: #f3f3f3;
 }
 
-.datos{
+.datos {
     padding: 8px;
 }
 
-.datos h2{
+.datos h2 {
     font-size: 20px;
 }
 
-.datos p{
+.datos p {
     font-size: 14px;
     margin: 0;
 }
 
-.datos a{
+.datos a {
     text-decoration: none;
     font-size: 14px;
 }
 
-.datos a:hover{
+.datos a:hover {
     text-decoration: underline;
     font-size: 14px;
 }
 
-.formularioInput{
+.formularioInput {
     background-color: #fff !important;
     border: 1.5px solid #bdb9b9 !important;
 }
 
-.select2-container{
+.select2-container {
     height: 38px;
     width: 100% !important;
 }
@@ -80,9 +129,23 @@ main{
     width: 20px;
 }
 
+
+.btn-elm-cuenta {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    color: #0d6efd;
+}
+
+.btn-elm-cuenta:hover {
+    text-decoration: underline;
+    font-size: 14px;
+    color: #0a58ca;
+}
+
 @media only screen and (max-width: 560px) {
 
-    .columnaDatos{
+    .columnaDatos {
         width: 100%;
     }
 

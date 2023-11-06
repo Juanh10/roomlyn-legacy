@@ -3,9 +3,20 @@
 $(document).ready(function () {
   $('#onload').fadeOut(); //TODO Desaparece el elemento
   $('.cabeceraHab').show(); //TODO Muestra el elemento
+  $('.cabecera').show(); //TODO Muestra el elemento
   $('.btnWha').show();
   $('.flexslider').show();
   $('.filtros-habitaciones').show();
+
+  let menu = $('.navegacion ul');
+  let icono = $('.icono');
+
+  $(".menuRespon").click(function(){
+      menu.toggleClass('mostrar');
+      icono.toggleClass('iconoActivo');
+  });
+
+
 });
 
 $(document).ready(function () {

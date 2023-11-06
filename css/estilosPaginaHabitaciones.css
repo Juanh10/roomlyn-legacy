@@ -11,6 +11,10 @@
     display: none;
 }
 
+.cabecera{
+    padding: 15px 30px !important;
+}
+
 .cabeceraHab a {
     color: #000;
     text-decoration: none;
@@ -525,6 +529,13 @@
     background-color: #947971;
 }
 
+@media only screen and (max-width: 860px) {
+
+    .cabecera{
+        padding: 0px 10px !important;
+    }
+
+}
 
 @media only screen and (max-width: 824px) {
 

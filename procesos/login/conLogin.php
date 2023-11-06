@@ -15,7 +15,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 
     if (filter_var($usuario, FILTER_VALIDATE_EMAIL)) {
         
-        $validarUsu = $dbh->prepare("SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.contraseña, clientes_registrados.estado, info_clientes.nombres, info_clientes.apellidos, info_clientes.estado FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente WHERE info_clientes.estado = :estCli AND clientes_registrados.estado = :est AND clientes_registrados.usuario = :usurio");
+        $validarUsu = $dbh->prepare("SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.contraseña, clientes_registrados.estado, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.email, info_clientes.estado FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente WHERE info_clientes.estado = :estCli AND clientes_registrados.estado = :est AND clientes_registrados.usuario = :usurio");
 
         $validarUsu->bindParam(':estCli',$estado);
         $validarUsu->bindParam(':est',$estado);
@@ -36,6 +36,9 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             $_SESSION['usuario'] = $datosCliente['usuario']; //* Guardar el id en una sesion
             $_SESSION['nombres'] = $datosCliente['nombres']; //* Guardar el id en una sesion
             $_SESSION['apellidos'] = $datosCliente['apellidos']; //* Guardar el id en una sesion
+            $_SESSION['apellidos'] = $datosCliente['apellidos']; //* Guardar el id en una sesion
+            $_SESSION['celular'] = $datosCliente['celular']; //* Guardar el id en una sesion
+            $_SESSION['email'] = $datosCliente['email']; //* Guardar el id en una sesion
 
         }
 

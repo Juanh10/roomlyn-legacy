@@ -75,9 +75,9 @@ $rowConsulta = $dbh->query($sqlConsulta)->fetch();
         <div class="container contenedorPrincipal">
             <h1>Gestionar datos</h1>
 
-            <form class="formularioRegistro" action="../procesos/registroClientes/conRegistroClientes.php" method="post" id="form">
+            <form class="formularioRegistro" action="../../procesos/registroClientes/conActualizarClientes.php" method="post" id="form">
 
-            <input type="hidden" name="idCliente" id="idCliente" value="<?php echo $idCliente ?>">
+                <input type="hidden" name="idCliente" id="idCliente" value="<?php echo $idCliente ?>">
 
                 <div class="grupoNombres" id="grupoNombres">
                     <label for="pNombre">Nombres*</label>
@@ -175,6 +175,54 @@ $rowConsulta = $dbh->query($sqlConsulta)->fetch();
             </form>
         </div>
     </main>
+
+    <!--* PIE DE PAGINA -->
+
+    <footer>
+        <div class="piePagina">
+            <div class="copyPiePagina">
+                <div class="logoPiePagina">
+                    <img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web">
+                </div>
+                <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+            </div>
+            <div class="contenidoPiePagina">
+                <div class="redes-sociales">
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61550262616792" class="face" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/hotelcolonialci2/" class="insta" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="what" target="_blank" title="Whatsapp"><i class="bi bi-whatsapp"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="tiktok" target="_blank" title="Tik tok"><i class="bi bi-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                <div class="contPreguntas">
+                    <a href="../../comoFunciona.html">Como funciona ROOMLYN</a>
+                    <a href="#">Politicas de privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ALERTAS -->
+
+    <?php
+
+    if (isset($_SESSION['msjAct'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '<?php echo $_SESSION['msjAct']; ?>',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjAct']);
+    endif;
+
+    ?>
 
 
 

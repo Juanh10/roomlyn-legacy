@@ -38,7 +38,7 @@ include "funcionesIconos.php";
     <header class="cabeceraHab">
         <div class="contenedorHab navContenedorHab">
             <div class="logoPlahotHab">
-                <a href="../../index.html"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                <a href="../../index.php"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
             </div>
             <nav class="navegacionHab">
                 <ul>

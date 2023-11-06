@@ -1,10 +1,6 @@
 <?php
-
 session_start();
-
-if (empty($_SESSION['id_cliente_registrado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
-    header("location: ../login.php");
-}
+include_once "../../procesos/config/conex.php";
 
 $idCliente = $_SESSION['id_cliente_registrado'];
 $nombres = explode(" ", $_SESSION['nombres']);
@@ -12,7 +8,6 @@ $apellidos = explode(" ", $_SESSION['apellidos']);
 
 $primerNombre = $nombres[0];
 $primerApellido = $apellidos[0];
-
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +17,10 @@ $primerApellido = $apellidos[0];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "dependencias.php" ?>
-    <title>Configuración</title>
+    <title>Seguridad</title>
 </head>
 
 <body>
-
-    <!--* PRELOADER CARGAR PAGINA WEB -->
 
     <div class="contenedorPreloader" id="onload">
         <div class="lds-default">
@@ -61,7 +54,7 @@ $primerApellido = $apellidos[0];
             <nav class="navegacion">
                 <ul>
                     <li class="inicioSesionCliente" title="Conectado">
-                        <a href="configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre." ".$primerApellido ?></a>
+                        <a href="configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre . " " . $primerApellido ?></a>
                     </li>
                 </ul>
             </nav>
@@ -70,21 +63,21 @@ $primerApellido = $apellidos[0];
 
     <main>
         <div class="container contenedorPrincipal mx-auto">
-            <h1>Configuración de la cuenta</h1>
+            <h1>Ajustes de seguridad</h1>
             <div class="row">
                 <div class="col-6 columnaDatos">
                     <div class="cardDatos">
                         <div class="row">
                             <div class="col-1">
                                 <div class="iconoCard">
-                                    <i class="bi bi-person-fill-add"></i>
+                                    <i class="bi bi-lock-fill"></i>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="datos">
-                                    <h2>Datos personales</h2>
-                                    <p>En esta sección, puedes actualizar y gestionar tus datos personales</p>
-                                    <a href="gestionarDatos.php">Gestionar los datos personales</a>
+                                    <h2>Contraseña</h2>
+                                    <p>Cambia tu contraseña con frecuencia para proteger tu cuenta</p>
+                                    <a data-bs-toggle="modal" data-bs-target="#modalCambiarContraseña" href="#">Cambiar contraseña</a>
                                 </div>
                             </div>
                         </div>
@@ -94,32 +87,35 @@ $primerApellido = $apellidos[0];
                         <div class="row">
                             <div class="col-1">
                                 <div class="iconoCard">
-                                    <i class="bi bi-person-fill-lock"></i>
+                                    <i class="bi bi-box-arrow-left"></i>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="datos">
-                                    <h2>Seguridad</h2>
-                                    <p>En esta sección, tienes la posibilidad de modificar tus configuraciones de seguridad, cambiar tu contraseña o eliminar tu cuenta.</p>
-                                    <a href="gestionarSeguridad.php">Gestionar los ajustes de seguridad</a>
+                                    <h2>Cerrar sesión</h2>
+                                    <p>Cierra sesión en este dispositivo</p>
+                                    <a class="btnCerrarSesion" href="#">Cerrar sesión</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 columnaDatos">
-                <div class="cardDatos">
+                    <div class="cardDatos">
                         <div class="row">
                             <div class="col-1">
                                 <div class="iconoCard">
-                                <i class="bi bi-calendar-check-fill"></i>
+                                    <i class="bi bi-trash3-fill"></i>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="datos">
-                                    <h2>Reservas</h2>
-                                    <p>En esta sección, encontraras todas las reservas que tienes.</p>
-                                    <a href="">Gestionar reservas</a>
+                                    <h2>Eliminar cuenta</h2>
+                                    <p>Elimina tu cuenta de forma permanente</p>
+                                    <form action="../../procesos/registroClientes/contElmCuenta.php" method="post" class="formElmCuenta">
+                                        <input type="hidden" name="idCliente" value="<?php echo $idCliente ?>">
+                                        <input type="submit" class="btn-elm-cuenta" name="elmCuenta" value="Eliminar cuenta">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -129,6 +125,47 @@ $primerApellido = $apellidos[0];
         </div>
     </main>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalCambiarContraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar contraseña</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="../../procesos/registroClientes/conActContraseña.php" method="post" class="formContra">
+
+                        <input type="hidden" name="idCliente" value="<?php echo $idCliente ?>">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput1" name="contraActual" placeholder="Contraseña actual" required>
+                            <label for="floatingInput1">Contraseña actual</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control inputContra" id="floatingInput2" name="contraNueva" placeholder="Contraseña actual" required>
+                            <span class="verContraseña"><i class="bi bi-eye"></i></i></span>
+                            <label for="floatingInput2">Contraseña nueva</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control inputContra2" id="floatingInput3" name="contraNueva2" placeholder="Contraseña actual" required>
+                            <span class="verContraseña2"><i class="bi bi-eye"></i></i></span>
+                            <label for="floatingInput3">Confirmar contraseña</label>
+                        </div>
+                        <p class="msjVerificacion">Las contraseñas no coinciden</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <input type="submit" class="btn boton-guardar" value="Cambiar">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
         <!--* PIE DE PAGINA -->
 
@@ -156,6 +193,26 @@ $primerApellido = $apellidos[0];
             </div>
         </div>
     </footer>
+
+
+    <?php
+
+    if (isset($_SESSION['msjAct'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '<?php echo $_SESSION['msjAct']; ?>',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjAct']);
+    endif;
+
+    ?>
 
 </body>
 
