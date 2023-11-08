@@ -9,6 +9,24 @@ $(document).ready(function () {
         $('.logoPlahotHab').toggleClass('estadoLogo');
     });
 
+    //* ALERTA DE CONFIRMACION DEL FORMULARIO
+
+    $('.formReservas').submit(function (e) {
+        e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
+        Swal.fire({
+          title: '¿Estas seguro de realizar la reserva?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.submit(); // sirve para enivar los datos del formulario
+          }
+        });
+      });
+
 
     //* Establecer desde la fecha actual el calendario de la fecha de entrada y salida
 

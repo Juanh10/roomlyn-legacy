@@ -17,6 +17,7 @@ session_start();
     <link rel="icon" href="iconos/logo_icono.png">
     <link rel="stylesheet" href="librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="librerias/lightbox2/dist/css/lightbox.css">
+    <link rel="stylesheet" href="librerias/sweetAlert2/css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/estilosPrincipales.css">
     <link rel="stylesheet" href="css/estilosPaginaPrincipal.css">
     <title>ROOMLYN</title>
@@ -87,7 +88,7 @@ session_start();
                             <a href="vistas/vistasRegistroClientes/configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre." ".$primerApellido ?></a>
                         </li>
                         <li class="cerrarSesionCliente" title="Cerrar sesión">
-                            <a href="procesos/login/conCerrarSesion2.php"><i class="bi bi-box-arrow-left"></i></a>
+                            <a href="#" id="btncerrarSesionCliente"><i class="bi bi-box-arrow-left"></i></a>
                         </li>
                     </ul>
                 </nav>
@@ -324,6 +325,7 @@ session_start();
     <script src="librerias/flexSlider/js/jquery.flexslider-min.js"></script>
     <script src="librerias/lightbox2/dist/js/lightbox.js"></script>
     <script src="librerias/scrollreveal.js"></script>
+    <script src="librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <script src="js/script.js"></script>
 
 

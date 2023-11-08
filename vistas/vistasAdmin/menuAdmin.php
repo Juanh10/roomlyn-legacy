@@ -109,7 +109,7 @@
 
         </ul>
         <div class="iconCerrarSesion2">
-            <a href="../../procesos/login/conCerrarSesion.php" title="Cerrar Sesión">
+            <a href="#" class="btnCerrarSesion" title="Cerrar Sesión">
                 <i class="bi bi-box-arrow-left"></i>
             </a>
         </div>
@@ -205,7 +205,7 @@
         </ul>
 
         <div class="iconCerrarSesion">
-            <a href="../../procesos/login/conCerrarSesion.php">
+            <a href="#" class="btnCerrarSesion">
                 <i class="bi bi-box-arrow-left"></i>
                 <span>Cerrar Sesión</span>
             </a>

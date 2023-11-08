@@ -212,6 +212,23 @@
     background-color: #000;
 }
 
+.bg-colo{
+    background-color: #000;
+}
+
+.imagenesTipoHabitacion{
+    width: 100%;
+    height: 100%;
+}
+
+.imagenesTipoHabitacion img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
 
 /*! ESTILOS RESPOSIVES*/
 

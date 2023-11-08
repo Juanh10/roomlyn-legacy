@@ -375,6 +375,24 @@ $(document).ready(function () {
     });
   });
 
+  //* ALERTAS DE CONFIRMACIÓN
+
+  $('.btnCerrarSesion').click(function (e) {
+
+    Swal.fire({
+      title: '¿Estas seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Cerrar sesión'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '../../procesos/login/conCerrarSesion.php';
+      }
+    });
+  });
+
 });
 
 
@@ -383,7 +401,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 
   function initDatatables($tablaID) {
-    
+
     $($tablaID).DataTable({
 
       "lengthMenu": [5, 10, 20, 30],

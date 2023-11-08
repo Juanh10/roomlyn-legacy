@@ -158,7 +158,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                             $celular = $_SESSION['celular'];
                             
                         ?>
-                            <form action="../../procesos/registroReservas/conRegistroReservasCliente.php" method="post">
+                            <form action="../../procesos/registroReservas/conRegistroReservasCliente.php" method="post" class="formReservas">
                                 <div class="row">
                                     <div class="col-6 responsive-col-form">
 
@@ -235,7 +235,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                         <?php
                         else :
                         ?>
-                            <form action="../../procesos/registroReservas/conRegistroReservas.php" method="post" id="form">
+                            <form action="../../procesos/registroReservas/conRegistroReservas.php" method="post" id="form" class="formReservas">
                                 <div class="row">
                                     <div class="col-6 responsive-col-form">
 

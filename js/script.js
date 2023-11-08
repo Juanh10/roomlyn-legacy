@@ -1,6 +1,6 @@
 //* Saber cuando ya se cargo correctamente el HTML
 
-$(document).ready(function() {
+$(document).ready(function () {
   $('#onload').fadeOut(); //TODO Desaparece el elemento
   $('.cabecera').show(); //TODO Muestra el elemento
   $('.btnWha').show();
@@ -9,86 +9,104 @@ $(document).ready(function() {
   let iframeMapa = $('.mapaGoogle iframe');
 
   //* Saber si se cargó correctamente el iframe del mapa 
-  iframeMapa.on('load', function(){
+  iframeMapa.on('load', function () {
     $('#cargandoMapa2').fadeOut();
     $(this).show();
   });
 
+  //* ALERTAS DE CONFIRMACIÓN
+
+  $('#btncerrarSesionCliente').click(function (e) {
+
+    Swal.fire({
+      title: '¿Estas seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Cerrar sesión'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = 'procesos/login/conCerrarSesion2.php';
+      }
+    });
+  });
+
 });
 
-$(document).ready(function() {
-    //* USAR LA LIBRERIA FLEXSLIDER PARA EL CARRUSEL DE LA PAGINA
-    $('.flexslider').flexslider({
-        pauseOnAction: false,
-        pauseOnHover: false,
-        touch: true
+$(document).ready(function () {
+  //* USAR LA LIBRERIA FLEXSLIDER PARA EL CARRUSEL DE LA PAGINA
+  $('.flexslider').flexslider({
+    pauseOnAction: false,
+    pauseOnHover: false,
+    touch: true
+  });
+
+  //* AGREGAR Y QUITAR CLASES A LOS ENLACES DEL MENU 
+
+  $(".enlaceMenu").click(function () {
+
+    let enlace = $(this);
+
+    $("a.activo").removeClass("activo");
+    $(this).addClass("activo");
+
+  });
+
+  //* EVENTO CLICK PARA AGREGAR CLASE DE MENU RESPONSIVO 
+
+  let menu = $('.navegacion ul');
+  let icono = $('.icono');
+
+  $(".menuRespon").click(function () {
+    menu.toggleClass('mostrar');
+    icono.toggleClass('iconoActivo');
+  });
+
+  //* EVENTO CLICK DE TODA LA PANTALLA PARA QUE AL HACER CLIC ALGUNA PARTE DE LA PANTALLA SE QUITE LA CLASE DEL MENU
+
+  $(document).click(function (event) {
+
+    let cabeceraMenu = $(".cabecera");
+
+    if (!$(event.target).closest(cabeceraMenu).length) {
+      menu.removeClass("mostrar");
+      icono.removeClass('iconoActivo');
+    }
+  });
+
+  //* LIBRERIA QUE AYUDA A QUE LA GALERIA DE IMAGENES TENGA EL EFECTO LIGHTOBX
+
+  lightbox.option({
+    'resizeDuration': 300,
+    'wrapAround': true,
+    'fitImagesInViewport': true,
+    'imageFadeDuration': 200,
+    'showImageNumberLabel': true,
+    'albumLabel': "Imagen %1 de %2",
+    'disableScrolling': true,
+  });
+
+  //* LIBRERIA PARA CONTROLAR LAS ANIMACIONES
+
+  const sr = ScrollReveal();
+
+  //* Libreria para crear las animaciones y creando una funcion con parametros para las animaciones para ahorrar codigo
+
+  const animacion = (clase, origen, duracion, delay, distacia, ease) => {
+    sr.reveal(clase, {
+      origin: origen,
+      duration: duracion,
+      delay: delay,
+      distance: distacia,
+      easing: ease
     });
+  }
 
-    //* AGREGAR Y QUITAR CLASES A LOS ENLACES DEL MENU 
+  animacion('.cabecera', 'top', 1000, 200, '30px', 'ease-out');
+  animacion('.descripcionHotel', 'left', 1000, 200, '30px', 'ease-out');
+  animacion('.cardServicios', 'right', 1000, 200, '50px', 'ease-in-out');
+  animacion('.mapa', 'left', 1000, 200, '30px', 'ease-out');
 
-    $(".enlaceMenu").click(function(){
 
-        let enlace = $(this);
-        
-        $("a.activo").removeClass("activo");
-        $(this).addClass("activo");
-
-    });
-
-    //* EVENTO CLICK PARA AGREGAR CLASE DE MENU RESPONSIVO 
-
-    let menu = $('.navegacion ul');
-    let icono = $('.icono');
-
-    $(".menuRespon").click(function(){
-        menu.toggleClass('mostrar');
-        icono.toggleClass('iconoActivo');
-    });
-
-     //* EVENTO CLICK DE TODA LA PANTALLA PARA QUE AL HACER CLIC ALGUNA PARTE DE LA PANTALLA SE QUITE LA CLASE DEL MENU
-
-    $(document).click(function(event) {
-
-        let cabeceraMenu = $(".cabecera");
-      
-        if (!$(event.target).closest(cabeceraMenu).length) {
-          menu.removeClass("mostrar");
-          icono.removeClass('iconoActivo');
-        }
-      });
-
-      //* LIBRERIA QUE AYUDA A QUE LA GALERIA DE IMAGENES TENGA EL EFECTO LIGHTOBX
-
-      lightbox.option({
-        'resizeDuration': 300,
-        'wrapAround': true,
-        'fitImagesInViewport': true, 
-        'imageFadeDuration': 200, 
-        'showImageNumberLabel': true,
-        'albumLabel': "Imagen %1 de %2",
-        'disableScrolling': true,
-      });
-
-      //* LIBRERIA PARA CONTROLAR LAS ANIMACIONES
-
-      const sr = ScrollReveal();
-
-      //* Libreria para crear las animaciones y creando una funcion con parametros para las animaciones para ahorrar codigo
-
-      const animacion = (clase, origen, duracion, delay, distacia, ease) => {
-        sr.reveal(clase, {
-          origin: origen,
-          duration: duracion,
-          delay: delay,
-          distance: distacia,
-          easing: ease
-        });
-      }
-
-      animacion('.cabecera','top', 1000, 200, '30px', 'ease-out');
-      animacion('.descripcionHotel','left', 1000, 200, '30px', 'ease-out');
-      animacion('.cardServicios','right', 1000, 200, '50px', 'ease-in-out');
-      animacion('.mapa','left', 1000, 200, '30px', 'ease-out');
-
-    
 });

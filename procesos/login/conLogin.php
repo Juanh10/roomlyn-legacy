@@ -43,13 +43,13 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         }
 
         if($contador2 == 0){
-            $_SESSION['error'] = "Usuario o Contraseña Incorrecta";
+            $_SESSION['error'] = "El usuario es incorrecto";
             header("location: ../../vistas/login.php");
         }else{
             if (password_verify($contraseña, $contraBD)) {
                 header("location: ../../index.php");
             } else {
-                $_SESSION['error'] = "Usuario o Contraseña Incorrectasss";
+                $_SESSION['error'] = "La contraseña es incorrecta";
                 header("location: ../../vistas/login.php");
             }
         }

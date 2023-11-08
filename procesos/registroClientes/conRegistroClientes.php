@@ -68,7 +68,7 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
             $sqlCliente->bindParam(':estado', $estado);
 
             if ($sqlCliente->execute()) {
-                $_SESSION['msjCliente'] = "El cliente se ha registrado con éxito. Por favor, inicie sesión.";
+                $_SESSION['msjCliente'] = "El cliente se ha registrado con éxito. Por favor, inicie sesión. <br> Usuario: ".$email;
                 header("Location: ../../vistas/login.php");
                 exit;
             } else {
