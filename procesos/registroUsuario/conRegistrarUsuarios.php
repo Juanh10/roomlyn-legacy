@@ -4,7 +4,7 @@ session_start();
 
 include_once "../config/conex.php";
 
-if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty($_POST['tipoDocumento']) && !empty($_POST['primerApellido']) && !empty($_POST['documento']) && !empty($_POST['celular']) && !empty($_POST['email']) && !empty($_POST['tipoUsuario']) && !empty($_POST['usuario']) && !empty($_POST['contraseña']) ){
+if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty($_POST['tipoDocumento']) && !empty($_POST['primerApellido']) && !empty($_POST['documento']) && !empty($_POST['celular']) && !empty($_POST['email']) && !empty($_POST['tipoUsuario']) && !empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 
     // Datos de los inputs
 
@@ -27,96 +27,174 @@ if(!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty(
     $insertarInforUsuarios = "INSERT INTO infousuarios(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
 
     //* INSERTAR EL USUARIO
-    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, usuario, contraseña, id_rol, estado, fecha, hora, fecha_sys) VALUES (:idInfo,:usu,:contra,:tUsu,:estado,:fecha,:hora,now())";
+    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, id_rol, usuario, contraseña, estado, fecha, hora, fecha_sys) VALUES (:idInfo,:usu,:contra,:tUsu,:estado,:fecha,:hora,now())";
 
-   
-   //*CONSULTA DEL USUARIO
-   $consultaUsuario = $dbh -> prepare("SELECT usuario FROM usuarios WHERE usuario = :usuario"); // preparar la consulta sobre el usuario para que no haya duplicados
-   $consultaUsuario -> bindParam(':usuario', $usuario);// enlazar marcador con la variable
-   $consultaUsuario -> execute(); // realiza la consulta
+
+    //*CONSULTA DEL USUARIO
+
+    $consultaRegUsuario = $dbh->prepare("SELECT usuario FROM usuarios WHERE 1");
+
+    $consultaRegUsuario->execute();
+
+    $consultaUsuario = $dbh->prepare("SELECT usuario FROM usuarios WHERE usuario = :usuario"); // preparar la consulta sobre el usuario para que no haya duplicados
+    $consultaUsuario->bindParam(':usuario', $usuario); // enlazar marcador con la variable
+    $consultaUsuario->execute(); // realiza la consulta
 
     //* CONSULTA TIPO ROL
-   $consultarTipoUsuario = $dbh -> prepare("SELECT id_rol FROM usuarios WHERE id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
-   $marcTipoUsuario = 1;
-   $consultarTipoUsuario -> bindParam(':tipoUsuario', $marcTipoUsuario);
-   $consultarTipoUsuario -> execute(); // realiza la consulta
+    $consultarTipoUsuario = $dbh->prepare("SELECT id_rol FROM usuarios WHERE id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
+    $marcTipoUsuario = 1;
+    $consultarTipoUsuario->bindParam(':tipoUsuario', $marcTipoUsuario);
+    $consultarTipoUsuario->execute(); // realiza la consulta
+
+    if ($consultaRegUsuario->rowCount() > 0) {
+
+        $tipoUsuario2 = 2;
 
 
-
-
-   if($consultaUsuario -> fetch()){ // si ya existe un tipo de usuario como administrador no deja registrar
-        ?>
+        if ($consultaUsuario->fetch()) {
+?>
             <script>
                 alert("Este usuario ya está registrado, Intenta con otro");
                 window.location.href = '../../vistas/registroUsuarios.php';
             </script>
-        <?php
-   }else{
-
-    //Preparar la consulta
-    $insertInfor = $dbh -> prepare($insertarInforUsuarios);
-
-    $estado = 1;
-    
-    // enlazar los marcadores con las variables
-    $insertInfor -> bindParam(':tDoc', $tipoDocumento);
-    $insertInfor -> bindParam(':doc', $documento);
-    $insertInfor -> bindParam(':pn', $primerNombre);
-    $insertInfor -> bindParam(':sn', $segundoNombre);
-    $insertInfor -> bindParam(':pa', $primerApellido);
-    $insertInfor -> bindParam(':sa', $segundoApellido);
-    $insertInfor -> bindParam(':cel', $celular);
-    $insertInfor -> bindParam(':em', $email);
-
-    if($insertInfor -> execute()){ // ejecutar la consulta
-
-        $ultID = $dbh -> lastInsertId('infousuarios'); // obtener el ultimo ID de la tabla infoUsuarios
-
-        date_default_timezone_set('America/Bogota'); // Establecer la zona horaria
-
-        $fecha = date('Y-m-d'); // Obtener la fecha actual
-
-        $hora = date('H:i:s'); // obtener la hora actual
-
-        // preparar la consulta
-        $insertUsu = $dbh -> prepare($insertarUsuarios);
-
-        //enlazar los marcadores con las variables
-        $insertUsu -> bindParam(':idInfo',$ultID);
-        $insertUsu -> bindParam(':usu',$usuario);
-        $insertUsu -> bindParam(':contra',$contraEncriptada);
-        $insertUsu -> bindParam(':tUsu',$tipoUsuario);
-        $insertUsu -> bindParam(':estado',$estado);
-        $insertUsu -> bindParam(':fecha',$fecha);
-        $insertUsu -> bindParam(':hora',$hora);
-
-        if($insertUsu -> execute()){ // ejecutar la consulta
-            if($consultarTipoUsuario -> fetch()){
-                ?>
-                <script>
-                    alert("Usuario creado");
-                    window.location.href = '../../vistas/vistasAdmin/usuarios.php'; // me redirige a la plataforma del administrador
-                </script>
             <?php
-            }else{
-                ?>
-                <script>
-                    alert("Usuario creado");
-                    window.location.href = '../../vistas/login.php'; // me redirige al login ya que se crea el administrador o el primer registro
-                </script>
+        } else {
+
+            //Preparar la consulta
+            $insertInfor = $dbh->prepare($insertarInforUsuarios);
+
+            $estado = 1;
+
+            // enlazar los marcadores con las variables
+            $insertInfor->bindParam(':tDoc', $tipoDocumento);
+            $insertInfor->bindParam(':doc', $documento);
+            $insertInfor->bindParam(':pn', $primerNombre);
+            $insertInfor->bindParam(':sn', $segundoNombre);
+            $insertInfor->bindParam(':pa', $primerApellido);
+            $insertInfor->bindParam(':sa', $segundoApellido);
+            $insertInfor->bindParam(':cel', $celular);
+            $insertInfor->bindParam(':em', $email);
+
+            if ($insertInfor->execute()) { // ejecutar la consulta
+
+                $ultID = $dbh->lastInsertId('infousuarios'); // obtener el ultimo ID de la tabla infoUsuarios
+
+                date_default_timezone_set('America/Bogota'); // Establecer la zona horaria
+
+                $fecha = date('Y-m-d'); // Obtener la fecha actual
+
+                $hora = date('H:i:s'); // obtener la hora actual
+
+                // preparar la consulta
+                $insertUsu = $dbh->prepare($insertarUsuarios);
+
+                //enlazar los marcadores con las variables
+                $insertUsu->bindParam(':idInfo', $ultID);
+                $insertUsu->bindParam(':usu', $usuario);
+                $insertUsu->bindParam(':contra', $contraEncriptada);
+                $insertUsu->bindParam(':tUsu', $tipoUsuario2);
+                $insertUsu->bindParam(':estado', $estado);
+                $insertUsu->bindParam(':fecha', $fecha);
+                $insertUsu->bindParam(':hora', $hora);
+
+                if ($insertUsu->execute()) { // ejecutar la consulta
+                    if ($consultarTipoUsuario->fetch()) {
+            ?>
+                        <script>
+                            alert("Usuario creado");
+                            window.location.href = '../../vistas/vistasAdmin/usuarios.php'; // me redirige a la plataforma del administrador
+                        </script>
+                    <?php
+                    } else {
+                    ?>
+                        <script>
+                            alert("Usuario creado");
+                            window.location.href = '../../vistas/login.php'; // me redirige al login ya que se crea el administrador o el primer registro
+                        </script>
             <?php
+                    }
+                } else {
+                    echo "ERROR";
+                }
+            } else {
+                echo "ERROR";
             }
-        }else{
-            echo "ERROR";
         }
+    } else {
 
-    }else{
-        echo "ERROR";
+        $tipoUsuario2 = 1;
+
+        if ($consultaUsuario->fetch()) {
+            ?>
+            <script>
+                alert("Este usuario ya está registrado, Intenta con otro");
+                window.location.href = '../../vistas/registroUsuarios.php';
+            </script>
+            <?php
+        } else {
+
+            //Preparar la consulta
+            $insertInfor = $dbh->prepare($insertarInforUsuarios);
+
+            $estado = 1;
+
+            // enlazar los marcadores con las variables
+            $insertInfor->bindParam(':tDoc', $tipoDocumento);
+            $insertInfor->bindParam(':doc', $documento);
+            $insertInfor->bindParam(':pn', $primerNombre);
+            $insertInfor->bindParam(':sn', $segundoNombre);
+            $insertInfor->bindParam(':pa', $primerApellido);
+            $insertInfor->bindParam(':sa', $segundoApellido);
+            $insertInfor->bindParam(':cel', $celular);
+            $insertInfor->bindParam(':em', $email);
+
+            if ($insertInfor->execute()) { // ejecutar la consulta
+
+                $ultID = $dbh->lastInsertId('infousuarios'); // obtener el ultimo ID de la tabla infoUsuarios
+
+                date_default_timezone_set('America/Bogota'); // Establecer la zona horaria
+
+                $fecha = date('Y-m-d'); // Obtener la fecha actual
+
+                $hora = date('H:i:s'); // obtener la hora actual
+
+                // preparar la consulta
+                $insertUsu = $dbh->prepare($insertarUsuarios);
+
+                //enlazar los marcadores con las variables
+                $insertUsu->bindParam(':idInfo', $ultID);
+                $insertUsu->bindParam(':usu', $usuario);
+                $insertUsu->bindParam(':contra', $contraEncriptada);
+                $insertUsu->bindParam(':tUsu', $tipoUsuario2);
+                $insertUsu->bindParam(':estado', $estado);
+                $insertUsu->bindParam(':fecha', $fecha);
+                $insertUsu->bindParam(':hora', $hora);
+
+                if ($insertUsu->execute()) { // ejecutar la consulta
+                    if ($consultarTipoUsuario->fetch()) {
+            ?>
+                        <script>
+                            alert("Usuario creado");
+                            window.location.href = '../../vistas/vistasAdmin/usuarios.php'; // me redirige a la plataforma del administrador
+                        </script>
+                    <?php
+                    } else {
+                    ?>
+                        <script>
+                            alert("Usuario creado");
+                            window.location.href = '../../vistas/login.php'; // me redirige al login ya que se crea el administrador o el primer registro
+                        </script>
+<?php
+                    }
+                } else {
+                    echo "ERROR";
+                }
+            } else {
+                echo "ERROR";
+            }
+        }
     }
-    
-   }
-
-}else{
+} else {
     echo "Campos vacios";
 }
 
