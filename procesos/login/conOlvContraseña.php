@@ -14,11 +14,11 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
         include "../../librerias/phpMailer/PHPMailer.php"; 
         include "../../librerias/phpMailer/SMTP.php";
 
-        $emailUser = "juanchohernandez200518@gmail.com";
-        $emailContra = "3183683155Juan";
-        $msj = "HOLA MUNDO";
-        $emailEnvio = "juanchohernandez200518@gmail.com";
-        $fromName = 'CHAO MUNDO';
+        $emailUser = "";
+        $emailContra = "";
+        $msj = "Recuperar contraseña";
+        $emailEnvio = "";
+        $fromName = 'No responder a este correo';
         
         $phpmailer = new PHPMailer();
         $phpmailer -> Username = $emailUser;
@@ -30,7 +30,7 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
         $phpmailer -> SMTPAuth = true;
         $phpmailer -> setFrom($phpmailer->Username,$fromName);
         $phpmailer -> addAddress($emailEnvio);
-        $phpmailer -> FromName = "HOLA A TODOS";
+        $phpmailer -> FromName = $fromName;
         $phpmailer -> Subject = $msj;
         $phpmailer -> Body .= $mensaje_correo;
         $phpmailer -> isHTML(true);

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../iconos/logo_icono.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
@@ -35,7 +36,7 @@
         <div class="logo_cont2">
             <div class="logo2">
                 <a href="inicio.php">
-                   <img src="../../iconos/logoRoomlyn3.png" alt="Logo roomlyn">
+                    <img src="../../iconos/logoRoomlyn3.png" alt="Logo roomlyn">
                 </a>
             </div>
         </div>
@@ -67,13 +68,13 @@
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
                             <a class="enlaceMenuSecund" href="regTipoHabitacion.php" title="Crear tipo de habitación">
-                            <i class="bi bi-pencil"></i>
+                                <i class="bi bi-pencil"></i>
                             </a>
                             <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Listado tipo de habitaciones">
-                            <i class="bi bi-card-checklist"></i>
+                                <i class="bi bi-card-checklist"></i>
                             </a>
                             <a class="enlaceMenuSecund" href="habitaciones.php" title="Habitaciones">
-                            <i class="bi bi-key-fill"></i>
+                                <i class="material-symbols-outlined">bed</i>
                             </a>
                         </div>
                     </li>
@@ -82,7 +83,7 @@
 
             <li class="list_item">
                 <a class="enlaceMenu" href="clientes.php" title="Clientes">
-                    <i class="bi bi-person-fill"></i>
+                    <i class="bi bi-person-lines-fill"></i>
                 </a>
             </li>
 
@@ -156,16 +157,16 @@
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
                             <a class="enlaceMenuSecund" href="regTipoHabitacion.php">
-                            <i class="bi bi-pencil"></i>
-                            <span>Crear tipo de habitación</span>
+                                <i class="bi bi-pencil"></i>
+                                <span>Crear tipo de habitación</span>
                             </a>
                             <a class="enlaceMenuSecund" href="tipoHabitaciones.php">
-                            <i class="bi bi-card-checklist"></i>
-                            <span>Listado tipo de habitaciones</span>
+                                <i class="bi bi-card-checklist"></i>
+                                <span>Listado tipo de habitaciones</span>
                             </a>
                             <a class="enlaceMenuSecund" href="habitaciones.php">
-                            <i class="bi bi-key-fill"></i>
-                            <span>Habitaciones</span>
+                                <i class="material-symbols-outlined">bed</i>
+                                <span>Habitaciones</span>
                             </a>
                         </div>
                     </li>
@@ -174,7 +175,7 @@
 
             <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="clientes.php">
-                    <i class="bi bi-person-fill"></i>
+                    <i class="bi bi-person-lines-fill"></i>
                     <span class="linksOpciones">Clientes</span>
                 </a>
             </li>
@@ -219,8 +220,8 @@
     <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
     <script src="../../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <script src="../../js/scriptMenuAdmit.js"></script>
-    <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script>    
-    
+    <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script>
+
 
 </body>
 

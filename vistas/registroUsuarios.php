@@ -59,25 +59,25 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
 
                 <div class="grupoPrimerNombre" id="grupoPrimerNombre">
                     <label for="pNombre">Primer Nombre*</label>
-                    <input class="formularioInput" type="text" placeholder="Primer nombre" name="primerNombre" id="pNombre" pattern="[A-Za-z\s]+" title="Ingresa solo texto" required>
+                    <input class="formularioInput" type="text" placeholder="Primer nombre" name="primerNombre" id="pNombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto">
                     <p></p>
                 </div>
 
                 <div class="grupoSegundoNombre" id="grupoSegundoNombre">
                     <label for="sNombre">Segundo Nombre</label>
-                    <input class="formularioInput" type="text" placeholder="Segundo nombre" name="segundoNombre" id="sNombre" pattern="[A-Za-z\s]+" title="Ingresa solo texto">
+                    <input class="formularioInput" type="text" placeholder="Segundo nombre" name="segundoNombre" id="sNombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto">
                     <!-- <p class="inputError">Llena este campo</p> -->
                 </div>
 
                 <div class="grupoPrimerApellido" id="grupoPrimerApellido">
                     <label for="pApellido">Primer Apellido*</label>
-                    <input class="formularioInput" type="text" placeholder="Primer apellido" name="primerApellido" id="pApellido" pattern="[A-Za-z\s]+" title="Ingresa solo texto" required>
+                    <input class="formularioInput" type="text" placeholder="Primer apellido" name="primerApellido" id="pApellido" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto" required>
                     <p></p>
                 </div>
 
                 <div class="grupoSegundoApellido" id="grupoSegundoApellido">
                     <label for="sApellido">Segundo Apellido</label>
-                    <input class="formularioInput" type="text" placeholder="Segundo apellido" name="segundoApellido" id="sApellido" pattern="[A-Za-z\s]+" title="Ingresa solo texto">
+                    <input class="formularioInput" type="text" placeholder="Segundo apellido" name="segundoApellido" id="sApellido" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto">
                     <!-- <p class="inputError">Llena este campo</p> -->
                 </div>
 

@@ -13,7 +13,7 @@ echo $_SESSION['tipoUsuario']; */
 
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id_hab_tipo = habitaciones_imagenes.id_hab_tipo WHERE 1 AND habitaciones_imagenes.estado = 1 GROUP BY(habitaciones_imagenes.id_hab_tipo)";
+$sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado AS estadoTipo, MAX(habitaciones_imagenes.ruta) AS ruta, MAX(habitaciones_imagenes.estado) AS estadoImg FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id_hab_tipo = habitaciones_imagenes.id_hab_tipo WHERE habitaciones_imagenes.estado = 1 AND habitaciones_tipos.estado = 1 GROUP BY habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado";
 
 ?>
 
@@ -49,26 +49,21 @@ $sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion
 
                         <?php
                         foreach ($dbh->query($sql) as $row) :
-                            if ($row[2] == 1) :
                         ?>
                                 <div class="cardHab">
                                     <?php
-                                    if ($row[4] == 1) :
                                     ?>
                                         <div class="imgHab">
                                             <img src="../../imgServidor/<?php echo $row['ruta'] ?>" alt="">
                                         </div>
                                     <?php
-                                    endif;
                                     ?>
                                     <div class="tipoHab">
                                         <span class="nombreTipo"><?php echo $row['tipoHabitacion'] ?></span>
                                         <button data-id="<?php echo $row['id_hab_tipo']; ?>" data-bs-toggle="modal" data-bs-target="#modalInfor">Ver más</button>
                                     </div>
                                 </div>
-
                         <?php
-                            endif;
                         endforeach;
                         ?>
                     </div>

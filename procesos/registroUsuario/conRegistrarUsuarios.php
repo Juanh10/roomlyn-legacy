@@ -27,7 +27,7 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
     $insertarInforUsuarios = "INSERT INTO infousuarios(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
 
     //* INSERTAR EL USUARIO
-    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, id_rol, usuario, contraseña, estado, fecha, hora, fecha_sys) VALUES (:idInfo,:usu,:contra,:tUsu,:estado,:fecha,:hora,now())";
+    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, id_rol, usuario, contrasena, estado, fecha_reg, hora_reg, fecha_update) VALUES (:idInfo,:tUsu,:usu,:contra, :estado,:fecha,:hora,now())";
 
 
     //*CONSULTA DEL USUARIO
@@ -45,6 +45,8 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
     $marcTipoUsuario = 1;
     $consultarTipoUsuario->bindParam(':tipoUsuario', $marcTipoUsuario);
     $consultarTipoUsuario->execute(); // realiza la consulta
+
+    $tipoUsuario2 = 0;
 
     if ($consultaRegUsuario->rowCount() > 0) {
 
@@ -122,7 +124,7 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
         }
     } else {
 
-        $tipoUsuario2 = 1;
+        $tipoUsuario2 = "1";
 
         if ($consultaUsuario->fetch()) {
             ?>

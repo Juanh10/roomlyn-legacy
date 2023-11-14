@@ -75,19 +75,19 @@ $rowConsulta = $dbh->query($sqlConsulta)->fetch();
         <div class="container contenedorPrincipal">
             <h1>Gestionar datos</h1>
 
-            <form class="formularioRegistro" action="../../procesos/registroClientes/conActualizarClientes.php" method="post" id="form">
+            <form class="formularioRegistro" action="../../procesos/registroClientes/conActualizarClientes.php" method="post" id="formAct">
 
                 <input type="hidden" name="idCliente" id="idCliente" value="<?php echo $idCliente ?>">
 
                 <div class="grupoNombres" id="grupoNombres">
                     <label for="pNombre">Nombres*</label>
-                    <input class="formularioInput form-control" type="text" placeholder="Nombres" name="nombres" id="nombres" pattern="[A-Za-z\s]+" title="Ingresa solo texto" value="<?php echo $rowConsulta['nombres'] ?>" required>
+                    <input class="formularioInput form-control" type="text" placeholder="Nombres" name="nombres" id="nombres" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto" value="<?php echo $rowConsulta['nombres'] ?>" required>
                     <p></p>
                 </div>
 
                 <div class="grupoApellidos" id="grupoApellidos">
                     <label for="pApellido">Apellidos*</label>
-                    <input class="formularioInput form-control" type="text" placeholder="Apellidos" name="apellidos" id="apellidos" pattern="[A-Za-z\s]+" title="Ingresa solo texto" value="<?php echo $rowConsulta['apellidos'] ?>" required>
+                    <input class="formularioInput form-control" type="text" placeholder="Apellidos" name="apellidos" id="apellidos" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto" value="<?php echo $rowConsulta['apellidos'] ?>" required>
                     <p></p>
                 </div>
 
@@ -224,7 +224,7 @@ $rowConsulta = $dbh->query($sqlConsulta)->fetch();
 
     ?>
 
-
+    <script src="../../js/validarRegistroClientes.js"></script>
 
 </body>
 

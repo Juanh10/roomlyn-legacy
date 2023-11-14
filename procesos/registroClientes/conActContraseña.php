@@ -15,7 +15,7 @@ if (!empty($_POST['contraActual']) && !empty($_POST['contraNueva']) && !empty($_
 
     $contraEncriptada = password_hash($contraNueva, PASSWORD_DEFAULT);
 
-    $sqlConsulta = $dbh->prepare("SELECT id_cliente_registrado, contraseña, estado FROM clientes_registrados WHERE id_cliente_registrado = :idCliente AND estado = :est");
+    $sqlConsulta = $dbh->prepare("SELECT id_cliente_registrado, contrasena, estado FROM clientes_registrados WHERE id_cliente_registrado = :idCliente AND estado = :est");
 
     $sqlConsulta->bindParam(':idCliente', $cliente);
     $sqlConsulta->bindParam(':est', $estado);
@@ -24,11 +24,11 @@ if (!empty($_POST['contraActual']) && !empty($_POST['contraNueva']) && !empty($_
 
     $rowConsulta = $sqlConsulta->fetch();
 
-    if (password_verify($contraActual, $rowConsulta['contraseña'])) {
+    if (password_verify($contraActual, $rowConsulta['contrasena'])) {
 
         if ($contraNueva == $contraNueva2) {
 
-            $sqlUpdateContra = $dbh->prepare("UPDATE clientes_registrados SET contraseña= :contra, fecha_sys= now() WHERE id_cliente_registrado = :idCli AND estado = :estado");
+            $sqlUpdateContra = $dbh->prepare("UPDATE clientes_registrados SET contrasena= :contra, fecha_update= now() WHERE id_cliente_registrado = :idCli AND estado = :estado");
 
             $sqlUpdateContra->bindParam(':contra', $contraEncriptada);
             $sqlUpdateContra->bindParam(':idCli', $cliente);

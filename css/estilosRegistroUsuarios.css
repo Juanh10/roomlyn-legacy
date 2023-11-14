@@ -115,12 +115,12 @@
     color: #000;
 }
 
-.validarInput{
+.inputError{
     border: 2px solid red;
     box-shadow: 0 0 3px red;
 }
 
-.inputError{
+.error{
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 0;

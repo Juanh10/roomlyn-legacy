@@ -145,28 +145,36 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form action="../../procesos/registroUsuario/conActualizarUsuarios.php" method="post">
+                            <form action="../../procesos/registroUsuario/conActualizarUsuarios.php" method="post" id="formularioAct">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="hidden" id="id_usuario" name="id_usuario">
+                                        <input type="hidden" id="id_usuario" name="id_usuario" required>
                                         <label for="pNombre">Primer nombre</label>
-                                        <input type="text" id="pNombre" class="form-control mt-2" name="primerNombreUsuario">
+                                        <input type="text" id="pNombre" class="form-control mt-2" name="primerNombreUsuario" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Debe de llevar solo letras" required>
+                                        <p></p>
                                         <label for="sNombre" class="mt-2">Segundo nombre</label>
-                                        <input type="text" id="sNombre" class="form-control mt-2" name="segundoNombreUsuario">
+                                        <input type="text" id="sNombre" class="form-control mt-2" name="segundoNombreUsuario" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Debe de llevar solo letras">
+                                        <p></p>
                                         <label for="pApellido" class="mt-2">Primer apellido</label>
-                                        <input type="text" id="pApellido" class="form-control mt-2" name="primerApellidoUsuario">
+                                        <input type="text" id="pApellido" class="form-control mt-2" name="primerApellidoUsuario" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Debe de llevar solo letras" required>
+                                        <p></p>
                                         <label for="sApellido" class="mt-2">Segundo apellido</label>
-                                        <input type="text" id="sApellido" class="form-control mt-2" name="segundoApellidoUsuario">
+                                        <input type="text" id="sApellido" class="form-control mt-2" name="segundoApellidoUsuario" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Debe de llevar solo letras">
+                                        <p></p>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="telefono">Teléfono </label>
-                                        <input type="text" id="telefono" class="form-control mt-2" name="telefonoUsuario">
+                                        <input type="text" id="nCelular" class="form-control mt-2" name="telefonoUsuario" pattern="[0-9]*" title="Debe de llevar solo numeros" required>
+                                        <p></p>
                                         <label for="email" class="mt-2">Email</label>
-                                        <input type="email" id="email" class="form-control mt-2" name="emailUsuario">
+                                        <input type="email" id="email" class="form-control mt-2" name="emailUsuario" required>
+                                        <p></p>
                                         <label for="documento" class="mt-2">Documento</label>
-                                        <input type="text" id="documento" class="form-control mt-2" name="documentoUsuario">
+                                        <input type="text" id="documento" pattern="[0-9]*" title="Debe de llevar solo numeros" class="form-control mt-2" name="documentoUsuario" required>
+                                        <p></p>
                                         <label for="usuario" class="mt-2">Usuario</label>
-                                        <input type="text" id="usuario" class="form-control mt-2" name="usuario">
+                                        <input type="text" id="usuario" class="form-control mt-2" name="usuario" required>
+                                        <p></p>
                                     </div>
                                 </div>
                         </div>
@@ -185,6 +193,8 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
 
+
+    <script src="../../js/validarRegistroUsuario.js"></script>
 
         <!-- MOSTRAR MENSAJE DE CONFIRMACION -->
 

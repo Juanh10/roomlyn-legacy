@@ -1,120 +1,102 @@
 $(document).ready(function () {
-    $('#onload').fadeOut(); //TODO Desaparece el elemento
-    $('.cabecera').show(); //TODO Muestra el elemento
+    // Ocultar elementos al cargar
+    $('#onload').fadeOut();
+    $('.cabecera').show();
 
-
-    // VER CONTRASEÑAS
-
-    $('.inputContra').next('.verContraseña').click(function(){ // Por medio del evento clic capturamos el elemtno siguiente del input en este caso el icono de ver contraseña
-        let contrInput = $(this).prev('.inputContra');
-        let type = contrInput.attr('type');
-        
-        if (type === 'password') { // Verificamos si el tipo es password para campiarle el tipo a text
-            contrInput.attr('type', 'text');
-        } else {
-            contrInput.attr('type', 'password');
-        }
-    });
-
-    $('.inputContra2').next('.verContraseña2').click(function(){
-        let contraInput2 = $(this).prev('.inputContra2');
-        let type = contraInput2.attr('type');
-        
+    // Función para mostrar/ocultar contraseña
+    function estadoContraseña(inputElement) {
+        let type = inputElement.attr('type');
         if (type === 'password') {
-            contraInput2.attr('type', 'text');
+            inputElement.attr('type', 'text');
         } else {
-            contraInput2.attr('type', 'password');
+            inputElement.attr('type', 'password');
         }
-    })
+    }
 
-    //* VALIDAR LAS CONTRASEÑAS QUE SEAN IGUALES
-
-    let contra1 = $('.inputContra');
-    let contra2 = $('.inputContra2');
-    let msjVerificacion = $('.msjVerificacion');
-
-    contra1.add(contra2).on('input', function(){
-
-        let valorContra1 = contra1.val(); 
-        let valorContra2 = contra2.val(); 
-
-        if(valorContra1 !== valorContra2){
-            msjVerificacion.css('display','block');
-        }else{
-            msjVerificacion.css('display','none');
-
-        }
-
+    $('.verContraseña').click(function () {
+        estadoContraseña($(this).prev('.inputContra'));
     });
 
+    $('.verContraseña2').click(function () {
+        estadoContraseña($(this).prev('.inputContra2'));
+    });
 
+    // Validar contraseñas iguales
+    $('.inputContra, .inputContra2').on('input', function () {
+        const contra1 = $('.inputContra').val();
+        const contra2 = $('.inputContra2').val();
+        const msjVerificacion = $('.msjVerificacion');
 
-    //* Alerta de verificacion
+        msjVerificacion.css('display', contra1 !== contra2 ? 'block' : 'none');
+    });
 
-    $('.btnCerrarSesion').click(function (e) {
-        
-        Swal.fire({
-            title: '¿Estas seguro?',
-            text: "¡No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Cerrar sesión'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '../../procesos/login/conCerrarSesion2.php';
-            }
+    // Alerta de confirmación
+    function confirmarAccionFromulario(formElemento, message, resultado) {
+        formElemento.submit(function (e) {
+            e.preventDefault();
+
+            const capThist = this;
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: message,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirmar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resultado.call(capThist); // Ejecutar la función de envío del formulario
+                }
+            });
         });
+    }
+
+    confirmarAccionFromulario($('.formContra'), '¡No podrás revertir esto!', function() {
+        this.submit(); 
+    });
+    confirmarAccionFromulario($('.formElmCuenta'), '¡No podrás revertir esto! ¿Deseas eliminar la cuenta?', function() {
+        this.submit(); 
     });
 
-    $('.formContra').submit(function (e) {
-        e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
-        Swal.fire({
-            title: '¿Estas seguro?',
-            text: "¡No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Cambiar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit(); // sirve para enivar los datos del formulario
-            }
+    function confirmarAccionBoton(botonElemento, message, resultado){
+
+        botonElemento.click(function(e){
+
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: message,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirmar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resultado();
+                }
+            });
+
         });
-    });
 
+    }
 
-    $('.formElmCuenta').submit(function (e) {
-        e.preventDefault(); // sirve para parar lo que esta haciendo el navegador
-        Swal.fire({
-            title: '¿Estas seguro?',
-            text: "¡No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Eliminar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit(); // sirve para enivar los datos del formulario
-            }
-        });
-    });
+    confirmarAccionBoton($('.btnCerrarSesion'), "¡No podrás revertir esto!", function(){window.location.href = '../../procesos/login/conCerrarSesion2.php';})
 
-
-    let menu = $('.navegacion ul');
-    let icono = $('.icono');
-    let nacionalidad = $('#nacionalidad');
-    let departamento = $('#departamento');
-    let ciudad = $('#ciudad');
-    let idCliente = $('#idCliente');
+    // Manipulación del menú responsivo
+    const menu = $('.navegacion ul');
+    const icono = $('.icono');
 
     $(".menuRespon").click(function () {
         menu.toggleClass('mostrar');
         icono.toggleClass('iconoActivo');
     });
+
+    let nacionalidad = $('#nacionalidad');
+    let departamento = $('#departamento');
+    let ciudad = $('#ciudad');
+    let idCliente = $('#idCliente');
 
     nacionalidad.select2();
     departamento.select2();

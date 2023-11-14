@@ -62,24 +62,29 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
 
                             <!-- FORMULARIO PARA ACTUALIZAR LOS TIPOS DE HABITACIONES  -->
 
-                            <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
+                            <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post" id="formActTipoCama">
 
                                 <h2>Información</h2>
 
                                 <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
 
+                                <input type="hidden" name="actTipo" value="1">
+
                                 <label for="nombreTipo" class="form-label">Tipo de habitación</label>
                                 <input type="text" name="nombreTipo" id="nombreTipo" value="<?php echo $row['tipoHabitacion'] ?>" class="form-control p-2" placeholder="Nombre del tipo de la habitacion" require>
+                                <p></p>
 
                                 <div class="row responsiveRowInput">
                                     <div class="col-5 responsiveInput">
                                         <label for="cantidadCamas" class="form-label mt-3">Cantidad de camas</label>
                                         <input type="number" name="cantidadCamas" id="cantidadCamas" value="<?php echo $row['cantidadCamas'] ?>" min="0" class="form-control p-2 inputPeque" required>
+                                        <p></p>
                                     </div>
 
                                     <div class="col">
                                         <label for="cantidadPersonas" class="form-label mt-3">Cantidad maxima de huéspedes</label>
                                         <input type="number" name="cantidadPersonas" id="cantidadPersonas" value="<?php echo $row['capacidadPersonas'] ?>" min="0" class="form-control p-2 inputPeque" required>
+                                        <p></p>
                                     </div>
                                 </div>
 
@@ -87,15 +92,17 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                                     <div class="col-5 responsiveInput">
                                         <label for="precioVentilador" class="form-label mt-3">Costo con ventilador</label>
                                         <input type="number" name="precioVentilador" id="precioVentilador" value="<?php echo $row['precioVentilador'] ?>" min="0" class="form-control p-2 inputPeque" required>
+                                        <p></p>
                                     </div>
 
                                     <div class="col">
                                         <label for="precioAire" class="form-label mt-3">Costo con aire acondicionado</label>
                                         <input type="number" name="precioAire" id="precioAire" value="<?php echo $row['precioAire'] ?>" min="0" class="form-control p-2 inputPeque" required>
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="botonRgServicio">
-                                    <input type="submit" name="actTipo" value="Actualizar" class="btnInputSubmit">
+                                    <input type="submit" name="actTipoBtn" value="Actualizar" class="btnInputSubmit">
                                 </div>
                             </form>
                         </div>
@@ -219,6 +226,8 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
         unset($_SESSION['msjExito']);
     endif;
     ?>
+
+    <script src="../../js/validarRegistroTipoHabitaciones.js"></script>
 
 </body>
 

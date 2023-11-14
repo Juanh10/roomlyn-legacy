@@ -94,7 +94,7 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
 
     <!-- MODAL DE AÑADIR HABITACION -->
 
-    <div class="modal fade" id="addHabitacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addHabitacion" tabindex="-1" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header fondo-modal">
@@ -156,7 +156,7 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
 
 
     <!-- MODAL PARA EDITAR LAS HABITACIONES -->
-    <div class="modal fade" id="editarHab" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editarHab" tabindex="-1" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header fondo-modal">
@@ -170,7 +170,7 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
 
 
     <!-- MODAL PARA CAMBIAR EL ESTADO DE LA HABITACIÓN -->
-    <div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"">
             <div class=" modal-content">
             <div class="modal-header fondo-modal">
@@ -214,7 +214,6 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
 
 
     <script src="../../js/validarRegistroHabitaciones.js"></script>
-
 
 </body>
 

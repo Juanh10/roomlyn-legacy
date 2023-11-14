@@ -6,16 +6,16 @@ include_once "../config/conex.php";
 
 //* HACER LA VALIDACION DEL INICIO DE SESION SI LOS CAMPOS NO ESTAN VACIOS SE HACE LA CONSULTA A LA BD
 
-if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
+if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
 
 
     $usuario = $_POST['usuario'];
-    $contraseña = $_POST['contraseña'];
+    $contrasena = $_POST['contrasena'];
     $estado = 1;
 
     if (filter_var($usuario, FILTER_VALIDATE_EMAIL)) {
         
-        $validarUsu = $dbh->prepare("SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.contraseña, clientes_registrados.estado, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.email, info_clientes.estado FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente WHERE info_clientes.estado = :estCli AND clientes_registrados.estado = :est AND clientes_registrados.usuario = :usurio");
+        $validarUsu = $dbh->prepare("SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.contrasena, clientes_registrados.estado, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.email, info_clientes.estado FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente WHERE info_clientes.estado = :estCli AND clientes_registrados.estado = :est AND clientes_registrados.usuario = :usurio");
 
         $validarUsu->bindParam(':estCli',$estado);
         $validarUsu->bindParam(':est',$estado);
@@ -29,7 +29,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 
             $contador2 += 1;
 
-            $contraBD = $datosCliente['contraseña'];
+            $contraBD = $datosCliente['contrasena'];
 
             $_SESSION['id_cliente_registrado'] = $datosCliente['id_cliente_registrado']; //* Guardar el id en una sesion
             $_SESSION['id_rol'] = $datosCliente['id_rol']; //* Guardar el id en una sesion
@@ -46,7 +46,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             $_SESSION['error'] = "El usuario es incorrecto";
             header("location: ../../vistas/login.php");
         }else{
-            if (password_verify($contraseña, $contraBD)) {
+            if (password_verify($contrasena, $contraBD)) {
                 header("location: ../../index.php");
             } else {
                 $_SESSION['error'] = "La contraseña es incorrecta";
@@ -56,7 +56,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 
     } else {
 
-        $validar = $dbh->prepare("SELECT usuarios.idUsuario, usuarios.id_rol, usuarios.usuario, usuarios.contraseña, infousuarios.pNombre, infousuarios.pApellido FROM usuarios JOIN infousuarios ON usuarios.id_infoUsuario = infousuarios.id_infoUsuario WHERE usuarios.usuario = :usua and usuarios.estado = :estado"); //* preparar la consulta
+        $validar = $dbh->prepare("SELECT usuarios.idUsuario, usuarios.id_rol, usuarios.usuario, usuarios.contrasena, infousuarios.pNombre, infousuarios.pApellido FROM usuarios JOIN infousuarios ON usuarios.id_infoUsuario = infousuarios.id_infoUsuario WHERE usuarios.usuario = :usua and usuarios.estado = :estado"); //* preparar la consulta
 
         //* Bloque para enlazar los marcadores con las variables
         $validar->bindParam(':usua', $usuario);
@@ -72,7 +72,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 
             $contador += 1;
 
-            $contrasenaBD = $datos['contraseña'];
+            $contrasenaBD = $datos['contrasena'];
             $_SESSION['idUsuario'] = $datos['idUsuario']; //* Guardar el id en una sesion
             $_SESSION['pNombre'] = $datos['pNombre'];
             $_SESSION['pApellido'] = $datos['pApellido'];
@@ -84,7 +84,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             $_SESSION['error'] = "Usuario o Contraseña Incorrecta";
             header("location: ../../vistas/login.php");
         } else {
-            if (password_verify($contraseña, $contrasenaBD)) {
+            if (password_verify($contrasena, $contrasenaBD)) {
                 header("location: ../../vistas/vistasAdmin/inicio.php");
             } else {
                 $_SESSION['error'] = "Usuario o Contraseña Incorrecta";

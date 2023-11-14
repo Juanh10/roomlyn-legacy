@@ -21,7 +21,7 @@ if (!empty($_GET['idselect'])) {
                     <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple">
                     <label for="simple">Simple</label>
                 </div>
-                <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+                <input type="number" class="form-control" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
             </div>
         </div>
 
@@ -31,7 +31,7 @@ if (!empty($_GET['idselect'])) {
                     <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble">
                     <label for="doble">Doble</label>
                 </div>
-                <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+                <input type="number" class="form-control" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
             </div>
         </div>
         <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>

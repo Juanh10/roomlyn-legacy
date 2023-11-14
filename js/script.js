@@ -1,10 +1,8 @@
-//* Saber cuando ya se cargo correctamente el HTML
-
 $(document).ready(function () {
-  $('#onload').fadeOut(); //TODO Desaparece el elemento
-  $('.cabecera').show(); //TODO Muestra el elemento
-  $('.btnWha').show();
-  $('.flexslider').show();
+  // Esconder elementos al cargar el documento
+  $('#onload').fadeOut();
+  $('.cabecera, .btnWha, .flexslider').show();
+
 
   let iframeMapa = $('.mapaGoogle iframe');
 
@@ -14,12 +12,10 @@ $(document).ready(function () {
     $(this).show();
   });
 
-  //* ALERTAS DE CONFIRMACIÓN
-
+  // ALERTA DE CONFIRMACIÓN al cerrar sesión
   $('#btncerrarSesionCliente').click(function (e) {
-
     Swal.fire({
-      title: '¿Estas seguro?',
+      title: '¿Estás seguro?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -32,51 +28,38 @@ $(document).ready(function () {
     });
   });
 
-});
-
-$(document).ready(function () {
-  //* USAR LA LIBRERIA FLEXSLIDER PARA EL CARRUSEL DE LA PAGINA
+  // USAR LA LIBRERIA FLEXSLIDER PARA EL CARRUSEL DE LA PÁGINA
   $('.flexslider').flexslider({
     pauseOnAction: false,
     pauseOnHover: false,
     touch: true
   });
 
-  //* AGREGAR Y QUITAR CLASES A LOS ENLACES DEL MENU 
-
+  // AGREGAR Y QUITAR CLASES A LOS ENLACES DEL MENÚ
   $(".enlaceMenu").click(function () {
-
-    let enlace = $(this);
-
-    $("a.activo").removeClass("activo");
+    $(".enlaceMenu.activo").removeClass("activo");
     $(this).addClass("activo");
-
   });
-
-  //* EVENTO CLICK PARA AGREGAR CLASE DE MENU RESPONSIVO 
 
   let menu = $('.navegacion ul');
   let icono = $('.icono');
 
+  // EVENTO CLICK PARA AGREGAR CLASE DE MENÚ RESPONSIVO
   $(".menuRespon").click(function () {
     menu.toggleClass('mostrar');
     icono.toggleClass('iconoActivo');
   });
 
-  //* EVENTO CLICK DE TODA LA PANTALLA PARA QUE AL HACER CLIC ALGUNA PARTE DE LA PANTALLA SE QUITE LA CLASE DEL MENU
-
+  // EVENTO CLICK PARA QUITAR CLASE DEL MENÚ AL HACER CLIC EN OTRA PARTE DE LA PANTALLA
   $(document).click(function (event) {
-
     let cabeceraMenu = $(".cabecera");
-
     if (!$(event.target).closest(cabeceraMenu).length) {
       menu.removeClass("mostrar");
       icono.removeClass('iconoActivo');
     }
   });
 
-  //* LIBRERIA QUE AYUDA A QUE LA GALERIA DE IMAGENES TENGA EL EFECTO LIGHTOBX
-
+  // LIBRERÍA PARA LA GALERÍA DE IMÁGENES CON EFECTO LIGHTBOX
   lightbox.option({
     'resizeDuration': 300,
     'wrapAround': true,
@@ -87,26 +70,23 @@ $(document).ready(function () {
     'disableScrolling': true,
   });
 
-  //* LIBRERIA PARA CONTROLAR LAS ANIMACIONES
-
+  // LIBRERÍA PARA CONTROLAR LAS ANIMACIONES
   const sr = ScrollReveal();
 
-  //* Libreria para crear las animaciones y creando una funcion con parametros para las animaciones para ahorrar codigo
-
-  const animacion = (clase, origen, duracion, delay, distacia, ease) => {
+  // Función para crear animaciones con parámetros
+  const animacion = (clase, origen, duracion, delay, distancia, ease) => {
     sr.reveal(clase, {
       origin: origen,
       duration: duracion,
       delay: delay,
-      distance: distacia,
+      distance: distancia,
       easing: ease
     });
-  }
+  };
 
+  // Aplicar animaciones con la función creada
   animacion('.cabecera', 'top', 1000, 200, '30px', 'ease-out');
   animacion('.descripcionHotel', 'left', 1000, 200, '30px', 'ease-out');
   animacion('.cardServicios', 'right', 1000, 200, '50px', 'ease-in-out');
   animacion('.mapa', 'left', 1000, 200, '30px', 'ease-out');
-
-
 });

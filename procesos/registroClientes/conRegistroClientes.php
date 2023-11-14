@@ -3,7 +3,7 @@ include_once "../config/conex.php";
 date_default_timezone_set("America/Bogota");
 session_start();
 
-if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['documento']) && !empty($_POST['celular']) && !empty($_POST['email']) && !empty($_POST['sexo']) && !empty($_POST['nacionalidad']) && !empty($_POST['departamento']) && !empty($_POST['ciudad']) && $_POST['contraseña']) {
+if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['documento']) && !empty($_POST['celular']) && !empty($_POST['email']) && !empty($_POST['sexo']) && !empty($_POST['nacionalidad']) && !empty($_POST['departamento']) && !empty($_POST['ciudad']) && $_POST['contrasena']) {
 
     $nombres = $_POST['nombres'];
     $apellidos = $_POST['apellidos'];
@@ -14,7 +14,7 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
     $nacionalidad = $_POST['nacionalidad'];
     $departamento = $_POST['departamento'];
     $ciudad = $_POST['ciudad'];
-    $clave = $_POST['contraseña'];
+    $clave = $_POST['contrasena'];
     $estadoRegistro = 1;
     $estado = 1;
     $rol = 3;
@@ -26,7 +26,7 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
 
     // PREPARAR LOS INSERT
 
-    $sqlInforCliente = $dbh->prepare("INSERT INTO info_clientes(id_nacionalidad, id_departamento, id_municipio, documento, nombres, apellidos, celular, sexo, email, estadoRegistro, estado, fecha, hora, fecha_sys) VALUES (:id_nacionalidad,:id_departamento,:id_municipio,:documento,:nombres,:apellidos,:celular,:sexo,:email,:estadoRegistro,:estado,:fecha,:hora,now())"); // preparar la consulta
+    $sqlInforCliente = $dbh->prepare("INSERT INTO info_clientes(id_nacionalidad, id_departamento, id_municipio, documento, nombres, apellidos, celular, sexo, email, estadoRegistro, estado, fecha_reg, hora_reg, fecha_update) VALUES (:id_nacionalidad,:id_departamento,:id_municipio,:documento,:nombres,:apellidos,:celular,:sexo,:email,:estadoRegistro,:estado,:fecha,:hora,now())"); // preparar la consulta
 
     // ENLAZAR LOS MARCADORES CON LAS VARIABLES
 
@@ -44,7 +44,7 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
     $sqlInforCliente->bindParam(':fecha', $fecha);
     $sqlInforCliente->bindParam(':hora', $hora);
 
-    $sqlCliente = $dbh->prepare("INSERT INTO clientes_registrados(id_info_cliente, id_rol, usuario, contraseña, estado, fecha_sys) VALUES (:infocliente, :rol, :usuario, :clave, :estado, now())");
+    $sqlCliente = $dbh->prepare("INSERT INTO clientes_registrados(id_info_cliente, id_rol, usuario, contrasena, estado, fecha_update) VALUES (:infocliente, :rol, :usuario, :clave, :estado, now())");
 
 
     //CONSULTA DE USUARIOS

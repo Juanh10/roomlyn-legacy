@@ -34,13 +34,13 @@
 
                 <div class="grupoNombres" id="grupoNombres">
                     <label for="pNombre">Nombres*</label>
-                    <input class="formularioInput" type="text" placeholder="Nombres" name="nombres" id="nombres" pattern="[A-Za-z\s]+" title="Ingresa solo texto" required>
+                    <input class="formularioInput" type="text" placeholder="Nombres" name="nombres" id="nombres" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto" required>
                     <p></p>
                 </div>
 
                 <div class="grupoApellidos" id="grupoApellidos">
                     <label for="pApellido">Apellidos*</label>
-                    <input class="formularioInput" type="text" placeholder="Apellidos" name="apellidos" id="apellidos" pattern="[A-Za-z\s]+" title="Ingresa solo texto" required>
+                    <input class="formularioInput" type="text" placeholder="Apellidos" name="apellidos" id="apellidos" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingresa solo texto" required>
                     <p></p>
                 </div>
 
@@ -72,7 +72,7 @@
 
                 <div class="grupoSexo" id="grupoSexo">
                     <label for="deshabilitado">Sexo*</label>
-                    <select class="formularioInput" name="sexo">
+                    <select class="formularioInput" name="sexo" id="sexo">
                         <option selected disabled value="">Escoja una opción</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
@@ -102,14 +102,14 @@
                 <div class="grupoDepartamento" id="grupoDepartamento">
                     <label for="departamento">Departamento</label>
                     <select class="formularioInput" name="departamento" id="departamento" required>
-                        
+
                     </select>
                 </div>
 
                 <div class="grupoCiudad" id="grupoCiudad">
                     <label for="ciudad">Ciudad de origen</label>
                     <select class="formularioInput" name="ciudad" id="ciudad" required>
-                        
+
                     </select>
                 </div>
 
@@ -117,7 +117,7 @@
                     <label for="contraseña">Contraseña*</label>
                     <div class="inputContra">
                         <span class="verContraseña"><i class="bi bi-eye"></i></span>
-                        <input class="formularioInput" type="password" placeholder="Contraseña" name="contraseña" id="contraseña" required>
+                        <input class="formularioInput" type="password" placeholder="Contraseña" name="contrasena" id="contrasena" required>
                         <p></p>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                     <label for="contraseña2">Confirmar Contraseña*</label>
                     <div class="inputContra">
                         <span class="verContraseña2"><i class="bi bi-eye"></i></i></span>
-                        <input class="formularioInput" type="password" placeholder="Contraseña" name="contraseña2" id="contraseña2" required>
+                        <input class="formularioInput" type="password" placeholder="Contraseña" name="contrasena2" id="contrasena2" required>
                         <p></p>
                     </div>
                 </div>

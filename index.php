@@ -2,8 +2,6 @@
 
 session_start();
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -246,7 +244,7 @@ session_start();
 
                 <div class="conImg">
                     <a href="img/zonaParqueadero.webp" data-lightbox="fotosHotel">
-                        <img src="img/zonaParqueadero.webp" alt="Zona parqueadero">
+                        <img src="img/zonaParqueadero3.jpeg" alt="Zona parqueadero">
                     </a>
                 </div>
 

@@ -15,7 +15,7 @@ function actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas,
 
         // ejecutamos la consulta
         if ($sql->execute()) {
-            $_SESSION['msjExito'] = "Datos actualizados";
+            $_SESSION['msjExito'] = "Datos actualizados correctamente";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         } else {
             $_SESSION['msjError'] = "Ocurrió un error";
@@ -92,7 +92,7 @@ if (isset($_POST['btnElmServ'])) {
 
         // ejecutamos la consulta 
         if ($sqlElmServ->execute()) {
-            $_SESSION['msjExito'] = "Servicio deshabilitado";
+            $_SESSION['msjExito'] = "¡Se ha deshabilitado correctamente!";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         } else {
             $_SESSION['msjError'] = "Ocurrió un error";
@@ -136,7 +136,7 @@ if (isset($_POST['añadirServ'])) {
             }
 
             if($estadoSer){
-                $_SESSION['msjExito'] = "Servicio agregado";
+                $_SESSION['msjExito'] = "Servicios agregado con éxito";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             }else{
                 $_SESSION['msjExito'] = "Ocurrió un error";
