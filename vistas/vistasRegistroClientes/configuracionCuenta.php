@@ -117,9 +117,9 @@ $primerApellido = $apellidos[0];
                             </div>
                             <div class="col">
                                 <div class="datos">
-                                    <h2>Reservas</h2>
+                                    <h2>Reservas realizadas</h2>
                                     <p>En esta sección, encontraras todas las reservas que tienes.</p>
-                                    <a href="">Gestionar reservas</a>
+                                    <a href="reservasRealizadas.php">Gestionar reservas</a>
                                 </div>
                             </div>
                         </div>

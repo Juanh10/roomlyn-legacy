@@ -143,6 +143,12 @@ main {
     color: #0a58ca;
 }
 
+/* SECCION DE RESERVAS REALIZADAS */
+
+.tabla-background {
+    background-color: #9d8076;
+}
+
 @media only screen and (max-width: 560px) {
 
     .columnaDatos {

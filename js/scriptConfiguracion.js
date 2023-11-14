@@ -60,6 +60,10 @@ $(document).ready(function () {
         this.submit(); 
     });
 
+    confirmarAccionFromulario($('.formCancelarReserva'), '¡No podrás revertir esto! ¿Deseas cancelar la reserva?', function() {
+        this.submit(); 
+    });
+
     function confirmarAccionBoton(botonElemento, message, resultado){
 
         botonElemento.click(function(e){
