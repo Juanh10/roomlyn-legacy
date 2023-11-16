@@ -9,17 +9,44 @@ $fechaRango = $_GET['fechasRango'];
 $huespedes = $_GET['huespedes'];
 $sisClimatizacion = $_GET['selectClima'];
 
-$arrayFechas = explode(" - ", $fechaRango);
+$arrayFechas = explode(" - ", $fechaRango); // separar los rangos de fecha segun el caracter "-"
 
-$numeroHuespedes = preg_replace('/\D/', '', $huespedes);
+$numeroHuespedes = preg_replace('/\D/', '', $huespedes); // Eliminar todos los caracteres no numericos
 
 $checkin = $arrayFechas[0];
 
 $checkout = $arrayFechas[1];
 
+//Consultas SQL de las habitaciones segun lo que el usuario escogio en el filtro
+
 $sqlHabitaciones = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE cantidadPersonasHab = " . $numeroHuespedes . " AND tipoServicio = " . $sisClimatizacion . " AND id_hab_estado = 1 AND estado = 1";
 
 $resultHabitacion = $dbh->query($sqlHabitaciones);
+
+if ($resultHabitacion) {
+
+    // Inicializar un arreglo para almacenar los tipos de habitación
+    $arregloTipo = array();
+
+    // Recorrer los resultados de la consulta sobre las habitaciones
+    while ($datosHabitacion = $resultHabitacion->fetch(PDO::FETCH_ASSOC)) {
+
+        // Consulta SQL para obtener información sobre los tipos de habitaciones según la habitación seleccionada
+
+        $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $datosHabitacion['id_hab_tipo'] . " AND estado = 1 GROUP BY tipoHabitacion";
+
+        $datosTipos = $dbh->query($sqlTipoHabitacion)->fetch();
+
+        // Verificar si el tipo de habitación ya existe en el arreglo
+        if (!isset($arregloTipo[$datosTipos['tipoHabitacion']])) {
+            // Agregar el tipo de habitación al arreglo
+            $arregloTipo[$datosTipos['tipoHabitacion']] = $datosTipos['tipoHabitacion'];
+        }
+
+    }
+}
+
+
 
 ?>
 
@@ -52,7 +79,7 @@ $resultHabitacion = $dbh->query($sqlHabitaciones);
         </div>
     </div>
 
-    <!--     <header class="cabeceraHab">
+    <!--         <header class="cabeceraHab">
         <div class="contenedorHab navContenedorHab">
             <div class="logoPlahotHab">
                 <a href="../../index.php"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
@@ -73,8 +100,8 @@ $resultHabitacion = $dbh->query($sqlHabitaciones);
                 </ul>
             </nav>
         </div>
-    </header>
- -->
+    </header> -->
+
 
 </body>
 
@@ -82,67 +109,42 @@ $resultHabitacion = $dbh->query($sqlHabitaciones);
 <?php
 
 if ($resultHabitacion->rowCount() > 0) {
-    $datosHabitacion = $dbh->query($sqlHabitaciones)->fetch();
+
+
 
     if ($sisClimatizacion == 0) :
 ?>
         <main>
-            <section class="container seccionHabitaciones">
-                <div class="row">
-                    <div class="col-15">
-                        <?php
 
-                        foreach ($resultHabitacion as $datosHabitacion) :
+            <?php
 
-                            $idTipoHab = $datosHabitacion["id_hab_tipo"];
-
-                            $sqlTipoHab = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $idTipoHab . " AND estado = 1";
-
-                            $rowTipo = $dbh->query($sqlTipoHab)->fetch();
-
-                            $sqlServicios = "SELECT habitaciones_elementos.elemento FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_elementos.id_hab_elemento = habitaciones_tipos_elementos.id_hab_elemento WHERE id_hab_tipo = " . $idTipoHab . " AND estado = 1"; // Capturar servicios del tipo de la habitacion
-
-                            $sqlImagenesTipoHab = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = " . $idTipoHab . ""; //Capturar la ruta de las imagenes de los tipos de habitaciones
-
-                        ?>
-
-                            <div class="cardHabitaciones">
-                            <div class="row">
-                            <div class="col-3 responsive-img">
-                                <div class="imagenesTipoHabitacion">
-                                    <img src="../../img/1camaAire2.webp" alt="">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="informacionHabitacion">
-                                    <div class="habitacionTitulo">
-                                        <h1>Habitación 1</h1>
-                                    </div>
-                                    <div class="serviciosPrecio">
-                                        <p>
-                                            <span>Tipo de cama: doble</span>
-                                        </p>
-                                        <p>
-                                            <span>Capacidad: 2 personas</span> 
-                                        </p>
-                                    </div>
-                                    <div class="servicios">
-
-                                    </div>
-                                    <div class="descripcionHabitacion">
-                                        <p>Muy comodo</p>
-                                    </div>
-                                </div>
+                foreach($arregloTipo as $datosTipo):
+                    ?>
+                    <h1 class="tituloTipoHab"><?php echo $datosTipo ?></h1>
+                        <section class="container seccionHabitaciones">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="informacionList">
+    
+                                <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con ventilador</h2>
+    
+    
+          
+    
                             </div>
                         </div>
+    
+                        <div class="col-md-8">
+                            <div class="listadoHab">
+                                
                             </div>
+                        </div>
+                </section>
+                    <?php
+                endforeach;
 
+            ?>
 
-                        <?php
-                        endforeach;
-                        ?>
-                    </div>
-            </section>
         </main>
 <?php
     endif;

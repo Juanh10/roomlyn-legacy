@@ -53,11 +53,6 @@ include "funcionesIconos.php";
                             </div>
                         </div>
                     </li>
-                    <!--  <li>
-                        <div class="btnFiltro">
-                            <a class="filtro" href="#filtro"><i class="bi bi-funnel"></i></a>
-                        </div>
-                    </li> -->
                 </ul>
             </nav>
         </div>
@@ -108,7 +103,7 @@ include "funcionesIconos.php";
 
             $row = $dbh->query($sqlTipoHabitacion)->fetch(); // Obtener datos
 
-            if ($filtro === "ventilador") {
+            if ($filtro == "ventilador") {
         ?>
                 <section class="container seccionHabitaciones">
                     <div class="row">
@@ -209,7 +204,7 @@ include "funcionesIconos.php";
                         </div>
                 </section>
             <?php
-            } else if ($filtro === "aire") {
+            } else if ($filtro == "aire") {
             ?>
                 <section class="container seccionHabitaciones">
                     <div class="row">
