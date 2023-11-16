@@ -7,42 +7,49 @@ session_start();
 if (isset($_POST['btnActualizar'])) {
     if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POST['observaciones']) && !empty($_POST['idHab'])) { // Comparar si los datos no estan vacios
 
-        // Capturar todos los datos enviados del formulario
-        $idHabitacion = $_POST['idHab'];
-        $numHab = $_POST['numHabitacion'];
-        $tipoHab = $_POST['tipoHab'];
-        $tipoCama = $_POST['tipoCama'];
-        $cantTipoSimple = $_POST['cantTipoSimple'];
-        $cantTipoDoble = $_POST['cantTipoDoble'];
-        $sisClimatizacion = $_POST['sisClimatizacion'];
-        $observ = $_POST['observaciones'];
 
-        $existe = false;
+        if (!empty($_POST['cantTipoSimple']) || !empty($_POST['cantTipoDoble'])) {
 
-        $consulta = $dbh->prepare("SELECT id_habitaciones, nHabitacion FROM habitaciones WHERE id_habitaciones = :idHab"); // consulta sql
-        $consulta->bindParam(":idHab", $idHabitacion); // enlazar el marcador con la variable
-        $consulta->execute(); // ejecutar la consulta
+            // Capturar todos los datos enviados del formulario
+            $idHabitacion = $_POST['idHab'];
+            $numHab = $_POST['numHabitacion'];
+            $tipoHab = $_POST['tipoHab'];
+            $tipoCama = $_POST['tipoCama'];
+            $cantTipoSimple = $_POST['cantTipoSimple'];
+            $cantTipoDoble = $_POST['cantTipoDoble'];
+            $sisClimatizacion = $_POST['sisClimatizacion'];
+            $observ = $_POST['observaciones'];
 
-        if ($datos = $consulta->fetch()) { // obtener datos de la consulta
-            if ($datos['nHabitacion'] != $numHab) {
-                $consulta2 = $dbh->prepare("SELECT id_habitaciones, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
-                $consulta2->bindParam(":numHab", $numHab);
-                $consulta2->execute();
+            $existe = false;
 
-                $filas = $consulta2 -> fetch();
+            $consulta = $dbh->prepare("SELECT id_habitaciones, nHabitacion FROM habitaciones WHERE id_habitaciones = :idHab"); // consulta sql
+            $consulta->bindParam(":idHab", $idHabitacion); // enlazar el marcador con la variable
+            $consulta->execute(); // ejecutar la consulta
 
-                if ($consulta2->rowCount() > 0 && $filas['estado'] === 1) {
-                    $_SESSION['msjError'] = "Error: El número de habitación ya ha sido registrado anteriormente.";
-                    header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-                    $existe = true;
-                } else {
-                    if(!$existe){
-                        actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
+            if ($datos = $consulta->fetch()) { // obtener datos de la consulta
+                if ($datos['nHabitacion'] != $numHab) {
+                    $consulta2 = $dbh->prepare("SELECT id_habitaciones, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
+                    $consulta2->bindParam(":numHab", $numHab);
+                    $consulta2->execute();
+
+                    $filas = $consulta2->fetch();
+
+                    if ($consulta2->rowCount() > 0 && $filas['estado'] === 1) {
+                        $_SESSION['msjError'] = "Error: El número de habitación ya ha sido registrado anteriormente.";
+                        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+                        $existe = true;
+                    } else {
+                        if (!$existe) {
+                            actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
+                        }
                     }
+                } else {
+                    actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
                 }
-            } else {
-                actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
             }
+        }else{
+            $_SESSION['msjError'] = "Campos vacíos";
+            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
     } else {
         $_SESSION['msjError'] = "Campos vacíos";
@@ -74,7 +81,8 @@ if (isset($_POST['actualizarEstado'])) {
 }
 
 
-function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ){
+function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ)
+{
 
     $sql = $dbh->prepare("UPDATE habitaciones SET nHabitacion= :nHab, id_hab_tipo= :idTipo, tipoServicio= :tipoServ, observacion=:observacion, tipoCama=:tipoCama, cantidadPersonasHab=:cantPersonas, fecha_sys=now() WHERE id_habitaciones = :id");
 
@@ -92,15 +100,15 @@ function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tip
     $total1 = 0;
     $total2 = 0;
 
-    foreach($tipoCama as $tipo){
-        if($tipo == "simple"){
+    foreach ($tipoCama as $tipo) {
+        if ($tipo == "simple") {
             $cantPersonaSimple += 1;
             $total1 = $cantPersonaSimple * $cantTipoSimple;
-            $valorCampo.= $cantTipoSimple." ".$tipo.",";
-        }else if($tipo == "doble"){
+            $valorCampo .= $cantTipoSimple . " " . $tipo . ",";
+        } else if ($tipo == "doble") {
             $cantPersonaDoble += 2;
             $total2 = $cantPersonaDoble * $cantTipoDoble;
-            $valorCampo.= $cantTipoDoble." ".$tipo." ";
+            $valorCampo .= $cantTipoDoble . " " . $tipo . " ";
         }
         $totalCantPersonas = $total1 + $total2;
     }

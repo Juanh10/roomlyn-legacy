@@ -89,26 +89,6 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                 <div class="logoPlahotHab">
                     <a href="../index.php"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
                 </div>
-                <nav class="navegacionHab">
-                    <ul>
-                        <!-- <li id="activoBucador">
-                        <div class="buscador">
-                            <div class="btnBuscar">
-                                <i class="bi bi-search"></i>
-                            </div>
-                            <div class="inputBuscador">
-                                <label for="buscador" class="buscadorHidden">Buscar</label>
-                                <input type="text" id="buscador" placeholder="Buscar tipo de habitación">
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="btnFiltro">
-                            <a class="filtro" href="#filtro"><i class="bi bi-funnel"></i></a>
-                        </div>
-                    </li> -->
-                    </ul>
-                </nav>
             </div>
         </header>
 

@@ -13,7 +13,7 @@ echo $_SESSION['tipoUsuario']; */
 
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado AS estadoTipo, MAX(habitaciones_imagenes.ruta) AS ruta, MAX(habitaciones_imagenes.estado) AS estadoImg FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id_hab_tipo = habitaciones_imagenes.id_hab_tipo WHERE habitaciones_imagenes.estado = 1 AND habitaciones_tipos.estado = 1 GROUP BY habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado";
+$sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado AS estadoTipo, MIN(habitaciones_imagenes.ruta) AS ruta, MIN(habitaciones_imagenes.estado) AS estadoImg FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id_hab_tipo = habitaciones_imagenes.id_hab_tipo WHERE habitaciones_imagenes.estado = 1 AND habitaciones_tipos.estado = 1 GROUP BY habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado";
 
 ?>
 
