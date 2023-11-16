@@ -1,7 +1,7 @@
 <?php
 
+include_once "../../../procesos/config/conex.php";
 if (!empty($_GET['idselect'])) {
-    include_once "../../../procesos/config/conex.php";
 
     $idSelect = $_GET['idselect'];
 
@@ -14,24 +14,24 @@ if (!empty($_GET['idselect'])) {
     <p class="mensajeCantidad">Cantidad de camas disponibles en este tipo de habitación: <?php echo $cantidadCamas ?></p>
     <p>Seleccione los tipos de cama y la cantidad para cada tipo:</p>
 
-    <div class="tiposDeCamas mb-2">
+    <div class="tiposDeCamasEdit mb-2">
         <div class="tipoSimple">
             <div class="input-group mb-3">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple">
+                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple"  onchange="inputSimple(this)">
                     <label for="simple">Simple</label>
                 </div>
-                <input type="number" class="form-control" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+                <input type="number" class="form-control cantidadCamasEdit" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
             </div>
         </div>
 
         <div class="tipoDoble">
-            <div class="input-group">
+            <div class="input-group mb-3">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble">
+                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble"  onchange="inputDoble(this)">
                     <label for="doble">Doble</label>
                 </div>
-                <input type="number" class="form-control" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+                <input type="number" class="form-control cantidadCamasEdit" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
             </div>
         </div>
         <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>
@@ -55,7 +55,11 @@ if (!empty($_GET['idselect'])) {
         $nuevoArreglo[] = array("cantidad" => $cantidad, "tipo" => $tipo);
     }
 
+    $rowCantCama = $dbh->query($sql)->fetch();
+
 ?>
+
+    <p class="mensajeCantidad">Cantidad de camas disponibles en este tipo de habitación: <?php echo $rowCantCama['cantidadCamas'] ?></p>
 
     <p>Seleccione los tipos de cama y la cantidad para cada tipo:</p>
 
@@ -84,24 +88,24 @@ if (!empty($_GET['idselect'])) {
         $cantidadDelSegundoElemento = $segundoElemento["cantidad"];
         $tipoDelSegundoElemento = $segundoElemento["tipo"];
     ?>
-        <div class="tiposDeCamas mb-2">
+        <div class="tiposDeCamasEdit mb-2">
             <div class="tipoSimple">
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" checked>
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple"  onchange="inputSimple(this)" checked>
                         <label for="simple">Simple</label>
                     </div>
-                    <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelPrimerElemento ?>">
+                    <input type="number" class="form-control cantidadCamasEdit" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelPrimerElemento ?>">
                 </div>
             </div>
 
             <div class="tipoDoble">
-                <div class="input-group">
+                <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" checked>
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble"   onchange="inputDoble(this)" checked>
                         <label for="doble">Doble</label>
                     </div>
-                    <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelSegundoElemento ?>">
+                    <input type="number" class="form-control cantidadCamasEdit" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelSegundoElemento ?>">
                 </div>
             </div>
             <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>
@@ -114,59 +118,72 @@ if (!empty($_GET['idselect'])) {
         $cantidadDelPrimerElemento = $primerElemento["cantidad"];
         $tipoDelPrimerElemento = $primerElemento["tipo"];
     ?>
-        <div class="tiposDeCamas mb-2">
+        <div class="tiposDeCamasEdit mb-2">
             <div class="tipoSimple">
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" checked>
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" onchange="inputSimple(this)" checked>
                         <label for="simple">Simple</label>
                     </div>
-                    <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelPrimerElemento ?>">
+                    <input type="number" class="form-control cantidadCamasEdit" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelPrimerElemento ?>">
                 </div>
             </div>
 
             <div class="tipoDoble">
-                <div class="input-group">
+                <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble">
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" onchange="inputDoble(this)">
                         <label for="doble">Doble</label>
                     </div>
-                    <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+                    <input type="number" class="form-control cantidadCamasEdit" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
                 </div>
             </div>
             <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>
             <p id="msjErrorTipoCama2">La cantidad de camas no coincide con el tipo de habitación.</p>
         </div>
-        <?php
+    <?php
     } else if ($tieneDoble) {
         // Acceder al segundo elemento (índice 1)
         $segundoElemento = $nuevoArreglo[0];
         $cantidadDelSegundoElemento = $segundoElemento["cantidad"];
         $tipoDelSegundoElemento = $segundoElemento["tipo"];
-        ?>
+
+    ?>
+        <div class="tiposDeCamasEdit mb-2">
             <div class="tipoDoble">
-                <div class="input-group">
+                <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" checked>
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" onchange="inputDoble(this)" checked>
                         <label for="doble">Doble</label>
                     </div>
-                    <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelSegundoElemento ?>">
+                    <input type="number" class="form-control cantidadCamasEdit" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelSegundoElemento ?>">
+                </div>
+            </div>
+
+            <div class="tipoSimple">
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" onchange="inputSimple(this)">
+                        <label for="simple">Simple</label>
+                    </div>
+                    <input type="number" class="form-control cantidadCamasEdit" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
                 </div>
             </div>
             <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>
             <p id="msjErrorTipoCama2">La cantidad de camas no coincide con el tipo de habitación.</p>
         </div>
-
-        <div class="tiposDeCamas mb-2">
-            <div class="tipoSimple">
-                <div class="input-group mb-3">
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple">
-                        <label for="simple">Simple</label>
-                    </div>
-                    <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
-                </div>
-            </div>
 <?php
     }
 }
+?>
+    <script>
+        function inputSimple(checkbox) {
+        let input = document.getElementById("cantTipoSimple");
+        input.disabled = !checkbox.checked;
+    }
+
+    function inputDoble(checkbox) {
+        let input = document.getElementById("cantTipoDoble");
+        input.disabled = !checkbox.checked;
+    }
+    </script>

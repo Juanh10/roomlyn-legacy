@@ -5,7 +5,9 @@ session_start();
 
 if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POST['observaciones'])) {
 
-    $numHab =  $_POST['numHabitacion'];
+    if(!empty($_POST['cantTipoSimple']) || !empty($_POST['cantTipoDoble'])){
+
+        $numHab =  $_POST['numHabitacion'];
     $tipoHab = $_POST['tipoHab'];
     $tipoCama = $_POST['tipoCama'];
     $cantTipoSimple = $_POST['cantTipoSimple'];
@@ -80,6 +82,13 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
         }
 
     }
+
+    }else{
+        $_SESSION['msjError'] = "Campos vacíos";
+        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+    }
+
+    
 } else {
     $_SESSION['msjError'] = "Campos vacíos";
     header("location: ../../../vistas/vistasAdmin/habitaciones.php");

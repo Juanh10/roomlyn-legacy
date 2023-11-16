@@ -30,6 +30,9 @@ body {
 .boton-guardar {
     background-color: #c4ac9f;
     transition: .3s ease;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
 }
 
 .boton-guardar:hover {

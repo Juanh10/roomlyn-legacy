@@ -151,6 +151,10 @@ main {
 
 @media only screen and (max-width: 560px) {
 
+    .cabecera{
+        padding: 0px 0px !important;
+    }
+
     .columnaDatos {
         width: 100%;
     }

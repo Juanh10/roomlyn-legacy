@@ -4,9 +4,10 @@ include_once "../../../procesos/config/conex.php";
 
 $idHab = $_GET['id'];
 
-$sql = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaciones.id_hab_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.tipoServicio, habitaciones.observacion, habitaciones_estado.estado_habitacion, habitaciones_tipos.tipoHabitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id_hab_estado INNER JOIN habitaciones_tipos ON habitaciones.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones.id_habitaciones = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
+$sql = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaciones.id_hab_tipo, habitaciones.tipoCama, habitaciones.id_hab_estado, habitaciones.tipoServicio, habitaciones.observacion, habitaciones_estado.estado_habitacion, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id_hab_estado INNER JOIN habitaciones_tipos ON habitaciones.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones.id_habitaciones = " . $idHab . ""; // consulta sobre todos los datos de las habitaciones
 
 $sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND estado = 1"; // consulta de los tipos de habitaciones
+
 
 ?>
 
@@ -21,13 +22,14 @@ $sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND 
 
     <div class="container">
         <div class="formEditHab">
-            <form action="../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php" method="post" id="formRegHab">
+            <form action="../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php" id="formEditarHab" method="post">
                 <?php
                 foreach ($dbh->query($sql) as $rowHab) : // mostrar datos
                 ?>
                     <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
-                    <label for="numHabitacion">Número de la habitación</label>
-                    <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacion" value="<?php echo $rowHab['nHabitacion'] ?>" required>
+                    <label for="numHabitacion" class="borrar">Número de la habitación</label>
+                    <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacionEdit" value="<?php echo $rowHab['nHabitacion'] ?>" required>
+                    <p></p>
 
                     <label for="tipoHabEdit" class="mt-2">Tipo de habitación</label>
                     <select class="form-select mt-2 mb-3" name="tipoHab" id="tipoHabEdit" required>
@@ -42,6 +44,7 @@ $sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND 
                         endforeach;
                         ?>
                     </select>
+                    <p></p>
 
                     <div id="addSelect">
                         <?php
@@ -50,7 +53,7 @@ $sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND 
                     </div>
 
                     <label class="mt-2" for="serv">Sistema de climatización</label>
-                    <select class="form-select mt-2" name="sisClimatizacion" id="servicio">
+                    <select class="form-select mt-2" name="sisClimatizacion" id="sisClimatizacionEdit" required>
                         <?php
                         if ($rowHab['tipoServicio'] == 0) :
                         ?>
@@ -65,9 +68,11 @@ $sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND 
                         endif;
                         ?>
                     </select>
+                    <p></p>
 
                     <label for="observaciones" class="mt-2">Observaciones</label>
-                    <textarea class="form-control mt-2 mb-3" name="observaciones" id="observaciones" required><?php echo $rowHab['observacion'] ?></textarea>
+                    <textarea class="form-control mt-2 mb-3" name="observaciones" id="observacionesEdit" required><?php echo $rowHab['observacion'] ?></textarea>
+                    <p class="hola">hola</p>
                 <?php
                 endforeach;
                 ?>
@@ -79,6 +84,10 @@ $sql2 = "SELECT id_hab_tipo, tipoHabitacion FROM habitaciones_tipos WHERE 1 AND 
 
     <script src="../../librerias/jquery-3.7.0.min.js"></script>
     <script src="../../js/scriptModalAdmit.js"></script>
+
+    <script>
+        
+    </script>
 
 </body>
 

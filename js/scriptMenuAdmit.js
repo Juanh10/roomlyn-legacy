@@ -71,29 +71,6 @@ $(document).ready(function () {
     }
   });
 
-  //* Mostrar datos de usuarios para editar
-
-  $('.botonEditar').click(function (e) {
-    let tr = e.target.parentElement.parentElement.parentElement; // seleccionar al tr
-    let td = [...tr.children]; // convertir en arreglo
-
-    let datos = td.map(function (element) { // recorre los td
-      return $(element).text(); // combierte los elementos del td en texto
-    })
-
-    let nombreSeparados = datos[1].split(" "); // separa el nombre y lo convierte en un arreglo
-
-    $('#id_usuario').val(datos[0]);
-    $('#pNombre').val(nombreSeparados[0]);
-    $('#sNombre').val(nombreSeparados[1]);
-    $('#pApellido').val(nombreSeparados[2]);
-    $('#sApellido').val(nombreSeparados[3]);
-    $('#documento').val(datos[2]);
-    $('#nCelular').val(datos[3]);
-    $('#email').val(datos[4]);
-    $('#usuario').val(datos[6]);
-    $('#contraseñaUsuario').val(datos[7]);
-  });
 
   //* MOSTRAR DATOS DE SERVICIOS DE HABITACIONES PARA EDITAR
 

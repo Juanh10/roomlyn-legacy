@@ -50,7 +50,6 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                             <div class="botonAgregar">
                                 <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir Usuario</a>
                             </div>
-                            <!--                 <input type="search" class="buscador form-control" id="buscador" name="buscador" placeholder="Buscar"> -->
                         </div>
                         <div class="table-responsive tabla-usuarios">
                             <table class="table table-hover table-borderless text-center" id="tablaUsuarios">
@@ -125,10 +124,6 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                                 <span id="totalRegistro"></span>
                                 <span id="pagActual"></span>
                             </div>
-                            <!--                         <div class=botonesPaginacion">
-                            <button class="btn colorBtn" id="btnAnterior"><i class="bi bi-caret-left-fill"></i> Anterior</button>
-                            <button class="btn colorBtn" id="btnSiguiente">Siguiente <i class="bi bi-caret-right-fill"></i></button>
-                        </div> -->
                         </div>
                     </div>
                 </div>
@@ -189,12 +184,40 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
         </div>
 
         <!-- PIE DE PAGINA -->
-    <footer class="pie-de-pagina">
-        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
-    </footer>
+        <footer class="pie-de-pagina">
+            <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+        </footer>
 
 
-    <script src="../../js/validarRegistroUsuario.js"></script>
+        <script>
+            //* Mostrar datos de usuarios para editar
+
+            $('.botonEditar').click(function(e) {
+                let tr = e.target.parentElement.parentElement.parentElement; // seleccionar al tr
+                let td = [...tr.children]; // convertir en arreglo
+
+
+                let datos = td.map(function(element) { // recorre los td
+                    return $(element).text(); // combierte los elementos del td en texto
+                })
+
+                let nombreSeparados = datos[1].split(" "); // separa el nombre y lo convierte en un arreglo
+
+                $('#id_usuario').val(datos[0]);
+                $('#pNombre').val(nombreSeparados[0]);
+                $('#sNombre').val(nombreSeparados[1]);
+                $('#pApellido').val(nombreSeparados[2]);
+                $('#sApellido').val(nombreSeparados[3]);
+                $('#documento').val(datos[2]);
+                $('#nCelular').val(datos[3]);
+                $('#email').val(datos[4]);
+                $('#usuario').val(datos[6]);
+                $('#contraseñaUsuario').val(datos[7]);
+            });
+        </script>
+
+
+        <script src="../../js/validarRegistroUsuario.js"></script>
 
         <!-- MOSTRAR MENSAJE DE CONFIRMACION -->
 

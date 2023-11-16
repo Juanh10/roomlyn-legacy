@@ -19,25 +19,37 @@ if (!empty($_GET['id'])) {
     <div class="tipoSimple">
         <div class="input-group mb-3">
             <div class="input-group-text">
-                <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple">
+                <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" onchange="inputSimple(this)">
                 <label for="simple">Simple</label>
             </div>
-            <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+            <input type="number" class="form-control cantidadCamas" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
         </div>
     </div>
 
     <div class="tipoDoble">
         <div class="input-group">
             <div class="input-group-text">
-                <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble">
+                <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" onchange="inputDoble(this)">
                 <label for="doble">Doble</label>
             </div>
-            <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas">
+            <input type="number" class="form-control cantidadCamas" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
         </div>
     </div>
     <p id="msjErrorTipoCama">Debes escoger al menos una opción</p>
     <p id="msjErrorTipoCama2">La cantidad de camas no coincide con el tipo de habitación.</p>
     </div>
+
+    <script>
+        function inputSimple(checkbox) {
+        let input = document.getElementById("cantTipoSimple");
+        input.disabled = !checkbox.checked;
+    }
+
+    function inputDoble(checkbox) {
+        let input = document.getElementById("cantTipoDoble");
+        input.disabled = !checkbox.checked;
+    }
+    </script>
 
 <?php
 

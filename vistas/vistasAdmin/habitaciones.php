@@ -52,6 +52,7 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
                                     <th>Habitación</th>
                                     <th>Tipo habitación</th>
                                     <th>Sistema de climatización</th>
+                                    <th>Camas</th>
                                     <th class="col-3">Observaciones</th>
                                     <th>Estado</th>
                                     <th>Acción</th>
@@ -65,7 +66,8 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
                                         <tr>
                                             <td><?php echo $rowHab['nHabitacion'] ?></td>
                                             <td><?php echo $rowHab['tipoHabitacion'] ?></td>
-                                            <td><?php echo ($rowHab['tipoServicio'] == 0) ? "Ventilador" : "Aire acondicionado"; ?></td>
+                                            <td style="width: 100px;"><?php echo ($rowHab['tipoServicio'] == 0) ? "Ventilador" : "Aire acondicionado"; ?></td>
+                                            <td><?php echo $rowHab['tipoCama'] ?></td>
                                             <td><?php echo $rowHab['observacion'] ?></td>
                                             <td><?php echo $rowHab['estado_habitacion'] ?></td>
                                             <td class="botones-Config" id="<?php echo $rowHab['id_habitaciones'] ?>">
@@ -94,7 +96,7 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
 
     <!-- MODAL DE AÑADIR HABITACION -->
 
-    <div class="modal fade" id="addHabitacion" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal fade" id="addHabitacion" tabindex="-1" aria-labelledby="modalAñadir" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header fondo-modal">
@@ -146,10 +148,9 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" value="Añadir" name="añadirHab" class="btn boton-guardar">
+                    <input type="submit" value="Añadir" name="añadirHab" class="boton-guardar">
                 </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -182,8 +183,8 @@ $sql2 = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaci
     </div>
     </div>
 
-      <!-- PIE DE PAGINA -->
-      <footer class="pie-de-pagina">
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
 

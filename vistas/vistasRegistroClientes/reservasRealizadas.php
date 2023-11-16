@@ -115,7 +115,7 @@ $sql = "SELECT reservas.id_reserva, reservas.id_cliente, reservas.id_estado_rese
                                         <td><?php echo $checkIn ?></td>
                                         <td><?php echo $checkOut ?></td>
                                         <td>Habitación <?php echo $habitacion ?> - <?php echo $tipoHabitacion ?></td>
-                                        <td><?php echo $totalReserva ?></td>
+                                        <td><?php echo number_format($totalReserva,0,",",".") ?></td>
                                         <td><?php echo $estado ?></td>
                                         <td><?php echo $fechaRegistro ?></td>
                                         <?php
