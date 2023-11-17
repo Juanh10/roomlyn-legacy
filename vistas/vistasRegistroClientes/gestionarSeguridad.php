@@ -77,7 +77,7 @@ $primerApellido = $apellidos[0];
                                 <div class="datos">
                                     <h2>Contraseña</h2>
                                     <p>Cambia tu contraseña con frecuencia para proteger tu cuenta</p>
-                                    <a data-bs-toggle="modal" data-bs-target="#modalCambiarContraseña" href="#">Cambiar contraseña</a>
+                                    <a data-bs-toggle="modal" class="btnGestionSeg" data-bs-target="#modalCambiarContraseña" href="#">Cambiar contraseña</a>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@ $primerApellido = $apellidos[0];
                                 <div class="datos">
                                     <h2>Cerrar sesión</h2>
                                     <p>Cierra sesión en este dispositivo</p>
-                                    <a class="btnCerrarSesion" href="#">Cerrar sesión</a>
+                                    <a class="btnCerrarSesion btnGestionSeg" href="#">Cerrar sesión</a>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@ $primerApellido = $apellidos[0];
                                     <p>Elimina tu cuenta de forma permanente</p>
                                     <form action="../../procesos/registroClientes/contElmCuenta.php" method="post" class="formElmCuenta">
                                         <input type="hidden" name="idCliente" value="<?php echo $idCliente ?>">
-                                        <input type="submit" class="btn-elm-cuenta" name="elmCuenta" value="Eliminar cuenta">
+                                        <input type="submit" class="btnGestionSeg" name="elmCuenta" value="Eliminar cuenta">
                                     </form>
                                 </div>
                             </div>

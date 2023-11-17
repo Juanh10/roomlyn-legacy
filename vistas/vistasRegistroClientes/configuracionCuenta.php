@@ -72,58 +72,70 @@ $primerApellido = $apellidos[0];
         <div class="container contenedorPrincipal mx-auto">
             <h1>Configuración de la cuenta</h1>
             <div class="row">
-                <div class="col-6 columnaDatos">
+                <div class="col columnaDatos">
+
                     <div class="cardDatos">
                         <div class="row">
-                            <div class="col-1">
-                                <div class="iconoCard">
-                                    <i class="bi bi-person-fill-add"></i>
+                            <div class="col-3 colIconTitulo d-flex align-items-center justify-content-center">
+                                <div class="iconCard">
+                                    <p class="tituloConfig"><i class="bi bi-person-fill-add"></i><span>Datos personales</span></p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 colIconTitulo">
                                 <div class="datos">
-                                    <h2>Datos personales</h2>
-                                    <p>En esta sección, puedes actualizar y gestionar tus datos personales</p>
-                                    <a href="gestionarDatos.php">Gestionar los datos personales</a>
+                                    <p>En esta sección, puedes actualizar y gestionar tus datos personales. Tu experiencia personalizada comienza aquí.</p>
+                                </div>
+                            </div>
+                            <div class="col p-3 d-flex align-items-center justify-content-center">
+                                <div class="btnGes pe-4">
+                                    <a class="btnGestion" href="gestionarDatos.php">Gestionar datos personales</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="cardDatos">
                         <div class="row">
-                            <div class="col-1">
-                                <div class="iconoCard">
-                                    <i class="bi bi-person-fill-lock"></i>
+                            <div class="col-3 colIconTitulo d-flex align-items-center justify-content-center">
+                                <div class="iconCard">
+                                    <p class="tituloConfig"><i class="bi bi-person-fill-lock"></i><span>Seguridad</span></p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 colIconTitulo">
                                 <div class="datos">
-                                    <h2>Seguridad</h2>
                                     <p>En esta sección, tienes la posibilidad de modificar tus configuraciones de seguridad, cambiar tu contraseña o eliminar tu cuenta.</p>
-                                    <a href="gestionarSeguridad.php">Gestionar los ajustes de seguridad</a>
+                                </div>
+                            </div>
+                            <div class="col p-3 d-flex align-items-center justify-content-center">
+                                <div class="btnGes pe-4">
+                                    <a class="btnGestion" href="gestionarSeguridad.php">Gestionar ajustes de seguridad</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 columnaDatos">
-                <div class="cardDatos">
+
+
+                    <div class="cardDatos">
                         <div class="row">
-                            <div class="col-1">
-                                <div class="iconoCard">
-                                <i class="bi bi-calendar-check-fill"></i>
+                            <div class="col-3 colIconTitulo d-flex align-items-center justify-content-center">
+                                <div class="iconCard">
+                                    <p class="tituloConfig"><i class="bi bi-calendar-check-fill"></i><span>Reservas realizadas</span></p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6 colIconTitulo">
                                 <div class="datos">
-                                    <h2>Reservas realizadas</h2>
-                                    <p>En esta sección, encontraras todas las reservas que tienes.</p>
-                                    <a href="reservasRealizadas.php">Gestionar reservas</a>
+                                    <p>En esta sección, puedes encontrar toda la información sobre tus reservas realizadas, desde las fechas y los horarios hasta el estado actual de cada reserva.</p>
+                                </div>
+                            </div>
+                            <div class="col p-3 d-flex align-items-center justify-content-center">
+                                <div class="btnGes pe-4">
+                                    <a class="btnGestion" href="reservasRealizadas.php">Gestionar reservas</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

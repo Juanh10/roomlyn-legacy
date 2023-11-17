@@ -61,13 +61,31 @@ main {
 }
 
 .cardDatos {
-    padding: 10px;
+    background-color: #D8C6BC;
     border: 1px solid #cfcece;
     margin-bottom: 20px;
 }
 
+.colIconTitulo{
+    padding: 18px;
+}
+
+.tituloConfig i {
+    padding: 8px 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    background-color: #F6F1F1;
+}
+
+.tituloConfig{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
 .iconoCard {
-    margin-top: 10px;
+    margin-top: 30px;
+    margin-left: 8px;
 }
 
 .iconoCard i {
@@ -76,6 +94,10 @@ main {
     border-radius: 50%;
     font-size: 18px;
     background-color: #f3f3f3;
+}
+
+.tituloConfig span{
+    margin-left: 10px;
 }
 
 .datos {
@@ -89,6 +111,7 @@ main {
 .datos p {
     font-size: 14px;
     margin: 0;
+    margin-bottom: 20px;
 }
 
 .datos a {
@@ -96,9 +119,23 @@ main {
     font-size: 14px;
 }
 
-.datos a:hover {
-    text-decoration: underline;
+.btnGestion{
     font-size: 14px;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 5px;
+    color: #000;
+    background-color: #C2A596;
+}
+
+.btnGestionSeg{
+    font-size: 14px;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: none;
+    color: #000;
+    background-color: #C2A596;
 }
 
 .formularioInput {
