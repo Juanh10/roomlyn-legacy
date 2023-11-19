@@ -114,7 +114,7 @@
 }
 
 .resHabitaciones h1 {
-    margin-top: 130px;
+    margin-top: 110px;
     margin-bottom: 20px;
     padding: 20px;
     text-align: center;
@@ -821,6 +821,10 @@
     .btn-buscar-filtro{
         position: relative;
         padding: 0 30px;
+    }
+
+    .infoCard .filtrosHab li {
+        margin-bottom: 10px;
     }
 
 }

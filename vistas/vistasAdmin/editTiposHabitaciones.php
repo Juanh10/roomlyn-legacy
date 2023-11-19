@@ -2,27 +2,22 @@
 
 session_start();
 
-if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
-
-/* echo $_SESSION['idUsuario'];
-echo $_SESSION['pNombre'];
-echo $_SESSION['pApellido'];
-echo $_SESSION['tipoUsuario']; */
 
 include_once "../../procesos/config/conex.php";
 
 $idTipo = $_GET['id'];
 
 // Consulta para obtener información del tipo de habitación
-$SqlTipo = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, capacidadPersonas, precioVentilador, precioAire, estado, fecha_sys FROM habitaciones_tipos WHERE id_hab_tipo = " . $idTipo . "";
+$SqlTipo = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, capacidadPersonas, estado, fecha_sys FROM habitaciones_tipos WHERE id_hab_tipo = " . $idTipo . "";
 
 // Consulta para obtener imágenes relacionadas con el tipo de habitación
 $sqlImg = "SELECT habitaciones_imagenes.id_hab_imagen, habitaciones_imagenes.nombre, habitaciones_imagenes.ruta, habitaciones_imagenes.estado FROM habitaciones_imagenes INNER JOIN habitaciones_tipos ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones_imagenes.id_hab_tipo = " . $idTipo . "";
 
 // consulta para obtener los servicios que estan relacionados con el tipo de habitacion
-$sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habitaciones_tipos_elementos.id_hab_tipo, habitaciones_elementos.elemento, habitaciones_tipos_elementos.estado FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_tipos_elementos.id_hab_elemento = habitaciones_elementos.id_hab_elemento WHERE habitaciones_tipos_elementos.id_hab_tipo = " . $idTipo . "";
+$sqlServicios = "SELECT habitaciones_tipos_servicios.id_tipo_servicio, habitaciones_tipos_servicios.id_hab_tipo, habitaciones_servicios.servicio, habitaciones_servicios.id_servicio, habitaciones_tipos_servicios.estado FROM habitaciones_tipos_servicios INNER JOIN habitaciones_servicios ON habitaciones_tipos_servicios.id_servicio = habitaciones_servicios.id_servicio WHERE habitaciones_tipos_servicios.estado = 1 AND habitaciones_tipos_servicios.id_hab_tipo = " . $idTipo . "";
 
 ?>
 
@@ -116,12 +111,16 @@ $sqlServicios = "SELECT habitaciones_tipos_elementos.id_hab_tipo_elemento, habit
                             <?php
                             // mostrar datos de los servicios
                             foreach ($dbh->query($sqlServicios) as $rowServ) :
-                                if ($rowServ['estado'] == 1) :
+                                if ($rowServ['id_servicio'] == 1 || $rowServ['id_servicio'] == 2) :
                             ?>
-                                    <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
+                                    <li class="border border-bottom"><span><?php echo $rowServ['servicio'] ?></span></li>
+                                <?php
+                                else :
+                                ?>
+                                    <li class="border border-bottom"><span><?php echo $rowServ['servicio'] ?></span>
                                         <form action="../../procesos/registroHabitaciones/registroTipos/conActualizarTipo.php" method="post">
                                             <input type="hidden" name="idTipoHab" value="<?php echo $idTipo ?>">
-                                            <input type="hidden" name="idServicio" value="<?php echo $rowServ['id_hab_tipo_elemento'] ?>">
+                                            <input type="hidden" name="idServicio" value="<?php echo $rowServ['id_tipo_servicio'] ?>">
                                             <button type="submit" name="btnElmServ" title="Deshabilitar"><i class="bi bi-trash"></i></button>
                                         </form>
                                     </li>

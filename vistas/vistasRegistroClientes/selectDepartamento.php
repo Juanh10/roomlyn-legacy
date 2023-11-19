@@ -4,7 +4,7 @@ include_once "../../procesos/config/conex.php";
 
 $nacionalidad = $_GET['valorNa'];
 
-$sqlDepartamento = "SELECT id_departamento, id_nacionalidad, departamento FROM departamento WHERE id_nacionalidad = " . $nacionalidad . "";
+$sqlDepartamento = "SELECT id_departamento, id_nacionalidad, departamento FROM departamentos WHERE id_nacionalidad = " . $nacionalidad . "";
 
 $resultFilasDepartamento = $dbh->query($sqlDepartamento);
 

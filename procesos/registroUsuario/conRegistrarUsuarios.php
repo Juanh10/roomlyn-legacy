@@ -24,24 +24,24 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
 
 
     //* INSERTAR LA INFORMACION DEL USUARIO
-    $insertarInforUsuarios = "INSERT INTO infousuarios(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
+    $insertarInforUsuarios = "INSERT INTO info_empleados(id_tipoDocumento, documento, pNombre, sNombre, pApellido, sApellido, celular, email) VALUES (:tDoc,:doc,:pn,:sn,:pa,:sa,:cel,:em)";
 
     //* INSERTAR EL USUARIO
-    $insertarUsuarios = "INSERT INTO usuarios(id_infoUsuario, id_rol, usuario, contrasena, estado, fecha_reg, hora_reg, fecha_update) VALUES (:idInfo,:tUsu,:usu,:contra, :estado,:fecha,:hora,now())";
+    $insertarUsuarios = "INSERT INTO empleados(id_info_empleado, id_rol, usuario, contrasena, estado, fecha_reg, hora_reg, fecha_update) VALUES (:idInfo,:tUsu,:usu,:contra, :estado,:fecha,:hora,now())";
 
 
     //*CONSULTA DEL USUARIO
 
-    $consultaRegUsuario = $dbh->prepare("SELECT usuario FROM usuarios WHERE 1");
+    $consultaRegUsuario = $dbh->prepare("SELECT usuario FROM empleados WHERE 1");
 
     $consultaRegUsuario->execute();
 
-    $consultaUsuario = $dbh->prepare("SELECT usuario FROM usuarios WHERE usuario = :usuario"); // preparar la consulta sobre el usuario para que no haya duplicados
+    $consultaUsuario = $dbh->prepare("SELECT usuario FROM empleados WHERE usuario = :usuario"); // preparar la consulta sobre el usuario para que no haya duplicados
     $consultaUsuario->bindParam(':usuario', $usuario); // enlazar marcador con la variable
     $consultaUsuario->execute(); // realiza la consulta
 
     //* CONSULTA TIPO ROL
-    $consultarTipoUsuario = $dbh->prepare("SELECT id_rol FROM usuarios WHERE id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
+    $consultarTipoUsuario = $dbh->prepare("SELECT id_rol FROM empleados WHERE id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
     $marcTipoUsuario = 1;
     $consultarTipoUsuario->bindParam(':tipoUsuario', $marcTipoUsuario);
     $consultarTipoUsuario->execute(); // realiza la consulta
@@ -152,7 +152,7 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
 
             if ($insertInfor->execute()) { // ejecutar la consulta
 
-                $ultID = $dbh->lastInsertId('infousuarios'); // obtener el ultimo ID de la tabla infoUsuarios
+                $ultID = $dbh->lastInsertId('info_empleados'); // obtener el ultimo ID de la tabla infoUsuarios
 
                 date_default_timezone_set('America/Bogota'); // Establecer la zona horaria
 

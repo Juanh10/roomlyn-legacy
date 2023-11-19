@@ -8,18 +8,34 @@ $idUsuario = $_POST['id_usuario'];
 
 $estado = 0;
 
-$sql = $dbh -> prepare("UPDATE usuarios SET estado = :estado WHERE idUsuario = :idUsuario");
+$rol = 1;
 
-$sql -> bindParam(':estado', $estado);
-$sql -> bindParam(':idUsuario', $idUsuario);
+$sqlConsulta = $dbh->prepare("SELECT id_rol FROM empleados WHERE id_empleado = :idUsu AND id_rol = :idRol");
 
-if($sql -> execute()){
+$sqlConsulta->bindParam('idUsu',$idUsuario);
+$sqlConsulta->bindParam('idRol', $rol);
+
+$sqlConsulta->execute();
+
+$sql = $dbh -> prepare("UPDATE empleados SET estado = :estado WHERE id_empleado = :idUsuario");
+
+if($sqlConsulta->rowCount()>0){
     header("location: ../../vistas/vistasAdmin/usuarios.php");
-    $_SESSION['msj2'] = "Deshabilitado";
+    $_SESSION['msj2'] = "El administrador no se puede deshabilitar";
 }else{
-    header("location: ../../vistas/vistasAdmin/usuarios.php");
-    $_SESSION['msj2'] = "Ocurrió un error";
+    $sql -> bindParam(':estado', $estado);
+    $sql -> bindParam(':idUsuario', $idUsuario);
+    
+    if($sql -> execute()){
+        header("location: ../../vistas/vistasAdmin/usuarios.php");
+        $_SESSION['msj2'] = "Usuario ha sido deshabilitado correctamente";
+    }else{
+        header("location: ../../vistas/vistasAdmin/usuarios.php");
+        $_SESSION['msj2'] = "Ocurrió un error";
+    }
 }
+
+
 
 
 ?>

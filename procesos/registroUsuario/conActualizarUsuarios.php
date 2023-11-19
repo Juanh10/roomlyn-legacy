@@ -18,7 +18,7 @@ $contraseña = $_POST['contraseña'];
 
 //* SQL de actualizar 
 
-$sql = $dbh -> prepare("UPDATE infousuarios, usuarios SET infousuarios.documento= :documento, infousuarios.pNombre= :pNombre, infousuarios.sNombre= :sNombre, infousuarios.pApellido= :pApellido, infousuarios.sApellido= :sApellido, infousuarios.celular= :celular, infousuarios.email= :email, usuarios.usuario= :usuario, usuarios.fecha_update = now()  WHERE usuarios.idUsuario = :id and infousuarios.id_infoUsuario = usuarios.id_infoUsuario");
+$sql = $dbh -> prepare("UPDATE info_empleados, empleados SET info_empleados.documento= :documento, info_empleados.pNombre= :pNombre, info_empleados.sNombre= :sNombre, info_empleados.pApellido= :pApellido, info_empleados.sApellido= :sApellido, info_empleados.celular= :celular, info_empleados.email= :email, empleados.usuario= :usuario, empleados.fecha_update = now()  WHERE empleados.id_empleado = :id and info_empleados.id_info_empleado = empleados.id_info_empleado");
 
 $sql -> bindParam(':id', $idUsuario);
 $sql -> bindParam(':pNombre', $pNombre);

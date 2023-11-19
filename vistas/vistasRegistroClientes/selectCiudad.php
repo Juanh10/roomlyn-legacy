@@ -2,7 +2,7 @@
 include_once "../../procesos/config/conex.php";
 
 $departamento = $_GET['valorDe'];
-$sqlCiudad = "SELECT id_municipio, id_departamento, municipio FROM municipio WHERE id_departamento = " . $departamento . "";
+$sqlCiudad = "SELECT id_municipio, id_departamento, municipio FROM municipios WHERE id_departamento = " . $departamento . "";
 
 $resultFilasCiudad = $dbh->query($sqlCiudad);
 

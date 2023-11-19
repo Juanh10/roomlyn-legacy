@@ -4,7 +4,7 @@ session_start();
 
 include_once "../procesos/config/conex.php";
 
-$sql = $dbh->prepare("SELECT id_rol FROM usuarios WHERE id_rol = 1"); // consulta sobre el tipo de usuario
+$sql = $dbh->prepare("SELECT id_rol FROM empleados WHERE id_rol = 1"); // consulta sobre el tipo de usuario
 
 $sql->execute();
 
@@ -80,7 +80,7 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
                                 <?php
                                 if (!$validarTipoUsuario) : // si ya existe un tipo de usuario administrador no debe aparecer "Registrar" en el login
                                 ?>
-                                    <a href="registroUsuarios.php">Registrar |</a>
+                                    <a href="registroUsuarios.php">Registrar Admin|</a>
                                 <?php
                                 endif;
                                 ?>

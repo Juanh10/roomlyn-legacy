@@ -85,7 +85,7 @@ if (isset($_POST['btnElmServ'])) {
 
         $estadoElmServ = 0;
 
-        $sqlElmServ = $dbh->prepare("UPDATE habitaciones_tipos_elementos SET estado=:estado WHERE id_hab_tipo_elemento = :idServ"); // consulta sql
+        $sqlElmServ = $dbh->prepare("UPDATE habitaciones_tipos_servicios SET estado=:estado WHERE id_tipo_servicio = :idServ"); // consulta sql
 
         $sqlElmServ->bindParam(':estado', $estadoElmServ); // vincular los marcadores con las variables
         $sqlElmServ->bindParam(':idServ', $idServicios);
@@ -118,7 +118,7 @@ if (isset($_POST['añadirServ'])) {
             $tipoServ = $_POST['listaServi'];
             $estado = 1;
 
-            $sql = $dbh->prepare("INSERT INTO habitaciones_tipos_elementos(id_hab_tipo, id_hab_elemento, estado) VALUES (:idTipoHab, :idElemento, :estado)"); // consulta sql
+            $sql = $dbh->prepare("INSERT INTO habitaciones_tipos_servicios(id_hab_tipo, id_servicio, estado, fecha_sys) VALUES (:idTipoHab, :idElemento, :estado, now())"); // consulta sql
 
             $sql->bindParam(':idTipoHab', $idTipoHab); // vincular los marcadores con las variables
             $sql->bindParam(':estado', $estado);

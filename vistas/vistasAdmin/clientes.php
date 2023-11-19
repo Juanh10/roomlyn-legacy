@@ -1,19 +1,14 @@
 <?php
 session_start();
 
-if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
 
-/* echo $_SESSION['idUsuario'];
-echo $_SESSION['pNombre'];
-echo $_SESSION['pApellido'];
-echo $_SESSION['tipoUsuario']; */
-
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.estado, info_clientes.fecha_reg, info_clientes.id_info_cliente, info_clientes.documento, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.sexo, info_clientes.email, nacionalidad.nacionalidad, municipio.municipio
-FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente INNER JOIN nacionalidad ON info_clientes.id_nacionalidad = nacionalidad.id_nacionalidad INNER JOIN municipio ON info_clientes.id_municipio = municipio.id_municipio WHERE 1";
+$sql = "SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.estado, info_clientes.fecha_reg, info_clientes.id_info_cliente, info_clientes.documento, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.sexo, info_clientes.email, nacionalidades.nacionalidad, municipios.municipio
+FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente INNER JOIN nacionalidades ON info_clientes.id_nacionalidad = nacionalidades.id_nacionalidad INNER JOIN municipios ON info_clientes.id_municipio = municipios.id_municipio WHERE 1";
 
 ?>
 

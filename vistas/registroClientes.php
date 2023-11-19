@@ -85,7 +85,7 @@
                     <select class="formularioInput" name="nacionalidad" id="nacionalidad" required>
                         <option selected disabled value="">Escoja una opción</option>
                         <?php
-                        $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidad WHERE 1";
+                        $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidades WHERE 1";
 
                         foreach ($dbh->query($sqlNacionalidad) as $rowNacionalidad) :
                             if ($rowNacionalidad['id_nacionalidad'] != 1) :

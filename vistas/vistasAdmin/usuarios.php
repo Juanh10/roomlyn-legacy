@@ -2,18 +2,13 @@
 
 session_start();
 
-if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
 
-/* echo $_SESSION['idUsuario'];
-echo $_SESSION['pNombre'];
-echo $_SESSION['pApellido'];
-echo $_SESSION['tipoUsuario']; */
-
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT usuarios.*, infousuarios.* FROM usuarios JOIN infousuarios ON usuarios.id_infoUsuario = infousuarios.id_infoUsuario WHERE 1";
+$sql = "SELECT empleados.*, info_empleados.* FROM empleados JOIN info_empleados ON empleados.id_info_empleado = info_empleados.id_info_empleado WHERE 1";
 
 ?>
 
@@ -70,7 +65,7 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
 
                                     foreach ($dbh->query($sql) as $row) :
 
-                                        $id = $row['idUsuario'];
+                                        $id = $row['id_empleado'];
                                         $nombre1 = $row['pNombre'];
                                         $nombre2 = $row['sNombre'];
                                         $apellido1 = $row['pApellido'];
@@ -98,15 +93,18 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                                                 <td>
                                                     <div class="accion">
                                                         <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarUsuario" title="Editar"></span>
-
-                                                        <form action="../../procesos/registroUsuario/conEliminarUsuario.php" method="post" class="formularioEliminar">
-
-                                                            <input type="hidden" name="id_usuario" value="<?php echo $id ?> ">
-
-                                                            <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </form>
+                                                        <?php
+                                                        if ($tipoUsuario != 1) :
+                                                        ?>
+                                                            <form action="../../procesos/registroUsuario/conEliminarUsuario.php" method="post" class="formularioEliminar">
+                                                                <input type="hidden" name="id_usuario" value="<?php echo $id ?>">
+                                                                <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        <?php
+                                                        endif;
+                                                        ?>
                                                     </div>
                                                 </td>
                                             </tr>

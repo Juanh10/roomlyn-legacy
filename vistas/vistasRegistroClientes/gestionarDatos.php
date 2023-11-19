@@ -12,7 +12,7 @@ $apellidos = explode(" ", $_SESSION['apellidos']);
 $primerNombre = $nombres[0];
 $primerApellido = $apellidos[0];
 
-$sqlConsulta = "SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.estado, info_clientes.documento, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.sexo, info_clientes.email, info_clientes.estadoRegistro, info_clientes.id_nacionalidad, info_clientes.id_departamento, info_clientes.id_municipio, nacionalidad.nacionalidad, departamento.departamento, municipio.municipio FROM clientes_registrados INNER JOIN info_clientes ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente INNER JOIN nacionalidad ON info_clientes.id_nacionalidad = nacionalidad.id_nacionalidad INNER JOIN departamento ON info_clientes.id_departamento = departamento.id_departamento INNER JOIN municipio ON info_clientes.id_municipio = municipio.id_municipio WHERE clientes_registrados.id_cliente_registrado = " . $idCliente . " AND clientes_registrados.estado = 1";
+$sqlConsulta = "SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.estado, info_clientes.documento, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.sexo, info_clientes.email, info_clientes.estadoRegistro, info_clientes.id_nacionalidad, info_clientes.id_departamento, info_clientes.id_municipio, nacionalidades.nacionalidad, departamentos.departamento, municipios.municipio FROM clientes_registrados INNER JOIN info_clientes ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente INNER JOIN nacionalidades ON info_clientes.id_nacionalidad = nacionalidades.id_nacionalidad INNER JOIN departamentos ON info_clientes.id_departamento = departamentos.id_departamento INNER JOIN municipios ON info_clientes.id_municipio = municipios.id_municipio WHERE clientes_registrados.id_cliente_registrado = " . $idCliente . " AND clientes_registrados.estado = 1";
 
 $rowConsulta = $dbh->query($sqlConsulta)->fetch();
 
@@ -136,7 +136,7 @@ $rowConsulta = $dbh->query($sqlConsulta)->fetch();
                     <select class="formularioInput" name="nacionalidad" id="nacionalidad" required>
                         <option value="<?php echo $rowConsulta['id_nacionalidad'] ?>"><?php echo $rowConsulta['nacionalidad'] ?></option>
                         <?php
-                        $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidad WHERE 1";
+                        $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidades WHERE 1";
 
                         foreach ($dbh->query($sqlNacionalidad) as $rowNacionalidad) :
                             if ($rowNacionalidad['id_nacionalidad'] != 1 && $rowNacionalidad['id_nacionalidad'] != $rowConsulta['id_nacionalidad']) :

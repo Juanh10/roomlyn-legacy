@@ -2,18 +2,13 @@
 
 session_start();
 
-if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
 
-/* echo $_SESSION['idUsuario'];
-echo $_SESSION['pNombre'];
-echo $_SESSION['pApellido'];
-echo $_SESSION['tipoUsuario']; */
-
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
+$sql = "SELECT id_servicio, servicio FROM habitaciones_servicios WHERE 1";
 
 ?>
 
@@ -102,19 +97,27 @@ $sql = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
 
                                 <?php
 
-                                $elemento = strtolower($row['elemento']);
-
-                                $seleccionado = ($elemento == "ventilador" || $elemento == "aire acondicionado") ? "checked" : "";
+                                $elemento = strtolower($row['servicio']);
 
                                 ?>
-                                <label for="" class="ocularIdServi"><?php echo $row['id_hab_elemento'] ?></label>
+                                <label for="" class="ocularIdServi"><?php echo $row['id_servicio'] ?></label>
 
-                                <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['elemento'] ?>" value="<?php echo $row['id_hab_elemento'] ?>" name="opcionesServ[]" <?php echo $seleccionado; ?>>
+                                <?php
 
-                                <label class="form-check-label" for="<?php echo $row['elemento'] ?>"><?php echo $row['elemento'] ?></label>
-
-                                <span class="btn btn-sm editServiciosBtn bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#actualizarServicios" title="Editar"></span>
-
+                                if ($elemento == "ventilador" || $elemento == "aire acondicionado") {
+                                ?>
+                                    <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['servicio'] ?>" value="<?php echo $row['id_servicio'] ?>" name="opcionesServ[]" checked disabled>
+                                    <label class="form-check-label" for="<?php echo $row['servicio'] ?>"><?php echo $row['servicio'] ?></label>
+                                <?php
+                                } else {
+                                ?>
+                                    <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['servicio'] ?>" value="<?php echo $row['id_servicio'] ?>" name="opcionesServ[]" >
+                                    <label class="form-check-label" for="<?php echo $row['servicio'] ?>"><?php echo $row['servicio'] ?></label>
+    
+                                    <span class="btn btn-sm editServiciosBtn bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#actualizarServicios" title="Editar"></span>
+                                <?php
+                                }
+                                ?>
                             </div>
                         <?php
                         endforeach;
@@ -193,8 +196,8 @@ $sql = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
         </div>
     </div>
 
-      <!-- PIE DE PAGINA -->
-      <footer class="pie-de-pagina">
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
 

@@ -69,14 +69,14 @@ $primerApellido = $apellidos[0];
                     <div class="cardDatos">
                         <div class="row">
                             <div class="col-1">
-                                <div class="iconoCard">
+                                <div class="iconoCard iconCardSeg">
                                     <i class="bi bi-lock-fill"></i>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="datos">
+                                <div class="datos datoSeguridad">
                                     <h2>Contraseña</h2>
-                                    <p>Cambia tu contraseña con frecuencia para proteger tu cuenta</p>
+                                    <p class="pSeguridad">Cambia tu contraseña con frecuencia para proteger tu cuenta</p>
                                     <a data-bs-toggle="modal" class="btnGestionSeg" data-bs-target="#modalCambiarContraseña" href="#">Cambiar contraseña</a>
                                 </div>
                             </div>
@@ -86,14 +86,14 @@ $primerApellido = $apellidos[0];
                     <div class="cardDatos">
                         <div class="row">
                             <div class="col-1">
-                                <div class="iconoCard">
+                                <div class="iconoCard iconCardSeg">
                                     <i class="bi bi-box-arrow-left"></i>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="datos">
+                                <div class="datos datoSeguridad">
                                     <h2>Cerrar sesión</h2>
-                                    <p>Cierra sesión en este dispositivo</p>
+                                    <p class="pSeguridad">Cierra sesión en este dispositivo</p>
                                     <a class="btnCerrarSesion btnGestionSeg" href="#">Cerrar sesión</a>
                                 </div>
                             </div>
@@ -104,14 +104,14 @@ $primerApellido = $apellidos[0];
                     <div class="cardDatos">
                         <div class="row">
                             <div class="col-1">
-                                <div class="iconoCard">
+                                <div class="iconoCard iconCardSeg">
                                     <i class="bi bi-trash3-fill"></i>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="datos">
+                                <div class="datos datoSeguridad">
                                     <h2>Eliminar cuenta</h2>
-                                    <p>Elimina tu cuenta de forma permanente</p>
+                                    <p class="pSeguridad">Elimina tu cuenta de forma permanente</p>
                                     <form action="../../procesos/registroClientes/contElmCuenta.php" method="post" class="formElmCuenta">
                                         <input type="hidden" name="idCliente" value="<?php echo $idCliente ?>">
                                         <input type="submit" class="btnGestionSeg" name="elmCuenta" value="Eliminar cuenta">

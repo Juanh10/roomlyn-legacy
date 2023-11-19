@@ -61,7 +61,7 @@ $primerApellido = $apellidos[0];
             <nav class="navegacion">
                 <ul>
                     <li class="inicioSesionCliente" title="Conectado">
-                        <a href="configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre." ".$primerApellido ?></a>
+                        <a href="configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre . " " . $primerApellido ?></a>
                     </li>
                 </ul>
             </nav>
@@ -76,75 +76,83 @@ $primerApellido = $apellidos[0];
 
                     <div class="cardDatos">
                         <div class="row">
-                            <div class="col-3 colIconTitulo d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-md-3 colIconTitulo d-flex align-items-center justify-content-center">
                                 <div class="iconCard">
                                     <p class="tituloConfig"><i class="bi bi-person-fill-add"></i><span>Datos personales</span></p>
                                 </div>
                             </div>
-                            <div class="col-6 colIconTitulo">
-                                <div class="datos">
-                                    <p>En esta sección, puedes actualizar y gestionar tus datos personales. Tu experiencia personalizada comienza aquí.</p>
-                                </div>
-                            </div>
-                            <div class="col p-3 d-flex align-items-center justify-content-center">
-                                <div class="btnGes pe-4">
-                                    <a class="btnGestion" href="gestionarDatos.php">Gestionar datos personales</a>
+                            <div class="col-12 col-md-9">
+                                <div class="row align-items-stretch">
+                                    <div class="col-8 columnaDatos d-flex align-items-center justify-content-center">
+                                        <div class="datos">
+                                            <p>En esta sección, puedes actualizar y gestionar tus datos personales. Tu experiencia personalizada comienza aquí.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 columnaBoton d-flex align-items-center justify-content-center">
+                                        <div class="btnGes">
+                                            <a class="btnGestion" href="gestionarDatos.php">Gestionar datos personales</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="cardDatos">
                         <div class="row">
-                            <div class="col-3 colIconTitulo d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-md-3 colIconTitulo d-flex align-items-center justify-content-center">
                                 <div class="iconCard">
-                                    <p class="tituloConfig"><i class="bi bi-person-fill-lock"></i><span>Seguridad</span></p>
+                                    <p class="tituloConfig"><i class="bi bi-person-fill-add"></i><span>Seguridad</span></p>
                                 </div>
                             </div>
-                            <div class="col-6 colIconTitulo">
-                                <div class="datos">
-                                    <p>En esta sección, tienes la posibilidad de modificar tus configuraciones de seguridad, cambiar tu contraseña o eliminar tu cuenta.</p>
-                                </div>
-                            </div>
-                            <div class="col p-3 d-flex align-items-center justify-content-center">
-                                <div class="btnGes pe-4">
-                                    <a class="btnGestion" href="gestionarSeguridad.php">Gestionar ajustes de seguridad</a>
+                            <div class="col-12 col-md-9">
+                                <div class="row align-items-stretch">
+                                    <div class="col-8 columnaDatos d-flex align-items-center justify-content-center">
+                                        <div class="datos">
+                                            <p>En esta sección, tienes la posibilidad de modificar tus configuraciones de seguridad, cambiar tu contraseña o eliminar tu cuenta.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 columnaBoton d-flex align-items-center justify-content-center">
+                                        <div class="btnGes">
+                                            <a class="btnGestion" href="gestionarSeguridad.php">Gestionar ajustes de seguridad</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="cardDatos">
                         <div class="row">
-                            <div class="col-3 colIconTitulo d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-md-3 colIconTitulo d-flex align-items-center justify-content-center">
                                 <div class="iconCard">
-                                    <p class="tituloConfig"><i class="bi bi-calendar-check-fill"></i><span>Reservas realizadas</span></p>
+                                    <p class="tituloConfig"><i class="bi bi-person-fill-add"></i><span>Reservas realizadas</span></p>
                                 </div>
                             </div>
-                            <div class="col-6 colIconTitulo">
-                                <div class="datos">
-                                    <p>En esta sección, puedes encontrar toda la información sobre tus reservas realizadas, desde las fechas y los horarios hasta el estado actual de cada reserva.</p>
-                                </div>
-                            </div>
-                            <div class="col p-3 d-flex align-items-center justify-content-center">
-                                <div class="btnGes pe-4">
-                                    <a class="btnGestion" href="reservasRealizadas.php">Gestionar reservas</a>
+                            <div class="col-12 col-md-9">
+                                <div class="row align-items-stretch">
+                                    <div class="col-8 columnaDatos d-flex align-items-center justify-content-center">
+                                        <div class="datos">
+                                            <p>En esta sección, puedes encontrar toda la información sobre tus reservas realizadas, desde las fechas y los horarios hasta el estado actual de cada reserva.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 columnaBoton d-flex align-items-center justify-content-center">
+                                        <div class="btnGes">
+                                            <a class="btnGestion" href="reservasRealizadas.php">Gestionar reservas</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </main>
 
+    <!--* PIE DE PAGINA -->
 
-        <!--* PIE DE PAGINA -->
-
-        <footer>
+    <footer>
         <div class="piePagina">
             <div class="copyPiePagina">
                 <div class="logoPiePagina">

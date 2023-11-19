@@ -603,3 +603,9 @@ footer {
     }
 
 }
+
+@media only screen and (max-width: 280px) {
+    .logoPlahot{
+        display: none;
+    }
+}

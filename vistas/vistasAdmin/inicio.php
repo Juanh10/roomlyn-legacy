@@ -1,14 +1,9 @@
 <?php
 session_start();
 
-if (empty($_SESSION['idUsuario'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
+if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
 }
-
-/* echo $_SESSION['idUsuario'];
-echo $_SESSION['pNombre'];
-echo $_SESSION['pApellido'];
-echo $_SESSION['tipoUsuario']; */
 
 ?>
 

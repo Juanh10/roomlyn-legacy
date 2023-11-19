@@ -4,7 +4,7 @@ include_once "../../procesos/config/conex.php";
 
 if(!empty($_GET['event'])){
     $nacionalidad = $_GET['valorNa'];
-    $sqlDepartamento = "SELECT id_departamento, id_nacionalidad, departamento FROM departamento WHERE id_nacionalidad = " . $nacionalidad . "";
+    $sqlDepartamento = "SELECT id_departamento, id_nacionalidad, departamento FROM departamentos WHERE id_nacionalidad = " . $nacionalidad . "";
     
     $resultFilasDepartamento = $dbh->query($sqlDepartamento);
     if ($resultFilasDepartamento->rowCount() > 0) :
@@ -24,11 +24,11 @@ if(!empty($_GET['event'])){
     $nacionalidad = $_GET['valorNa'];
     $cliente = $_GET['vCliente'];
     
-    $sqlDepartamento = "SELECT id_departamento, id_nacionalidad, departamento FROM departamento WHERE id_nacionalidad = " . $nacionalidad . "";
+    $sqlDepartamento = "SELECT id_departamento, id_nacionalidad, departamento FROM departamentos WHERE id_nacionalidad = " . $nacionalidad . "";
     
     $resultFilasDepartamento = $dbh->query($sqlDepartamento);
     
-    $sqlCliente = "SELECT clientes_registrados.id_cliente_registrado, info_clientes.id_departamento, info_clientes.id_municipio, departamento.departamento, municipio.municipio FROM clientes_registrados INNER JOIN info_clientes ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente INNER JOIN nacionalidad ON info_clientes.id_nacionalidad = nacionalidad.id_nacionalidad INNER JOIN departamento ON info_clientes.id_departamento = departamento.id_departamento INNER JOIN municipio ON info_clientes.id_municipio = municipio.id_municipio WHERE clientes_registrados.id_cliente_registrado = " . $cliente . " AND clientes_registrados.estado = 1";
+    $sqlCliente = "SELECT clientes_registrados.id_cliente_registrado, info_clientes.id_departamento, info_clientes.id_municipio, departamentos.departamento, municipios.municipio FROM clientes_registrados INNER JOIN info_clientes ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente INNER JOIN nacionalidades ON info_clientes.id_nacionalidad = nacionalidades.id_nacionalidad INNER JOIN departamentos ON info_clientes.id_departamento = departamentos.id_departamento INNER JOIN municipios ON info_clientes.id_municipio = municipios.id_municipio WHERE clientes_registrados.id_cliente_registrado = " . $cliente . " AND clientes_registrados.estado = 1";
     
     $rowCliente = $dbh->query($sqlCliente)->fetch();
     

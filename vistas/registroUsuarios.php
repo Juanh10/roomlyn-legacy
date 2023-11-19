@@ -2,7 +2,7 @@
 
 include "../procesos/config/conex.php";
 
-$sql = $dbh->prepare("SELECT id_rol  FROM usuarios WHERE id_rol = 1"); // consulta sobre el tipo de usuario
+$sql = $dbh->prepare("SELECT id_rol  FROM empleados WHERE id_rol = 1"); // consulta sobre el tipo de usuario
 
 $sql->execute();
 

@@ -56,7 +56,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
 
     } else {
 
-        $validar = $dbh->prepare("SELECT usuarios.idUsuario, usuarios.id_rol, usuarios.usuario, usuarios.contrasena, infousuarios.pNombre, infousuarios.pApellido FROM usuarios JOIN infousuarios ON usuarios.id_infoUsuario = infousuarios.id_infoUsuario WHERE usuarios.usuario = :usua and usuarios.estado = :estado"); //* preparar la consulta
+        $validar = $dbh->prepare("SELECT empleados.id_empleado, empleados.id_rol, empleados.usuario, empleados.contrasena, info_empleados.pNombre, info_empleados.pApellido FROM empleados JOIN info_empleados ON empleados.id_info_empleado = info_empleados.id_info_empleado WHERE empleados.usuario = :usua and empleados.estado = :estado"); //* preparar la consulta
 
         //* Bloque para enlazar los marcadores con las variables
         $validar->bindParam(':usua', $usuario);
@@ -73,7 +73,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
             $contador += 1;
 
             $contrasenaBD = $datos['contrasena'];
-            $_SESSION['idUsuario'] = $datos['idUsuario']; //* Guardar el id en una sesion
+            $_SESSION['id_empleado'] = $datos['id_empleado']; //* Guardar el id en una sesion
             $_SESSION['pNombre'] = $datos['pNombre'];
             $_SESSION['pApellido'] = $datos['pApellido'];
             $_SESSION['tipoUsuario'] = $datos['id_rol'];
@@ -81,13 +81,13 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
         }
 
         if ($contador == 0) {
-            $_SESSION['error'] = "Usuario o Contraseña Incorrecta";
+            $_SESSION['error'] = "El usuario es incorrecto";
             header("location: ../../vistas/login.php");
         } else {
             if (password_verify($contrasena, $contrasenaBD)) {
                 header("location: ../../vistas/vistasAdmin/inicio.php");
             } else {
-                $_SESSION['error'] = "Usuario o Contraseña Incorrecta";
+                $_SESSION['error'] = "La contraseña es incorrecta";
                 header("location: ../../vistas/login.php");
             }
         }

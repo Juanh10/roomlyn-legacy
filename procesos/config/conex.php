@@ -1,5 +1,5 @@
 <?php
-$dbserver = 'mysql:dbname=proyecto4;host=127.0.0.1';
+$dbserver = 'mysql:dbname=proyecto_final;host=127.0.0.1';
 $user = 'root';
 $password = '';
 
