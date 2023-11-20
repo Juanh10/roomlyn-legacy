@@ -2,7 +2,7 @@
 
 include_once "../../config/conex.php";
 
-if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_POST['cantidadPersonas']) && !empty($_POST['precioVentilador']) && !empty($_POST['precioAire']) && !empty($_FILES['imagenes']) && !empty($_POST['opcionesServ'])) {
+if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_POST['cantidadPersonas']) && !empty($_POST['precioVentilador']) && !empty($_POST['precioAire']) && !empty($_FILES['imagenes'])) {
 
     session_start();
 
@@ -59,7 +59,11 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
             $ventilador = 1;
             $aire = 2;
 
-            $opcionesServ2 = array_merge([$ventilador, $aire], $opcionesServ);
+            $opcionesServ2 = [$ventilador, $aire];
+
+            if (!empty($opcionesServ)) {
+                $opcionesServ2 = array_merge($opcionesServ2, $opcionesServ);
+            }
 
             foreach ($opcionesServ2 as $opciones) { // recorrer todas las opciones de servicios
                 $sql2->bindParam(':idElemento', $opciones);
@@ -69,7 +73,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
                     $estadoConfirServicios = false;
                 }
             }
-
+            
             if ($estadoConfirServicios) {
 
                 $sqlServicioTipo = $dbh->prepare("SELECT id_tipo_servicio, id_hab_tipo, id_servicio, estado FROM habitaciones_tipos_servicios WHERE id_hab_tipo = " . $ultID . " AND id_servicio = " . $ventilador . "");
@@ -104,21 +108,18 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
                             $sqlInsertPrecioAire->bindParam(':precio', $precioAire);
                             $sqlInsertPrecioAire->bindParam(':estado', $estado);
 
-                            if($sqlInsertPrecioAire->execute()){
+                            if ($sqlInsertPrecioAire->execute()) {
                                 $estadoConfirPrecios = true;
-                            }else{
+                            } else {
                                 header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
                                 $_SESSION['msj2'] = "Ocurrió un error";
                             }
-
                         }
                     }
                 }
             }
 
-
             //* SECCION PARA SUBIR LAS IMAGENES A LA BASE DE DATOS
-
 
             $sql3 = $dbh->prepare("INSERT INTO habitaciones_imagenes(id_hab_tipo, nombre, ruta, estado) VALUES (:idTipo, :nombre, :ruta, :estadoImg)"); // preparar la consulta de la tabla de las imagenes
             $estadoImg = 1;

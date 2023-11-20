@@ -88,7 +88,7 @@ $sql = "SELECT id_servicio, servicio FROM habitaciones_servicios WHERE 1";
                 <div class="col-4 responsiveServicios">
 
                     <div class="serviciosHabitaciones">
-                        <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios <span class="checkSpan">(Seleccione al menos una opción)</span></h1>
+                        <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Servicios</h1>
                         <?php
 
                         foreach ($dbh->query($sql) as $row) :

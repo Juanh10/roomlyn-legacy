@@ -5,9 +5,11 @@ session_start();
 include_once "../procesos/config/conex.php";
 include "vistasHabitaciones/funcionesIconos.php";
 
-$sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.precioVentilador, habitaciones_tipos.precioAire, habitaciones_tipos.estado, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE 1 GROUP BY habitaciones_imagenes.id_hab_tipo";
+$estado = 1;
 
+$sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.estado, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones_tipos.estado=1 GROUP BY habitaciones_imagenes.id_hab_tipo";
 
+$sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE hts.id_hab_tipo = :idHabTipo AND htp.estado = :estadoHab");
 
 ?>
 
@@ -158,64 +160,70 @@ $sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHa
                 foreach ($dbh->query($sqlTiposHab) as $row) :
                     $cantCama = $row['cantidadCamas'];
                     $capacidadPerson = $row['capacidadPersonas'];
-                    if ($row['estado'] == 1) :
                 ?>
-                        <div class="cardHab">
-                            <div class="imgCard">
-                                <img src="../imgServidor/<?php echo $row['ruta'] ?>" alt="Imagen del tipo de habitación">
+                    <div class="cardHab">
+                        <div class="imgCard">
+                            <img src="../imgServidor/<?php echo $row['ruta'] ?>" alt="Imagen del tipo de habitación">
+                        </div>
+
+                        <div class="contenidoCard">
+
+                            <div class="tituloHab">
+                                <h2><?php echo $row['tipoHabitacion'] ?></h2>
+                                <a class="btnImgHab" href="../imgServidor/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id_hab_tipo'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
                             </div>
 
-                            <div class="contenidoCard">
-
-                                <div class="tituloHab">
-                                    <h2><?php echo $row['tipoHabitacion'] ?></h2>
-                                    <a class="btnImgHab" href="../imgServidor/<?php echo $row['ruta'] ?>" data-lightbox="image-<?php echo $row['id_hab_tipo'] ?>" title="Ver imagen"><i class="bi bi-image"></i></a>
-                                </div>
-
-                                <div class="infoCard">
-                                    <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
-                                    <p><span>Capacidad máxima: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
-                                    <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="get">
-                                        <input type="hidden" value="<?php echo $row['id_hab_tipo'] ?>" name="idTipoHab">
-                                        <p class="selFiltro">Seleccione: </p>
-                                        <ul class="filtrosHab">
-                                            <li>
-                                                <input type="checkbox" name="opServicios[]" value="ventilador" id="checkVentilador<?php echo $row['id_hab_tipo'] ?>" class="check">
-                                                <label for="checkVentilador<?php echo $row['id_hab_tipo'] ?>">Ventilador</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="opServicios[]" value="aire" id="checkAire<?php echo $row['id_hab_tipo'] ?>" class="check">
-                                                <label for="checkAire<?php echo $row['id_hab_tipo'] ?>">Aire acondicionado</label>
-                                            </li>
-                                        </ul>
-                                        <div class="btnInfo">
-                                            <button type="submit" class="btnVermas" title="Ver lista de las habitaciones"> Ver más </button>
-                                        </div>
-                                    </form>
-                                </div>
+                            <div class="infoCard">
+                                <p><span>Cantidad de camas: </span><?php echo $cantCama; ?></p>
+                                <p><span>Capacidad máxima: </span><?php iconCapacidad($capacidadPerson); ?></pass=>
+                                <form action="vistasHabitaciones/mostrarListaHabitaciones.php" method="get">
+                                    <input type="hidden" value="<?php echo $row['id_hab_tipo'] ?>" name="idTipoHab">
+                                    <p class="selFiltro">Seleccione: </p>
+                                    <ul class="filtrosHab">
+                                        <li>
+                                            <input type="checkbox" name="opServicios[]" value="ventilador" id="checkVentilador<?php echo $row['id_hab_tipo'] ?>" class="check">
+                                            <label for="checkVentilador<?php echo $row['id_hab_tipo'] ?>">Ventilador</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="opServicios[]" value="aire" id="checkAire<?php echo $row['id_hab_tipo'] ?>" class="check">
+                                            <label for="checkAire<?php echo $row['id_hab_tipo'] ?>">Aire acondicionado</label>
+                                        </li>
+                                    </ul>
+                                    <div class="btnInfo">
+                                        <button type="submit" class="btnVermas" title="Ver lista de las habitaciones"> Ver más </button>
+                                    </div>
+                                </form>
+                            </div>
 
 
-                                <div class="precios">
+                            <div class="precios">
+                                <?php
+
+                                $idTipoHab = $row['id_hab_tipo'];
+
+                                $sqlPrecios->bindParam(':estadoHab', $estado);
+                                $sqlPrecios->bindParam(':idHabTipo', $idTipoHab);
+
+                                $sqlPrecios->execute();
+
+                                while ($resPrecio = $sqlPrecios->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
                                     <div class="precioVent">
-                                        <p>Precio por dia con ventilador</p>
-                                        <span>COP <?php echo number_format($row['precioVentilador'], 0, ',', '.') ?> + IVA</span>
+                                        <p>Precio por dia con <?php echo $resPrecio['servicio'] ?></p>
+                                        <span>COP <?php echo number_format($resPrecio['precio'], 0, ',', '.') ?> + IVA</span>
                                     </div>
-                                    <div class="precioAire">
-                                        <p>Precio por dia con aire acondicionado</p>
-                                        <span>COP <?php echo number_format($row['precioAire'], 0, ',', '.') ?> + IVA</span>
-                                    </div>
-                                </div>
+                                <?php
+                                }
 
+                                ?>
                             </div>
 
                         </div>
 
+                    </div>
                 <?php
-                    endif;
                 endforeach;
-
                 ?>
-
             </div>
         </section>
     </main>

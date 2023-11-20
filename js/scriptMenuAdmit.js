@@ -1,10 +1,8 @@
 $(document).ready(function () {
 
   $('.btnIconoMenu').click(function () {
-
     $('.menuLateral').toggleClass('activoMenu');
     $('body').toggleClass('activoBackground');
-
   });
 
   let enlacePrincipal = $('.enlacePrincipal');
@@ -155,18 +153,21 @@ $(document).ready(function () {
 
   //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
   const btnEditHab = $('.btnEditHab');
-  const contenidoEditHab = $('#modalEditHab');
+  const contenidoEditHab = $('#contaionerEditHabitaciones');
 
   btnEditHab.click(function (e) {
-
-    let idHabitacion = e.target.parentElement.id;
-
-    fetch(`../vistasAdmin/habitaciones/editarHabitaciones.php?id=${idHabitacion}`)
-      .then(res => res.text())
-      .then(datos => contenidoEditHab.html(datos))
-      .catch()
-
+      let idHabitacion = e.target.parentElement.id;
+  
+      fetch(`../vistasAdmin/editarHabitaciones.php?id=${idHabitacion}`)
+          .then(res => res.text())
+          .then(datos => {
+              contenidoEditHab.html(datos);
+              $('#contaionerHabitaciones').hide(); // Oculta el contenedor
+              $('.pie-de-pagina').hide();
+          })
+          .catch();
   });
+  
 
   //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
   const btnCambiarEstado = $('.btnCambEstado');
@@ -177,7 +178,7 @@ $(document).ready(function () {
     let idHabitacion = e.target.parentElement.id;
 
 
-    fetch(`../vistasAdmin/habitaciones/cambiarEstado.php?id=${idHabitacion}`)
+    fetch(`../vistasAdmin/cambiarEstado.php?id=${idHabitacion}`)
       .then(res => res.text())
       .then(datos => contenidoEstado.html(datos))
       .catch()

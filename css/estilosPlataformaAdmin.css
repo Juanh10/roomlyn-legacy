@@ -161,8 +161,8 @@ body {
 .tituloServicios{
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 20px;
     text-align: left;
+    margin-bottom: 0;
     background-color: #c4ac9f;
     padding: 15px;
 }
@@ -803,6 +803,13 @@ body {
 
 .dataTables_wrapper{
     margin-bottom: 90px;
+}
+
+.btnVolverHab{
+    color: #b49d91;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 /** MODAL DE REGISTRO DE HABITACIONES  */

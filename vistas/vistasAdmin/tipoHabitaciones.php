@@ -10,6 +10,8 @@ include_once "../../procesos/config/conex.php";
 
 $sql = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado AS estadoTipo, MIN(habitaciones_imagenes.ruta) AS ruta, MIN(habitaciones_imagenes.estado) AS estadoImg FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_tipos.id_hab_tipo = habitaciones_imagenes.id_hab_tipo WHERE habitaciones_imagenes.estado = 1 AND habitaciones_tipos.estado = 1 GROUP BY habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.estado";
 
+$sqlPrecios = "SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE htp.estado = 1";
+
 ?>
 
 <!DOCTYPE html>

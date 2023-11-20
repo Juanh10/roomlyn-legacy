@@ -65,7 +65,7 @@ include "funcionesIconos.php";
         {
 
             
-            $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
+            $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
 
             foreach ($dbh->query($sqlTipoHabitacion) as $row) {
         ?>
@@ -92,13 +92,13 @@ include "funcionesIconos.php";
                 $tipoServ = 1;
             }
 
-            $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
+            $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
 
-            $sqlServicios = "SELECT habitaciones_elementos.elemento FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_elementos.id_hab_elemento = habitaciones_tipos_elementos.id_hab_elemento WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar servicios del tipo de la habitacion
+            $sqlServicios = "SELECT habitaciones_servicios.servicio FROM habitaciones_tipos_servicios INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = habitaciones_tipos_servicios.id_servicio WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar servicios del tipo de la habitacion
 
             $sqlImagenesTipoHab = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = " . $id . ""; //Capturar la ruta de las imagenes de los tipos de habitaciones
 
-            $sqlHabitacion = "SELECT id_habitaciones, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND tipoServicio = " . $tipoServ . " AND id_hab_estado = 1 AND estado = 1"; // Capturar toda la informacion de la habitacion
+            $sqlHabitacion = "SELECT id_habitaciones, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND tipoServicio = " . $tipoServ . " AND id_hab_estado = 1 AND estado = 1"; // Capturar toda la informacion de la habitacion
 
 
             $row = $dbh->query($sqlTipoHabitacion)->fetch(); // Obtener datos
@@ -148,9 +148,9 @@ include "funcionesIconos.php";
                                     <li><?php echo $row['cantidadCamas'] ?> Cama sencilla o doble</li>
                                     <?php
                                     foreach ($dbh->query($sqlServicios) as $row2) :
-                                        if (strtolower($row2['elemento']) != "aire acondicionado") :
+                                        if (strtolower($row2['servicio']) != "aire acondicionado") :
                                     ?>
-                                            <li><?php echo $row2['elemento'] ?></li>
+                                            <li><?php echo $row2['servicio'] ?></li>
                                     <?php
                                         endif;
                                     endforeach;

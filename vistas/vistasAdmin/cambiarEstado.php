@@ -1,20 +1,15 @@
 <?php
 
-include_once "../../../procesos/config/conex.php";
+include_once "../../procesos/config/conex.php";
 $idHab = $_GET['id'];
 
-$sql = "SELECT habitaciones.id_habitaciones, habitaciones.nHabitacion, habitaciones.id_hab_estado, habitaciones_estado.estado_habitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id_hab_estado WHERE habitaciones.id_habitaciones = " . $idHab . ""; // consulta del estado actual de la habitacion
+$sql = "SELECT habitaciones.id_habitacion, habitaciones.nHabitacion, habitaciones.id_hab_estado, habitaciones_estado.estado_habitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id_hab_estado WHERE habitaciones.id_habitacion = " . $idHab . ""; // consulta del estado actual de la habitacion
 
 $sql2 = "SELECT id_hab_estado, estado_habitacion FROM habitaciones_estado WHERE 1"; // consulta de los tipos de estado
 
 ?>
 
 <!DOCTYPE html>
-
-<head>
-    <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
-    <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
-</head>
 
 <body>
 

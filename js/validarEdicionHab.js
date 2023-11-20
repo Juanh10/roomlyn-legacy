@@ -1,0 +1,140 @@
+const expresiones = {
+    soloNumeros: /^[0-9,.]+$/  // solo se permite numeros
+}
+
+const estadoInput = {
+    numHabitacion: false,
+    tipoHab: false,
+    observaciones: false,
+    sisClimatizacion: false,
+    tipoCama: false,
+    cantCamasTotales: false,
+    numHabitacionEdit: false,
+    observacionesEdit: false
+}
+
+const formularioEdit = document.getElementById('formEditarHab');
+const inputFormEdit = document.querySelectorAll('#formEditarHab input');
+const selectDatoEdit = document.querySelectorAll('#formEditarHab select');
+const obsTextareaEdit = document.querySelectorAll('#formEditarHab textarea');
+
+const validarFormulario = (e) => {
+
+    datoInput = e.target;
+    nombreInput = e.target.name;
+
+    switch (nombreInput) {
+        case 'numHabitacion':
+            validarCampo(expresiones.soloNumeros, datoInput, 'numHabitacionEdit', 'Llena este campo con solo números');
+            break;
+
+        case 'observaciones':
+            validarObser(datoInput, 'observacionesEdit', 'Rellene este campo');
+            break;
+    }
+
+}
+
+const validarCampo = (expresion, input, idCampo, message) => {
+    if (expresion.test(input.value)) {
+        document.getElementById(idCampo).classList.remove("inputError");
+        document.getElementById(idCampo).nextElementSibling.classList.remove("error"); // estoy accediendo al elemento hermano del input
+        document.getElementById(idCampo).nextElementSibling.innerText = ""; // para agregar texto al elemento hermano del input
+        estadoInput[idCampo] = true;
+    } else {
+        document.getElementById(idCampo).classList.add("inputError");
+        document.getElementById(idCampo).nextElementSibling.classList.add("error"); // estoy accediendo al elemento hermano del input
+        document.getElementById(idCampo).nextElementSibling.innerText = message; // para agregar texto al elemento hermano del input
+        estadoInput[idCampo] = false;
+    }
+}
+
+const validarObser = (input, idCampo, message) => {
+
+    let vInput = input.value.length;
+
+    if (vInput === 0) {
+        document.getElementById(idCampo).classList.add("inputError");
+        document.getElementById(idCampo).nextElementSibling.classList.add("error"); // estoy accediendo al elemento hermano del input
+        document.getElementById(idCampo).nextElementSibling.innerText = message; // para agregar texto al elemento hermano del input
+        estadoInput[idCampo] = false;
+    } else {
+        document.getElementById(idCampo).classList.remove("inputError");
+        document.getElementById(idCampo).nextElementSibling.classList.remove("error"); // estoy accediendo al elemento hermano del input
+        document.getElementById(idCampo).nextElementSibling.innerText = ""; // para agregar texto al elemento hermano del input
+        estadoInput[idCampo] = true;
+    }
+
+}
+
+inputFormEdit.forEach((input) => {
+    input.addEventListener('keyup', validarFormulario);
+    input.addEventListener('blur', validarFormulario);
+});
+
+selectDatoEdit.forEach((select) => {
+    select.addEventListener('blur', validarFormulario);
+});
+
+obsTextareaEdit.forEach((textarea) => {
+    textarea.addEventListener('keyup', validarFormulario);
+    textarea.addEventListener('blur', validarFormulario);
+});
+
+
+// VALIDAR PARTE DE LOS TIPOS DE CAMAS
+
+
+formularioEdit.addEventListener('submit', (e) => {
+
+    let inputCheck = document.querySelectorAll(".tiposDeCamasEdit input:checked"); // checkbox a los tipos de camas
+
+
+    const cantidadCamasElementos = document.querySelectorAll(".cantidadCamasEdit");
+    let valoresCantidadCamas = []; // Crear un array para almacenar los valores
+    const cantidadCamasBD = document.querySelectorAll(".mensajeCantidad"); // cantidad de las camas que estan registradas en la BD
+    let numCantCamas;
+
+    cantidadCamasBD.forEach(function (e) {
+        let textoCantCamas = e.textContent; //numero total de la cantidad de camas
+        numCantCamas = parseInt(textoCantCamas.match(/\d+/g));
+    })
+
+
+    // Recorrer los elementos de cantidadCamasElementos
+    cantidadCamasElementos.forEach(function (elemento) {
+        let valor = parseInt(elemento.value, 10); // Parsear el valor a entero
+        if (!isNaN(valor)) {
+            valoresCantidadCamas.push(valor); // Agregar el valor al arreglo si es un número válido
+        }
+    });
+
+    // Calcular la suma total
+    let sumaTotal = 0;
+    valoresCantidadCamas.forEach(function (valor) {
+        sumaTotal += valor;
+    });
+
+    let errorCantCamas = false;
+
+    if (sumaTotal == numCantCamas) {
+        estadoInput[cantCamasTotales] = true;
+    } else {
+        errorCantCamas = true;
+    }
+
+
+    e.preventDefault(); // No dejar enviar el formulario
+
+    if (estadoInput.numHabitacionEdit && estadoInput.observacionesEdit && inputCheck.length >= 1 && estadoInput.cantCamasTotales) {
+        formulario.submit();
+    } else {
+
+        if (errorCantCamas) {
+            document.getElementById("msjErrorTipoCama2").style.display = "block";
+        } else {
+            document.getElementById("msjErrorTipoCama").style.display = "block";
+        }
+    }
+
+});

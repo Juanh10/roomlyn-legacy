@@ -7,7 +7,7 @@ if(!empty($_POST['idHab'])){
     $idHab = $_POST['idHab'];
     $estado = 0;
 
-    $sql = $dbh -> prepare("UPDATE habitaciones SET estado=:estado WHERE id_habitaciones = :idHab");
+    $sql = $dbh -> prepare("UPDATE habitaciones SET estado=:estado WHERE id_habitacion = :idHab");
     $sql -> bindParam(":estado", $estado);
     $sql -> bindParam(":idHab", $idHab);
 

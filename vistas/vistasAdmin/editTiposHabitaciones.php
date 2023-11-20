@@ -19,6 +19,10 @@ $sqlImg = "SELECT habitaciones_imagenes.id_hab_imagen, habitaciones_imagenes.nom
 // consulta para obtener los servicios que estan relacionados con el tipo de habitacion
 $sqlServicios = "SELECT habitaciones_tipos_servicios.id_tipo_servicio, habitaciones_tipos_servicios.id_hab_tipo, habitaciones_servicios.servicio, habitaciones_servicios.id_servicio, habitaciones_tipos_servicios.estado FROM habitaciones_tipos_servicios INNER JOIN habitaciones_servicios ON habitaciones_tipos_servicios.id_servicio = habitaciones_servicios.id_servicio WHERE habitaciones_tipos_servicios.estado = 1 AND habitaciones_tipos_servicios.id_hab_tipo = " . $idTipo . "";
 
+$sqlPrecioVentilador = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON htp.id_tipo_servicio = hts.id_tipo_servicio WHERE hts.id_hab_tipo = " . $idTipo . " AND hts.id_servicio = 1 AND htp.estado = 1";
+
+$sqlPrecioAire = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON htp.id_tipo_servicio = hts.id_tipo_servicio WHERE hts.id_hab_tipo = " . $idTipo . " AND hts.id_servicio = 2 AND htp.estado = 1";
+
 ?>
 
 <!DOCTYPE html>
@@ -85,15 +89,29 @@ $sqlServicios = "SELECT habitaciones_tipos_servicios.id_tipo_servicio, habitacio
 
                                 <div class="row responsiveRowInput">
                                     <div class="col-5 responsiveInput">
-                                        <label for="precioVentilador" class="form-label mt-3">Costo con ventilador</label>
-                                        <input type="number" name="precioVentilador" id="precioVentilador" value="<?php echo $row['precioVentilador'] ?>" min="0" class="form-control p-2 inputPeque" required>
-                                        <p></p>
+                                        <?php
+
+                                        foreach ($dbh->query($sqlPrecioVentilador) as $rowPrecios) :
+                                        ?>
+                                            <label for="precioVentilador" class="form-label mt-3">Costo con ventilador</label>
+                                            <input type="number" name="precioVentilador" id="precioVentilador" value="<?php echo $rowPrecios['precio'] ?>" min="0" class="form-control p-2 inputPeque" required>
+                                            <p></p>
+                                        <?php
+                                        endforeach;
+                                        ?>
                                     </div>
 
                                     <div class="col">
-                                        <label for="precioAire" class="form-label mt-3">Costo con aire acondicionado</label>
-                                        <input type="number" name="precioAire" id="precioAire" value="<?php echo $row['precioAire'] ?>" min="0" class="form-control p-2 inputPeque" required>
-                                        <p></p>
+                                        <?php
+
+                                        foreach ($dbh->query($sqlPrecioAire) as $rowPrecios) :
+                                        ?>
+                                            <label for="precioAire" class="form-label mt-3">Costo con aire acondicionado</label>
+                                            <input type="number" name="precioAire" id="precioAire" value="<?php echo $rowPrecios['precio'] ?>" min="0" class="form-control p-2 inputPeque" required>
+                                            <p></p>
+                                        <?php
+                                        endforeach;
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="botonRgServicio">

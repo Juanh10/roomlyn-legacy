@@ -115,18 +115,13 @@ if (document.getElementById('formularioReg')) {
         input.addEventListener('blur', validarFormulario);
     });
 
-    //* validaciones de los input checkbox
-
-
     formularioTipoHab.addEventListener('submit', function (e) {
-        let inputcheck = document.querySelectorAll('.serviciosCheck input:checked');
 
         e.preventDefault(); // no dejar enviar el formulario
 
-        if (estadoInput.nombreTipo && estadoInput.cantidadCamas && estadoInput.cantidadPersonas && estadoInput.precioAire && estadoInput.precioVentilador && estadoInput.imagenes && inputcheck.length >= 1) {
+        if (estadoInput.nombreTipo && estadoInput.cantidadCamas && estadoInput.cantidadPersonas && estadoInput.precioAire && estadoInput.precioVentilador && estadoInput.imagenes) {
             formularioTipoHab.submit();
         } else {
-            document.getElementById('mensajeErrorServicio').classList.add('activoMensajeErrorServicio');
             document.querySelector(".formularioMensaje").classList.add("activoMensaje");
         }
 
