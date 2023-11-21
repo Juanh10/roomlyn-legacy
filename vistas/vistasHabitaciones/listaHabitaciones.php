@@ -64,7 +64,7 @@ include "funcionesIconos.php";
         function mostrarTituloTipo($id, $dbh)
         {
 
-            
+
             $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
 
             foreach ($dbh->query($sqlTipoHabitacion) as $row) {
@@ -79,17 +79,18 @@ include "funcionesIconos.php";
         <?php
         function mostrarDatosHabitaciones($filtro, $id, $dbh)
         {
+            $estado = 1;
 
             $fechaActual = date('Y-m-d');
 
             $fechaSiguiente = date("Y-m-d", strtotime($fechaActual . " +1 day")); // Calcula la fecha del día siguiente
 
-            $rangoFecha = $fechaActual." - ".$fechaSiguiente;
+            $rangoFecha = $fechaActual . " - " . $fechaSiguiente;
 
             if ($filtro === "ventilador") {
-                $tipoServ = 0;
-            } else if ($filtro === "aire") {
                 $tipoServ = 1;
+            } else if ($filtro === "aire") {
+                $tipoServ = 2;
             }
 
             $sqlTipoHabitacion = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $id . " AND estado = 1"; // Capturar la informacion del tipo de la habitacion
@@ -98,12 +99,15 @@ include "funcionesIconos.php";
 
             $sqlImagenesTipoHab = "SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = " . $id . ""; //Capturar la ruta de las imagenes de los tipos de habitaciones
 
-            $sqlHabitacion = "SELECT id_habitaciones, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND tipoServicio = " . $tipoServ . " AND id_hab_estado = 1 AND estado = 1"; // Capturar toda la informacion de la habitacion
+            $sqlHabitacion = "SELECT id_habitacion, nHabitacion, id_hab_tipo, id_hab_estado, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE id_hab_tipo = " . $id . " AND id_servicio = " . $tipoServ . " AND id_hab_estado = 1 AND estado = 1"; // Capturar toda la informacion de la habitacion
 
+            $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE hts.id_hab_tipo = :idTipo AND hts.id_servicio = :idServ AND htp.estado = :estado");
 
             $row = $dbh->query($sqlTipoHabitacion)->fetch(); // Obtener datos
 
             if ($filtro == "ventilador") {
+
+                $verntilador = 1;
         ?>
                 <section class="container seccionHabitaciones">
                     <div class="row">
@@ -117,7 +121,9 @@ include "funcionesIconos.php";
                                         <div class="carousel-inner">
                                             <?php
                                             $primeraImg = true;
-                                            foreach ($dbh->query($sqlImagenesTipoHab) as $rowImg) :
+
+                                            $resultImg = $dbh->query($sqlImagenesTipoHab);
+                                            foreach ($resultImg as $rowImg) :
                                                 $claseActive = $primeraImg ? 'active' : '';
                                             ?>
                                                 <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
@@ -131,18 +137,33 @@ include "funcionesIconos.php";
                                             endforeach;
                                             ?>
                                         </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                                        <?php
+
+                                        if ($resultImg->rowCount() > 1) :
+                                        ?>
+
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        <?php
+                                        endif;
+                                        ?>
                                     </div>
                                 </div>
 
-                                <p class="ms-3 mt-3">Precio por día: <?php echo number_format($row['precioVentilador'], 0, ",", ".") ?> + IVA</p>
+                                <p class="ms-3 mt-3">Precio por día: <?php
+                                                                        $sqlPrecios->bindParam(':idTipo', $id);
+                                                                        $sqlPrecios->bindParam(':idServ', $verntilador);
+                                                                        $sqlPrecios->bindParam(':estado', $estado);
+                                                                        $sqlPrecios->execute();
+                                                                        $resulPrecio = $sqlPrecios->fetch();
+                                                                        echo number_format($resulPrecio['precio'], 0, ",", ".") ?> + IVA
+                                </p>
 
                                 <ul class="listServicios">
                                     <li><?php echo $row['cantidadCamas'] ?> Cama sencilla o doble</li>
@@ -187,7 +208,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>&fechasRango=<?php echo $rangoFecha?>" class="btnSelecHab">Seleccionar</a>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;
@@ -205,6 +226,7 @@ include "funcionesIconos.php";
                 </section>
             <?php
             } else if ($filtro == "aire") {
+                $aire = 2;
             ?>
                 <section class="container seccionHabitaciones">
                     <div class="row">
@@ -218,11 +240,12 @@ include "funcionesIconos.php";
                                         <div class="carousel-inner">
                                             <?php
                                             $primeraImg = true;
-                                            foreach ($dbh->query($sqlImagenesTipoHab) as $rowImg) :
+                                            $resultImg = $dbh->query($sqlImagenesTipoHab);
+                                            foreach ($resultImg as $rowImg) :
                                                 $claseActive = $primeraImg ? 'active' : '';
                                             ?>
                                                 <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
-                                                    <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel">
+                                                    <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $id ?>">
                                                         <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de las habitaciones del tipo seleccionado" class="img-fluid rounded mx-auto d-block mb-4">
                                                     </a>
                                                 </div>
@@ -232,26 +255,40 @@ include "funcionesIconos.php";
                                             endforeach;
                                             ?>
                                         </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                                        <?php
+                                        if ($resultImg->rowCount() > 1) :
+                                        ?>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab2" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        <?php
+                                        endif;
+                                        ?>
+
                                     </div>
                                 </div>
 
-                                <p class="ms-3 mt-3">Precio por día: <?php echo number_format($row['precioAire'], 0, ",", ".") ?> + IVA</p>
+                                <p class="ms-3 mt-3">Precio por día: <?php
+                                                                        $sqlPrecios->bindParam(':idTipo', $id);
+                                                                        $sqlPrecios->bindParam(':idServ', $aire);
+                                                                        $sqlPrecios->bindParam(':estado', $estado);
+                                                                        $sqlPrecios->execute();
+                                                                        $resulPrecio = $sqlPrecios->fetch();
+                                                                        echo number_format($resulPrecio['precio'], 0, ",", ".") ?> + IVA
+                                </p>
 
                                 <ul class="listServicios">
                                     <li><?php echo $row['cantidadCamas'] ?> Cama sencilla o doble</li>
                                     <?php
                                     foreach ($dbh->query($sqlServicios) as $row2) :
-                                        if (strtolower($row2['elemento']) != "ventilador") :
+                                        if (strtolower($row2['servicio']) != "ventilador") :
                                     ?>
-                                            <li><?php echo $row2['elemento'] ?></li>
+                                            <li><?php echo $row2['servicio'] ?></li>
                                     <?php
                                         endif;
                                     endforeach;
@@ -288,7 +325,7 @@ include "funcionesIconos.php";
                                                     </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $id?>&fechasRango=<?php echo $rangoFecha?>" class="btnSelecHab">Seleccionar</a>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
                                         endif;

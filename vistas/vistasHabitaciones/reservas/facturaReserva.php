@@ -6,13 +6,18 @@ $fechasRango = $_GET['fechasRango'];
 $tipoHab = $_GET['tipoHab'];
 $habitacion = $_GET['habitacion'];
 
-$sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
+$sqlHabitacion = "SELECT id_habitacion, id_servicio, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE id_habitacion = " . $habitacion . " AND estado = 1";
 
 $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
 
-$sqlTipoHab = "SELECT id_hab_tipo, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHab . " AND estado = 1";
+$servHabitacion = $rowHabitacion['id_servicio'];
 
-$rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
+$sqlPrecioVentilador = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = ".$tipoHab." AND hts.id_servicio = ".$servHabitacion." AND htp.estado = 1 AND hts.estado = 1";
+
+$sqlPrecioAire = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = ".$tipoHab." AND hts.id_servicio = ".$servHabitacion." AND htp.estado = 1 AND hts.estado = 1";
+
+$rowPrecioVentilador = $dbh->query($sqlPrecioVentilador)->fetch();
+$rowPrecioAire = $dbh->query($sqlPrecioAire)->fetch();
 
 $arrayFechas = explode(" - ", $fechasRango);
 
@@ -38,9 +43,9 @@ $diferenciaDias = round($diferenciaDias);
 
 $total = 0;
 
-if ($rowHabitacion['tipoServicio'] == 0) {
+if ($rowHabitacion['id_servicio'] == 1) {
 
-    $precioTipo = $rowTipoHab['precioVentilador'];
+    $precioTipo = $rowPrecioVentilador['precio'];
 
     $subtotal1 = $precioTipo * $diferenciaDias;
 
@@ -48,7 +53,7 @@ if ($rowHabitacion['tipoServicio'] == 0) {
 
     $totalFactura = $subtotal1 + $iva;
 } else {
-    $precioTipo = $rowTipoHab['precioAire'];
+    $precioTipo = $rowPrecioAire['precio'];
 
     $subtotal1 = $precioTipo * $diferenciaDias;
 

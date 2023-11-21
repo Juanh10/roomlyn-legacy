@@ -50,7 +50,7 @@ $sqlServicios = "SELECT habitaciones_elementos_selec.id_hab_tipo_elemento, habit
 
                         <div id="addSelect">
                             <?php
-                            include "habitaciones/editTipoCama.php";
+                            include "editTipoCama.php";
                             ?>
                         </div>
 

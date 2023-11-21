@@ -26,7 +26,7 @@ $(document).ready(function () {
           }
         });
       });
-
+    
 
     //* Establecer desde la fecha actual el calendario de la fecha de entrada y salida
 

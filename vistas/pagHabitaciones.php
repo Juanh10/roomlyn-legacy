@@ -139,8 +139,8 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                                 <label for="selectClima" class="label-huespedes">Seleccionar el sistema de climatización</label>
 
                                 <select name="selectClima" id="selectClima">
-                                    <option value="0">Ventilador</option>
-                                    <option value="1">Aire acondicionado</option>
+                                    <option value="1">Ventilador</option>
+                                    <option value="2">Aire acondicionado</option>
                                 </select>
 
                             </div>

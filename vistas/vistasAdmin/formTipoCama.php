@@ -2,7 +2,7 @@
 
 if (!empty($_GET['id'])) {
 
-    include_once "../../../procesos/config/conex.php";
+    include_once "../../procesos/config/conex.php";
 
     $id = $_GET['id'];
 

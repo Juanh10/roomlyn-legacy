@@ -303,7 +303,7 @@ $(document).ready(function () {
 
     let seleccion = tipoHab.val();
 
-    fetch(`../vistasAdmin/habitaciones/formTipoCama.php?id=${seleccion}`)
+    fetch(`../vistasAdmin/formTipoCama.php?id=${seleccion}`)
       .then(res => res.text())
       .then(datos => inputAdd.html(datos))
       .catch()

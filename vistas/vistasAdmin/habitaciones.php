@@ -130,7 +130,7 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
 
                                     <div id="inputAgregado">
                                         <?php
-                                        include "habitaciones/formTipoCama.php"; // incluimos para añadir los demas inputs segun el tipo de habitacion escogida
+                                        include "formTipoCama.php"; // incluimos para añadir los demas inputs segun el tipo de habitacion escogida
                                         ?>
                                     </div>
 

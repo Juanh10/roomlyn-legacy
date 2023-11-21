@@ -15,7 +15,7 @@ $(document).ready(function(){
             tipoHabEdit.find('option:selected').removeAttr('selected'); // deseleccionar la opcion predeterminado
         }
 
-        fetch(`../vistasAdmin/habitaciones/editTipoCama.php?idselect=${seleccion}`)
+        fetch(`../vistasAdmin/editTipoCama.php?idselect=${seleccion}`)
             .then(res => res.text())
             .then(datos => addSelectEdit.html(datos))
             .catch();

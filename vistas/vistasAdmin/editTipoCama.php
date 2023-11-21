@@ -1,7 +1,7 @@
 <?php
 
 if (!empty($_GET['idselect'])) {
-    include_once "../../../procesos/config/conex.php";
+    include_once "../../procesos/config/conex.php";
 
     $idSelect = $_GET['idselect'];
 

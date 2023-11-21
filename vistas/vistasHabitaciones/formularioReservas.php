@@ -48,11 +48,11 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
         $checkout = $arrayFechas[1];
     }
 
-    $sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
+    $sqlHabitacion = "SELECT id_habitacion, id_hab_tipo, id_hab_estado, nHabitacion, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE id_habitacion = " . $habitacion . " AND estado = 1";
 
     $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
 
-    $sqlTipoHab = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHabitacion . " AND estado = 1";
+    $sqlTipoHab = "SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHabitacion . " AND estado = 1";
 
     $rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
 
@@ -196,7 +196,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         </div>
                                     </div>
                                     <div class="col-6">
-
+                                    
                                         <div class="form-floating mb-3">
                                             <?php
                                             if ($pagFiltro) :
@@ -235,7 +235,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                         <?php
                         else :
                         ?>
-                            <form action="../../procesos/registroReservas/conRegistroReservas.php" method="post" id="form" class="formReservas">
+                            <form action="../../procesos/registroReservas/conRegistroReservas.php" method="post" id="form" class="formReservasClienteNoReg">
                                 <div class="row">
                                     <div class="col-6 responsive-col-form">
 
@@ -280,7 +280,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                             <select class="form-select" name="nacionalidad" id="nacionalidad" required>
                                                 <option selected disabled value="">Escoja una opción</option>
                                                 <?php
-                                                $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidad WHERE 1";
+                                                $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidades WHERE 1";
 
                                                 foreach ($dbh->query($sqlNacionalidad) as $rowNacionalidad) :
                                                     if ($rowNacionalidad['id_nacionalidad'] != 1) :
@@ -357,7 +357,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                 </div>
 
                                 <div class="btnReservar">
-                                    <input type="submit" name="btnReservar" value="Reservar">
+                                    <input type="submit" name="btnReservar" value="Reservar" id="btnResClnNoReg">
                                 </div>
                             </form>
                         <?php

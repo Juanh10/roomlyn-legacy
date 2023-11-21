@@ -19,7 +19,7 @@ $checkout = $arrayFechas[1];
 
 //Consultas SQL de las habitaciones segun lo que el usuario escogio en el filtro
 
-$sqlHabitaciones = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE cantidadPersonasHab = " . $numeroHuespedes . " AND tipoServicio = " . $sisClimatizacion . " AND id_hab_estado = 1 AND estado = 1";
+$sqlHabitaciones = "SELECT id_habitacion, id_hab_estado, id_servicio, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE cantidadPersonasHab = " . $numeroHuespedes . " AND id_servicio = " . $sisClimatizacion . " AND id_hab_estado = 1 AND estado = 1";
 
 $resultHabitacion = $dbh->query($sqlHabitaciones);
 
@@ -45,15 +45,21 @@ if ($resultHabitacion) {
     }
 }
 
+$ventilador = 1;
+$aire = 2;
+$estado = 1;
+
 //! CONSULTAS DE LA BASE DE DATOS PARA LA INFORMACION DE LOS TIPOS DE HABITACIONES
 
-$sqlTipoHabitaciones = $dbh->prepare("SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = :idTipo AND estado = 1"); // Capturar la informacion del tipo de la habitacion
+$sqlTipoHabitaciones = $dbh->prepare("SELECT id_hab_tipo, tipoHabitacion, cantidadCamas, estado FROM habitaciones_tipos WHERE id_hab_tipo = :idTipo AND estado = 1"); // Capturar la informacion del tipo de la habitacion
 
 $sqlImagenesTipoHab = $dbh->prepare("SELECT nombre, ruta, estado FROM habitaciones_imagenes WHERE estado = 1 AND id_hab_tipo = :idTipoImg"); //Capturar la ruta de las imagenes de los tipos de habitaciones
 
-$sqlServicios = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM habitaciones_tipos_elementos INNER JOIN habitaciones_elementos ON habitaciones_elementos.id_hab_elemento = habitaciones_tipos_elementos.id_hab_elemento WHERE id_hab_tipo = :idTipoServ AND estado = 1"); // Capturar servicios del tipo de la habitacion
+$sqlServicios = $dbh->prepare("SELECT habitaciones_servicios.servicio FROM habitaciones_tipos_servicios INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = habitaciones_tipos_servicios.id_servicio WHERE id_hab_tipo = :idTipoServ AND estado = 1"); // Capturar servicios del tipo de la habitacion
 
-$sqlHabitacionesTi = $dbh->prepare("SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE cantidadPersonasHab = " . $numeroHuespedes . " AND tipoServicio = " . $sisClimatizacion . " AND id_hab_tipo = :idTipoHab AND id_hab_estado = 1 AND estado = 1");
+$sqlHabitacionesTi = $dbh->prepare("SELECT id_habitacion, id_hab_estado, id_servicio, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE cantidadPersonasHab = " . $numeroHuespedes . " AND id_servicio = " . $sisClimatizacion . " AND id_hab_tipo = :idTipoHab AND id_hab_estado = 1 AND estado = 1");
+
+$sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE hts.id_hab_tipo = :idTipo AND hts.id_servicio = :idServ AND htp.estado = :estado");
 
 
 ?>
@@ -120,7 +126,7 @@ if ($resultHabitacion->rowCount() > 0) {
 
 
 
-    if ($sisClimatizacion == 0) :
+    if ($sisClimatizacion == 1) :
 ?>
         <main>
 
@@ -135,6 +141,7 @@ if ($resultHabitacion->rowCount() > 0) {
                 $sqlTipoHabitaciones->execute();
 
                 while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
+                   $idTipoHab = $rowTipo['id_hab_tipo']; 
             ?>
                     <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
                     <section class="container seccionHabitaciones">
@@ -182,7 +189,19 @@ if ($resultHabitacion->rowCount() > 0) {
                                         </div>
                                     </div>
 
-                                    <p class="ms-3 mt-3">Precio por día: <?php echo number_format($rowTipo['precioVentilador'], 0, ",", ".") ?> + IVA</p>
+                                    <p class="ms-3 mt-3">
+                                        
+                                    Precio por día: <?php
+                                    
+                                    $sqlPrecios->bindParam(':idTipo', $idTipoHab);
+                                    $sqlPrecios->bindParam(':idServ', $ventilador);
+                                    $sqlPrecios->bindParam(':estado', $estado);
+                                    $sqlPrecios->execute();
+                                    $resulPrecio = $sqlPrecios->fetch();
+                                    echo number_format($resulPrecio['precio'], 0, ",", ".") 
+                        
+                                    ?> + IVA
+                                </p>
 
                                     <ul class="listServicios">
                                         <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
@@ -190,9 +209,9 @@ if ($resultHabitacion->rowCount() > 0) {
                                         $sqlServicios->execute();
 
                                         while ($row2 = $sqlServicios->fetch(PDO::FETCH_ASSOC)) :
-                                            if (strtolower($row2['elemento']) != "aire acondicionado") :
+                                            if (strtolower($row2['servicio']) != "aire acondicionado") :
                                         ?>
-                                                <li><?php echo $row2['elemento'] ?></li>
+                                                <li><?php echo $row2['servicio'] ?></li>
                                         <?php
                                             endif;
                                         endwhile;
@@ -230,7 +249,7 @@ if ($resultHabitacion->rowCount() > 0) {
                                                         </div>
                                                         <p><?php echo $row3['observacion'] ?></p>
                                                     </div>
-                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
                                                 </div>
                                         <?php
                                             endif;
@@ -275,6 +294,7 @@ if ($resultHabitacion->rowCount() > 0) {
                 $sqlTipoHabitaciones->execute();
 
                 while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
+                    $idTipoHab = $rowTipo['id_hab_tipo']; 
             ?>
                     <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
                     <section class="container seccionHabitaciones">
@@ -322,7 +342,19 @@ if ($resultHabitacion->rowCount() > 0) {
                                         </div>
                                     </div>
 
-                                    <p class="ms-3 mt-3">Precio por día: <?php echo number_format($rowTipo['precioAire'], 0, ",", ".") ?> + IVA</p>
+                                    <p class="ms-3 mt-3">
+                                        
+                                    Precio por día: <?php
+                                    
+                                    $sqlPrecios->bindParam(':idTipo', $idTipoHab);
+                                    $sqlPrecios->bindParam(':idServ', $aire);
+                                    $sqlPrecios->bindParam(':estado', $estado);
+                                    $sqlPrecios->execute();
+                                    $resulPrecio = $sqlPrecios->fetch();
+                                    echo number_format($resulPrecio['precio'], 0, ",", ".") 
+                        
+                                    ?> + IVA
+                                </p>
 
                                     <ul class="listServicios">
                                         <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
@@ -330,9 +362,9 @@ if ($resultHabitacion->rowCount() > 0) {
                                         $sqlServicios->execute();
 
                                         while ($row2 = $sqlServicios->fetch(PDO::FETCH_ASSOC)) :
-                                            if (strtolower($row2['elemento']) != "ventilador") :
+                                            if (strtolower($row2['servicio']) != "ventilador") :
                                         ?>
-                                                <li><?php echo $row2['elemento'] ?></li>
+                                                <li><?php echo $row2['servicio'] ?></li>
                                         <?php
                                             endif;
                                         endwhile;
@@ -370,7 +402,7 @@ if ($resultHabitacion->rowCount() > 0) {
                                                         </div>
                                                         <p><?php echo $row3['observacion'] ?></p>
                                                     </div>
-                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitaciones'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
                                                 </div>
                                         <?php
                                             endif;

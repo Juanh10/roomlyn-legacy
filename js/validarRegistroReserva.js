@@ -115,9 +115,20 @@ formulario.addEventListener('submit', (e) => {
     }
 
     if (estadoInput.nombres && estadoInput.apellidos && estadoInput.documento && estadoInput.sexo && estadoInput.email && estadoInput.telefono && estadoSelect) {
-
-        formulario.submit();
-
+        $('#btnResClnNoReg').click(function () {
+            Swal.fire({
+                title: '¿Estás seguro de realizar la reserva?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    formulario.submit();
+                }
+            });
+        });
     } else {
         document.querySelector(".formularioMensaje").classList.add("activoMensaje");
     }
