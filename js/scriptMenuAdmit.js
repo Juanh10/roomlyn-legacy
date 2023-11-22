@@ -251,7 +251,7 @@ $(document).ready(function () {
 
   }
 
-  confirmarAccionBoton($('.btnCerrarSesion'), "¡No podrás revertir esto!", function () { window.location.href = '../../procesos/login/conCerrarSesion.php'; });
+  confirmarAccionBoton($('.btnCerrarSesion'), "", function () { window.location.href = '../../procesos/login/conCerrarSesion.php'; });
 
 
   //! INICIALIZAR DATATABLES

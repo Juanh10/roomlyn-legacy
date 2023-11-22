@@ -15,12 +15,12 @@ $(document).ready(function () {
   // ALERTA DE CONFIRMACIÓN al cerrar sesión
   $('#btncerrarSesionCliente').click(function (e) {
     Swal.fire({
-      title: '¿Estás seguro?',
+      title: '¿Estas seguro?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Cerrar sesión'
+      confirmButtonText: 'Confirmar'
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = 'procesos/login/conCerrarSesion2.php';

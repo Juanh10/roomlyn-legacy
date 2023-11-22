@@ -61,6 +61,7 @@ $sqlHabitacionesTi = $dbh->prepare("SELECT id_habitacion, id_hab_estado, id_serv
 
 $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE hts.id_hab_tipo = :idTipo AND hts.id_servicio = :idServ AND htp.estado = :estado");
 
+$sqlElementosHab = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM habitaciones_elementos_selec INNER JOIN habitaciones_elementos ON habitaciones_elementos.id_hab_elemento = habitaciones_elementos_selec.id_hab_elemento WHERE id_habitacion = :idHab AND estado = :estado");
 
 ?>
 
@@ -93,7 +94,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
         </div>
     </div>
 
-            <header class="cabeceraHab">
+    <header class="cabeceraHab">
         <div class="contenedorHab navContenedorHab">
             <div class="logoPlahotHab">
                 <a href="../../index.php"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
@@ -141,7 +142,7 @@ if ($resultHabitacion->rowCount() > 0) {
                 $sqlTipoHabitaciones->execute();
 
                 while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
-                   $idTipoHab = $rowTipo['id_hab_tipo']; 
+                    $idTipoHab = $rowTipo['id_hab_tipo'];
             ?>
                     <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
                     <section class="container seccionHabitaciones">
@@ -190,18 +191,18 @@ if ($resultHabitacion->rowCount() > 0) {
                                     </div>
 
                                     <p class="ms-3 mt-3">
-                                        
-                                    Precio por día: <?php
-                                    
-                                    $sqlPrecios->bindParam(':idTipo', $idTipoHab);
-                                    $sqlPrecios->bindParam(':idServ', $ventilador);
-                                    $sqlPrecios->bindParam(':estado', $estado);
-                                    $sqlPrecios->execute();
-                                    $resulPrecio = $sqlPrecios->fetch();
-                                    echo number_format($resulPrecio['precio'], 0, ",", ".") 
-                        
-                                    ?> + IVA
-                                </p>
+
+                                        Precio por día: <?php
+
+                                                        $sqlPrecios->bindParam(':idTipo', $idTipoHab);
+                                                        $sqlPrecios->bindParam(':idServ', $ventilador);
+                                                        $sqlPrecios->bindParam(':estado', $estado);
+                                                        $sqlPrecios->execute();
+                                                        $resulPrecio = $sqlPrecios->fetch();
+                                                        echo number_format($resulPrecio['precio'], 0, ",", ".")
+
+                                                        ?> + IVA
+                                    </p>
 
                                     <ul class="listServicios">
                                         <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
@@ -231,28 +232,53 @@ if ($resultHabitacion->rowCount() > 0) {
                                         while ($row3 = $sqlHabitacionesTi->fetch(PDO::FETCH_ASSOC)) :
                                             $capacidadPerson = $row3['cantidadPersonasHab'];
                                             $tipoCama = $row3['tipoCama'];
-                                            if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
-                                    ?>
-                                                <div class="cardHabitaciones">
-                                                    <div class="inforHabitacion">
-                                                        <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                        <div class="datosHabitacion">
-                                                            <p>
-                                                                <span>Tipo de cama:</span>
-                                                                <?php iconCantidadCama($tipoCama); ?>
-                                                            </p>
+                                            $idHab = $row3['id_habitacion'];
+                                            $sqlElementosHab->bindParam(':idHab', $idHab);
+                                            $sqlElementosHab->bindParam(':estado', $estado);
+                                            $sqlElementosHab->execute();
 
-                                                            <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                                <span>Capacidad:</span>
-                                                                <?php iconCapacidad($capacidadPerson) ?>
-                                                            </p>
-                                                        </div>
-                                                        <p><?php echo $row3['observacion'] ?></p>
+                                    ?>
+                                            <div class="cardHabitaciones">
+                                                <div class="inforHabitacion">
+                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                    <div class="datosHabitacion">
+                                                        <p>
+                                                            <span>Tipo de cama:</span>
+                                                            <?php iconCantidadCama($tipoCama); ?>
+                                                        </p>
+
+                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                            <span>Capacidad:</span>
+                                                            <?php iconCapacidad($capacidadPerson) ?>
+                                                        </p>
                                                     </div>
-                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                    <div class="elementos">
+                                                        <p>
+                                                            <?php
+                                                            $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
+                                                            $currentRow = 0; // Inicializa el contador de filas
+
+                                                            while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
+                                                                // Imprime el elemento actual
+                                                                echo $resElemento['elemento'];
+
+                                                                // Incrementa el contador de filas
+                                                                $currentRow++;
+
+                                                                // Si no es la última fila, agrega un guion
+                                                                if ($currentRow < $rowCount) {
+                                                                    echo ' - ';
+                                                                }
+                                                            endwhile;
+                                                            ?>
+                                                        </p>
+                                                    </div>
+                                                    <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                            </div>
                                         <?php
-                                            endif;
+
                                         endwhile;
                                     else :
                                         ?>
@@ -276,11 +302,11 @@ if ($resultHabitacion->rowCount() > 0) {
             ?>
 
         </main>
-<?php
+    <?php
 
-        else:
+    else :
 
-            ?>
+    ?>
         <main>
 
             <?php
@@ -294,7 +320,7 @@ if ($resultHabitacion->rowCount() > 0) {
                 $sqlTipoHabitaciones->execute();
 
                 while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
-                    $idTipoHab = $rowTipo['id_hab_tipo']; 
+                    $idTipoHab = $rowTipo['id_hab_tipo'];
             ?>
                     <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
                     <section class="container seccionHabitaciones">
@@ -343,18 +369,18 @@ if ($resultHabitacion->rowCount() > 0) {
                                     </div>
 
                                     <p class="ms-3 mt-3">
-                                        
-                                    Precio por día: <?php
-                                    
-                                    $sqlPrecios->bindParam(':idTipo', $idTipoHab);
-                                    $sqlPrecios->bindParam(':idServ', $aire);
-                                    $sqlPrecios->bindParam(':estado', $estado);
-                                    $sqlPrecios->execute();
-                                    $resulPrecio = $sqlPrecios->fetch();
-                                    echo number_format($resulPrecio['precio'], 0, ",", ".") 
-                        
-                                    ?> + IVA
-                                </p>
+
+                                        Precio por día: <?php
+
+                                                        $sqlPrecios->bindParam(':idTipo', $idTipoHab);
+                                                        $sqlPrecios->bindParam(':idServ', $aire);
+                                                        $sqlPrecios->bindParam(':estado', $estado);
+                                                        $sqlPrecios->execute();
+                                                        $resulPrecio = $sqlPrecios->fetch();
+                                                        echo number_format($resulPrecio['precio'], 0, ",", ".")
+
+                                                        ?> + IVA
+                                    </p>
 
                                     <ul class="listServicios">
                                         <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
@@ -384,28 +410,51 @@ if ($resultHabitacion->rowCount() > 0) {
                                         while ($row3 = $sqlHabitacionesTi->fetch(PDO::FETCH_ASSOC)) :
                                             $capacidadPerson = $row3['cantidadPersonasHab'];
                                             $tipoCama = $row3['tipoCama'];
-                                            if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
+                                            $idHab = $row3['id_habitacion'];
+                                            $sqlElementosHab->bindParam(':idHab', $idHab);
+                                            $sqlElementosHab->bindParam(':estado', $estado);
+                                            $sqlElementosHab->execute();
                                     ?>
-                                                <div class="cardHabitaciones">
-                                                    <div class="inforHabitacion">
-                                                        <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                        <div class="datosHabitacion">
-                                                            <p>
-                                                                <span>Tipo de cama:</span>
-                                                                <?php iconCantidadCama($tipoCama); ?>
-                                                            </p>
+                                            <div class="cardHabitaciones">
+                                                <div class="inforHabitacion">
+                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                    <div class="datosHabitacion">
+                                                        <p>
+                                                            <span>Tipo de cama:</span>
+                                                            <?php iconCantidadCama($tipoCama); ?>
+                                                        </p>
 
-                                                            <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                                <span>Capacidad:</span>
-                                                                <?php iconCapacidad($capacidadPerson) ?>
-                                                            </p>
-                                                        </div>
-                                                        <p><?php echo $row3['observacion'] ?></p>
+                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                            <span>Capacidad:</span>
+                                                            <?php iconCapacidad($capacidadPerson) ?>
+                                                        </p>
                                                     </div>
-                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                    <div class="elementos">
+                                                        <p>
+                                                            <?php
+                                                            $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
+                                                            $currentRow = 0; // Inicializa el contador de filas
+
+                                                            while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
+                                                                // Imprime el elemento actual
+                                                                echo $resElemento['elemento'];
+
+                                                                // Incrementa el contador de filas
+                                                                $currentRow++;
+
+                                                                // Si no es la última fila, agrega un guion
+                                                                if ($currentRow < $rowCount) {
+                                                                    echo ' - ';
+                                                                }
+                                                            endwhile;
+                                                            ?>
+                                                        </p>
+                                                    </div>
+                                                    <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
+                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                            </div>
                                         <?php
-                                            endif;
                                         endwhile;
                                     else :
                                         ?>

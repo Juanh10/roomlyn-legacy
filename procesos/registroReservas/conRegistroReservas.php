@@ -102,7 +102,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
         $sqlInforCliente->bindParam(':fecha', $fecha);
         $sqlInforCliente->bindParam(':hora', $hora);
 
-        $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitaciones, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
+        $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitacion, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
 
         $sqlActHabitacion = $dbh->prepare("UPDATE habitaciones SET id_hab_estado = :estadoHab WHERE nHabitacion = :habitacion");
 

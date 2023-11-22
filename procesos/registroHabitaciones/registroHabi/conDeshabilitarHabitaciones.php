@@ -11,11 +11,23 @@ if(!empty($_POST['idHab'])){
     $sql -> bindParam(":estado", $estado);
     $sql -> bindParam(":idHab", $idHab);
 
+    $sqlElemento = $dbh->prepare("UPDATE habitaciones_elementos_selec SET estado = :estado WHERE id_habitacion = :idHab");
+
     if($sql -> execute()){
-        $_SESSION['msjExito'] = "¡La habitación se ha deshabilitado exitosamente!";
-        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+
+        $sqlElemento->bindParam(':estado',$estado);
+        $sqlElemento->bindParam(':idHab',$idHab);
+
+        if($sqlElemento->execute()){
+            $_SESSION['msjExito'] = "¡La habitación se ha deshabilitado exitosamente!";
+            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+        }else{
+            $_SESSION['msjError'] = "Ocurrió un error";
+            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+        }
+
     }else{
-        $_SESSION['msjError'] = "Campos vacíos";
+        $_SESSION['msjError'] = "Ocurrió un error";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 

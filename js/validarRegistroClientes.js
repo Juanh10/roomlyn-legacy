@@ -1,9 +1,3 @@
-//*VER CONTRASEÑA
-const contrasenaInput = document.querySelector("#contraseña");
-const contrasena2Input = document.querySelector("#contraseña2");
-const botonVer = document.querySelector(".verContraseña i");
-const botonVer2 = document.querySelector(".verContraseña2 i");
-
 const expresiones = {
     soloLetras: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     contraseña: /^.{4,25}$/, // 4 a 25 digitos.
@@ -27,13 +21,13 @@ const estadoInput = {
 
 const validarCampos = (expresion, input, idCampo, message) => {
     if (expresion.test(input.value)) { // validamos si cumple con las expresiones regulares
-        document.getElementById(`${idCampo}`).classList.remove('validarInput'); // quitamos clase al input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('inputError'); // quitamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).classList.remove('inputError'); // quitamos clase al input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('error'); // quitamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = ""; // dejamos el texto vacio de la etiqueta hermana del input
         estadoInput[idCampo] = true;
     } else {
-        document.getElementById(`${idCampo}`).classList.add('validarInput'); // agregamos clase del input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('inputError'); // agregamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).classList.add('inputError'); // agregamos clase del input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('error'); // agregamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = message; // ponemos texto a la etiqueta hermana del input
         estadoInput[idCampo] = false;
     }
@@ -45,13 +39,13 @@ const validarCampos = (expresion, input, idCampo, message) => {
 const validarSelects = (input, idCampo, message) => {
     let gValor = input.value;
     if (gValor === "") {
-        document.getElementById(`${idCampo}`).classList.add('validarInput'); // agregamos clase del input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('inputError'); // agregamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).classList.add('inputError'); // agregamos clase del input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('error'); // agregamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = message; // ponemos texto a la etiqueta hermana del input
         estadoInput[idCampo] = false;
     } else {
-        document.getElementById(`${idCampo}`).classList.remove('validarInput'); // quitamos clase al input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('inputError'); // quitamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).classList.remove('inputError'); // quitamos clase al input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('error'); // quitamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = ""; // dejamos el texto vacio de la etiqueta hermana del input
         estadoInput[idCampo] = true;
     }
@@ -59,6 +53,11 @@ const validarSelects = (input, idCampo, message) => {
 
 if (document.getElementById('form')) {
 
+    //*VER CONTRASEÑA
+    const contrasenaInput = document.querySelector("#contrasena");
+    const contrasena2Input = document.querySelector("#contrasena2");
+    const botonVer = document.querySelector(".verContraseña i");
+    const botonVer2 = document.querySelector(".verContraseña2 i");
 
     botonVer.onclick = (() => {
 
@@ -148,13 +147,13 @@ if (document.getElementById('form')) {
         const contraseña2 = document.getElementById('contrasena2');
 
         if (contraseña1.value !== contraseña2.value) {
-            document.getElementById("contrasena2").classList.add('validarInput'); // agregamos clase del input
-            document.getElementById("contrasena2").nextElementSibling.classList.add('inputError'); // agregamos clase a la etiqueta hermana del input
+            document.getElementById("contrasena2").classList.add('inputError'); // agregamos clase del input
+            document.getElementById("contrasena2").nextElementSibling.classList.add('error'); // agregamos clase a la etiqueta hermana del input
             document.getElementById("contrasena2").nextElementSibling.innerText = "La contraseña no coinciden"; // ponemos texto a la etiqueta hermana del inpu
             estadoInput["contraseña"] = false;
         } else {
-            document.getElementById("contrasena2").classList.remove('validarInput'); // quitamos clase al input
-            document.getElementById("contrasena2").nextElementSibling.classList.remove('inputError'); // quitamos clase a la etiqueta hermana del input
+            document.getElementById("contrasena2").classList.remove('inputError'); // quitamos clase al input
+            document.getElementById("contrasena2").nextElementSibling.classList.remove('error'); // quitamos clase a la etiqueta hermana del input
             document.getElementById("contrasena2").nextElementSibling.innerText = ""; // dejamos el texto vacio de la etiqueta hermana del input
             estadoInput["contraseña"] = true;
         }
@@ -206,15 +205,15 @@ if (document.getElementById('form')) {
         let nombreInput = e.target.name;
         let valorInput = e.target;
 
-        switch(nombreInput){
+        switch (nombreInput) {
 
             case 'nombres':
                 validarCampos(expresiones.soloLetras, valorInput, 'nombres', 'Rellene este campo con solo letras');
-            break;
+                break;
 
             case 'apellidos':
                 validarCampos(expresiones.soloLetras, valorInput, 'apellidos', 'Rellene este campo con solo letras');
-            break;
+                break;
 
             case 'documento':
                 validarCampos(expresiones.soloNumeros, valorInput, 'documento', 'Rellene este campo con solo numeros'); // lo ponemos con parametros para ahorrar codigo
@@ -233,7 +232,7 @@ if (document.getElementById('form')) {
                 break;
 
         }
-        
+
     }
 
 
@@ -241,7 +240,7 @@ if (document.getElementById('form')) {
     datosInputAct.forEach((input) => {
         input.addEventListener('input', validarFormularioAct);
         input.addEventListener('blur', validarFormularioAct);
-        validarFormularioAct({ target: input }); 
+        validarFormularioAct({ target: input });
     });
 
     //* ciclo donde reocorre todos los select

@@ -20,11 +20,20 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
         // CONSULTA PARA OBTENER EL TOTAL DE LA RESERVA
 
-        $sqlHabitacion = "SELECT id_habitaciones, id_hab_estado, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, tipoServicio, observacion, estado FROM habitaciones WHERE id_habitaciones = " . $habitacion . " AND estado = 1";
+        $sqlHabitacion = "SELECT id_habitacion, id_hab_estado, id_servicio, id_hab_tipo, nHabitacion, tipoCama, cantidadPersonasHab, observacion, estado FROM habitaciones WHERE id_habitacion = " . $habitacion . " AND estado = 1";
 
         $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
 
-        $sqlTipoHab = "SELECT id_hab_tipo, precioVentilador, precioAire, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHab . " AND estado = 1";
+        $servHabitacion = $rowHabitacion['id_servicio'];
+
+        $sqlPrecioVentilador = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = " . $tipoHab . " AND hts.id_servicio = " . $servHabitacion . " AND htp.estado = 1 AND hts.estado = 1";
+
+        $sqlPrecioAire = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = " . $tipoHab . " AND hts.id_servicio = " . $servHabitacion . " AND htp.estado = 1 AND hts.estado = 1";
+
+        $rowPrecioVentilador = $dbh->query($sqlPrecioVentilador)->fetch();
+        $rowPrecioAire = $dbh->query($sqlPrecioAire)->fetch();
+
+        $sqlTipoHab = "SELECT id_hab_tipo, estado FROM habitaciones_tipos WHERE id_hab_tipo = " . $tipoHab . " AND estado = 1";
 
         $rowTipoHab = $dbh->query($sqlTipoHab)->fetch();
 
@@ -42,9 +51,9 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
         $total = 0;
 
-        if ($rowHabitacion['tipoServicio'] == 0) {
+        if ($rowHabitacion['id_servicio'] == 1) {
 
-            $precioTipo = $rowTipoHab['precioVentilador'];
+            $precioTipo = $rowPrecioVentilador['precio'];
 
             $subtotal1 = $precioTipo * $diferenciaDias;
 
@@ -52,7 +61,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
             $totalFactura = $subtotal1 + $iva;
         } else {
-            $precioTipo = $rowTipoHab['precioAire'];
+            $precioTipo = $rowPrecioAire['precio'];
 
             $subtotal1 = $precioTipo * $diferenciaDias;
 
@@ -61,7 +70,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
             $totalFactura = $subtotal1 + $iva;
         }
 
-        $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitaciones, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
+        $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitacion, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
 
         $sqlActHabitacion = $dbh->prepare("UPDATE habitaciones SET id_hab_estado = 5 WHERE nHabitacion = :habitacion");
 

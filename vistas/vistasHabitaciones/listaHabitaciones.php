@@ -103,6 +103,8 @@ include "funcionesIconos.php";
 
             $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE hts.id_hab_tipo = :idTipo AND hts.id_servicio = :idServ AND htp.estado = :estado");
 
+            $sqlElementosHab = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM habitaciones_elementos_selec INNER JOIN habitaciones_elementos ON habitaciones_elementos.id_hab_elemento = habitaciones_elementos_selec.id_hab_elemento WHERE id_habitacion = :idHab AND estado = :estado");
+
             $row = $dbh->query($sqlTipoHabitacion)->fetch(); // Obtener datos
 
             if ($filtro == "ventilador") {
@@ -190,28 +192,53 @@ include "funcionesIconos.php";
                                     foreach ($resulFilasHabitaciones as $row3) :
                                         $capacidadPerson = $row3['cantidadPersonasHab'];
                                         $tipoCama = $row3['tipoCama'];
-                                        if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
+                                        $idHab = $row3['id_habitacion'];
+                                        $sqlElementosHab->bindParam(':idHab', $idHab);
+                                        $sqlElementosHab->bindParam(':estado', $estado);
+                                        $sqlElementosHab->execute();
                                 ?>
-                                            <div class="cardHabitaciones">
-                                                <div class="inforHabitacion">
-                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                    <div class="datosHabitacion">
-                                                        <p>
-                                                            <span>Tipo de cama:</span>
-                                                            <?php iconCantidadCama($tipoCama); ?>
-                                                        </p>
+                                        <div class="cardHabitaciones">
+                                            <div class="inforHabitacion">
+                                                <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                <div class="datosHabitacion">
+                                                    <p>
+                                                        <span>Tipo de cama:</span>
+                                                        <?php iconCantidadCama($tipoCama); ?>
+                                                    </p>
 
-                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                            <span>Capacidad:</span>
-                                                            <?php iconCapacidad($capacidadPerson) ?>
-                                                        </p>
-                                                    </div>
-                                                    <p><?php echo $row3['observacion'] ?></p>
+                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                        <span>Capacidad:</span>
+                                                        <?php iconCapacidad($capacidadPerson) ?>
+                                                    </p>
                                                 </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
+                                                <div class="elementos">
+                                                    <p>
+                                                        <?php
+                                                        $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
+                                                        $currentRow = 0; // Inicializa el contador de filas
+
+                                                        while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
+                                                            // Imprime el elemento actual
+                                                            echo $resElemento['elemento'];
+
+                                                            // Incrementa el contador de filas
+                                                            $currentRow++;
+
+                                                            // Si no es la última fila, agrega un guion
+                                                            if ($currentRow < $rowCount) {
+                                                                echo ' - ';
+                                                            }
+                                                        endwhile;
+                                                        ?>
+
+
+                                                    </p>
+                                                </div>
+                                                <p><?php echo $row3['observacion'] ?></p>
                                             </div>
+                                            <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
+                                        </div>
                                     <?php
-                                        endif;
                                     endforeach;
                                 else :
                                     ?>
@@ -307,7 +334,10 @@ include "funcionesIconos.php";
                                     foreach ($resulFilasHabitaciones as $row3) :
                                         $capacidadPerson = $row3['cantidadPersonasHab'];
                                         $tipoCama = $row3['tipoCama'];
-                                        if ($row3['estado'] == 1 && $row3['id_hab_estado'] == 1) :
+                                        $idHab = $row3['id_habitacion'];
+                                        $sqlElementosHab->bindParam(':idHab', $idHab);
+                                        $sqlElementosHab->bindParam(':estado', $estado);
+                                        $sqlElementosHab->execute();
                                 ?>
                                             <div class="cardHabitaciones">
                                                 <div class="inforHabitacion">
@@ -323,12 +353,35 @@ include "funcionesIconos.php";
                                                             <?php iconCapacidad($capacidadPerson) ?>
                                                         </p>
                                                     </div>
+                                                    <div class="elementos">
+                                                    <p>
+                                                        <?php
+                                                        $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
+                                                        $currentRow = 0; // Inicializa el contador de filas
+
+                                                        while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
+                                                            // Imprime el elemento actual
+                                                            echo $resElemento['elemento'];
+
+                                                            // Incrementa el contador de filas
+                                                            $currentRow++;
+
+                                                            // Si no es la última fila, agrega un guion
+                                                            if ($currentRow < $rowCount) {
+                                                                echo ' - ';
+                                                            }
+                                                        endwhile;
+                                                        ?>
+
+
+                                                    </p>
+                                                </div>
                                                     <p><?php echo $row3['observacion'] ?></p>
                                                 </div>
                                                 <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
                                             </div>
                                     <?php
-                                        endif;
+                                        
                                     endforeach;
                                 else :
                                     ?>
