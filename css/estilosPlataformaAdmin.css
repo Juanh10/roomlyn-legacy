@@ -820,6 +820,53 @@ body {
     margin-bottom: 10px;
 }
 
+/** SECCION DE RECEPCION  */
+
+.contenedorHab{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cardHabitaciones{
+    width: 250px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #28a64b;
+}
+
+.informacionHab{
+    padding: 0 10px;
+}
+
+.informacionHab .numHabitacion{
+    font-size: 35px;
+    font-weight: bold;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.informacionHab .numHabitacion i{
+    font-size: 60px;
+}
+
+.informacionHab .inforHab{
+    margin: 5px 0;
+}
+
+.informacionHab .inforHab span{
+    font-size: 14px;
+    display: block;
+}
+
+.btnEstado{
+    padding: 5px 10px;
+    background-color: #269642;
+    text-align: center;
+    cursor: pointer;
+}
 
 @media only screen and (max-width: 996px) {
     .contenedorFila{
@@ -967,7 +1014,6 @@ body {
         font-size: 15px;
     }
 
-
 }
 
 @media only screen and (max-width: 470px){
@@ -989,6 +1035,10 @@ body {
 
     .addFoto label{
         font-size: 18px;
+    }
+
+    .cardHabitaciones{
+        width: 100%;
     }
 
 

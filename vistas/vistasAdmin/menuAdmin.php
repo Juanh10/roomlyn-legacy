@@ -50,6 +50,12 @@
             </li>
 
             <li class="list_item">
+                <a class="enlaceMenu" href="recepcion.php" title="Recepción">
+                    <i class="bi bi-calendar-plus"></i>
+                </a>
+            </li>
+
+            <li class="list_item">
                 <a class="enlaceMenu" href="reservaciones.php" title="Reservaciones">
                     <i class="bi bi-calendar-check-fill"></i>
                 </a>
@@ -133,6 +139,13 @@
                 <a class="enlaceMenu2" href="inicio.php">
                     <i class="bi bi-house-door-fill"></i>
                     <span class="linksOpciones">Inicio</span>
+                </a>
+            </li>
+
+            <li class="list_itemDesplegable">
+                <a class="enlaceMenu2" href="recepcion.php">
+                    <i class="bi bi-calendar-plus"></i>
+                    <span class="linksOpciones">Recepción</span>
                 </a>
             </li>
 

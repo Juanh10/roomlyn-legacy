@@ -143,4 +143,62 @@ $(document).ready(function () {
     departamento.change(function () {
         listaOrigenCiudad();
     });
+
+    // ENVIO DE DATOS POR MEDIO DE AJAX
+
+    $('#filtroBtnFecha').click(function () {
+        // Obtener las fechas seleccionadas
+        let fechaInicial = $('#fechaInicio').val();
+        let fechaFinal = $('#fechaFinal').val();
+        let idCliente = $('#idCliente').val();
+
+        // Realizar la petición AJAX c
+        $.ajax({
+            type: 'POST',
+            url: 'filtroReservasRealizadas.php',
+            data: {
+                fechaInicial: fechaInicial,
+                fechaFinal: fechaFinal,
+                idCliente: idCliente
+            },
+            success: function (response) {  
+                $('#contenedorCardInicial').hide();
+                $('.filtrosReserva').hide();
+                $('#contenedorCardFiltro').html(response);
+            }
+        });
+    });
+
+    $('.btnVolverFiltro').click(function() {
+        location.reload();
+    });
+
+    $('.desplegarFiltroFecha').click(function(){
+        $('#formFiltroFecha').toggle()
+    });
+
+    $('.desplegarFiltroSelect').click(function(){
+        $('#formSelectFiltro').toggle()
+    });
+
+    $('#selectFiltro').change(function () {
+
+        let seleccion = $(this).val();
+        let idCliete = $('#idCliente').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'filtroSelectReservas.php', 
+            data: { 
+                seleccion: seleccion,
+                idCliente: idCliete
+             },
+            success: function (respuesta) {
+                $('#contenedorCardInicial').hide();
+                $('.filtrosReserva').hide();
+                $('#contenedorCardFiltro').html(respuesta);
+            }
+        });
+    });
+
 });

@@ -30,7 +30,7 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
         <header class="cabeceraMenu">
             <div class="iconoMenu">
                 <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
-                <span>USUARIOS</span>
+                <span>RECEPCIONISTAS</span>
             </div>
             <div class="usuPlat">
                 <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>
