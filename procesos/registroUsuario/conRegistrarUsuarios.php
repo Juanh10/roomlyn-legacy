@@ -54,12 +54,9 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
 
 
         if ($consultaUsuario->fetch()) {
-?>
-            <script>
-                alert("Este usuario ya está registrado, Intenta con otro");
-                window.location.href = '../../vistas/registroUsuarios.php';
-            </script>
-            <?php
+            $_SESSION['msjError'] = "Este usuario ya está registrado, Intenta con otro";
+            header("location: ../../vistas/registroUsuarios.php");
+            exit;
         } else {
 
             //Preparar la consulta
@@ -101,25 +98,23 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
 
                 if ($insertUsu->execute()) { // ejecutar la consulta
                     if ($consultarTipoUsuario->fetch()) {
-            ?>
-                        <script>
-                            alert("Usuario creado");
-                            window.location.href = '../../vistas/vistasAdmin/usuarios.php'; // me redirige a la plataforma del administrador
-                        </script>
-                    <?php
+                        $_SESSION['msjExito'] = "Usuario creado";
+                        header("location: ../../vistas/vistasAdmin/usuarios.php");
+                        exit;
                     } else {
-                    ?>
-                        <script>
-                            alert("Usuario creado");
-                            window.location.href = '../../vistas/login.php'; // me redirige al login ya que se crea el administrador o el primer registro
-                        </script>
-            <?php
+                        $_SESSION['msjExito'] = "Usuario creado";
+                        header("location: ../../vistas/login.php"); // me redirige al login ya que se crea el administrador o el primer registro
+                        exit;
                     }
                 } else {
-                    echo "ERROR";
+                    $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+                    header("location: ../../vistas/registroUsuarios.php");
+                    exit;
                 }
             } else {
-                echo "ERROR";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+                header("location: ../../vistas/registroUsuarios.php");
+                exit;
             }
         }
     } else {
@@ -127,12 +122,9 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
         $tipoUsuario2 = "1";
 
         if ($consultaUsuario->fetch()) {
-            ?>
-            <script>
-                alert("Este usuario ya está registrado, Intenta con otro");
-                window.location.href = '../../vistas/registroUsuarios.php';
-            </script>
-            <?php
+            $_SESSION['msjError'] = "Este usuario ya está registrado, Intenta con otro";
+            header("location: ../../vistas/registroUsuarios.php");
+            exit;
         } else {
 
             //Preparar la consulta
@@ -174,32 +166,29 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
 
                 if ($insertUsu->execute()) { // ejecutar la consulta
                     if ($consultarTipoUsuario->fetch()) {
-            ?>
-                        <script>
-                            alert("Usuario creado");
-                            window.location.href = '../../vistas/vistasAdmin/usuarios.php'; // me redirige a la plataforma del administrador
-                        </script>
-                    <?php
+                        $_SESSION['msjExito'] = "Usuario creado";
+                        header("location: ../../vistas/vistasAdmin/usuarios.php");
+                        exit;
                     } else {
-                    ?>
-                        <script>
-                            alert("Usuario creado");
-                            window.location.href = '../../vistas/login.php'; // me redirige al login ya que se crea el administrador o el primer registro
-                        </script>
-<?php
+                        $_SESSION['msjExito'] = "Usuario creado";
+                        header("location: ../../vistas/login.php"); // me redirige al login ya que se crea el administrador o el primer registro
+                        exit;
                     }
                 } else {
-                    echo "ERROR";
+                    $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+                    header("location: ../../vistas/registroUsuarios.php");
+                    exit;
                 }
             } else {
-                echo "ERROR";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+                header("location: ../../vistas/registroUsuarios.php");
+                exit;
             }
         }
     }
 } else {
-    echo "Campos vacios";
+    $_SESSION['msjError'] = "Campos vacíos. por favor llena todos los campos.";
+    header("location: ../../vistas/registroUsuarios.php");
+    exit;
 }
-
-
-
 ?>

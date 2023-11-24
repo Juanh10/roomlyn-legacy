@@ -130,17 +130,17 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
                     header("Location: ../../vistas/pagHabitaciones.php");
                     exit;
                 } else {
-                    $_SESSION['msjReservas'] = "Ocurrió un error";
+                    $_SESSION['msjReservas'] = "Se ha producido un error en el proceso de registro de la reserva. Te solicitamos amablemente que nos contactes a través del correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                     header("Location: $urlActual");
                     exit;
                 }
             } else {
-                $_SESSION['msjReservas'] = "Ocurrió un error";
+                $_SESSION['msjReservas'] = "Se ha producido un error en el proceso de registro de la reserva. Te solicitamos amablemente que nos contactes a través del correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("Location: $urlActual");
                 exit;
             }
         } else {
-            $_SESSION['msjReservas'] = "Ocurrió un error";
+            $_SESSION['msjReservas'] = "Se ha producido un error en el proceso de registro de la reserva. Te solicitamos amablemente que nos contactes a través del correo electrónico roomlyn@gmail.com para informarnos sobre este inconveniente.";
             header("Location: $urlActual");
             exit;
         }
@@ -150,8 +150,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
         exit;
     }
 } else {
-    $_SESSION['msjReservas'] = "Campos vacíos";
-
+    $_SESSION['msjReservas'] = "Campos vacíos. Por favor, completa todos los campos obligatorios antes de continuar.";
     header("Location: $urlActual");
 
     exit;

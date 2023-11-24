@@ -74,7 +74,7 @@ function actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas,
 
             // Verificar si la inserción del nuevo precio fue exitosa
             if (!$sqlPrecioAire->execute()) {
-                throw new Exception("Ocurrió un error al insertar el nuevo precio del aire.");
+                throw new Exception("$_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";");
             }
         }
 
@@ -83,7 +83,7 @@ function actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas,
         header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab);
     } catch (Exception $e) {
         // Manejar errores y redireccionar con mensaje de error
-        $_SESSION['msjError'] = "Ocurrió un error durante la actualización. Por favor, contacte al soporte técnico para obtener ayuda.";
+        $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab);
     }
 }
@@ -136,7 +136,7 @@ if (isset($_POST['actTipo'])) {
         }
     } else {
         // Si hay campos vacíos, mostrar un mensaje de error
-        $_SESSION['msjError'] = "Campos vacíos";
+        $_SESSION['msjError'] = "Campos vacíos. Por favor llena todos los campos.";
         header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
     }
 }
@@ -166,11 +166,11 @@ if (isset($_POST['btnElmServ'])) {
             $_SESSION['msjExito'] = "¡Se ha deshabilitado correctamente!";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         } else {
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         }
     } else {
-        $_SESSION['msjError'] = "Ocurrió un error";
+        $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
     }
 }
@@ -211,7 +211,7 @@ if (isset($_POST['añadirServ'])) {
                 $_SESSION['msjExito'] = "Servicios agregado con éxito";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             } else {
-                $_SESSION['msjExito'] = "Ocurrió un error";
+                $_SESSION['msjExito'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             }
         } else {
@@ -219,7 +219,7 @@ if (isset($_POST['añadirServ'])) {
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         }
     } else {
-        $_SESSION['msjError'] = "Ocurrió un error";
+        $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
     }
 }

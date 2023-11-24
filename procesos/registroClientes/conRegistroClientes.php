@@ -55,7 +55,9 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
     $rowUsuarios = $sqlConstUs->fetch();
 
     if ($sqlConstUs->rowCount() > 0) {
-        echo "El correo electronico ya está registrado" . $rowUsuarios['usuario'];
+        $_SESSION['msjError'] = "La dirección de correo electrónico ya está registrada. Por favor, intenta con otra.";
+        header("location: ../../vistas/registroClientes.php");
+        exit;
     } else {
 
         if ($sqlInforCliente->execute()) {
@@ -72,27 +74,18 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
                 header("Location: ../../vistas/login.php");
                 exit;
             } else {
-?>
-                <script>
-                    alert("Ocurrió un error");
-                    window.location.href = '../../vistas/registroClientes.php'; // me redirige a la plataforma del administrador
-                </script>
-            <?php
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+                header("location: ../../vistas/registroClientes.php");
+                exit;
             }
         } else {
-            ?>
-            <script>
-                alert("Ocurrió un error");
-                window.location.href = '../../vistas/registroClientes.php'; // me redirige a la plataforma del administrador
-            </script>
-    <?php
+            $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+            header("location: ../../vistas/registroClientes.php");
+            exit;
         }
     }
 } else {
-    ?>
-    <script>
-        alert("Campos vacios");
-        window.location.href = '../../vistas/registroClientes.php'; // me redirige a la plataforma del administrador
-    </script>
-<?php
+    $_SESSION['msjError'] = "Campos vacíos. Por favor llena todos los campos.";
+    header("location: ../../vistas/registroClientes.php");
+    exit;
 }

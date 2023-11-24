@@ -32,13 +32,13 @@ if (!empty($_POST['checkIn'])) {
                 header("Location: ../../vistas/vistasAdmin/recepcion.php");
                 exit;
             }else{
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Se ha producido un error al intentar confirmar el proceso de entrada del cliente. Por favor, te solicitamos amablemente que nos contactes a través del correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente. ";
                 header("Location: $urlActual");
                 exit;
             }
             
         }else{
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Se ha producido un error al intentar confirmar el proceso de entrada del cliente. Por favor, te solicitamos amablemente que nos contactes a través del correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente. ";
             header("Location: $urlActual");
             exit;
         }
@@ -75,13 +75,13 @@ if (!empty($_POST['checkOut'])) {
                 header("Location: ../../vistas/vistasAdmin/recepcion.php");
                 exit;
             }else{
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Se ha producido un error al intentar confirmar el proceso de salida del cliente. Por favor, te solicitamos amablemente que nos contactes a través del correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente. ";
                 header("Location: $urlActual");
                 exit;
             }
             
         }else{
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Se ha producido un error al intentar confirmar el proceso de salida del cliente. Por favor, te solicitamos amablemente que nos contactes a través del correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente. ";
             header("Location: $urlActual");
             exit;
         }

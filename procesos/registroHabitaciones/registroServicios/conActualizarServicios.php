@@ -18,10 +18,10 @@ if (!empty($_POST['idServicio']) && !empty($_POST['servicioAct'])) {
         $_SESSION['msjExito'] = "El elemento ha sido actualizado exitosamente";
     } else {
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-        $_SESSION['msjError'] = "Ocurrió un error";
+        $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico roomlyn@gmail.com para informarnos sobre este inconveniente.";
     }
 } else {
     session_start();
     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
-    $_SESSION['msjError'] = "Campo vacio";
+    $_SESSION['msjError'] = "Por favor, complete todos los campos del formulario.";
 }

@@ -22,12 +22,12 @@ if(!empty($_POST['idHab'])){
             $_SESSION['msjExito'] = "¡La habitación se ha deshabilitado exitosamente!";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }else{
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Ha habido un error al intentar deshabilitar la habitación. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
 
     }else{
-        $_SESSION['msjError'] = "Ocurrió un error";
+        $_SESSION['msjError'] = "Ha habido un error al intentar deshabilitar la habitación. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 

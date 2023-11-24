@@ -31,13 +31,13 @@ if (!empty($_POST['cancelReserva'])) {
                 header("Location: ../../vistas/vistasAdmin/recepcion.php");
                 exit;
             }else{
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ha habido un error al intentar cancelar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("Location: $urlActual");
                 exit;
             }
             
         }else{
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Ha habido un error al intentar cancelar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
             header("Location: $urlActual");
             exit;
         }
@@ -74,13 +74,13 @@ if (!empty($_POST['confirmReserva'])) {
                 header("Location: ../../vistas/vistasAdmin/recepcion.php");
                 exit;
             }else{
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ha habido un error al intentar confirmar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("Location: $urlActual");
                 exit;
             }
             
         }else{
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Ha habido un error al intentar confirmar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
             header("Location: $urlActual");
             exit;
         }

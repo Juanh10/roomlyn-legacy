@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include "../procesos/config/conex.php";
 
 $sql = $dbh->prepare("SELECT id_rol  FROM empleados WHERE id_rol = 1"); // consulta sobre el tipo de usuario
@@ -27,6 +29,8 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
     <link rel="icon" href="../iconos/logo_icono.png">
     <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/estilosRegistroUsuarios.css">
+    <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
+    <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <title>Registro</title>
 </head>
 
@@ -39,17 +43,17 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
             <img src="../img/fondoRegistro.png" alt="Foto">
         </div>
 
-    <?php
-        if($validarTipoUsuario){
-            ?>
-                <a href="../vistas/vistasAdmin/usuarios.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
-            <?php
-       }else{
+        <?php
+        if ($validarTipoUsuario) {
         ?>
-                 <a href="login.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
-            <?php
-       }
-    ?>
+            <a href="../vistas/vistasAdmin/usuarios.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
+        <?php
+        } else {
+        ?>
+            <a href="login.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>
+        <?php
+        }
+        ?>
 
         <div class="contenedorRegistro">
 
@@ -87,11 +91,11 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
                         <option disabled selected value="">Seleccione</option>
                         <?php
 
-                        foreach($dbh -> query($sql2) as $row):
-                            if(strtolower($row['documento']) != "tarjeta de identidad"):
-                            ?>
+                        foreach ($dbh->query($sql2) as $row) :
+                            if (strtolower($row['documento']) != "tarjeta de identidad") :
+                        ?>
                                 <option value="<?php echo $row['id_tipoDocumento'] ?>"><?php echo $row['documento'] ?></option>
-                            <?php
+                        <?php
                             endif;
                         endforeach;
 
@@ -120,16 +124,16 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
 
                 <div class="grupoTipoUsuario" id="grupoTipoUsuario">
                     <label for="deshabilitado">Tipo de usuario*</label>
-                    <select class="formularioInput" name="tipoUsuario" id="deshabilitado" >
-                    <?php if (!$validarTipoUsuario) {
-                    ?>
-                        <option value="1">Administrador</option>
-                    <?php
-                    } else {
-                    ?>
-                        <option value="2">Recepcionista</option>
-                    <?php
-                    } ?>
+                    <select class="formularioInput" name="tipoUsuario" id="deshabilitado">
+                        <?php if (!$validarTipoUsuario) {
+                        ?>
+                            <option value="1">Administrador</option>
+                        <?php
+                        } else {
+                        ?>
+                            <option value="2">Recepcionista</option>
+                        <?php
+                        } ?>
                     </select>
                     <p></p>
                 </div>
@@ -170,9 +174,73 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
         </div>
     </div>
 
+    <!-- ALERTAS -->
+
+    <?php
+
+    if (isset($_SESSION['msjError'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'error',
+                title: '¡Ocurrió un error!',
+                text: '<?php echo $_SESSION['msjError']; ?>',
+                showConfirmButton: true
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjError']);
+    endif;
+
+    if (isset($_SESSION['msjExito'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '<?php echo $_SESSION['msjExito']; ?>',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjExito']);
+    endif;
+
+    ?>
+
 
     <script src="../js/validarRegistroUsuario.js"></script>
-    
+
+    <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>
+
+    <script>
+        window.addEventListener('mouseover', initLandbot, {
+            once: true
+        });
+        window.addEventListener('touchstart', initLandbot, {
+            once: true
+        });
+        var myLandbot;
+
+        function initLandbot() {
+            if (!myLandbot) {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.addEventListener('load', function() {
+                    var myLandbot = new Landbot.Livechat({
+                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1781515-UV9UMH34F70SNUM3/index.json',
+                    });
+                });
+                s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
+        }
+    </script>
+
 
 </body>
 

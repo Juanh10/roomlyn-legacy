@@ -32,6 +32,7 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
 
+    
 </body>
 
 </html>

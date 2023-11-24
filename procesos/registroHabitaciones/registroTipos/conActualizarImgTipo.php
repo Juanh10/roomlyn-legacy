@@ -36,7 +36,7 @@ if (isset($_POST['actulizarImagen'])) {
                 $_SESSION['msjExito'] = "La foto se ha actualizado con éxito.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             } else {
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
             }
         } else {
@@ -67,7 +67,7 @@ if (isset($_POST['eliminarImagen'])) {
             $_SESSION['msjExito'] = "¡Se ha deshabilitado correctamente!";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         } else {
-            $_SESSION['msjError'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
             header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab . "");
         }
     }
@@ -108,7 +108,7 @@ if (isset($_POST['btnAddImg'])) {
                 $_SESSION['msjExito'] = "La foto se ha insertado exitosamente.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
             } else {
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("location: ../../../vistas/vistasAdmin/editTiposHabitaciones.php?id=" . $idTipoHab2 . "");
             }
         } else {

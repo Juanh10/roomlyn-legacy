@@ -37,12 +37,12 @@ if (!empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['d
         header("Location: ../../vistas/vistasRegistroClientes/gestionarDatos.php");
         exit;
     } else {
-        $_SESSION['msjAct'] = "Ocurrió un error";
+        $_SESSION['msjAct'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("Location: ../../vistas/vistasRegistroClientes/gestionarDatos.php");
         exit;
     }
 } else {
-    $_SESSION['msjAct'] = "Campos vacios";
+    $_SESSION['msjAct'] = "Campos vacios. Por favor llena todos los campos.";
     header("Location: ../../vistas/vistasRegistroClientes/gestionarDatos.php");
     exit;
 }

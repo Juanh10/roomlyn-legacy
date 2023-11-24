@@ -100,15 +100,15 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
                     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
                 }
             } else {
-                $_SESSION['msjError'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso de registro. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("location: ../../../vistas/vistasAdmin/habitaciones.php");
             }
         }
     } else {
-        $_SESSION['msjError'] = "Campos vacíos";
+        $_SESSION['msjError'] = "Por favor, complete todos los campos del formulario.";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 } else {
-    $_SESSION['msjError'] = "Campos vacíos";
+    $_SESSION['msjError'] = "Por favor, complete todos los campos del formulario.";
     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
 }

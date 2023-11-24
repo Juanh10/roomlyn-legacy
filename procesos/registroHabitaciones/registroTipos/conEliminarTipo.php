@@ -61,7 +61,7 @@ if (!empty($_POST['idTipoHab'])) {
 if ($exito) {
     $_SESSION['msjExito'] = "¡Se ha deshabilitado correctamente!";
 } else {
-    $_SESSION['msjError'] = "Ocurrió un error";
+    $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
 }
 
 // Redirige a la página de destino

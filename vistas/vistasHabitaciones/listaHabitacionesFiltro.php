@@ -117,376 +117,427 @@ $sqlElementosHab = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM ha
         </div>
     </header>
 
-
-</body>
-
-
-<?php
-
-if ($resultHabitacion->rowCount() > 0) {
-
-
-
-    if ($sisClimatizacion == 1) :
-?>
-        <main>
-
-            <?php
-
-            foreach ($arregloTipo as $datosTipo) :
-
-                $sqlTipoHabitaciones->bindParam(':idTipo', $datosTipo);
-                $sqlImagenesTipoHab->bindParam(':idTipoImg', $datosTipo);
-                $sqlServicios->bindParam(':idTipoServ', $datosTipo);
-
-                $sqlTipoHabitaciones->execute();
-
-                while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
-                    $idTipoHab = $rowTipo['id_hab_tipo'];
-            ?>
-                    <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
-                    <section class="container seccionHabitaciones">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="informacionList">
-                                    <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con ventilador</h2>
-
-                                    <div class="imgTipo">
-                                        <div id="carruselImagenesTipoHab" class="carousel slide" data-bs-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <?php
-                                                $sqlImagenesTipoHab->execute();
-                                                $primeraImg = true;
-                                                while ($rowImg = $sqlImagenesTipoHab->fetch(PDO::FETCH_ASSOC)) :
-                                                    $claseActive = $primeraImg ? 'active' : '';
-                                                ?>
-                                                    <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
-                                                        <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $datosTipo ?>">
-                                                            <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $rowTipo['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
-                                                        </a>
-                                                    </div>
-
-                                                <?php
-                                                    $primeraImg = false;
-
-                                                endwhile;
-                                                ?>
-                                            </div>
-                                            <?php
-
-                                            if ($sqlImagenesTipoHab->rowCount() > 1) :
-                                            ?>
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </button>
-                                            <?php
-                                            endif;
-                                            ?>
-                                        </div>
-                                    </div>
-
-                                    <p class="ms-3 mt-3">
-
-                                        Precio por día: <?php
-
-                                                        $sqlPrecios->bindParam(':idTipo', $idTipoHab);
-                                                        $sqlPrecios->bindParam(':idServ', $ventilador);
-                                                        $sqlPrecios->bindParam(':estado', $estado);
-                                                        $sqlPrecios->execute();
-                                                        $resulPrecio = $sqlPrecios->fetch();
-                                                        echo number_format($resulPrecio['precio'], 0, ",", ".")
-
-                                                        ?> + IVA
-                                    </p>
-
-                                    <ul class="listServicios">
-                                        <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
-                                        <?php
-                                        $sqlServicios->execute();
-
-                                        while ($row2 = $sqlServicios->fetch(PDO::FETCH_ASSOC)) :
-                                            if (strtolower($row2['servicio']) != "aire acondicionado") :
-                                        ?>
-                                                <li><?php echo $row2['servicio'] ?></li>
-                                        <?php
-                                            endif;
-                                        endwhile;
-                                        ?>
-                                    </ul>
-
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="listadoHab">
-                                    <?php
-
-                                    $sqlHabitacionesTi->bindParam(':idTipoHab', $datosTipo);
-
-                                    $sqlHabitacionesTi->execute();
-                                    if ($sqlHabitacionesTi->rowCount() > 0) :
-                                        while ($row3 = $sqlHabitacionesTi->fetch(PDO::FETCH_ASSOC)) :
-                                            $capacidadPerson = $row3['cantidadPersonasHab'];
-                                            $tipoCama = $row3['tipoCama'];
-                                            $idHab = $row3['id_habitacion'];
-                                            $sqlElementosHab->bindParam(':idHab', $idHab);
-                                            $sqlElementosHab->bindParam(':estado', $estado);
-                                            $sqlElementosHab->execute();
-
-                                    ?>
-                                            <div class="cardHabitaciones">
-                                                <div class="inforHabitacion">
-                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                    <div class="datosHabitacion">
-                                                        <p>
-                                                            <span>Tipo de cama:</span>
-                                                            <?php iconCantidadCama($tipoCama); ?>
-                                                        </p>
-
-                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                            <span>Capacidad:</span>
-                                                            <?php iconCapacidad($capacidadPerson) ?>
-                                                        </p>
-                                                    </div>
-                                                    <div class="elementos">
-                                                        <p>
-                                                            <?php
-                                                            $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
-                                                            $currentRow = 0; // Inicializa el contador de filas
-
-                                                            while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
-                                                                // Imprime el elemento actual
-                                                                echo $resElemento['elemento'];
-
-                                                                // Incrementa el contador de filas
-                                                                $currentRow++;
-
-                                                                // Si no es la última fila, agrega un guion
-                                                                if ($currentRow < $rowCount) {
-                                                                    echo ' - ';
-                                                                }
-                                                            endwhile;
-                                                            ?>
-                                                        </p>
-                                                    </div>
-                                                    <p><?php echo $row3['observacion'] ?></p>
-                                                </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
-                                            </div>
-                                        <?php
-
-                                        endwhile;
-                                    else :
-                                        ?>
-                                        <div class="hab-no-disponibles">
-                                            <span>No se encontraron habitaciones disponibles</span>
-                                        </div>
-                                    <?php
-                                    endif;
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                <?php
-                endwhile;
-
-                ?>
-            <?php
-            endforeach;
-
-            ?>
-
-        </main>
     <?php
 
-    else :
+    if ($resultHabitacion->rowCount() > 0) {
 
+
+
+        if ($sisClimatizacion == 1) :
     ?>
-        <main>
+            <main>
 
-            <?php
-
-            foreach ($arregloTipo as $datosTipo) :
-
-                $sqlTipoHabitaciones->bindParam(':idTipo', $datosTipo);
-                $sqlImagenesTipoHab->bindParam(':idTipoImg', $datosTipo);
-                $sqlServicios->bindParam(':idTipoServ', $datosTipo);
-
-                $sqlTipoHabitaciones->execute();
-
-                while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
-                    $idTipoHab = $rowTipo['id_hab_tipo'];
-            ?>
-                    <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
-                    <section class="container seccionHabitaciones">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="informacionList">
-                                    <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con aire acondicionado</h2>
-
-                                    <div class="imgTipo">
-                                        <div id="carruselImagenesTipoHab" class="carousel slide" data-bs-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <?php
-                                                $sqlImagenesTipoHab->execute();
-                                                $primeraImg = true;
-                                                while ($rowImg = $sqlImagenesTipoHab->fetch(PDO::FETCH_ASSOC)) :
-                                                    $claseActive = $primeraImg ? 'active' : '';
-                                                ?>
-                                                    <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
-                                                        <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $datosTipo ?>">
-                                                            <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $rowTipo['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
-                                                        </a>
-                                                    </div>
-
-                                                <?php
-                                                    $primeraImg = false;
-
-                                                endwhile;
-                                                ?>
-                                            </div>
-                                            <?php
-
-                                            if ($sqlImagenesTipoHab->rowCount() > 1) :
-                                            ?>
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </button>
-                                            <?php
-                                            endif;
-                                            ?>
-                                        </div>
-                                    </div>
-
-                                    <p class="ms-3 mt-3">
-
-                                        Precio por día: <?php
-
-                                                        $sqlPrecios->bindParam(':idTipo', $idTipoHab);
-                                                        $sqlPrecios->bindParam(':idServ', $aire);
-                                                        $sqlPrecios->bindParam(':estado', $estado);
-                                                        $sqlPrecios->execute();
-                                                        $resulPrecio = $sqlPrecios->fetch();
-                                                        echo number_format($resulPrecio['precio'], 0, ",", ".")
-
-                                                        ?> + IVA
-                                    </p>
-
-                                    <ul class="listServicios">
-                                        <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
-                                        <?php
-                                        $sqlServicios->execute();
-
-                                        while ($row2 = $sqlServicios->fetch(PDO::FETCH_ASSOC)) :
-                                            if (strtolower($row2['servicio']) != "ventilador") :
-                                        ?>
-                                                <li><?php echo $row2['servicio'] ?></li>
-                                        <?php
-                                            endif;
-                                        endwhile;
-                                        ?>
-                                    </ul>
-
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="listadoHab">
-                                    <?php
-
-                                    $sqlHabitacionesTi->bindParam(':idTipoHab', $datosTipo);
-
-                                    $sqlHabitacionesTi->execute();
-                                    if ($sqlHabitacionesTi->rowCount() > 0) :
-                                        while ($row3 = $sqlHabitacionesTi->fetch(PDO::FETCH_ASSOC)) :
-                                            $capacidadPerson = $row3['cantidadPersonasHab'];
-                                            $tipoCama = $row3['tipoCama'];
-                                            $idHab = $row3['id_habitacion'];
-                                            $sqlElementosHab->bindParam(':idHab', $idHab);
-                                            $sqlElementosHab->bindParam(':estado', $estado);
-                                            $sqlElementosHab->execute();
-                                    ?>
-                                            <div class="cardHabitaciones">
-                                                <div class="inforHabitacion">
-                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                    <div class="datosHabitacion">
-                                                        <p>
-                                                            <span>Tipo de cama:</span>
-                                                            <?php iconCantidadCama($tipoCama); ?>
-                                                        </p>
-
-                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                            <span>Capacidad:</span>
-                                                            <?php iconCapacidad($capacidadPerson) ?>
-                                                        </p>
-                                                    </div>
-                                                    <div class="elementos">
-                                                        <p>
-                                                            <?php
-                                                            $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
-                                                            $currentRow = 0; // Inicializa el contador de filas
-
-                                                            while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
-                                                                // Imprime el elemento actual
-                                                                echo $resElemento['elemento'];
-
-                                                                // Incrementa el contador de filas
-                                                                $currentRow++;
-
-                                                                // Si no es la última fila, agrega un guion
-                                                                if ($currentRow < $rowCount) {
-                                                                    echo ' - ';
-                                                                }
-                                                            endwhile;
-                                                            ?>
-                                                        </p>
-                                                    </div>
-                                                    <p><?php echo $row3['observacion'] ?></p>
-                                                </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
-                                            </div>
-                                        <?php
-                                        endwhile;
-                                    else :
-                                        ?>
-                                        <div class="hab-no-disponibles">
-                                            <span>No se encontraron habitaciones disponibles</span>
-                                        </div>
-                                    <?php
-                                    endif;
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                 <?php
-                endwhile;
+
+                foreach ($arregloTipo as $datosTipo) :
+
+                    $sqlTipoHabitaciones->bindParam(':idTipo', $datosTipo);
+                    $sqlImagenesTipoHab->bindParam(':idTipoImg', $datosTipo);
+                    $sqlServicios->bindParam(':idTipoServ', $datosTipo);
+
+                    $sqlTipoHabitaciones->execute();
+
+                    while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
+                        $idTipoHab = $rowTipo['id_hab_tipo'];
+                ?>
+                        <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
+                        <section class="container seccionHabitaciones">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="informacionList">
+                                        <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con ventilador</h2>
+
+                                        <div class="imgTipo">
+                                            <div id="carruselImagenesTipoHab" class="carousel slide" data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <?php
+                                                    $sqlImagenesTipoHab->execute();
+                                                    $primeraImg = true;
+                                                    while ($rowImg = $sqlImagenesTipoHab->fetch(PDO::FETCH_ASSOC)) :
+                                                        $claseActive = $primeraImg ? 'active' : '';
+                                                    ?>
+                                                        <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
+                                                            <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $datosTipo ?>">
+                                                                <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $rowTipo['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
+                                                            </a>
+                                                        </div>
+
+                                                    <?php
+                                                        $primeraImg = false;
+
+                                                    endwhile;
+                                                    ?>
+                                                </div>
+                                                <?php
+
+                                                if ($sqlImagenesTipoHab->rowCount() > 1) :
+                                                ?>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                <?php
+                                                endif;
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                        <p class="ms-3 mt-3">
+
+                                            Precio por día: <?php
+
+                                                            $sqlPrecios->bindParam(':idTipo', $idTipoHab);
+                                                            $sqlPrecios->bindParam(':idServ', $ventilador);
+                                                            $sqlPrecios->bindParam(':estado', $estado);
+                                                            $sqlPrecios->execute();
+                                                            $resulPrecio = $sqlPrecios->fetch();
+                                                            echo number_format($resulPrecio['precio'], 0, ",", ".")
+
+                                                            ?> + IVA
+                                        </p>
+
+                                        <ul class="listServicios">
+                                            <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
+                                            <?php
+                                            $sqlServicios->execute();
+
+                                            while ($row2 = $sqlServicios->fetch(PDO::FETCH_ASSOC)) :
+                                                if (strtolower($row2['servicio']) != "aire acondicionado") :
+                                            ?>
+                                                    <li><?php echo $row2['servicio'] ?></li>
+                                            <?php
+                                                endif;
+                                            endwhile;
+                                            ?>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="listadoHab">
+                                        <?php
+
+                                        $sqlHabitacionesTi->bindParam(':idTipoHab', $datosTipo);
+
+                                        $sqlHabitacionesTi->execute();
+                                        if ($sqlHabitacionesTi->rowCount() > 0) :
+                                            while ($row3 = $sqlHabitacionesTi->fetch(PDO::FETCH_ASSOC)) :
+                                                $capacidadPerson = $row3['cantidadPersonasHab'];
+                                                $tipoCama = $row3['tipoCama'];
+                                                $idHab = $row3['id_habitacion'];
+                                                $sqlElementosHab->bindParam(':idHab', $idHab);
+                                                $sqlElementosHab->bindParam(':estado', $estado);
+                                                $sqlElementosHab->execute();
+
+                                        ?>
+                                                <div class="cardHabitaciones">
+                                                    <div class="inforHabitacion">
+                                                        <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                        <div class="datosHabitacion">
+                                                            <p>
+                                                                <span>Tipo de cama:</span>
+                                                                <?php iconCantidadCama($tipoCama); ?>
+                                                            </p>
+
+                                                            <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                                <span>Capacidad:</span>
+                                                                <?php iconCapacidad($capacidadPerson) ?>
+                                                            </p>
+                                                        </div>
+                                                        <div class="elementos">
+                                                            <p>
+                                                                <?php
+                                                                $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
+                                                                $currentRow = 0; // Inicializa el contador de filas
+
+                                                                while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
+                                                                    // Imprime el elemento actual
+                                                                    echo $resElemento['elemento'];
+
+                                                                    // Incrementa el contador de filas
+                                                                    $currentRow++;
+
+                                                                    // Si no es la última fila, agrega un guion
+                                                                    if ($currentRow < $rowCount) {
+                                                                        echo ' - ';
+                                                                    }
+                                                                endwhile;
+                                                                ?>
+                                                            </p>
+                                                        </div>
+                                                        <p><?php echo $row3['observacion'] ?></p>
+                                                    </div>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                </div>
+                                            <?php
+
+                                            endwhile;
+                                        else :
+                                            ?>
+                                            <div class="hab-no-disponibles">
+                                                <span>No se encontraron habitaciones disponibles</span>
+                                            </div>
+                                        <?php
+                                        endif;
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    <?php
+                    endwhile;
+
+                    ?>
+                <?php
+                endforeach;
 
                 ?>
-            <?php
-            endforeach;
 
-            ?>
+            </main>
+        <?php
 
-        </main>
-<?php
+        else :
+
+        ?>
+            <main>
+
+                <?php
+
+                foreach ($arregloTipo as $datosTipo) :
+
+                    $sqlTipoHabitaciones->bindParam(':idTipo', $datosTipo);
+                    $sqlImagenesTipoHab->bindParam(':idTipoImg', $datosTipo);
+                    $sqlServicios->bindParam(':idTipoServ', $datosTipo);
+
+                    $sqlTipoHabitaciones->execute();
+
+                    while ($rowTipo = $sqlTipoHabitaciones->fetch(PDO::FETCH_ASSOC)) :
+                        $idTipoHab = $rowTipo['id_hab_tipo'];
+                ?>
+                        <h1 class="tituloTipoHab"><?php echo $rowTipo['tipoHabitacion'] ?></h1>
+                        <section class="container seccionHabitaciones">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="informacionList">
+                                        <h2 class="fs-4 mt-4 mb-4 text-center">Habitaciones con aire acondicionado</h2>
+
+                                        <div class="imgTipo">
+                                            <div id="carruselImagenesTipoHab" class="carousel slide" data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <?php
+                                                    $sqlImagenesTipoHab->execute();
+                                                    $primeraImg = true;
+                                                    while ($rowImg = $sqlImagenesTipoHab->fetch(PDO::FETCH_ASSOC)) :
+                                                        $claseActive = $primeraImg ? 'active' : '';
+                                                    ?>
+                                                        <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
+                                                            <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $datosTipo ?>">
+                                                                <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $rowTipo['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
+                                                            </a>
+                                                        </div>
+
+                                                    <?php
+                                                        $primeraImg = false;
+
+                                                    endwhile;
+                                                    ?>
+                                                </div>
+                                                <?php
+
+                                                if ($sqlImagenesTipoHab->rowCount() > 1) :
+                                                ?>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carruselImagenesTipoHab" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                <?php
+                                                endif;
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                        <p class="ms-3 mt-3">
+
+                                            Precio por día: <?php
+
+                                                            $sqlPrecios->bindParam(':idTipo', $idTipoHab);
+                                                            $sqlPrecios->bindParam(':idServ', $aire);
+                                                            $sqlPrecios->bindParam(':estado', $estado);
+                                                            $sqlPrecios->execute();
+                                                            $resulPrecio = $sqlPrecios->fetch();
+                                                            echo number_format($resulPrecio['precio'], 0, ",", ".")
+
+                                                            ?> + IVA
+                                        </p>
+
+                                        <ul class="listServicios">
+                                            <li><?php echo $rowTipo['cantidadCamas'] ?> Cama sencilla o doble</li>
+                                            <?php
+                                            $sqlServicios->execute();
+
+                                            while ($row2 = $sqlServicios->fetch(PDO::FETCH_ASSOC)) :
+                                                if (strtolower($row2['servicio']) != "ventilador") :
+                                            ?>
+                                                    <li><?php echo $row2['servicio'] ?></li>
+                                            <?php
+                                                endif;
+                                            endwhile;
+                                            ?>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="listadoHab">
+                                        <?php
+
+                                        $sqlHabitacionesTi->bindParam(':idTipoHab', $datosTipo);
+
+                                        $sqlHabitacionesTi->execute();
+                                        if ($sqlHabitacionesTi->rowCount() > 0) :
+                                            while ($row3 = $sqlHabitacionesTi->fetch(PDO::FETCH_ASSOC)) :
+                                                $capacidadPerson = $row3['cantidadPersonasHab'];
+                                                $tipoCama = $row3['tipoCama'];
+                                                $idHab = $row3['id_habitacion'];
+                                                $sqlElementosHab->bindParam(':idHab', $idHab);
+                                                $sqlElementosHab->bindParam(':estado', $estado);
+                                                $sqlElementosHab->execute();
+                                        ?>
+                                                <div class="cardHabitaciones">
+                                                    <div class="inforHabitacion">
+                                                        <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                        <div class="datosHabitacion">
+                                                            <p>
+                                                                <span>Tipo de cama:</span>
+                                                                <?php iconCantidadCama($tipoCama); ?>
+                                                            </p>
+
+                                                            <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                                <span>Capacidad:</span>
+                                                                <?php iconCapacidad($capacidadPerson) ?>
+                                                            </p>
+                                                        </div>
+                                                        <div class="elementos">
+                                                            <p>
+                                                                <?php
+                                                                $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
+                                                                $currentRow = 0; // Inicializa el contador de filas
+
+                                                                while ($resElemento = $sqlElementosHab->fetch(PDO::FETCH_ASSOC)) :
+                                                                    // Imprime el elemento actual
+                                                                    echo $resElemento['elemento'];
+
+                                                                    // Incrementa el contador de filas
+                                                                    $currentRow++;
+
+                                                                    // Si no es la última fila, agrega un guion
+                                                                    if ($currentRow < $rowCount) {
+                                                                        echo ' - ';
+                                                                    }
+                                                                endwhile;
+                                                                ?>
+                                                            </p>
+                                                        </div>
+                                                        <p><?php echo $row3['observacion'] ?></p>
+                                                    </div>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                </div>
+                                            <?php
+                                            endwhile;
+                                        else :
+                                            ?>
+                                            <div class="hab-no-disponibles">
+                                                <span>No se encontraron habitaciones disponibles</span>
+                                            </div>
+                                        <?php
+                                        endif;
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    <?php
+                    endwhile;
+
+                    ?>
+                <?php
+                endforeach;
+
+                ?>
+
+            </main>
+    <?php
 
 
 
-    endif;
-} else {
-    $_SESSION['msjError'] = "No se encontraron habitaciones disponibles";
-    header("location: ../pagHabitaciones.php");
-}
-?>
+        endif;
+    } else {
+        $_SESSION['msjError'] = "No se encontraron habitaciones disponibles";
+        header("location: ../pagHabitaciones.php");
+    }
+    ?>
+
+    <footer>
+        <div class="piePagina">
+            <div class="copyPiePagina">
+                <div class="logoPiePagina">
+                    <img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web">
+                </div>
+                <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+            </div>
+            <div class="contenidoPiePagina">
+                <div class="redes-sociales">
+                    <ul>
+                        <li><a href="https://www.facebook.com/profile.php?id=61550262616792" class="face" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/hotelcolonialci2/" class="insta" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a></li>
+                        <li><a href="https://wa.link/ys192u" class="what" target="_blank" title="Whatsapp"><i class="bi bi-whatsapp"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@colonialespinal2023" class="tiktok" target="_blank" title="Tik tok"><i class="bi bi-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                <div class="contPreguntas">
+                    <a href="../../comoFunciona.html">Como funciona ROOMLYN</a>
+                    <a href="#">Politicas de privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>
+
+<script>
+    window.addEventListener('mouseover', initLandbot, {
+        once: true
+    });
+    window.addEventListener('touchstart', initLandbot, {
+        once: true
+    });
+    var myLandbot;
+
+    function initLandbot() {
+        if (!myLandbot) {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.addEventListener('load', function() {
+                var myLandbot = new Landbot.Livechat({
+                    configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1781515-UV9UMH34F70SNUM3/index.json',
+                });
+            });
+            s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        }
+    }
+</script>
+
+</body>
 
 </html>

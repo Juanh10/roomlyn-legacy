@@ -30,17 +30,17 @@ if (!empty($_POST['idHabitacion']) && !empty($_POST['idReserva'])) {
             header("Location: ../../vistas/vistasRegistroClientes/reservasRealizadas.php");
             exit;
         } else {
-            $_SESSION['msjCn'] = "Ocurrió un error";
+            $_SESSION['msjCn'] = "Ha habido un error al intentar cancelar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente. ";
             header("Location: $urlActual");
             exit;
         }
     } else {
-        $_SESSION['msjCn'] = "Ocurrió un error";
+        $_SESSION['msjCn'] = "Ha habido un error al intentar cancelar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("Location: $urlActual");
         exit;
     }
 } else {
-    $_SESSION['msjCn'] = "Campos vacios";
+    $_SESSION['msjCn'] = "Ha habido un error al intentar cancelar la reserva. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
     header("Location: $urlActual");
     exit;
 }

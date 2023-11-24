@@ -31,7 +31,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
     $consultaNm->execute();
 
     if ($consultaNm->rowCount() > 0) {
-        $_SESSION['msjError'] = "Este tipo de habitación ya existe";
+        $_SESSION['msjError'] = "Ya existe un registro para este tipo de habitación.";
         header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
         $existeDato = true;
     } else {
@@ -112,7 +112,7 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
                                 $estadoConfirPrecios = true;
                             } else {
                                 header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
-                                $_SESSION['msj2'] = "Ocurrió un error";
+                                $_SESSION['msj2'] = "Ha habido un error en el proceso de registro. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                             }
                         }
                     }
@@ -158,14 +158,14 @@ if (!empty($_POST['nombreTipo']) && !empty($_POST['cantidadCamas']) && !empty($_
                 $_SESSION['msj2'] = "Se registró exitosamente";
             } else {
                 header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
-                $_SESSION['msj2'] = "Ocurrió un error";
+                $_SESSION['msj2'] = "Ha habido un error en el proceso de registro. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
             }
         } else {
             header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
-            $_SESSION['msj2'] = "Ocurrió un error";
+            $_SESSION['msj2'] = "Ha habido un error en el proceso de registro. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         }
     }
 } else {
     header("location: ../../../vistas/vistasAdmin/regTipoHabitacion.php");
-    $_SESSION['msj2'] = "Campos vacios";
+    $_SESSION['msj2'] = "Por favor, complete todos los campos del formulario.";
 }

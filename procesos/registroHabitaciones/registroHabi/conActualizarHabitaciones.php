@@ -47,12 +47,12 @@ if (isset($_POST['btnActualizar'])) {
                     actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble,   $sisClimatizacion, $observ);
                 }
             }
-        }else{
-            $_SESSION['msjError'] = "Campos vacíos";
+        } else {
+            $_SESSION['msjError'] = "Por favor, completa la información sobre la cantidad de camas.";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
     } else {
-        $_SESSION['msjError'] = "Campos vacíos";
+        $_SESSION['msjError'] = "Por favor, completa todos los campos.";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }
@@ -70,14 +70,14 @@ if (isset($_POST['actualizarEstado'])) {
 
         if ($sql->execute()) {
             $_SESSION['msjExito'] = "¡Se ha cambiado el estado exitosamente!";
-            header("location: ../../../vistas/vistasAdmin/".$archivo.".php");
+            header("location: ../../../vistas/vistasAdmin/" . $archivo . ".php");
         } else {
-            $_SESSION['msjError'] = "Ocurrió un error";
-            header("location: ../../../vistas/vistasAdmin/".$archivo.".php");
+            $_SESSION['msjError'] = "Ha habido un error al intentar cambiar el estado. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+            header("location: ../../../vistas/vistasAdmin/" . $archivo . ".php");
         }
     } else {
-        $_SESSION['msjError'] = "Campos vacíos";
-        header("location: ../../../vistas/vistasAdmin/".$archivo.".php");
+        $_SESSION['msjError'] = "Por favor, completa todos los campos.";
+        header("location: ../../../vistas/vistasAdmin/" . $archivo . ".php");
     }
 }
 
@@ -126,7 +126,7 @@ function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tip
         $_SESSION['msjExito'] = "¡La habitación se ha actualizado exitosamente!";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     } else {
-        $_SESSION['msjError'] = "Ocurrió un error";
+        $_SESSION['msjError'] = "Ha habido un error al intentar actualizar los datos. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }

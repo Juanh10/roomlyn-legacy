@@ -56,7 +56,7 @@ $(document).ready(function () {
     confirmarAccionFromulario($('.formContra'), '¡No podrás revertir esto!', function() {
         this.submit(); 
     });
-    confirmarAccionFromulario($('.formElmCuenta'), '¡No podrás revertir esto! ¿Deseas eliminar la cuenta?', function() {
+    confirmarAccionFromulario($('.formElmCuenta'), '¡No podrás revertir esto! ¿Deseas desactivar la cuenta?', function() {
         this.submit(); 
     });
 

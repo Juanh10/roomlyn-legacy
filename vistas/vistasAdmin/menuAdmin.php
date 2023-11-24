@@ -237,6 +237,7 @@
     <script src="../../js/scriptMenuAdmit.js"></script>
     <script src="../../js/scriptHabitacionesReservas.js"></script>
 
+    <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>
 
 </body>
 

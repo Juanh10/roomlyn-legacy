@@ -71,7 +71,7 @@ if (isset($_POST['añadirServ'])) {
                 $_SESSION['msjExito'] = "Servicios agregado con éxito";
                 header("location: ../../../vistas/vistasAdmin/habitaciones.php");
             } else {
-                $_SESSION['msjExito'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("location: ../../../vistas/vistasAdmin/habitaciones.php");
             }
         } else {
@@ -79,7 +79,7 @@ if (isset($_POST['añadirServ'])) {
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
         }
     } else {
-        $_SESSION['msjError'] = "Ocurrió un error";
+        $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }

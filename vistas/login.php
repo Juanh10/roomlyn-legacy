@@ -26,8 +26,8 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     <link rel="stylesheet" href="../css/estilosLogin.css">
     <!-- librerias para el diseño del login -->
     <link rel="icon" href="../iconos/logo_icono.png">
-    <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
     <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
     <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <title>LOGIN</title>
 </head>

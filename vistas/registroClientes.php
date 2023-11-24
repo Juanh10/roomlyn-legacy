@@ -1,4 +1,10 @@
-<?php include_once "../procesos/config/conex.php" ?>
+<?php
+
+session_start();
+
+include_once "../procesos/config/conex.php";
+
+?>
 
 
 <!DOCTYPE html>
@@ -12,6 +18,8 @@
     <link rel="stylesheet" href="../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../librerias/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="../css/estilosRegistroUsuarios.css">
+    <link rel="stylesheet" href="../librerias/sweetAlert2/css/sweetalert2.min.css">
+    <script src="../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <title>Registro</title>
 </head>
 
@@ -143,11 +151,74 @@
         </div>
     </div>
 
+    <!-- ALERTAS -->
+
+    <?php
+
+    if (isset($_SESSION['msjError'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'error',
+                title: '¡Ocurrió un error!',
+                text: '<?php echo $_SESSION['msjError']; ?>',
+                showConfirmButton: true
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjError']);
+    endif;
+
+    if (isset($_SESSION['msjExito'])) :
+    ?>
+        <script>
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: '<?php echo $_SESSION['msjExito']; ?>',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+    <?php
+        unset($_SESSION['msjExito']);
+    endif;
+
+    ?>
+
     <script src="../librerias/jquery-3.7.0.min.js"></script>
     <script src="../librerias/select2/dist/js/select2.min.js"></script>
     <script src="../js/scriptClientes.js"></script>
     <script src="../js/validarRegistroClientes.js"></script>
 
+    <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>
+
+    <script>
+        window.addEventListener('mouseover', initLandbot, {
+            once: true
+        });
+        window.addEventListener('touchstart', initLandbot, {
+            once: true
+        });
+        var myLandbot;
+
+        function initLandbot() {
+            if (!myLandbot) {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.addEventListener('load', function() {
+                    var myLandbot = new Landbot.Livechat({
+                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1781515-UV9UMH34F70SNUM3/index.json',
+                    });
+                });
+                s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
+        }
+    </script>
 
 </body>
 

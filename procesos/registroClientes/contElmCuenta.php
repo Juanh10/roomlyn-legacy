@@ -16,15 +16,14 @@ if (!empty($_POST['idCliente'])) {
     $sqlUpdate->bindParam(':idCliente', $cliente);
 
     if ($sqlUpdate->execute()) {
-        $_SESSION['msjAct'] = "Cuenta eliminada exitosamente";
         header("Location: ../login/conCerrarSesion2.php");
     } else {
-        $_SESSION['msjAct'] = "Ocurrió un error";
+        $_SESSION['msjAct'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
         exit;
     }
 } else {
-    $_SESSION['msjAct'] = "Campos vacios";
+    $_SESSION['msjAct'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
     header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
     exit;
 }

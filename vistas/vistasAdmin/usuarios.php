@@ -236,6 +236,21 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
             unset($_SESSION['msj2']);
         endif;
 
+        if (isset($_SESSION['msjExito'])) :
+            ?>
+                <script>
+                    Swal.fire({
+                        position: '',
+                        icon: 'success',
+                        title: '<?php echo $_SESSION['msjExito']; ?>',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                </script>
+            <?php
+                unset($_SESSION['msjExito']);
+            endif;
+
         ?>
 
     </body>
