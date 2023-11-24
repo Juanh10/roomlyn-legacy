@@ -162,7 +162,7 @@ if ($resultHabitacion->rowCount() > 0) {
                                                 ?>
                                                     <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
                                                         <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $datosTipo ?>">
-                                                            <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de las habitaciones del tipo seleccionado" class="img-fluid rounded mx-auto d-block mb-4">
+                                                            <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $rowTipo['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
                                                         </a>
                                                     </div>
 
@@ -340,7 +340,7 @@ if ($resultHabitacion->rowCount() > 0) {
                                                 ?>
                                                     <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
                                                         <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel<?php echo $datosTipo ?>">
-                                                            <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de las habitaciones del tipo seleccionado" class="img-fluid rounded mx-auto d-block mb-4">
+                                                            <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $rowTipo['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
                                                         </a>
                                                     </div>
 

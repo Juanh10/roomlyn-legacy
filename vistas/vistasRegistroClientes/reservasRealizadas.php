@@ -171,7 +171,7 @@ $sqlImagenes = $dbh->prepare("SELECT nombre, MIN(ruta) AS ruta, estado FROM habi
                                         </div>
                                     </div>
                                     <?php
-                                    if ($idEstado != 4 && $idEstado != 3) :
+                                    if ($idEstado == 1) :
                                     ?>
                                         <div class="botonCancelReserva">
                                             <form action="../../procesos/registroReservas/conCancelarReserva.php" method="post" class="formCancelarReserva">

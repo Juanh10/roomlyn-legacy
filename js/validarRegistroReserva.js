@@ -61,12 +61,12 @@ const validarFormulario = (e) => {
 const validarCampos = (expresion, input, idCampo, message) => {
     if (expresion.test(input.value)) { // validamos si cumple con las expresiones regulares
         document.getElementById(`${idCampo}`).classList.remove('validarInput'); // quitamos clase al input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('inputError'); // quitamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('error'); // quitamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = ""; // dejamos el texto vacio de la etiqueta hermana del input
         estadoInput[idCampo] = true;
     } else {
         document.getElementById(`${idCampo}`).classList.add('validarInput'); // agregamos clase del input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('inputError'); // agregamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('error'); // agregamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = message; // ponemos texto a la etiqueta hermana del input
         estadoInput[idCampo] = false;
     }
@@ -78,12 +78,12 @@ const validarSelects = (input, idCampo, message) => {
     let gValor = input.value;
     if (gValor === "") {
         document.getElementById(`${idCampo}`).classList.add('validarInput'); // agregamos clase del input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('inputError'); // agregamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.add('error'); // agregamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = message; // ponemos texto a la etiqueta hermana del input
         estadoInput[idCampo] = false;
     } else {
         document.getElementById(`${idCampo}`).classList.remove('validarInput'); // quitamos clase al input
-        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('inputError'); // quitamos clase a la etiqueta hermana del input
+        document.getElementById(`${idCampo}`).nextElementSibling.classList.remove('error'); // quitamos clase a la etiqueta hermana del input
         document.getElementById(`${idCampo}`).nextElementSibling.innerText = ""; // dejamos el texto vacio de la etiqueta hermana del input
         estadoInput[idCampo] = true;
     }

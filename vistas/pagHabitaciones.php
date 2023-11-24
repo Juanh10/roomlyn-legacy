@@ -163,7 +163,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                 ?>
                     <div class="cardHab">
                         <div class="imgCard">
-                            <img src="../imgServidor/<?php echo $row['ruta'] ?>" alt="Imagen del tipo de habitación">
+                            <img src="../imgServidor/<?php echo $row['ruta'] ?>" alt="Imagen que ilustra la categoría de <?php echo $row['tipoHabitacion']  ?> ">
                         </div>
 
                         <div class="contenidoCard">

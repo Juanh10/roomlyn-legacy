@@ -156,18 +156,18 @@ $(document).ready(function () {
   const contenidoEditHab = $('#contaionerEditHabitaciones');
 
   btnEditHab.click(function (e) {
-      let idHabitacion = e.target.parentElement.id;
-  
-      fetch(`../vistasAdmin/editarHabitaciones.php?id=${idHabitacion}`)
-          .then(res => res.text())
-          .then(datos => {
-              contenidoEditHab.html(datos);
-              $('#contaionerHabitaciones').hide(); // Oculta el contenedor
-              $('.pie-de-pagina').hide();
-          })
-          .catch();
+    let idHabitacion = e.target.parentElement.id;
+
+    fetch(`../vistasAdmin/editarHabitaciones.php?id=${idHabitacion}`)
+      .then(res => res.text())
+      .then(datos => {
+        contenidoEditHab.html(datos);
+        $('#contaionerHabitaciones').hide(); // Oculta el contenedor
+        $('.pie-de-pagina').hide();
+      })
+      .catch();
   });
-  
+
 
   //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
   const btnCambiarEstado = $('.btnCambEstado');
@@ -176,15 +176,15 @@ $(document).ready(function () {
   btnCambiarEstado.click(function (e) {
 
     let idHabitacion = e.target.parentElement.id;
+    let archivo = "habitaciones";
 
-
-    fetch(`../vistasAdmin/cambiarEstado.php?id=${idHabitacion}`)
+    fetch(`../vistasAdmin/cambiarEstado.php?id=${idHabitacion}&archivo=${archivo}`)
       .then(res => res.text())
       .then(datos => contenidoEstado.html(datos))
       .catch()
 
   });
-  
+
 
 
   //* ALERTAS DE CONFIRMACIÓN
@@ -224,6 +224,14 @@ $(document).ready(function () {
   });
 
   confirmarAccionFromulario($('.formularioEliminar'), '¡No podrás revertir esto!', function () {
+    this.submit();
+  });
+
+  confirmarAccionFromulario($('#formCancelarRes'), '¡No podrás revertir esto!', function () {
+    this.submit();
+  });
+
+  confirmarAccionFromulario($('#formConfirmRes'), '¡No podrás revertir esto!', function () {
     this.submit();
   });
 
@@ -309,5 +317,115 @@ $(document).ready(function () {
       .catch()
 
   });
+
+
+  function cambiarEstado(idHabitacion, archivo, contenido) {
+    fetch(`../vistasAdmin/cambiarEstadoRecepcion.php?id=${idHabitacion}&archivo=${archivo}`)
+      .then(res => res.text())
+      .then(datos => contenido.html(datos))
+      .catch();
+  }
+
+  $('.btnDisponible').click(function () {
+    let idHabitacion = $(this).attr('id');
+    let fechaRango = $(this).find('span:first').attr('id');
+    let tipoHab = $(this).find('span:last').attr('id');
+    let archivo = "";
+    $('#cambiarEstadoDispo').click(function () {
+      archivo = "recepcion";
+      let content = $('#contentCamEstadoDis');
+      cambiarEstado(idHabitacion, archivo, content);
+    });
+
+    $('#btnReservarRecepcion').click(function () {
+      archivo = "recepcion";
+      window.location.href = `reservarRecepcion.php?idHabitacion=${idHabitacion}&idTipoHab=${tipoHab}&archivo=${archivo}&fechasRango=${fechaRango}`;
+    });
+
+  });
+
+  $('.btnCambiarEstado').click(function () {
+    let idHabitacion = $(this).attr('id');
+    let archivo = "recepcion";
+    let content = $('#contentCamEstadoDi');
+    cambiarEstado(idHabitacion, archivo, content);
+  });
+
+  $('.btnPendiente').click(function () {
+    let idHabitacion = $(this).attr('id');
+    let contenido = $('#inforClientePendiente');
+
+    fetch(`../vistasAdmin/inforClientePendiente.php?id=${idHabitacion}`)
+      .then(res => res.text())
+      .then(datos => contenido.html(datos))
+      .catch();
+
+  });
+
+  $('.btnReservada').click(function () {
+    let idHabitacion = $(this).attr('id');
+    let contenido = $('#inforClienteConfir');
+
+    fetch(`../vistasAdmin/inforClientesConfir.php?id=${idHabitacion}`)
+      .then(res => res.text())
+      .then(datos => contenido.html(datos))
+      .catch();
+  });
+
+  $('.btnOcupado').click(function () {
+    let idHabitacion = $(this).attr('id');
+    let contenido = $('#inforClienteOcupado');
+
+    fetch(`../vistasAdmin/inforClienteOcupado.php?id=${idHabitacion}`)
+      .then(res => res.text())
+      .then(datos => contenido.html(datos))
+      .catch();
+  });
+
+  /* PETICION AJAX PARA FILTROS POR SELECT */
+  $('#selectFiltro').change(function () {
+
+    let seleccion = $(this).val();
+
+    $.ajax({
+        type: 'POST',
+        url: 'filtrosSelectRecepcion.php', 
+        data: { 
+            seleccion: seleccion
+         },
+        success: function (respuesta) {
+            $('#contenedorCardInicial').hide();
+            /* $('.filtrosReserva').hide(); */
+            $('#contenedorCardFiltro').html(respuesta);
+        }
+    });
+});
+
+//* BUSCADOR PARA LAS HABITACIONES
+
+$('#buscadorHab').on('keyup', function() {
+  //Obtener el texto ingresado en el input
+  let inputText = $(this).val().toLowerCase();
+  let resultadosEncontrados = false;
+
+  // Recorrer por la informacion de las habitaciones para capturar el numero de habitacion
+  $('.cardHabitaciones').each(function() {
+      let numHabitacion = $(this).find('.numHabitacion span').text().toLowerCase(); // capturar el numero de habitacion
+
+      if (numHabitacion.indexOf(inputText) === -1) { // comparamos que el numero de habitacion coincida con la busqueda
+          $(this).hide(); // ocultamos las demas habitaciones
+      } else {
+          $(this).show(); // mostramos la habitacion buscada
+          resultadosEncontrados = true;
+      }
+  });
+
+  // Mostrar u ocultar el mensaje según si se encontraron resultados
+  if (resultadosEncontrados) {
+      $('#mensajeNoResultados').hide();
+  } else {
+      $('#mensajeNoResultados').show();
+  }
+});
 
 });

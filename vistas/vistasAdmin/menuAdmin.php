@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../librerias/datatables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../librerias/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="../../css/estilosMenuAdmin.css">
     <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
-    <link rel="stylesheet" href="../../librerias/datatables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../css/estilosReservasAdmin.css">
     <title>ROOMLYN</title>
 </head>
 
@@ -201,8 +203,6 @@
             if ($_SESSION['tipoUsuario'] == 1) :
 
             ?>
-
-
                 <li class="list_itemDesplegable">
                     <a class="enlaceMenu2" href="usuarios.php">
                         <i class="bi bi-people-fill"></i>
@@ -232,8 +232,10 @@
     <script src="../../librerias/jquery-3.7.0.min.js"></script>
     <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
     <script src="../../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
-    <script src="../../js/scriptMenuAdmit.js"></script>
     <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../../librerias/select2/dist/js/select2.min.js"></script>
+    <script src="../../js/scriptMenuAdmit.js"></script>
+    <script src="../../js/scriptHabitacionesReservas.js"></script>
 
 
 </body>

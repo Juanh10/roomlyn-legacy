@@ -62,11 +62,6 @@ $(document).ready(function () {
 
 });
 
-
-
-
-// BUSCADOR EN TIEMPO REAL
-
 // Funcion para quitar las tildes
 function removeDiacritics(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");

@@ -115,14 +115,14 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
             </div>
         </header>
 
-        <main class="container">
+        <main class="container containerReserva">
             <div class="row rowPrincipal">
                 <div class="col-8 col-informacion">
                     <div class="card-infor-reserva">
                         <div class="row">
                             <div class="col-4 responsive-col-img">
                                 <div class="imagenes">
-                                    <img src="../../imgServidor/<?php echo $rowImgTipoHab['ruta'] ?>" alt="">
+                                    <img src="../../imgServidor/<?php echo $rowImgTipoHab['ruta'] ?>" alt="Fotos de <?php echo $rowTipoHab['tipoHabitacion'] ?>">
                                 </div>
                             </div>
                             <div class="col">

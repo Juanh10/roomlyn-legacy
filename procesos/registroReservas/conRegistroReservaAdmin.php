@@ -127,30 +127,30 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
                 if ($sqlActHabitacion->execute()) {
                     $_SESSION['msjReservasExito'] = "";
-                    header("Location: ../../vistas/pagHabitaciones.php");
+                    header("Location: ../../vistas/vistasAdmin/recepcion.php");
                     exit;
                 } else {
-                    $_SESSION['msjReservas'] = "Ocurrió un error";
+                    $_SESSION['msjError'] = "Ocurrió un error en el registro.";
                     header("Location: $urlActual");
                     exit;
                 }
             } else {
-                $_SESSION['msjReservas'] = "Ocurrió un error";
+                $_SESSION['msjError'] = "Ocurrió un error en el registro.";
                 header("Location: $urlActual");
                 exit;
             }
         } else {
-            $_SESSION['msjReservas'] = "Ocurrió un error";
+            $_SESSION['msjError'] = "Ocurrió un error en el registro.";
             header("Location: $urlActual");
             exit;
         }
     } else {
-        $_SESSION['msjReservas'] = "La fecha de llegada debe ser anterior a la fecha de salida. Por favor, corrige las fechas.";
+        $_SESSION['msjError'] = "La fecha de llegada debe ser anterior a la fecha de salida. Por favor, corrige las fechas.";
         header("Location: $urlActual");
         exit;
     }
 } else {
-    $_SESSION['msjReservas'] = "Campos vacíos";
+    $_SESSION['msjError'] = "Campos vacíos";
 
     header("Location: $urlActual");
 

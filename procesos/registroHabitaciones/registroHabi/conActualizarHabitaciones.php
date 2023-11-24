@@ -62,6 +62,7 @@ if (isset($_POST['actualizarEstado'])) {
     if (!empty($_POST['opcion']) && !empty($_POST['idHab'])) {
         $opcion = $_POST['opcion'];
         $idHabitacion = $_POST['idHab'];
+        $archivo = $_POST['archivo'];
 
         $sql = $dbh->prepare("UPDATE habitaciones SET id_hab_estado=:idEstado, fecha_update=now() WHERE id_habitacion = :idHab");
         $sql->bindParam(":idEstado", $opcion);
@@ -69,14 +70,14 @@ if (isset($_POST['actualizarEstado'])) {
 
         if ($sql->execute()) {
             $_SESSION['msjExito'] = "¡Se ha cambiado el estado exitosamente!";
-            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+            header("location: ../../../vistas/vistasAdmin/".$archivo.".php");
         } else {
             $_SESSION['msjError'] = "Ocurrió un error";
-            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+            header("location: ../../../vistas/vistasAdmin/".$archivo.".php");
         }
     } else {
         $_SESSION['msjError'] = "Campos vacíos";
-        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+        header("location: ../../../vistas/vistasAdmin/".$archivo.".php");
     }
 }
 

@@ -49,7 +49,7 @@ session_start();
     if (!empty($_SESSION['id_cliente_registrado'])) :
         $nombres = explode(" ", $_SESSION['nombres']);
         $apellidos = explode(" ", $_SESSION['apellidos']);
-        
+
         $primerNombre = $nombres[0];
         $primerApellido = $apellidos[0];
     ?>
@@ -83,7 +83,7 @@ session_start();
                             <a class="enlaceMenu" href="vistas/pagHabitaciones.php">Reservar</a>
                         </li>
                         <li class="inicioSesionCliente" title="Conectado">
-                            <a href="vistas/vistasRegistroClientes/configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre." ".$primerApellido ?></a>
+                            <a href="vistas/vistasRegistroClientes/configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre . " " . $primerApellido ?></a>
                         </li>
                         <li class="cerrarSesionCliente" title="Cerrar sesión">
                             <a href="#" id="btncerrarSesionCliente"><i class="bi bi-box-arrow-left"></i></a>
@@ -163,7 +163,7 @@ session_start();
                 </p>
             </div>
             <div class="imagenDescripcion">
-                <img src="img/conocenos2.webp" alt="Hotel Colonial City">
+                <img src="img/conocenos2.webp" alt="Fotografía del Hotel Colonial City">
             </div>
         </section>
 
@@ -214,37 +214,37 @@ session_start();
 
                 <div class="conImg">
                     <a href="img/entrada3.webp" data-lightbox="fotosHotel">
-                        <img src="img/entrada3.webp" alt="Entrada del hotel">
+                        <img src="img/entrada3.webp" alt="Exterior de la entrada del hotel">
                     </a>
                 </div>
 
                 <div class="conImg">
                     <a href="img/recepcion.webp" data-lightbox="fotosHotel">
-                        <img src="img/recepcion.webp" alt="Recepcion del hotel">
+                        <img src="img/recepcion.webp" alt="Recepción del hotel">
                     </a>
                 </div>
 
                 <div class="conImg">
                     <a href="img/solarRecepcion.webp" data-lightbox="fotosHotel">
-                        <img src="img/solarRecepcion.webp" alt="Solar de la recepcion">
+                        <img src="img/solarRecepcion.webp" alt="Solar de la recepción del hotel">
                     </a>
                 </div>
 
                 <div class="conImg">
                     <a href="img/salaRecepcion2.webp" data-lightbox="fotosHotel">
-                        <img src="img/salaRecepcion2.webp" alt="Sala de la recepcion">
+                        <img src="img/salaRecepcion2.webp" alt="Sala de espera junto a la recepción">
                     </a>
                 </div>
 
                 <div class="conImg">
                     <a href="img/pasillo.webp" data-lightbox="fotosHotel">
-                        <img src="img/pasillo.webp" alt="Pasillo">
+                        <img src="img/pasillo.webp" alt="Pasillo interior del hotel">
                     </a>
                 </div>
 
                 <div class="conImg">
                     <a href="img/zonaParqueadero.webp" data-lightbox="fotosHotel">
-                        <img src="img/zonaParqueadero3.jpeg" alt="Zona parqueadero">
+                        <img src="img/zonaParqueadero3.jpeg" alt="Zona de parqueadero del hotel">
                     </a>
                 </div>
 

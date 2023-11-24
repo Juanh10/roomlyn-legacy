@@ -396,6 +396,7 @@ body.activoBackground::before{
 }
 
 .pie-de-pagina p{
+    margin-top: 20px;
     margin-bottom: 20px;
     line-height: 40px;
     font-size: 14px;

@@ -5,49 +5,79 @@ use PHPMailer\PHPMailer\PHPMailer;
 include_once "../config/conex.php";
 session_start();
 
-if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se preciono el boton
+if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precionó el boton
 
     if (!empty($_POST["usuario"]) && !empty($_POST["documento"])) { // esta funcion es para saber si los campos estan vacios
-        
-        include "../../vistas/inicioSesion/msjCorreo.php";
 
-        include "../../librerias/phpMailer/PHPMailer.php"; 
-        include "../../librerias/phpMailer/SMTP.php";
+        $usuario = $_POST['usuario'];
+        $documento = $_POST['documento'];
+        $estado = 1;
+        $email = "";
 
-        $emailUser = "";
-        $emailContra = "";
-        $msj = "Recuperar contraseña";
-        $emailEnvio = "";
-        $fromName = 'No responder a este correo';
-        
-        $phpmailer = new PHPMailer();
-        $phpmailer -> Username = $emailUser;
-        $phpmailer -> Password = $emailContra;
-        $phpmailer -> SMTPSecure = 'ssl';
-        $phpmailer -> Host = '';
-        $phpmailer -> Port = 465;
-        $phpmailer -> isSMTP();
-        $phpmailer -> SMTPAuth = true;
-        $phpmailer -> setFrom($phpmailer->Username,$fromName);
-        $phpmailer -> addAddress($emailEnvio);
-        $phpmailer -> FromName = $fromName;
-        $phpmailer -> Subject = $msj;
-        $phpmailer -> Body .= $mensaje_correo;
-        $phpmailer -> isHTML(true);
+        $sqlCliente = $dbh->prepare("SELECT clr.id_cliente_registrado, clr.id_info_cliente, clr.id_rol, clr.usuario, clr.contrasena, clr.estado, ic.email FROM clientes_registrados AS clr INNER JOIN info_clientes AS ic ON ic.id_info_cliente = clr.id_info_cliente WHERE ic.documento = :documento AND clr.usuario = :usuario AND clr.estado = :estado");
 
-        if(!$phpmailer->send()){
-            echo "ERROR";
-        }else{
-            echo "OK";
+        $sqlEmpleado = $dbh->prepare("SELECT em.id_empleado, em.id_empleado, em.id_rol, em.usuario, em.contrasena, em.estado FROM empleados AS em INNER JOIN info_empleados AS ie ON ie.id_info_empleado = em.id_empleado WHERE ie.documento = :documento AND em.usuario = :usuario AND em.estado = :estado");
+
+        $sqlCliente->bindParam(':documento', $documento);
+        $sqlCliente->bindParam(':usuario', $usuario);
+        $sqlCliente->bindParam(':estado', $estado);
+
+        $sqlCliente->execute();
+
+
+        if ($sqlCliente->rowCount() > 0) {
+
+            $result = $sqlCliente->fetch();
+            $email = $result['email'];
+        } else {
+
+            $sqlEmpleado->bindParam(':documento', $documento);
+            $sqlEmpleado->bindParam(':usuario', $usuario);
+            $sqlEmpleado->bindParam(':estado', $estado);
+
+            $sqlEmpleado->execute();
+
+            if ($sqlEmpleado->rowCount() > 0) {
+                $result = $sqlCliente->fetch();
+                $email = $result['email'];
+            } else {
+                echo "Usuario no existente";
+            }
         }
 
+        include "../../vistas/inicioSesion/msjCorreo.php";
 
-        
+        include "../../librerias/phpMailer/PHPMailer.php";
+        include "../../librerias/phpMailer/SMTP.php";
 
+        $emailUser = "useroomlyn@roomlyn.com.co";
+        $emailContra = "3106046654Juan";
+        $msj = "Recuperar contrase単a";
+        $emailEnvio = "juanchohernandez200518@gmail.com";
+        $fromName = 'No responder este correo';
+
+        $phpmailer = new PHPMailer();
+        $phpmailer->Username = $emailUser;
+        $phpmailer->Password = $emailContra;
+        $phpmailer->SMTPSecure = 'ssl';
+        $phpmailer->Host = 'mail.roomlyn.com.co';
+        $phpmailer->Port = 465;
+        $phpmailer->isSMTP();
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->setFrom($phpmailer->Username, $fromName);
+        $phpmailer->addAddress($emailEnvio);
+        $phpmailer->FromName = $fromName;
+        $phpmailer->Subject = $msj;
+        $phpmailer->Body .= $mensaje_correo;
+        $phpmailer->isHTML(true);
+
+        if (!$phpmailer->send()) {
+            echo "ERROR";
+        } else {
+            echo "OK";
+        }
     } else {
         header("location: ../../vistas/login.php");
         $_SESSION['mjsError'] = "Campos vacios";
     }
 }
-
-?>

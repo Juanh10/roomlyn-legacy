@@ -2,7 +2,7 @@
 
 include_once "../../procesos/config/conex.php";
 
-$estadoTipo = 1;
+$estadoTipo = 1; 
 
 $idCliente = $_POST['idCliente'];
 $seleccion = $_POST['seleccion'];

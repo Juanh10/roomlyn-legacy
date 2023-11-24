@@ -83,7 +83,7 @@ include "funcionesIconos.php";
 
             $fechaActual = date('Y-m-d');
 
-            $fechaSiguiente = date("Y-m-d", strtotime($fechaActual . " +1 day")); // Calcula la fecha del día siguiente
+            $fechaSiguiente = date("Y-m-d", strtotime($fechaActual . " +1 day")); // Calcular la fecha del día siguiente
 
             $rangoFecha = $fechaActual . " - " . $fechaSiguiente;
 
@@ -130,7 +130,7 @@ include "funcionesIconos.php";
                                             ?>
                                                 <div class="carousel-item <?php echo $claseActive ?> coverImg" data-bs-interval="5000">
                                                     <a href="../../imgServidor/<?php echo $rowImg['ruta'] ?>" data-lightbox="fotosHotel">
-                                                        <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de las habitaciones del tipo seleccionado" class="img-fluid rounded mx-auto d-block mb-4">
+                                                        <img src="../../imgServidor/<?php echo $rowImg['ruta'] ?>" alt="Fotos de <?php echo $row['tipoHabitacion'] ?>" class="img-fluid rounded mx-auto d-block mb-4">
                                                     </a>
                                                 </div>
 

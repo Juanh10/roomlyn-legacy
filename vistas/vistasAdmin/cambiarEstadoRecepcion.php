@@ -4,7 +4,6 @@ include_once "../../procesos/config/conex.php";
 $idHab = $_GET['id'];
 $archivo = $_GET['archivo'];
 
-
 $sql = "SELECT habitaciones.id_habitacion, habitaciones.nHabitacion, habitaciones.id_hab_estado, habitaciones_estado.estado_habitacion FROM habitaciones INNER JOIN habitaciones_estado ON habitaciones.id_hab_estado = habitaciones_estado.id_hab_estado WHERE habitaciones.id_habitacion = " . $idHab . ""; // consulta del estado actual de la habitacion
 
 $sql2 = "SELECT id_hab_estado, estado_habitacion FROM habitaciones_estado WHERE 1"; // consulta de los tipos de estado
@@ -32,7 +31,7 @@ $sql2 = "SELECT id_hab_estado, estado_habitacion FROM habitaciones_estado WHERE 
                 <?php
 
                 foreach ($dbh->query($sql2) as $row2) :
-                    if ($row1['id_hab_estado'] != $row2['id_hab_estado']) :
+                    if ($row1['id_hab_estado'] != $row2['id_hab_estado'] && $row2['id_hab_estado'] != 4 && $row2['id_hab_estado'] != 5  && $row2['id_hab_estado'] != 6) :
                 ?>
                         <div class="form-check mb-2">
                             <input type="radio" class="form-check-input" value="<?php echo $row2['id_hab_estado'] ?>" name="opcion" id="<?php echo $row2['estado_habitacion'] ?>">
