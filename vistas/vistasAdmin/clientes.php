@@ -40,8 +40,8 @@ FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_in
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="table-responsive tabla-usuarios">
-                        <table class="table table-hover table-borderless text-center" id="tablaUsuarios">
+                    <div class="table-responsive tabla-clientes">
+                        <table class="table table-hover table-borderless text-center" id="tablaClientes">
                             <thead class="tabla-background">
                                 <tr>
                                     <th>#</th>

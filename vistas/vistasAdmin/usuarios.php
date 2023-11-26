@@ -8,7 +8,7 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
 
 include_once "../../procesos/config/conex.php";
 
-$sql = "SELECT empleados.*, info_empleados.* FROM empleados JOIN info_empleados ON empleados.id_info_empleado = info_empleados.id_info_empleado WHERE 1";
+$sql = "SELECT empleados.*, info_empleados.* FROM empleados JOIN info_empleados ON empleados.id_info_empleado = info_empleados.id_info_empleado WHERE estado = 1";
 
 ?>
 
@@ -77,9 +77,6 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                                         $usuario = $row['usuario'];
                                         // $contraseña = $row['contraseña'];
                                         $estado = $row['estado'];
-
-                                        if ($estado == 1) :
-
                                     ?>
 
                                             <tr class="filas filasUsuario">
@@ -109,10 +106,7 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                                                 </td>
                                             </tr>
                                     <?php
-
-                                        endif;
                                     endforeach;
-
                                     ?>
                                 </tbody>
                             </table>

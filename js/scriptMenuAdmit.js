@@ -266,6 +266,12 @@ $(document).ready(function () {
 
   function initDatatables($tablaID) {
 
+    // Verificar si la tabla ya tiene una instancia de DataTable
+    if ($.fn.DataTable.isDataTable($tablaID)) {
+      // Destruir la instancia existente antes de volver a inicializar
+      $tablaID.DataTable().destroy();
+    }
+
     $($tablaID).DataTable({
 
       "lengthMenu": [5, 10, 20, 30],
@@ -299,7 +305,10 @@ $(document).ready(function () {
   }
 
   initDatatables($('#tablaUsuarios'));
+  initDatatables($('#tablaClientes'));
   initDatatables($('#tablaHabitaciones'));
+  initDatatables($('#tablaReservas'));
+  initDatatables($('#tablaReservasFiltro'));
 
 
   //* CONSULTA AJAX PARA FORMULARIO DEL REGISTRO DE HABITACIONES
@@ -388,44 +397,89 @@ $(document).ready(function () {
     let seleccion = $(this).val();
 
     $.ajax({
-        type: 'POST',
-        url: 'filtrosSelectRecepcion.php', 
-        data: { 
-            seleccion: seleccion
-         },
-        success: function (respuesta) {
-            $('#contenedorCardInicial').hide();
-            /* $('.filtrosReserva').hide(); */
-            $('#contenedorCardFiltro').html(respuesta);
-        }
+      type: 'POST',
+      url: 'filtrosSelectRecepcion.php',
+      data: {
+        seleccion: seleccion
+      },
+      success: function (respuesta) {
+        $('#contenedorCardInicial').hide();
+        /* $('.filtrosReserva').hide(); */
+        $('#contenedorCardFiltro').html(respuesta);
+      }
     });
-});
+  });
 
-//* BUSCADOR PARA LAS HABITACIONES
+  //* BUSCADOR PARA LAS HABITACIONES
 
-$('#buscadorHab').on('keyup', function() {
-  //Obtener el texto ingresado en el input
-  let inputText = $(this).val().toLowerCase();
-  let resultadosEncontrados = false;
+  $('#buscadorHab').on('keyup', function () {
+    //Obtener el texto ingresado en el input
+    let inputText = $(this).val().toLowerCase();
+    let resultadosEncontrados = false;
 
-  // Recorrer por la informacion de las habitaciones para capturar el numero de habitacion
-  $('.cardHabitaciones').each(function() {
+    // Recorrer por la informacion de las habitaciones para capturar el numero de habitacion
+    $('.cardHabitaciones').each(function () {
       let numHabitacion = $(this).find('.numHabitacion span').text().toLowerCase(); // capturar el numero de habitacion
 
       if (numHabitacion.indexOf(inputText) === -1) { // comparamos que el numero de habitacion coincida con la busqueda
-          $(this).hide(); // ocultamos las demas habitaciones
+        $(this).hide(); // ocultamos las demas habitaciones
       } else {
-          $(this).show(); // mostramos la habitacion buscada
-          resultadosEncontrados = true;
+        $(this).show(); // mostramos la habitacion buscada
+        resultadosEncontrados = true;
       }
+    });
+
+    // Mostrar u ocultar el mensaje según si se encontraron resultados
+    if (resultadosEncontrados) {
+      $('#mensajeNoResultados').hide();
+    } else {
+      $('#mensajeNoResultados').show();
+    }
   });
 
-  // Mostrar u ocultar el mensaje según si se encontraron resultados
-  if (resultadosEncontrados) {
-      $('#mensajeNoResultados').hide();
-  } else {
-      $('#mensajeNoResultados').show();
+
+  $('.btnVolverFiltro').click(function () {
+    location.reload();
+  });
+
+
+  // FILTRAR POR FECHAS
+
+  function setFechaActual() {
+    var fechaActual = new Date();
+    var fechaFormateada = fechaActual.toISOString().split('T')[0]; // Formato AAAA-MM-DD
+    $('#fechaInicio, #fechaFinal').val(fechaFormateada);
   }
-});
+
+  // evento clic para llamar la funcion de filtrar las fechas
+  $('#btnFiltrar').on('click', function () {
+    setFechaActual();
+  });
+
+
+  // ENVIO DE DATOS POR MEDIO DE AJAX
+
+  $('#filtroBtnFechaRes').click(function () {
+    // Obtener las fechas seleccionadas
+    let fechaInicial = $('#fechaInicio').val();
+    let fechaFinal = $('#fechaFinal').val();
+    let estado = $('#selectFiltroEstado').val();
+
+    // Realizar la petición AJAX c
+    $.ajax({
+      type: 'POST',
+      url: 'reservacionesFiltro.php',
+      data: {
+        fechaInicial: fechaInicial,
+        fechaFinal: fechaFinal,
+        estado: estado
+      },
+      success: function (response) {
+        $('#contenedorIniReservaciones').hide();
+        $('#modalFiltrarFecha').modal('hide');
+        $('#contenedorFilReservaciones').html(response);
+      }
+    });
+  });
 
 });

@@ -1,5 +1,5 @@
 <?php
 
-$mensaje_correo = '<h1>HELLO WORLD </h1>';
+$mensaje_correo = $result['email'];
 
 ?>

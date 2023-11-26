@@ -74,7 +74,7 @@ function actualizarTipoHab($dbh, $nombreTipo, $cantidadCamas, $cantidadPersonas,
 
             // Verificar si la inserción del nuevo precio fue exitosa
             if (!$sqlPrecioAire->execute()) {
-                throw new Exception("$_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";");
+                throw new Exception("Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.");
             }
         }
 

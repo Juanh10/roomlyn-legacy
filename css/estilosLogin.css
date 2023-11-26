@@ -1,18 +1,25 @@
-*{
+* {
     padding: 0;
     margin: 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.contenedorPrin{
+.contenedorPrin {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#86726B), to(#53433f));
+    background-image: -o-linear-gradient(bottom, #86726B, #53433f);
     background-image: linear-gradient(to top, #86726B, #53433f);
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     position: relative;
 }
 
-.contenedorPrin > a{
+.contenedorPrin>a {
     position: absolute;
     top: 25px;
     left: 50px;
@@ -23,77 +30,119 @@
     background-color: #86726B;
     font-size: 12px;
     font-weight: 600;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-transition: .6s ease;
+    -o-transition: .6s ease;
     transition: .6s ease;
 }
 
-.contenedorPrin > a:hover{
+.contenedorPrin>a:hover {
     background-color: #72615a;
 }
 
-.contenedorPrin > a i{
+.contenedorPrin>a i {
     margin-right: 5px;
     font-size: 18px;
 }
 
-.contenedorLogin{
+.contenedorLogin {
     max-width: 100em;
     margin-left: auto;
     margin-right: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
-.ConImgLogin{
+.ConImgLogin {
     width: 50%;
     height: 75%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
-.imgLogin{
+.imgLogin {
     width: 80%;
 
 }
 
-.imgLogin img{
+.imgLogin img {
     width: 100%;
     height: 100%;
+    -o-object-fit: cover;
     object-fit: cover;
+    -webkit-animation: animacion 2s infinite;
     animation: animacion 2s infinite;
 }
 
-@keyframes animacion{
+@-webkit-keyframes animacion {
     0% {
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
+
     50% {
+        -webkit-transform: translateY(-15px);
         transform: translateY(-15px);
     }
+
     100% {
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
 }
 
-.login{
+@keyframes animacion {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    50% {
+        -webkit-transform: translateY(-15px);
+        transform: translateY(-15px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+.login {
     background-color: #9D8070;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     border-radius: 20px;
     padding: 20px;
     width: 450px;
 }
 
-.formLogin{
+.formLogin {
     background-color: #b59f93;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     border-radius: 20px;
     padding: 25px 40px;
     position: relative;
 }
 
-.formLogin h1{
+.formLogin h1 {
     padding: 10px;
     text-align: center;
     font-size: 40px;
@@ -101,7 +150,7 @@
     font-family: 'Trebuchet MS', sans-serif;
 }
 
-.formLogin input{
+.formLogin input {
     display: block;
     width: 100%;
     height: 40px;
@@ -111,12 +160,31 @@
     outline: none;
     padding: 10px;
     background-color: #D6CECE;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-transition: background-color 1s ease;
+    -o-transition: background-color 1s ease;
     transition: background-color 1s ease;
 }
 
-.formLogin .usuarioInput{
+.formLogin .usuarioInput {
     padding: 10px 50px;
+}
+
+.formLogin input::-webkit-input-placeholder {
+    color: #444444;
+}
+
+.formLogin input::-moz-placeholder {
+    color: #444444;
+}
+
+.formLogin input:-ms-input-placeholder {
+    color: #444444;
+}
+
+.formLogin input::-ms-input-placeholder {
+    color: #444444;
 }
 
 .formLogin input::placeholder {
@@ -128,11 +196,11 @@
 }
 
 
-.userInput{
+.userInput {
     position: relative;
 }
 
-.userInput i{
+.userInput i {
     position: absolute;
     top: -5px;
     left: 0;
@@ -142,15 +210,15 @@
     background-color: #86726B;
 }
 
-.formLogin .contraseñaInput{
+.formLogin .contraseñaInput {
     padding: 10px 90px 10px 20px;
 }
 
-.passInput{
+.passInput {
     position: relative;
 }
 
-.passInput > i{
+.passInput>i {
     position: absolute;
     top: -4px;
     right: 0;
@@ -160,7 +228,7 @@
     background-color: #86726B;
 }
 
-.verContraseña i{
+.verContraseña i {
     position: absolute;
     bottom: 5px;
     right: 60px;
@@ -168,50 +236,55 @@
     cursor: pointer;
 }
 
-.btnIngresar{
+.btnIngresar {
     position: relative;
 }
 
-.btnIngresar input{
+.btnIngresar input {
     font-size: 18px;
     margin-top: 40px;
     cursor: pointer;
     background-color: #86726B;
+    -webkit-transition: .5s ease;
+    -o-transition: .5s ease;
     transition: .5s ease;
 }
 
-.btnIngresar input:hover{
+.btnIngresar input:hover {
     background-color: #72615a;
 }
 
-.opcionesFormu{
+.opcionesFormu {
     position: absolute;
     top: 50px;
     width: 100%;
-    text-align: center;  
+    text-align: center;
 }
 
-.opcionesFormu a{
+.opcionesFormu a {
     color: #000;
 }
 
 /** ESTILOS DE MENSAJES VALIDACIONES  */
 
-.error{
-    color: red; /*! CAMBIAR COLOR  */
+.error {
+    color: red;
+    /*! CAMBIAR COLOR  */
     position: absolute;
     top: 45px;
     left: 40px;
     font-weight: bold;
 }
 
-.formLogin .validarInput{
+.formLogin .validarInput {
     border-bottom: 3px solid red;
+    -webkit-box-shadow: 0 0 3px red;
     box-shadow: 0 0 3px red;
 }
 
-.cmpVacio{
-    color: red; /*! CAMBIAR COLOR */
+.cmpVacio {
+    color: red;
+    /*! CAMBIAR COLOR */
     font-size: 18px;
     position: absolute;
     top: 5rem;
@@ -223,7 +296,7 @@
 
 /** estilos patra la seccion de olvidar contraseña */
 
-.formLogin .recuperarh1{
+.formLogin .recuperarh1 {
     font-size: 35px;
 }
 
@@ -236,28 +309,29 @@
 }
 
 .swal2-popup {
-   width: 20em !important;
+    width: 20em !important;
 }
 
-@media only screen and (max-width: 982px){
+@media only screen and (max-width: 982px) {
 
-    .ConImgLogin{
+    .ConImgLogin {
         display: none;
     }
 
 }
 
-@media only screen and (max-width: 470px){
+@media only screen and (max-width: 470px) {
 
-    .contenedorPrin > a{
+    .contenedorPrin>a {
         position: absolute;
         top: 25px;
         left: 55px;
     }
 
 
-    .login{
+    .login {
         background-color: transparent;
+        -webkit-box-shadow: none;
         box-shadow: none;
         border-radius: 0;
         padding: 0;
@@ -265,15 +339,16 @@
         margin-left: auto;
         margin-right: auto;
     }
-    
-    .formLogin{
+
+    .formLogin {
         background-color: #b59f93;
+        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
         box-shadow: 0 0 10px rgba(0, 0, 0, .5);
         border-radius: 20px;
         padding: 50px 25px;
     }
 
-    .cmpVacio{
+    .cmpVacio {
         color: red;
         font-size: 18px;
         position: absolute;

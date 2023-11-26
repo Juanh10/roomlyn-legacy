@@ -72,7 +72,6 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
                                         <td><?php echo $rowHab['estado_habitacion'] ?></td>
                                         <td class="botones-Config" id="<?php echo $rowHab['id_habitacion'] ?>">
                                             <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHabitacion" title="Editar habitación"></span>
-                                            <span class="bi bi-gear btn btn-secondary btn-sm btnCambEstado" id="<?php echo $rowHab['id_habitacion'] ?>" data-bs-toggle="modal" data-bs-target="#cambiarEstado" title="Cambiar de estado"></span>
                                             <form action="../../procesos/registroHabitaciones/registroHabi/conDeshabilitarHabitaciones.php" method="post" class="desHabitacion">
                                                 <input type="hidden" name="idHab" value="<?php echo $rowHab['id_habitacion'] ?>">
                                                 <button type="submit" name="elmHab" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
@@ -244,25 +243,11 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
         </div>
     </div>
 
-    <!-- MODAL PARA CAMBIAR EL ESTADO DE LA HABITACIÓN -->
-    <div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"">
-            <div class=" modal-content">
-            <div class="modal-header fondo-modal">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar estado</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modalCambEstado"></div>
-        </div>
-    </div>
-    </div>
-
 
     <!-- PIE DE PAGINA -->
     <footer class="pie-de-pagina">
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
-
 
     <!-- ALERTAS -->
 

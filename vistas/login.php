@@ -129,8 +129,19 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
         unset($_SESSION['msjCliente']);
     }
 
+    if (isset($_SESSION['msjExito'])) {
     ?>
 
+        <script>
+            Swal.fire('<?php echo $_SESSION['msjExito']; ?>')
+        </script>
+
+    <?php
+        unset($_SESSION['msjExito']);
+    }
+
+    ?>
+    
     <script src="../librerias/jquery-3.7.0.min.js"></script>
     <script src="../js/validarLogin.js"></script>
 

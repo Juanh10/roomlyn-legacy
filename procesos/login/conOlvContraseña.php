@@ -41,8 +41,10 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
                 $result = $sqlCliente->fetch();
                 $email = $result['email'];
             } else {
-                echo "Usuario no existente";
-            }
+                $_SESSION['msjError'] = "Usuario no encontrado.";
+                header("location: ../../vistas/olvConrtraseña.php");
+                exit;
+             }
         }
 
         include "../../vistas/inicioSesion/msjCorreo.php";
@@ -52,8 +54,8 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
 
         $emailUser = "useroomlyn@roomlyn.com.co";
         $emailContra = "3106046654Juan";
-        $msj = "Recuperar contrase単a";
-        $emailEnvio = "juanchohernandez200518@gmail.com";
+        $msj = "Recuperar contraseña";
+        $emailEnvio = $email;
         $fromName = 'No responder este correo';
 
         $phpmailer = new PHPMailer();
@@ -72,12 +74,18 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
         $phpmailer->isHTML(true);
 
         if (!$phpmailer->send()) {
-            echo "ERROR";
+            $_SESSION['msjError'] = "Ocurrio un error.";
+            header("location: ../../vistas/login.php");
+            exit;
         } else {
-            echo "OK";
+            $_SESSION['msjExito'] = "Hemos enviado un enlace a tu correo electrónico para que puedas cambiar la contraseña.";
+            header("location: ../../vistas/olvConrtraseña.php");
+            exit;
         }
     } else {
-        header("location: ../../vistas/login.php");
+        header("location: ../../vistas/olvConrtraseña.php");
         $_SESSION['mjsError'] = "Campos vacios";
+        exit;
     }
 }
+?>

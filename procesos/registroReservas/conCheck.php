@@ -71,7 +71,7 @@ if (!empty($_POST['checkOut'])) {
             $sqlHab->bindParam(':idHab', $idHab);
             
             if ($sqlHab->execute()) {
-                $_SESSION['msjExito'] = "¡Check-in realizado con éxito!";
+                $_SESSION['msjExito'] = "¡Check-out realizado con éxito!";
                 header("Location: ../../vistas/vistasAdmin/recepcion.php");
                 exit;
             }else{
