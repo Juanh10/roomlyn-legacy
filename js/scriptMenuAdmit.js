@@ -3,6 +3,7 @@ $(document).ready(function () {
   $('.btnIconoMenu').click(function () {
     $('.menuLateral').toggleClass('activoMenu');
     $('body').toggleClass('activoBackground');
+    $('.pie-de-pagina p').toggleClass('activoBackground2');
   });
 
   let enlacePrincipal = $('.enlacePrincipal');
@@ -29,6 +30,7 @@ $(document).ready(function () {
     if (!$(event.target).closest(menuLateral).length && !$(event.target).closest(btnMenuFijo).length) {
       menuLateral.removeClass('activoMenu');
       $('body').removeClass('activoBackground');
+      $('.pie-de-pagina p').removeClass('activoBackground2');
     }
   });
 
@@ -306,6 +308,7 @@ $(document).ready(function () {
 
   initDatatables($('#tablaUsuarios'));
   initDatatables($('#tablaClientes'));
+  initDatatables($('#tablaClientesFiltro'));
   initDatatables($('#tablaHabitaciones'));
   initDatatables($('#tablaReservas'));
   initDatatables($('#tablaReservasFiltro'));
@@ -437,17 +440,16 @@ $(document).ready(function () {
     }
   });
 
-
-  $('.btnVolverFiltro').click(function () {
-    location.reload();
-  });
-
-
   // FILTRAR POR FECHAS
 
   function setFechaActual() {
-    var fechaActual = new Date();
-    var fechaFormateada = fechaActual.toISOString().split('T')[0]; // Formato AAAA-MM-DD
+    let fechaActual = new Date();
+    
+    // Establecer la zona horaria en Bogotá
+    fechaActual.setUTCHours(fechaActual.getUTCHours() - 5);
+    
+    // Formatear la fecha como ISO y establecerla en los elementos HTML
+    let fechaFormateada = fechaActual.toISOString().split('T')[0];
     $('#fechaInicio, #fechaFinal').val(fechaFormateada);
   }
 
@@ -478,6 +480,35 @@ $(document).ready(function () {
         $('#contenedorIniReservaciones').hide();
         $('#modalFiltrarFecha').modal('hide');
         $('#contenedorFilReservaciones').html(response);
+      }
+    });
+  });
+
+
+  /* FUNCION PARA MOSTRAR INFORMACION RELEVANTE DE LAS RESERVACIONES */
+
+  $('.desplegarInformacionRecep').click(function () {
+    $('.cardInformacion').toggle()
+  });
+
+
+  $('#filtroBtnFechaCli').click(function () {
+    // Obtener las fechas seleccionadas
+    let fechaInicial = $('#fechaInicio').val();
+    let fechaFinal = $('#fechaFinal').val();
+
+    // Realizar la petición AJAX c
+    $.ajax({
+      type: 'POST',
+      url: 'clientesFiltro.php',
+      data: {
+        fechaInicial: fechaInicial,
+        fechaFinal: fechaFinal
+      },
+      success: function (response) {
+        $('#contenedorPrincipalCli').hide();
+        $('#modalFiltrarFecha').modal('hide');
+        $('#contenedorFiltroCli').html(response);
       }
     });
   });

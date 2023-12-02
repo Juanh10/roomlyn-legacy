@@ -932,6 +932,35 @@ body {
     text-align: center;
 }
 
+
+
+.desplegarInformacionRecep{
+    display: none;
+}
+
+.mensajeError {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* TARJETAS DE INICIO */
+
+.tarjeta {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 10px 20px 10px;
+    text-align: center;
+}
+
+.numero-cant {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
 @media only screen and (max-width: 996px) {
     .contenedorFila{
         display: block;
@@ -986,6 +1015,19 @@ body {
     .contenido {
         padding-top: 80px;
         padding-left: 0;
+    }
+
+    .cardInformacion{
+        display: none;
+    }
+
+    .desplegarInformacionRecep{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #000;
+        cursor: pointer;
+        display: block;
     }
 }
 

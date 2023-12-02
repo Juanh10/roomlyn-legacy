@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php require_once "dependecias.php" ?>
+    <title>Habitaciones | Hotel Colonial City</title>
+</head>
+
 <?php
 
 session_start();
@@ -64,16 +74,6 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
 $sqlElementosHab = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM habitaciones_elementos_selec INNER JOIN habitaciones_elementos ON habitaciones_elementos.id_hab_elemento = habitaciones_elementos_selec.id_hab_elemento WHERE id_habitacion = :idHab AND estado = :estado");
 
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php require_once "dependecias.php" ?>
-    <title>Habitaciones | Hotel Colonial City</title>
-</head>
 
 <body>
 
@@ -271,7 +271,7 @@ $sqlElementosHab = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM ha
                                                         </div>
                                                         <p><?php echo $row3['observacion'] ?></p>
                                                     </div>
-                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Reservar</a>
                                                 </div>
                                             <?php
 
@@ -448,7 +448,7 @@ $sqlElementosHab = $dbh->prepare("SELECT habitaciones_elementos.elemento FROM ha
                                                         </div>
                                                         <p><?php echo $row3['observacion'] ?></p>
                                                     </div>
-                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Seleccionar</a>
+                                                    <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $datosTipo ?>&fechasRango=<?php echo $fechaRango ?>&filtro=true&huespedes=<?php echo $huespedes ?>&sisClimatizacion=<?php echo $sisClimatizacion ?>&filtro=true" class="btnSelecHab">Reservar</a>
                                                 </div>
                                             <?php
                                             endwhile;

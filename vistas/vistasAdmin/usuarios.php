@@ -43,7 +43,7 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                     <div class="col">
                         <div class="buscBntAgr">
                             <div class="botonAgregar">
-                                <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir Usuario</a>
+                                <a href="../registroUsuarios.php" class="btn btnColorUsuario mb-3">Añadir recepcionista</a>
                             </div>
                         </div>
                         <div class="table-responsive tabla-usuarios">

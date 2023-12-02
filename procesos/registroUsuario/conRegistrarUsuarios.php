@@ -36,12 +36,12 @@ if (!empty($_POST['primerNombre']) && !empty($_POST['primerApellido']) && !empty
 
     $consultaRegUsuario->execute();
 
-    $consultaUsuario = $dbh->prepare("SELECT usuario FROM empleados WHERE usuario = :usuario"); // preparar la consulta sobre el usuario para que no haya duplicados
+    $consultaUsuario = $dbh->prepare("SELECT usuario FROM empleados WHERE estado = 1 AND usuario = :usuario"); // preparar la consulta sobre el usuario para que no haya duplicados
     $consultaUsuario->bindParam(':usuario', $usuario); // enlazar marcador con la variable
     $consultaUsuario->execute(); // realiza la consulta
 
     //* CONSULTA TIPO ROL
-    $consultarTipoUsuario = $dbh->prepare("SELECT id_rol FROM empleados WHERE id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
+    $consultarTipoUsuario = $dbh->prepare("SELECT id_rol FROM empleados WHERE estado = 1 AND id_rol = :tipoUsuario"); // preparar la consulta para comparar si ya existe un usuario como administrador
     $marcTipoUsuario = 1;
     $consultarTipoUsuario->bindParam(':tipoUsuario', $marcTipoUsuario);
     $consultarTipoUsuario->execute(); // realiza la consulta

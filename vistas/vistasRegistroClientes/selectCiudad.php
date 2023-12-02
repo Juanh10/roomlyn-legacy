@@ -1,18 +1,32 @@
-<?php
-include_once "../../procesos/config/conex.php";
+<!DOCTYPE html>
+<html lang="es">
 
-$departamento = $_GET['valorDe'];
-$sqlCiudad = "SELECT id_municipio, id_departamento, municipio FROM municipios WHERE id_departamento = " . $departamento . "";
+<head>
+    <meta charset="UTF-8">
 
-$resultFilasCiudad = $dbh->query($sqlCiudad);
+</head>
 
-if ($resultFilasCiudad->rowCount() > 0) :
+<body>
 
-    echo '<option selected disabled value="">Escoja una opción</option>';
+    <?php
+    include_once "../../procesos/config/conex.php";
 
-    foreach ($resultFilasCiudad as $rowCiudad) :
-        echo '<option value="' . $rowCiudad['id_municipio'] . '">' . $rowCiudad['municipio'] . '</option>';
-    endforeach;
-else :
-    echo '<option selected value="1">No requerido</option>';
-endif;
+    $departamento = $_GET['valorDe'];
+    $sqlCiudad = "SELECT id_municipio, id_departamento, municipio FROM municipios WHERE id_departamento = " . $departamento . "";
+
+    $resultFilasCiudad = $dbh->query($sqlCiudad);
+
+    if ($resultFilasCiudad->rowCount() > 0) :
+
+        echo '<option selected disabled value="">Escoja una opcion</option>';
+
+        foreach ($resultFilasCiudad as $rowCiudad) :
+            echo '<option value="' . $rowCiudad['id_municipio'] . '">' . $rowCiudad['municipio'] . '</option>';
+        endforeach;
+    else :
+        echo '<option selected value="1">No requerido</option>';
+    endif;
+    ?>
+</body>
+
+</html>

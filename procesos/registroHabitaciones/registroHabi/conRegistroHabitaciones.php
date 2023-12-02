@@ -22,12 +22,12 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
 
         $existe = false;
 
-        $consulta = $dbh->prepare("SELECT id_habitacion, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab");
+        $consulta = $dbh->prepare("SELECT id_habitacion, nHabitacion, estado FROM habitaciones WHERE nHabitacion = :numHab AND estado = 1");
         $consulta->bindParam(":numHab", $numHab); // enlazar el marcador con la variable
         $consulta->execute(); // ejecutar la consulta
         $fila = $consulta->fetch(); // para acceder a los datos de la BD
 
-        if ($consulta->rowCount() > 0 && $fila['estado'] === 1) {
+        if ($consulta->rowCount() > 0) {
             $_SESSION['msjError'] = "Esta habitación ya existe";
 
             header("location: ../../../vistas/vistasAdmin/habitaciones.php");
@@ -112,3 +112,4 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
     $_SESSION['msjError'] = "Por favor, complete todos los campos del formulario.";
     header("location: ../../../vistas/vistasAdmin/habitaciones.php");
 }
+?>

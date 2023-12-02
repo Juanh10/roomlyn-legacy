@@ -14,24 +14,25 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
     $estado = 1;
 
     if (filter_var($usuario, FILTER_VALIDATE_EMAIL)) {
-        
+
         $validarUsu = $dbh->prepare("SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.id_info_cliente, clientes_registrados.id_rol, clientes_registrados.usuario, clientes_registrados.contrasena, clientes_registrados.estado, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.email, info_clientes.estado FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente WHERE info_clientes.estado = :estCli AND clientes_registrados.estado = :est AND clientes_registrados.usuario = :usurio");
 
-        $validarUsu->bindParam(':estCli',$estado);
-        $validarUsu->bindParam(':est',$estado);
-        $validarUsu->bindParam(':usurio',$usuario);
+        $validarUsu->bindParam(':estCli', $estado);
+        $validarUsu->bindParam(':est', $estado);
+        $validarUsu->bindParam(':usurio', $usuario);
 
-        $validarUsu -> execute();
+        $validarUsu->execute();
 
         $contador2 = 0;
 
-        foreach($validarUsu -> fetchAll(PDO::FETCH_ASSOC) as $datosCliente){
+        foreach ($validarUsu->fetchAll(PDO::FETCH_ASSOC) as $datosCliente) {
 
             $contador2 += 1;
 
             $contraBD = $datosCliente['contrasena'];
 
             $_SESSION['id_cliente_registrado'] = $datosCliente['id_cliente_registrado']; //* Guardar el id en una sesion
+            $_SESSION['id_info_cliente'] = $datosCliente['id_info_cliente']; //* Guardar el id en una sesion
             $_SESSION['id_rol'] = $datosCliente['id_rol']; //* Guardar el id en una sesion
             $_SESSION['usuario'] = $datosCliente['usuario']; //* Guardar el id en una sesion
             $_SESSION['nombres'] = $datosCliente['nombres']; //* Guardar el id en una sesion
@@ -42,10 +43,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
 
         }
 
-        if($contador2 == 0){
+        if ($contador2 == 0) {
             $_SESSION['error'] = "El usuario es incorrecto";
             header("location: ../../vistas/login.php");
-        }else{
+        } else {
             if (password_verify($contrasena, $contraBD)) {
                 header("location: ../../index.php");
             } else {
@@ -53,7 +54,6 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
                 header("location: ../../vistas/login.php");
             }
         }
-
     } else {
 
         $validar = $dbh->prepare("SELECT empleados.id_empleado, empleados.id_rol, empleados.usuario, empleados.contrasena, info_empleados.pNombre, info_empleados.pApellido FROM empleados JOIN info_empleados ON empleados.id_info_empleado = info_empleados.id_info_empleado WHERE empleados.usuario = :usua and empleados.estado = :estado"); //* preparar la consulta
@@ -96,4 +96,3 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasena'])) {
     $_SESSION['error'] = "Campos Vacios";
     header("location: ../../vistas/login.php");
 }
-?>

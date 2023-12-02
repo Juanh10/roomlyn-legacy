@@ -7,7 +7,7 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
 
 include_once "../../procesos/config/conex.php";
 
-$sqlReservas = "SELECT r.id_reserva, r.id_cliente, r.id_habitacion, r.id_estado_reserva, r.fecha_ingreso, r.fecha_salida, r.total_reserva, r.estado, r.fecha_sys, info.nombres, info.apellidos, info.documento, es.nombre_estado, h.nHabitacion FROM reservas AS r INNER JOIN estado_reservas AS es ON es.id_estado_reserva = r.id_estado_reserva INNER JOIN habitaciones AS h ON h.id_habitacion = r.id_habitacion INNER JOIN info_clientes AS info ON info.id_info_cliente = r.id_cliente WHERE 1 ORDER BY r.id_reserva ASC";
+$sqlReservas = "SELECT r.id_reserva, r.id_cliente, r.id_habitacion, r.id_estado_reserva, r.fecha_ingreso, r.fecha_salida, r.total_reserva, r.estado, DATE(r.fecha_sys) AS fecha_sys, info.nombres, info.apellidos, info.documento, es.nombre_estado, h.nHabitacion FROM reservas AS r INNER JOIN estado_reservas AS es ON es.id_estado_reserva = r.id_estado_reserva INNER JOIN habitaciones AS h ON h.id_habitacion = r.id_habitacion INNER JOIN info_clientes AS info ON info.id_info_cliente = r.id_cliente WHERE 1 ORDER BY r.id_reserva ASC";
 
 $sqlTotal = "SELECT SUM(total_reserva) AS ingresos_totales FROM reservas WHERE id_estado_reserva = 4";
 $resultTotal = $dbh->query($sqlTotal)->fetch();
@@ -32,7 +32,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
     <header class="cabeceraMenu">
         <div class="iconoMenu">
             <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
-            <span>RESERVACIONES</span>
+            <span>HISTORIAL DE RESERVACIONES</span>
         </div>
         <div class="usuPlat">
             <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>
@@ -47,20 +47,21 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
 
             <div class="container mb-3">
                 <div class="row">
-                    <div class="col-md-2 mb-3">
-                        <div class="card" style="background-color: #17A2B6;">
-                            <h4 style="text-align: center; margin: 8px;"><?php echo number_format($resultTotal['ingresos_totales'], 0, ',', '.') ?></h4>
-                            <p style="font-size: 12px; text-align: center;">Ingresos totales</p>
+                    <span class="desplegarInformacionRecep">Mostrar información</span>
+                    <div class="col-md-3 mb-3">
+                        <div class="card cardInformacion tarjeta">
+                            <h4 style="text-align: center; margin: 8px;" class="numero-cant">$<?php echo number_format($resultTotal['ingresos_totales'], 0, ',', '.') ?></h4>
+                            <p style="font-size: 12px; text-align: center;" class="card-text">Ingresos totales</p>
                         </div>
                     </div>
                     <?php
 
                     foreach ($dbh->query($sqlEstados) as $rowEstado) :
                     ?>
-                        <div class="col-md-2 mb-3">
-                            <div class="card" style="background-color: #17A2B6;">
-                                <h4 style="text-align: center; margin: 8px;"><?php echo $rowEstado['cantidad_reservas'] ?></h4>
-                                <p style="font-size: 12px; text-align: center;">Reservas <?php echo $rowEstado['nombre_estado'] ?></p>
+                        <div class="col-md-3 mb-3">
+                            <div class="card cardInformacion tarjeta">
+                                <h4 style="text-align: center; margin: 8px;" class="numero-cant"><?php echo $rowEstado['cantidad_reservas'] ?></h4>
+                                <p style="font-size: 12px; text-align: center;" class="card-text">Reservas <?php echo $rowEstado['nombre_estado'] ?></p>
                             </div>
                         </div>
                     <?php
@@ -83,6 +84,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                     <th>Fecha salida</th>
                                     <th>Estado</th>
                                     <th>Total</th>
+                                    <th>Fecha registro</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -115,6 +117,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                         <td class="datos"><?php echo $fechaSalida ?></td>
                                         <td class="datos"><?php echo $estado ?></td>
                                         <td class="datos"><?php echo number_format($total, 0, ',', '.') ?></td>
+                                        <td class="datos"><?php echo $fechaSys ?></td>
                                         <td>
                                             <div class="accion">
                                                 <span class="bi bi-search btn btn-primary btn-sm mx-2 btnInforCli" data-bs-toggle="modal" data-bs-target="#modalVerInformacion" title="Ver información del cliente" id="<?php echo $idCliente ?>"></span>
@@ -261,7 +264,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
             let idCLiente = $(this).attr('id');
             let contenido = $('#contenidoInforCliente');
 
-            fetch(`../vistasAdmin/inforClienteReserva.php?id=${idCLiente}`)
+            fetch(`../../vistas/vistasAdmin/inforCLienteReserva.php?id=${idCLiente}`)
                 .then(res => res.text())
                 .then(datos => contenido.html(datos))
                 .catch();

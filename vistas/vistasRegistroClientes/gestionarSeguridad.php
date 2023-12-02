@@ -212,6 +212,21 @@ $primerApellido = $apellidos[0];
         unset($_SESSION['msjAct']);
     endif;
 
+    if (isset($_SESSION['msjError'])) :
+        ?>
+            <script>
+                Swal.fire({
+                    position: '',
+                    icon: 'error',
+                    title: '¡Ocurrió un error!',
+                    text: '<?php echo $_SESSION['msjError']; ?>',
+                    showConfirmButton: true
+                });
+            </script>
+        <?php
+            unset($_SESSION['msjError']);
+        endif;
+
     ?>
 
     <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>

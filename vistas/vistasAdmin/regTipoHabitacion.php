@@ -25,7 +25,7 @@ $sql = "SELECT id_servicio, servicio FROM habitaciones_servicios WHERE 1";
     <header class="cabeceraMenu">
         <div class="iconoMenu">
             <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
-            <span>HABITACIONES</span>
+            <span>CREAR TIPO DE HABITACIÓN</span>
         </div>
         <div class="usuPlat">
             <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>
@@ -189,7 +189,7 @@ $sql = "SELECT id_servicio, servicio FROM habitaciones_servicios WHERE 1";
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" value="Actualizar" class="btn boton-guardar">
+                    <input type="submit" name="btnActServ" value="Actualizar" class="btn boton-guardar">
                 </div>
                 </form>
             </div>

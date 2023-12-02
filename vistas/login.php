@@ -61,18 +61,22 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
                         }
                         ?>
 
-                        <label class="userInput" for="user" aria-label="Usuario">
-                            <i class="bi bi-person"></i>
-                            <input class="usuarioInput" type="text" placeholder="Usuario" id="user" name="usuario" required>
-                            <span></span>
-                        </label>
+                        <div class="userInput">
+                            <label for="user" aria-label="Usuario">
+                                <i class="bi bi-person"></i>
+                                <input class="usuarioInput" type="text" placeholder="Usuario" id="user" name="usuario" required>
+                                <span></span>
+                            </label>
+                        </div>
 
-                        <label class="passInput" for="pass" aria-label="Contraseña">
-                            <i class="bi bi-lock"></i>
-                            <span class="verContraseña"><i class="bi bi-eye"></i></span>
-                            <input class="contraseñaInput" type="password" placeholder="Contraseña" id="pass" name="contrasena" required>
-                            <span></span>
-                        </label>
+                        <div class="passInput">
+                            <label for="pass" aria-label="Contraseña">
+                                <i class="bi bi-lock"></i>
+                                <span class="verContraseña"><i class="bi bi-eye"></i></span>
+                                <input class="contraseñaInput" type="password" placeholder="Contraseña" id="pass" name="contrasena" required>
+                                <span></span>
+                            </label>
+                        </div>
 
                         <div class="btnIngresar">
                             <input type="submit" value="Ingresar" name="btnSubmit" id="btnSubmit">
@@ -95,17 +99,6 @@ if ($sql->fetch()) { // si ya existe un administrador en el tipo de usuario ento
     </div>
 
     <?php
-    /* 
-    if (isset($_SESSION['mjscontraseña'])) {
-    ?>
-
-        <script>
-            Swal.fire('Contraseña generada: <?php echo $_SESSION['mjscontraseña']; ?>')
-        </script>
-
-    <?php
-        unset($_SESSION['mjscontraseña']);
-    } */
 
     if (isset($_SESSION['mjsError'])) {
     ?>

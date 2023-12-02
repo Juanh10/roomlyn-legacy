@@ -37,8 +37,11 @@ FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_in
 
 
     <div class="contenido">
-        <div class="container">
+        <div class="container" id="contenedorPrincipalCli">
             <div class="row">
+            <div class="filtrarFechas">
+                <button class="btn botonFiltrarFecha mb-3" id="btnFiltrar" data-bs-toggle="modal" data-bs-target="#modalFiltrarFecha">Filtrar por fecha</button>
+            </div>
                 <div class="col">
                     <div class="table-responsive tabla-clientes">
                         <table class="table table-hover table-borderless text-center" id="tablaClientes">
@@ -100,6 +103,36 @@ FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_in
                             <span id="pagActual"></span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="contenedorFiltroCli"></div>
+    </div>
+
+    <!-- MODAL -->
+
+    <div class="modal fade" id="modalFiltrarFecha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Filtrar por fecha</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formFiltrarFecha">
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="fechaInicio" placeholder="Fecha Inicio" required>
+                            <label for="fechaInicio">Fecha inicio</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="fechaFinal" placeholder="Fecha Inicio" required>
+                            <label for="fechaFinal">Fecha final</label>
+                        </div>
+
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn boton-guardar" id="filtroBtnFechaCli">Filtrar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

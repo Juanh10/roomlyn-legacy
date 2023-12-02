@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
 <?php
 
 include_once "../../procesos/config/conex.php";
@@ -9,7 +17,7 @@ if(!empty($_GET['event'])){
     $resultFilasDepartamento = $dbh->query($sqlDepartamento);
     if ($resultFilasDepartamento->rowCount() > 0) :
     
-        echo '<option selected disabled value="">Escoja una opción</option>';
+        echo '<option selected disabled value="">Escoja una opcion</option>';
     
         foreach ($resultFilasDepartamento as $rowDepartamento) :
             if ($rowDepartamento['id_departamento'] != $rowCliente['id_departamento']) {
@@ -47,3 +55,6 @@ if(!empty($_GET['event'])){
     endif;
     
 }
+?>
+</body>
+</html>

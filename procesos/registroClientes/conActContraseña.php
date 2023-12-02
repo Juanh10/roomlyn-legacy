@@ -39,18 +39,22 @@ if (!empty($_POST['contraActual']) && !empty($_POST['contraNueva']) && !empty($_
                 header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
                 exit;
             } else {
-                $_SESSION['msjAct'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
+                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
                 header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
                 exit;
             }
+        } else {
+            $_SESSION['msjError'] = "No coinciden las contraseñas";
+            header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
+            exit;
         }
     } else {
-        $_SESSION['msjAct'] = "La contraseña actual es incorrecta, vuelvalo a intentar";
+        $_SESSION['msjError'] = "La contraseña actual es incorrecta, vuelvalo a intentar";
         header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
         exit;
     }
 } else {
-    $_SESSION['msjAct'] = "Campos vacios. Por favor llena todos los campos";
+    $_SESSION['msjError'] = "Campos vacios. Por favor llena todos los campos";
     header("Location: ../../vistas/vistasRegistroClientes/gestionarSeguridad.php");
     exit;
 }

@@ -1,3 +1,12 @@
+<?php
+
+include_once "../../procesos/config/conex.php";
+
+$sqlFecha = "UPDATE reservas AS r JOIN habitaciones AS h ON r.id_habitacion = h.id_habitacion SET r.id_estado_reserva = 3, h.id_hab_estado = 1 WHERE r.id_estado_reserva = 1 AND fecha_ingreso < CURDATE()";
+$dbh->query($sqlFecha);
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

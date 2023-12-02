@@ -30,7 +30,7 @@ $sqlPrecios = "SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones
     <header class="cabeceraMenu">
         <div class="iconoMenu">
             <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
-            <span>HABITACIONES</span>
+            <span>TIPO DE HABITACIONES</span>
         </div>
         <div class="usuPlat">
             <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>

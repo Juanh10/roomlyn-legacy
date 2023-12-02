@@ -18,7 +18,7 @@ if (!empty($_GET['idselect'])) {
         <div class="tipoSimple">
             <div class="input-group mb-3">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple"  onchange="inputSimple(this)">
+                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" onchange="inputSimple(this)">
                     <label for="simple">Simple</label>
                 </div>
                 <input type="number" class="form-control cantidadCamasEdit" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
@@ -28,7 +28,7 @@ if (!empty($_GET['idselect'])) {
         <div class="tipoDoble">
             <div class="input-group mb-3">
                 <div class="input-group-text">
-                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble"  onchange="inputDoble(this)">
+                    <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" onchange="inputDoble(this)">
                     <label for="doble">Doble</label>
                 </div>
                 <input type="number" class="form-control cantidadCamasEdit" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" disabled>
@@ -92,7 +92,7 @@ if (!empty($_GET['idselect'])) {
             <div class="tipoSimple">
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple"  onchange="inputSimple(this)" checked>
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="simple" id="simple" onchange="inputSimple(this)" checked>
                         <label for="simple">Simple</label>
                     </div>
                     <input type="number" class="form-control cantidadCamasEdit" name="cantTipoSimple" id="cantTipoSimple" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelPrimerElemento ?>">
@@ -102,7 +102,7 @@ if (!empty($_GET['idselect'])) {
             <div class="tipoDoble">
                 <div class="input-group mb-3">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble"   onchange="inputDoble(this)" checked>
+                        <input class="form-check-input mt-0 me-2" type="checkbox" name="tipoCama[]" value="doble" id="doble" onchange="inputDoble(this)" checked>
                         <label for="doble">Doble</label>
                     </div>
                     <input type="number" class="form-control cantidadCamasEdit" name="cantTipoDoble" id="cantTipoDoble" aria-label="Cantidad de camas" placeholder="Cantidad de camas" value="<?php echo $cantidadDelSegundoElemento ?>">
@@ -176,14 +176,32 @@ if (!empty($_GET['idselect'])) {
     }
 }
 ?>
-    <script>
-        function inputSimple(checkbox) {
-        let input = document.getElementById("cantTipoSimple");
-        input.disabled = !checkbox.checked;
-    }
+<script>
+    $(document).ready(function() {
+        // Manejar el cambio de estado del checkbox Simple
+        $("#simple").change(function() {
+            var inputSimple = $("#cantTipoSimple");
+            inputSimple.prop("disabled", !this.checked);
 
-    function inputDoble(checkbox) {
-        let input = document.getElementById("cantTipoDoble");
-        input.disabled = !checkbox.checked;
-    }
-    </script>
+            // Si el checkbox está marcado, establecer el atributo required
+            if (this.checked) {
+                inputSimple.prop("required", true);
+            } else {
+                inputSimple.prop("required", false);
+            }
+        });
+
+        // Manejar el cambio de estado del checkbox Doble
+        $("#doble").change(function() {
+            var inputDoble = $("#cantTipoDoble");
+            inputDoble.prop("disabled", !this.checked);
+
+            // Si el checkbox está marcado, establecer el atributo required
+            if (this.checked) {
+                inputDoble.prop("required", true);
+            } else {
+                inputDoble.prop("required", false);
+            }
+        });
+    });
+</script>

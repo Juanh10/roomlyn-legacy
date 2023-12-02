@@ -27,7 +27,7 @@ $stmt->execute();
 <body>
 
     <div class="contenServicios">
-        <form action="../../procesos/registroHabitaciones/registroHabi/conElementosHab.php" method="post">
+        <form id="formAñadirServicio">
             <input type="hidden" value="<?php echo $idTipoHab ?>" name="idTipoHab">
             <fieldset>
                 <legend>Selecciona una opción</legend>
@@ -39,8 +39,8 @@ $stmt->execute();
                 ?>
 
                         <div class="listServicios">
-                            <input type="checkbox" value="<?php echo $row['id_hab_elemento'] ?>" name="listaServi[]" id="<?php echo $row['elemento'] ?>">
-                            <label for="<?php echo $row['elemento'] ?>"><?php echo $row['elemento'] ?></label>
+                            <input type="checkbox" value="<?php echo $row['id_hab_elemento'] ?>" name="listaServi[]" id="<?php echo $row['id_hab_elemento'] ?>">
+                            <label for="<?php echo $row['id_hab_elemento'] ?>"><?php echo $row['elemento'] ?></label>
                         </div>
 
                 <?php
@@ -56,6 +56,41 @@ $stmt->execute();
             </div>
         </form>
     </div>
+
+    <!-- Script para manejar la solicitud AJAX -->
+    <script>
+        // Manejar el envío del formulario mediante AJAX
+        $("#formAñadirServicio").submit(function(e) {
+            e.preventDefault(); // Evitar el envío normal del formulario
+
+            let formData = $(this).serializeArray();
+            formData.push({
+                name: 'añadirServ',
+                value: true
+            });
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+                type: "POST",
+                url: "../../procesos/registroHabitaciones/registroHabi/conElementosHab.php",
+                data: formData,
+                success: function(response) {
+                    // Verificar si la respuesta es un mensaje de error
+                    if (response.indexOf("Debes seleccionar") !== -1 || response.indexOf("Ha habido un error") !== -1) {
+                        // Mostrar el mensaje de error debajo de la lista
+                        $(".elementosHabitacion").append('<div class="mensajeError">' + response + '</div>');
+                    } else {
+                        // Actualizar la sección de servicios con la nueva lista
+                        $(".elementosHabitacion").html(response);
+                    }
+                    $('#modalAddServ3').modal('hide');
+                },
+                error: function() {
+                    alert("Error al enviar la solicitud AJAX");
+                }
+            });
+        });
+    </script>
 
 </body>
 

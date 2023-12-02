@@ -158,13 +158,14 @@ include "funcionesIconos.php";
                                     </div>
                                 </div>
 
-                                <p class="ms-3 mt-3">Precio por día: <?php
-                                                                        $sqlPrecios->bindParam(':idTipo', $id);
-                                                                        $sqlPrecios->bindParam(':idServ', $verntilador);
-                                                                        $sqlPrecios->bindParam(':estado', $estado);
-                                                                        $sqlPrecios->execute();
-                                                                        $resulPrecio = $sqlPrecios->fetch();
-                                                                        echo number_format($resulPrecio['precio'], 0, ",", ".") ?> + IVA
+                                <p class="ms-3 mt-3">Precio por día:
+                                    <?php
+                                    $sqlPrecios->bindParam(':idTipo', $id);
+                                    $sqlPrecios->bindParam(':idServ', $verntilador);
+                                    $sqlPrecios->bindParam(':estado', $estado);
+                                    $sqlPrecios->execute();
+                                    $resulPrecio = $sqlPrecios->fetch();
+                                    echo number_format($resulPrecio['precio'], 0, ",", ".") ?> + IVA
                                 </p>
 
                                 <ul class="listServicios">
@@ -236,7 +237,7 @@ include "funcionesIconos.php";
                                                 </div>
                                                 <p><?php echo $row3['observacion'] ?></p>
                                             </div>
-                                            <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
+                                            <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Reservar</a>
                                         </div>
                                     <?php
                                     endforeach;
@@ -300,13 +301,14 @@ include "funcionesIconos.php";
                                     </div>
                                 </div>
 
-                                <p class="ms-3 mt-3">Precio por día: <?php
-                                                                        $sqlPrecios->bindParam(':idTipo', $id);
-                                                                        $sqlPrecios->bindParam(':idServ', $aire);
-                                                                        $sqlPrecios->bindParam(':estado', $estado);
-                                                                        $sqlPrecios->execute();
-                                                                        $resulPrecio = $sqlPrecios->fetch();
-                                                                        echo number_format($resulPrecio['precio'], 0, ",", ".") ?> + IVA
+                                <p class="ms-3 mt-3">Precio por día:
+                                    <?php
+                                    $sqlPrecios->bindParam(':idTipo', $id);
+                                    $sqlPrecios->bindParam(':idServ', $aire);
+                                    $sqlPrecios->bindParam(':estado', $estado);
+                                    $sqlPrecios->execute();
+                                    $resulPrecio = $sqlPrecios->fetch();
+                                    echo number_format($resulPrecio['precio'], 0, ",", ".") ?> + IVA
                                 </p>
 
                                 <ul class="listServicios">
@@ -339,21 +341,21 @@ include "funcionesIconos.php";
                                         $sqlElementosHab->bindParam(':estado', $estado);
                                         $sqlElementosHab->execute();
                                 ?>
-                                            <div class="cardHabitaciones">
-                                                <div class="inforHabitacion">
-                                                    <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
-                                                    <div class="datosHabitacion">
-                                                        <p>
-                                                            <span>Tipo de cama:</span>
-                                                            <?php iconCantidadCama($tipoCama); ?>
-                                                        </p>
+                                        <div class="cardHabitaciones">
+                                            <div class="inforHabitacion">
+                                                <h3>Habitación <?php echo $row3['nHabitacion'] ?></h3>
+                                                <div class="datosHabitacion">
+                                                    <p>
+                                                        <span>Tipo de cama:</span>
+                                                        <?php iconCantidadCama($tipoCama); ?>
+                                                    </p>
 
-                                                        <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
-                                                            <span>Capacidad:</span>
-                                                            <?php iconCapacidad($capacidadPerson) ?>
-                                                        </p>
-                                                    </div>
-                                                    <div class="elementos">
+                                                    <p title="Capacidad para <?php echo ($capacidadPerson > 1) ? $capacidadPerson . " personas" : $capacidadPerson . " persona" ?>">
+                                                        <span>Capacidad:</span>
+                                                        <?php iconCapacidad($capacidadPerson) ?>
+                                                    </p>
+                                                </div>
+                                                <div class="elementos">
                                                     <p>
                                                         <?php
                                                         $rowCount = $sqlElementosHab->rowCount(); // Obtén el número total de filas
@@ -376,12 +378,12 @@ include "funcionesIconos.php";
 
                                                     </p>
                                                 </div>
-                                                    <p><?php echo $row3['observacion'] ?></p>
-                                                </div>
-                                                <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Seleccionar</a>
+                                                <p><?php echo $row3['observacion'] ?></p>
                                             </div>
+                                            <a href="formularioReservas.php?idHabitacion=<?php echo $row3['id_habitacion'] ?>&idTipoHab=<?php echo $id ?>&fechasRango=<?php echo $rangoFecha ?>" class="btnSelecHab">Reservar</a>
+                                        </div>
                                     <?php
-                                        
+
                                     endforeach;
                                 else :
                                     ?>

@@ -2,7 +2,7 @@
 
 include_once "../../config/conex.php";
 
-// Eliminar los servicios de los tipos de habitaciones
+// Eliminar los servicios de las habitaciones
 
 if (isset($_POST['btnElmServ'])) {
 
@@ -22,8 +22,9 @@ if (isset($_POST['btnElmServ'])) {
 
         // ejecutamos la consulta 
         if ($sqlElmServ->execute()) {
-            $_SESSION['msjExito'] = "¡Se ha deshabilitado correctamente!";
-            header("location: ../../../vistas/vistasAdmin/habitaciones.php?id=" . $idTipoHab . "");
+            $nuevaListaServicios = obtenerListaServicios($dbh, $idTipoHab);
+
+            echo $nuevaListaServicios;
         } else {
             $_SESSION['msjError'] = "Ocurrió un error";
             header("location: ../../../vistas/vistasAdmin/habitaciones.php?id=" . $idTipoHab . "");
@@ -33,7 +34,6 @@ if (isset($_POST['btnElmServ'])) {
         header("location: ../../../vistas/vistasAdmin/habitaciones.php?id=" . $idTipoHab . "");
     }
 }
-
 
 // Agregar servicios segun los tipos de habitaciones
 
@@ -68,22 +68,48 @@ if (isset($_POST['añadirServ'])) {
             }
 
             if ($estadoSer) {
-                $_SESSION['msjExito'] = "Servicios agregado con éxito";
-                header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+                $nuevaListaServicios = obtenerListaServicios($dbh, $idTipoHab);
+
+                echo $nuevaListaServicios;
             } else {
-                $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
-                header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+                echo "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente";
             }
         } else {
-            $_SESSION['msjError'] = "Debes seleccionar al menos un elemento de la habitación";
-            header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+            echo "Debes seleccionar al menos un elemento de la habitación";
         }
     } else {
-        $_SESSION['msjError'] = "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
-        header("location: ../../../vistas/vistasAdmin/habitaciones.php");
+        echo "Ha habido un error en el proceso. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
     }
 }
 
+// Función para obtener la lista actualizada de servicios
+function obtenerListaServicios($dbh, $idTipoHab)
+{
 
+    $sqlServicios = "SELECT habitaciones_elementos_selec.id_hab_tipo_elemento, habitaciones_elementos_selec.id_habitacion, habitaciones_elementos.elemento, habitaciones_elementos.id_hab_elemento, habitaciones_elementos_selec.estado FROM habitaciones_elementos_selec INNER JOIN habitaciones_elementos ON habitaciones_elementos_selec.id_hab_elemento = habitaciones_elementos.id_hab_elemento WHERE habitaciones_elementos_selec.estado = 1 AND habitaciones_elementos_selec.id_habitacion = " . $idTipoHab . "";
+
+    ob_start(); // Capturar el contenido de salida
+
+?>
+            <?php
+            // Tu código existente para mostrar la lista de servicios
+            foreach ($dbh->query($sqlServicios) as $rowServ) {
+            ?>
+                <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
+                    <form id="formEliminarServicio">
+                        <input type="hidden" name="idTipoHab" id="tipoHab<?php echo $idTipoHab ?>" value="<?php echo $idTipoHab ?>">
+                        <input type="hidden" name="idServicio" id="idServicio<?php echo $rowServ['id_hab_tipo_elemento'] ?>" value="<?php echo $rowServ['id_hab_tipo_elemento'] ?>">
+                        <button type="button" name="btnElmServ" title="Deshabilitar"><i class="bi bi-trash"></i></button>
+                    </form>
+                </li>
+            <?php
+            }
+
+            ?>
+<?php
+
+    $html = ob_get_clean(); // Obtener y limpiar el contenido de salida capturado
+    return $html;
+}
 
 ?>

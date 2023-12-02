@@ -1,6 +1,16 @@
 $(document).ready(function () {
     $('#onload').fadeOut(); //TODO Desaparece el elemento
     $('.cabeceraHab').show(); //TODO Muestra el elemento
+    $('.cabecera').show(); //TODO Muestra el elemento
+
+    let menu = $('.navegacion ul');
+    let icono = $('.icono');
+  
+    // EVENTO CLICK PARA AGREGAR CLASE DE MENÚ RESPONSIVO
+    $(".menuRespon").click(function () {
+      menu.toggleClass('mostrar');
+      icono.toggleClass('iconoActivo');
+    });
 
     //* EVENTO CLICK BUSCADOR PARA AGREGAR Y QUITAR CLASE AL DIV BUSCADOR Y EL DIV DEL LOGO
 

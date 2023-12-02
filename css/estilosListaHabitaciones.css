@@ -237,6 +237,9 @@ main{
 
 @media only screen and (max-width: 580px){
 
+    .cabeceraHab {
+        padding: 20px 0px;
+    }
 
     .navContenedorHab {
         margin-right: 0;

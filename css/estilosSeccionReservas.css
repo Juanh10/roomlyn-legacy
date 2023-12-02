@@ -6,6 +6,10 @@ main{
     margin-top: 130px;
 }
 
+.cabecera{
+    padding: 20px;
+}
+
 .rowPrincipal{
     padding: 10px;
 }
@@ -243,6 +247,11 @@ main{
     width: 20px;
 }
 
+@media only screen and (max-width: 859px){
+    .cabecera {
+        padding: 0 !important;
+    }
+}
 
 @media only screen and (max-width: 684px) {
 

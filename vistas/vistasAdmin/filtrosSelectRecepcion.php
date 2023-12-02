@@ -128,5 +128,18 @@ endif;
 
 ?>
 
+<script>
+    $('.btnInforCli').click(function() {
+        let idCLiente = $(this).attr('id');
+        let contenido = $('#contenidoInforCliente');
 
-<script src="../../js/scriptMenuAdmit.js"></script>
+        fetch(`../vistasAdmin/inforClienteReserva.php?id=${idCLiente}`)
+            .then(res => res.text())
+            .then(datos => contenido.html(datos))
+            .catch();
+    });
+
+    $('.btnVolverFiltro').click(function() {
+        location.reload();
+    });
+</script>

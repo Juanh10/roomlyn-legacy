@@ -7,7 +7,7 @@ include "vistasHabitaciones/funcionesIconos.php";
 
 $estado = 1;
 
-$sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.estado, habitaciones_imagenes.ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones_tipos.estado=1 GROUP BY habitaciones_imagenes.id_hab_tipo";
+$sqlTiposHab = "SELECT habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.estado, MIN(habitaciones_imagenes.ruta) AS ruta FROM habitaciones_tipos INNER JOIN habitaciones_imagenes ON habitaciones_imagenes.id_hab_tipo = habitaciones_tipos.id_hab_tipo WHERE habitaciones_imagenes.estado = 1 AND habitaciones_tipos.estado = 1 GROUP BY habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, habitaciones_tipos.cantidadCamas, habitaciones_tipos.capacidadPersonas, habitaciones_tipos.estado";
 
 $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado, habitaciones_servicios.servicio FROM habitaciones_tipos_precios htp INNER JOIN habitaciones_tipos_servicios hts ON hts.id_tipo_servicio = htp.id_tipo_servicio INNER JOIN habitaciones_servicios ON habitaciones_servicios.id_servicio = hts.id_servicio WHERE hts.id_hab_tipo = :idHabTipo AND htp.estado = :estadoHab");
 
@@ -61,7 +61,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
         $primerApellido = $apellidos[0];
     ?>
 
-        <header class="cabecera cabeceraHabCli">
+        <header class="cabecera">
             <div class="contenedor navContenedor">
                 <div class="logoPlahot">
                     <a href="../index.php"><img src="../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
@@ -73,6 +73,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                         <div></div>
                     </div>
                 </div>
+
                 <nav class="navegacion">
                     <ul>
                         <li class="inicioSesionCliente" title="Conectado">
@@ -260,7 +261,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                 position: '',
                 icon: 'success',
                 title: '¡RESERVA REGISTRADA!',
-                html: "<p>Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href='#'>3186547890</a> para más detalles.</p>",
+                html: "<p>Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href='https://wa.link/ys192u' target='_blank'>3156676013</a> para más detalles.</p>",
                 showConfirmButton: true
             });
         </script>

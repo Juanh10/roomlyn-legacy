@@ -2,6 +2,12 @@
 
 session_start();
 
+include_once "procesos/config/conex.php";
+
+$sql = "UPDATE reservas AS r JOIN habitaciones AS h ON r.id_habitacion = h.id_habitacion SET r.id_estado_reserva = 3, h.id_hab_estado = 1 WHERE r.id_estado_reserva = 1 AND fecha_ingreso < CURDATE()";
+
+$dbh->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -244,7 +250,7 @@ session_start();
 
                 <div class="conImg">
                     <a href="img/zonaParqueadero.webp" data-lightbox="fotosHotel">
-                        <img src="img/zonaParqueadero3.jpeg" alt="Zona de parqueadero del hotel">
+                        <img src="img/zonaParqueadero.webp" alt="Zona de parqueadero del hotel">
                     </a>
                 </div>
 

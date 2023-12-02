@@ -17,9 +17,9 @@ $apellidos = explode(" ", $_SESSION['apellidos']);
 $primerNombre = $nombres[0];
 $primerApellido = $apellidos[0];
 
-$sql = "SELECT reservas.id_reserva, reservas.id_cliente, reservas.id_estado_reserva, reservas.fecha_ingreso, reservas.fecha_salida, reservas.total_reserva, reservas.estado, reservas.fecha_sys, habitaciones.id_habitacion, habitaciones.nHabitacion, habitaciones.cantidadPersonasHab, habitaciones.observacion, habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, estado_reservas.nombre_estado FROM reservas INNER JOIN clientes_registrados ON reservas.id_cliente = clientes_registrados.id_cliente_registrado INNER JOIN habitaciones ON habitaciones.id_habitacion = reservas.id_habitacion INNER JOIN habitaciones_tipos ON habitaciones_tipos.id_hab_tipo = habitaciones.id_hab_tipo INNER JOIN estado_reservas ON estado_reservas.id_estado_reserva = reservas.id_estado_reserva WHERE id_cliente = " . $idCliente . "";
+$sql = "SELECT reservas.id_reserva, reservas.id_cliente, reservas.id_estado_reserva, reservas.fecha_ingreso, reservas.fecha_salida, reservas.total_reserva, reservas.estado, reservas.fecha_sys, habitaciones.id_habitacion, habitaciones.nHabitacion, habitaciones.cantidadPersonasHab, habitaciones.observacion, habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, estado_reservas.nombre_estado FROM reservas INNER JOIN habitaciones ON habitaciones.id_habitacion = reservas.id_habitacion INNER JOIN habitaciones_tipos ON habitaciones_tipos.id_hab_tipo = habitaciones.id_hab_tipo INNER JOIN estado_reservas ON estado_reservas.id_estado_reserva = reservas.id_estado_reserva INNER JOIN info_clientes ON reservas.id_cliente = info_clientes.id_info_cliente INNER JOIN clientes_registrados ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente WHERE clientes_registrados.id_cliente_registrado = " . $idCliente . "";
 
-$sqlImagenes = $dbh->prepare("SELECT nombre, MIN(ruta) AS ruta, estado FROM habitaciones_imagenes WHERE id_hab_tipo = :idTipo AND estado = :estado");
+$sqlImagenes = $dbh->prepare("SELECT nombre, MIN(ruta) AS ruta, estado FROM habitaciones_imagenes WHERE id_hab_tipo = :idTipo AND estado = :estado GROUP BY id_hab_imagen");
 
 ?>
 

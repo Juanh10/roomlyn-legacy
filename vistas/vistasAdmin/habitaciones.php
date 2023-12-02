@@ -26,7 +26,7 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
     <header class="cabeceraMenu">
         <div class="iconoMenu">
             <i class="bi bi-list btnIconoMenu" id="btnMenu2"></i>
-            <span>HABITACIONES</span>
+            <span>GESTIONAR HABITACIONES</span>
         </div>
         <div class="usuPlat">
             <span><?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?></span>
@@ -71,7 +71,7 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
                                         <td><?php echo $rowHab['observacion'] ?></td>
                                         <td><?php echo $rowHab['estado_habitacion'] ?></td>
                                         <td class="botones-Config" id="<?php echo $rowHab['id_habitacion'] ?>">
-                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" data-bs-toggle="modal" data-bs-target="#editarHabitacion" title="Editar habitación"></span>
+                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditHab" title="Editar habitación"></span>
                                             <form action="../../procesos/registroHabitaciones/registroHabi/conDeshabilitarHabitaciones.php" method="post" class="desHabitacion">
                                                 <input type="hidden" name="idHab" value="<?php echo $rowHab['id_habitacion'] ?>">
                                                 <button type="submit" name="elmHab" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
@@ -236,7 +236,7 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" value="Actualizar" class="btn boton-guardar">
+                    <input type="submit" name="btnActElemento" value="Actualizar" class="btn boton-guardar">
                 </div>
                 </form>
             </div>

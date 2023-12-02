@@ -29,7 +29,7 @@ include_once "../procesos/config/conex.php";
 
     <div class="contenedorPrincipal">
         <div class="fondoRegistro">
-            <img src="../img/fondoRegistro.png" alt="Foto">
+            <img src="../img/fondoRegistro.webp" alt="Fondo del formulario de registro">
         </div>
 
         <a href="login.php"><i class="bi bi-arrow-bar-left"></i> REGRESAR</a>

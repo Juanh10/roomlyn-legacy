@@ -40,7 +40,7 @@ $sql2 = "SELECT id_tipoDocumento, documento FROM tipo_documento WHERE 1";
 
     <div class="contenedorPrincipal">
         <div class="fondoRegistro">
-            <img src="../img/fondoRegistro.png" alt="Foto">
+            <img src="../img/fondoRegistro.webp" alt="Fondo del formulario de registro">
         </div>
 
         <?php

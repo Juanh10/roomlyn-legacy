@@ -4,6 +4,7 @@ session_start();
 
 if (!empty($_SESSION['id_cliente_registrado'])) {
     $idCliente = $_SESSION['id_cliente_registrado'];
+    $idInfoCliente = $_SESSION['id_info_cliente'];
     $nombres = explode(" ", $_SESSION['nombres']);
     $apellidos = explode(" ", $_SESSION['apellidos']);
 
@@ -19,8 +20,8 @@ include "funcionesIconos.php";
 $estadoId = false;
 $pagFiltro = false;
 
-// Obtener la URL de la pagina actual
-$urlActual = $_SERVER['HTTP_REFERER'];
+// Obtener la URL de la pagina anterior
+$_SESSION['url_anterior'] = $_SERVER['HTTP_REFERER'];
 
 if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion para saber si los campos no estan vacios
 
@@ -76,6 +77,12 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
     <title>Habitaciones | Hotel Colonial City</title>
 </head>
 
+<style>
+    .cabeceraHab{
+        padding: 45px 20px !important;
+    }
+</style>
+
 <body>
 
     <?php
@@ -100,24 +107,56 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
             </div>
         </div>
 
-        <header class="cabeceraHab">
-            <div class="contenedorHab navContenedorHab">
-                <div class="logoPlahotHab">
-                    <a href="../../index.php"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+        <?php
+
+        if (!empty($_SESSION['id_cliente_registrado'])) :
+            $nombres = explode(" ", $_SESSION['nombres']);
+            $apellidos = explode(" ", $_SESSION['apellidos']);
+
+            $primerNombre = $nombres[0];
+            $primerApellido = $apellidos[0];
+        ?>
+
+            <header class="cabecera">
+                <div class="contenedor navContenedor">
+                    <div class="logoPlahot">
+                        <a href="../../index.php"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                    </div>
+                    <div class="menuRespon">
+                        <div class="icono">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+
+                    <nav class="navegacion">
+                        <ul>
+                            <li class="inicioSesionCliente" title="Conectado">
+                                <a href="../vistasRegistroClientes/configuracionCuenta.php" class="inicioSesion"><span class="conexion"></span><?php echo $primerNombre . " " . $primerApellido ?></a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav class="navegacionHab">
-                    <ul>
-                        <li id="vinculoVolver">
-                            <a href="<?php echo $urlActual ?>">Volver</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+            </header>
+        <?php
+        else :
+        ?>
+            <header class="cabeceraHab">
+                <div class="contenedorHab navContenedorHab">
+                    <div class="logoPlahotHab">
+                        <a href="../../index.php"><img src="../../iconos/logoPlahot2.png" alt="Logo de la plataforma web"></a>
+                    </div>
+                    <nav class="navegacionHab"></nav>
+                </div>
+            </header>
+        <?php
+        endif;
+        ?>
 
         <main class="container containerReserva">
             <div class="row rowPrincipal">
-                <div class="col-8 col-informacion">
+                <div class="col-md-8 col-informacion">
                     <div class="card-infor-reserva">
                         <div class="row">
                             <div class="col-4 responsive-col-img">
@@ -156,13 +195,13 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                             $apellidos = $_SESSION['apellidos'];
                             $email = $_SESSION['email'];
                             $celular = $_SESSION['celular'];
-                            
+
                         ?>
                             <form action="../../procesos/registroReservas/conRegistroReservasCliente.php" method="post" class="formReservas">
                                 <div class="row">
                                     <div class="col-6 responsive-col-form">
 
-                                        <input type="hidden" id="idCliente" name="idCliente" value="<?php echo $idCliente ?>">
+                                        <input type="hidden" id="idCliente" name="idCliente" value="<?php echo $idInfoCliente ?>">
                                         <input type="hidden" id="tipoHab" name="tipoHab" value="<?php echo $tipoHabitacion ?>">
                                         <input type="hidden" id="habitacion" name="habitacion" value="<?php echo $habitacion ?>">
 
@@ -196,7 +235,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                    
+
                                         <div class="form-floating mb-3">
                                             <?php
                                             if ($pagFiltro) :
@@ -427,31 +466,31 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 
     <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>
 
-<script>
-    window.addEventListener('mouseover', initLandbot, {
-        once: true
-    });
-    window.addEventListener('touchstart', initLandbot, {
-        once: true
-    });
-    var myLandbot;
+    <script>
+        window.addEventListener('mouseover', initLandbot, {
+            once: true
+        });
+        window.addEventListener('touchstart', initLandbot, {
+            once: true
+        });
+        var myLandbot;
 
-    function initLandbot() {
-        if (!myLandbot) {
-            var s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.addEventListener('load', function() {
-                var myLandbot = new Landbot.Livechat({
-                    configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1781515-UV9UMH34F70SNUM3/index.json',
+        function initLandbot() {
+            if (!myLandbot) {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.addEventListener('load', function() {
+                    var myLandbot = new Landbot.Livechat({
+                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1781515-UV9UMH34F70SNUM3/index.json',
+                    });
                 });
-            });
-            s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
-            var x = document.getElementsByTagName('script')[0];
-            x.parentNode.insertBefore(s, x);
+                s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
 

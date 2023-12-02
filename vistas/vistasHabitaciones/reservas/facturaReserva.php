@@ -97,7 +97,7 @@ if ($rowHabitacion['id_servicio'] == 1) {
                     <span><?php echo number_format($totalFactura, 0, ',', '.')  ?> COP</span>
                 </p>
                 <div class="alert alert-success msjAlert" role="alert">
-                    Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href="#">3186547890</a> para más detalles.
+                    Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href="https://wa.link/ys192u" target="_blank">3156676013</a> para más detalles.
                 </div>
             </div>
         </div>
