@@ -57,7 +57,7 @@ $idRes = $resultado['id_reserva'];
         ?>
     </main>
 
-    <script src="../../js/scriptMenuAdmit.js"></script>
+    <script src="../../js/scriptSelectRecepcion.js"></script>
 
 </body>
 

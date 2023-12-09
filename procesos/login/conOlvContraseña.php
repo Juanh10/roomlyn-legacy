@@ -5,15 +5,16 @@ use PHPMailer\PHPMailer\PHPMailer;
 include_once "../config/conex.php";
 session_start();
 
-if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precionó el boton
+if (isset($_POST["btnUsuario"])) { //Validar si el botón se precionó
 
-    if (!empty($_POST["usuario"]) && !empty($_POST["documento"])) { // esta funcion es para saber si los campos estan vacios
+    if (!empty($_POST["usuario"]) && !empty($_POST["documento"])) { // validar si los campos estan vacios
 
         $usuario = $_POST['usuario'];
         $documento = $_POST['documento'];
         $estado = 1;
         $email = "";
 
+        //Preparar las consultas
         $sqlCliente = $dbh->prepare("SELECT clr.id_cliente_registrado, clr.id_info_cliente, clr.id_rol, clr.usuario, clr.contrasena, clr.estado, ic.email FROM clientes_registrados AS clr INNER JOIN info_clientes AS ic ON ic.id_info_cliente = clr.id_info_cliente WHERE ic.documento = :documento AND clr.usuario = :usuario AND clr.estado = :estado");
 
         $sqlEmpleado = $dbh->prepare("SELECT em.id_empleado, em.id_rol, em.usuario, em.estado, ie.email FROM empleados AS em INNER JOIN info_empleados AS ie ON ie.id_info_empleado = em.id_empleado WHERE ie.documento = :documento AND em.usuario = :usuario AND em.estado = :estado");
@@ -24,31 +25,16 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
 
         $sqlCliente->execute();
 
-
-        $usuario = $_POST['usuario'];
-        $documento = $_POST['documento'];
-        $estado = 1;
-        $email = "";
-
-        $sqlCliente = $dbh->prepare("SELECT clr.id_cliente_registrado, clr.id_info_cliente, clr.id_rol, clr.usuario, clr.contrasena, clr.estado, ic.email FROM clientes_registrados AS clr INNER JOIN info_clientes AS ic ON ic.id_info_cliente = clr.id_info_cliente WHERE ic.documento = :documento AND clr.usuario = :usuario AND clr.estado = :estado");
-
-        $sqlEmpleado = $dbh->prepare("SELECT em.id_empleado, em.id_rol, em.usuario, em.estado, ie.email FROM empleados AS em INNER JOIN info_empleados AS ie ON ie.id_info_empleado = em.id_empleado WHERE ie.documento = :documento AND em.usuario = :usuario AND em.estado = :estado");
-
-        $sqlCliente->bindParam(':documento', $documento);
-        $sqlCliente->bindParam(':usuario', $usuario);
-        $sqlCliente->bindParam(':estado', $estado);
-
-        $sqlCliente->execute();
-
-        if ($sqlCliente->rowCount() > 0) {
+        if ($sqlCliente->rowCount() > 0) { // validar si hay registros en la consulta del cliente
+            // guardar la informacion en variables
             $result = $sqlCliente->fetch();
             $idUsuario = $result['id_cliente_registrado'];
             $email = $result['email'];
             $estadousu = 1;
 
-            $token = bin2hex(random_bytes(32));
+            $token = bin2hex(random_bytes(32)); // crear un token para la recuperacion de la contraseña
 
-            $sqlInsertToken = $dbh->prepare("INSERT INTO tokens_recuperacion (id_empleado, id_cliente_registrado, token, estado_usuario, fecha_expiracion) VALUES (NULL, :id_usuario, :token, :estado, DATE_ADD(NOW(), INTERVAL 1 HOUR))");
+            $sqlInsertToken = $dbh->prepare("INSERT INTO tokens_recuperacion (id_empleado, id_cliente_registrado, token, estado_usuario, fecha_expiracion) VALUES (NULL, :id_usuario, :token, :estado, DATE_ADD(NOW(), INTERVAL 1 HOUR))"); // insertar el registro en la BD
             $sqlInsertToken->bindParam(':id_usuario', $idUsuario);
             $sqlInsertToken->bindParam(':token', $token);
             $sqlInsertToken->bindParam(':estado', $estadousu);
@@ -62,13 +48,14 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
 
             $sqlEmpleado->execute();
 
-            if ($sqlEmpleado->rowCount() > 0) {
+            if ($sqlEmpleado->rowCount() > 0) { // validar si hay registros en la consulta del empleado
+                //Guardar informacion en variables
                 $result = $sqlEmpleado->fetch();
                 $idUsuario = $result['id_empleado'];
                 $email = $result['email'];
-                $token = bin2hex(random_bytes(32));
+                $token = bin2hex(random_bytes(32)); // crear un token para la recuperacion de la contraseña
 
-                $sqlInsertToken = $dbh->prepare("INSERT INTO tokens_recuperacion (id_empleado, id_cliente_registrado, token, estado_usuario, fecha_expiracion) VALUES (:id_usuario, NULL, :token, :estado, DATE_ADD(NOW(), INTERVAL 1 HOUR))");
+                $sqlInsertToken = $dbh->prepare("INSERT INTO tokens_recuperacion (id_empleado, id_cliente_registrado, token, estado_usuario, fecha_expiracion) VALUES (:id_usuario, NULL, :token, :estado, DATE_ADD(NOW(), INTERVAL 1 HOUR))"); // insertar el registro en la BD
                 $sqlInsertToken->bindParam(':id_usuario', $idUsuario);
                 $sqlInsertToken->bindParam(':token', $token);
                 $sqlInsertToken->bindParam(':estado', $estadousu);
@@ -80,7 +67,7 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
             }
         }
 
-
+        // Codigo para enviar correos electronicos
         include "../../vistas/inicioSesion/msjCorreo.php";
 
         include "../../librerias/phpMailer/PHPMailer.php";
@@ -105,11 +92,7 @@ if (isset($_POST["btnUsuario"])) { //esta funcion sirve para saber si se precion
         $phpmailer->addAddress($emailEnvio);
         $phpmailer->FromName = $fromName;
         $phpmailer->Subject = $msj;
-
-        // Aquí, debes agregar el cuerpo del mensaje
         $phpmailer->Body = $mensaje_correo;
-
-        // Puedes configurar el tipo de contenido como HTML
         $phpmailer->isHTML(true);
 
         if (!$phpmailer->send()) {

@@ -4,6 +4,7 @@ session_start();
 
 include_once "procesos/config/conex.php";
 
+// Consulta sql para verificar el estado de la reserva y actualizar si se pasó de la fecha de ingreso
 $sql = "UPDATE reservas AS r JOIN habitaciones AS h ON r.id_habitacion = h.id_habitacion SET r.id_estado_reserva = 3, h.id_hab_estado = 1 WHERE r.id_estado_reserva = 1 AND fecha_ingreso < CURDATE()";
 
 $dbh->query($sql);

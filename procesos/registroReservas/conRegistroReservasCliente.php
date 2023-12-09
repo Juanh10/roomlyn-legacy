@@ -15,7 +15,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
     $cliente = $_POST['idCliente'];
     $estadoRegistro = 1;
     $estado = 1;
-    $diasAntelacionMaxima = 10;
+    $diasAntelacionMaxima = 15;
 
     // Convertir las fechas a marcas de tiempo
     $marcaTiempoCheckIn = strtotime($checkIn);
@@ -119,3 +119,5 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
         exit;
     }
 }
+
+?>

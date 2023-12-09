@@ -25,7 +25,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
     $estado = 1;
     $fecha = date('Y-m-d'); // Obtener la fecha actual
     $hora = date('H:i:s'); // obtener la hora actual
-    $diasAntelacionMaxima = 10;
+    $diasAntelacionMaxima = 15;
 
     // Convertir las fechas a marcas de tiempo
     $marcaTiempoCheckIn = strtotime($checkIn);

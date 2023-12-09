@@ -1,4 +1,3 @@
-<link rel="icon" href="../../iconos/logo_icono.png">
 <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../../librerias/lightbox2/dist/css/lightbox.css">
 <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">

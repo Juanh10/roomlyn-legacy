@@ -91,21 +91,20 @@ function obtenerListaServicios($dbh, $idTipoHab)
     ob_start(); // Capturar el contenido de salida
 
 ?>
-            <?php
-            // Tu código existente para mostrar la lista de servicios
-            foreach ($dbh->query($sqlServicios) as $rowServ) {
-            ?>
-                <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
-                    <form id="formEliminarServicio">
-                        <input type="hidden" name="idTipoHab" id="tipoHab<?php echo $idTipoHab ?>" value="<?php echo $idTipoHab ?>">
-                        <input type="hidden" name="idServicio" id="idServicio<?php echo $rowServ['id_hab_tipo_elemento'] ?>" value="<?php echo $rowServ['id_hab_tipo_elemento'] ?>">
-                        <button type="button" name="btnElmServ" title="Deshabilitar"><i class="bi bi-trash"></i></button>
-                    </form>
-                </li>
-            <?php
-            }
+    <?php
+    foreach ($dbh->query($sqlServicios) as $rowServ) {
+    ?>
+        <li class="border border-bottom"><span><?php echo $rowServ['elemento'] ?></span>
+            <form id="formEliminarServicio">
+                <input type="hidden" name="idTipoHab" id="tipoHab<?php echo $idTipoHab ?>" value="<?php echo $idTipoHab ?>">
+                <input type="hidden" name="idServicio" id="idServicio<?php echo $rowServ['id_hab_tipo_elemento'] ?>" value="<?php echo $rowServ['id_hab_tipo_elemento'] ?>">
+                <button type="button" name="btnElmServ" title="Deshabilitar"><i class="bi bi-trash"></i></button>
+            </form>
+        </li>
+    <?php
+    }
 
-            ?>
+    ?>
 <?php
 
     $html = ob_get_clean(); // Obtener y limpiar el contenido de salida capturado

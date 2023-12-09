@@ -124,7 +124,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                                         <span>Habitación 1</span>
                                         <div class="grupo-cantidad-huespedes">
                                             <label for="inputCantHuespedes" class="cant-huespedes">Huéspedes</label>
-                                            <input type="number" name="cantHuespedes" id="inputCantHuespedes" min="0" max="6" value="1">
+                                            <input type="number" name="cantHuespedes" id="inputCantHuespedes" min="0" max="8" value="1">
                                         </div>
                                     </div>
                                     <div class="btn-añadir-guardar">
@@ -261,7 +261,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                 position: '',
                 icon: 'success',
                 title: '¡RESERVA REGISTRADA!',
-                html: "<p>Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href='https://wa.link/ys192u' target='_blank'>3156676013</a> para más detalles.</p>",
+                html: "<p>Para confirmar su reserva, es necesario realizar un pago inicial del 50%. Le solicitamos que efectúe dicho pago en un plazo de 24 horas. Para obtener más detalles y proceder con la transacción, por favor, comuníquese al <a href='https://wa.link/ys192u' target='_blank'>3156676013</a>. o al <a href='https://wa.link/icvti0' target='_blank'>3103341338</a></p>",
                 showConfirmButton: true
             });
         </script>

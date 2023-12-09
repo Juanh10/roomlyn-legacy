@@ -12,9 +12,9 @@ $rowHabitacion = $dbh->query($sqlHabitacion)->fetch();
 
 $servHabitacion = $rowHabitacion['id_servicio'];
 
-$sqlPrecioVentilador = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = ".$tipoHab." AND hts.id_servicio = ".$servHabitacion." AND htp.estado = 1 AND hts.estado = 1";
+$sqlPrecioVentilador = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = " . $tipoHab . " AND hts.id_servicio = " . $servHabitacion . " AND htp.estado = 1 AND hts.estado = 1";
 
-$sqlPrecioAire = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = ".$tipoHab." AND hts.id_servicio = ".$servHabitacion." AND htp.estado = 1 AND hts.estado = 1";
+$sqlPrecioAire = "SELECT htp.id_tipo_precio, htp.id_tipo_servicio, htp.precio FROM habitaciones_tipos_precios AS htp INNER JOIN habitaciones_tipos_servicios AS hts ON hts.id_tipo_servicio = htp.id_tipo_servicio WHERE hts.id_hab_tipo = " . $tipoHab . " AND hts.id_servicio = " . $servHabitacion . " AND htp.estado = 1 AND hts.estado = 1";
 
 $rowPrecioVentilador = $dbh->query($sqlPrecioVentilador)->fetch();
 $rowPrecioAire = $dbh->query($sqlPrecioAire)->fetch();
@@ -97,7 +97,7 @@ if ($rowHabitacion['id_servicio'] == 1) {
                     <span><?php echo number_format($totalFactura, 0, ',', '.')  ?> COP</span>
                 </p>
                 <div class="alert alert-success msjAlert" role="alert">
-                    Para confirmar su reserva, se requiere un pago inicial del 50% antes de la fecha de llegada. Comuníquese al <a href="https://wa.link/ys192u" target="_blank">3156676013</a> para más detalles.
+                    Para confirmar su reserva, es necesario realizar un pago inicial del 50%. Le solicitamos que efectúe dicho pago en un plazo de 24 horas. Para obtener más detalles y proceder con la transacción, por favor, comuníquese al <a href='https://wa.link/ys192u' target='_blank'>3156676013</a>. o al <a href='https://wa.link/icvti0' target='_blank'>3103341338</a>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@ if ($rowHabitacion['id_servicio'] == 1) {
 </div>
 
 <script>
-        $('.btnAbrirDetalles').click(function () {
+    $('.btnAbrirDetalles').click(function() {
         let detalles = $(this).next('.inforDetalles');
         if (detalles.is(':visible')) {
             $('.flechaDetalles').addClass('active');

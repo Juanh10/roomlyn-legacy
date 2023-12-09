@@ -61,10 +61,3 @@ form.addEventListener("submit", (e) => {
     }
 
 });
-
-
-//! parentElement: es el label
-//! insertAdjacentHTML: permite ingresar contenido HTML
-//! blur: Evento cuando el cursor sale del campo
-//! e: es un objeto que permite capturar toda la informacion
-//! nextElementSibling: recoje el elemento hermano del input

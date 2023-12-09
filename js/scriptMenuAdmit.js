@@ -229,16 +229,6 @@ $(document).ready(function () {
     this.submit();
   });
 
-  confirmarAccionFromulario($('#formCancelarRes'), '¡No podrás revertir esto!', function () {
-    this.submit();
-  });
-
-  confirmarAccionFromulario($('#formConfirmRes'), '¡No podrás revertir esto!', function () {
-    this.submit();
-  });
-
-
-
   function confirmarAccionBoton(botonElemento, message, resultado) {
 
     botonElemento.click(function (e) {

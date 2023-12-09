@@ -202,7 +202,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                 endforeach;
                                 ?>
                             </select>
-                            <label for="selectFiltro">Estado habitación</label>
+                            <label for="selectFiltro">Estado de la reserva</label>
                         </div>
 
                         <div class="d-flex justify-content-center align-items-center">

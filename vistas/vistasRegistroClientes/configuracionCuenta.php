@@ -102,7 +102,7 @@ $primerApellido = $apellidos[0];
                         <div class="row">
                             <div class="col-12 col-md-3 colIconTitulo d-flex align-items-center justify-content-center">
                                 <div class="iconCard">
-                                    <p class="tituloConfig"><i class="bi bi-person-fill-add"></i><span>Seguridad</span></p>
+                                    <p class="tituloConfig"><i class="bi bi-person-fill-lock"></i><span>Seguridad</span></p>
                                 </div>
                             </div>
                             <div class="col-12 col-md-9">
@@ -126,7 +126,7 @@ $primerApellido = $apellidos[0];
                         <div class="row">
                             <div class="col-12 col-md-3 colIconTitulo d-flex align-items-center justify-content-center">
                                 <div class="iconCard">
-                                    <p class="tituloConfig"><i class="bi bi-person-fill-add"></i><span>Reservas realizadas</span></p>
+                                    <p class="tituloConfig"><i class="bi bi-calendar-check-fill"></i><span>Reservas realizadas</span></p>
                                 </div>
                             </div>
                             <div class="col-12 col-md-9">

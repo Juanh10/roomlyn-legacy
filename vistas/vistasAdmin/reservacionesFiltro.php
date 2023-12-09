@@ -281,10 +281,14 @@ endif;
         let idCLiente = $(this).attr('id');
         let contenido = $('#contenidoInforCliente');
 
-        fetch(`../vistasAdmin/inforClienteReserva.php?id=${idCLiente}`)
+        fetch(`../../vistas/vistasAdmin/inforCLienteReserva.php?id=${idCLiente}`)
             .then(res => res.text())
             .then(datos => contenido.html(datos))
             .catch();
+    });
+
+    $('.desplegarInformacionRecep').click(function() {
+        $('.cardInformacion').toggle()
     });
 
     $('.btnVolverFiltro').click(function() {

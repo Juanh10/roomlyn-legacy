@@ -364,6 +364,9 @@ $iconos = array(
 
     ?>
 
+
+    <script src="../../js/scriptSelectRecepcion.js"></script>
+
 </body>
 
 </html>

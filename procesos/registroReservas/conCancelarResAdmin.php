@@ -93,7 +93,7 @@ if (!empty($_POST['confirmReserva'])) {
     if (!empty($_POST['idHab']) && !empty($_POST['idRes'])) {
 
         $idReserva = $_POST['idRes'];
-        echo $idHab = $_POST['idHab'];
+        $idHab = $_POST['idHab'];
         $estado = 2;
         $estadoHab = 6;
 
