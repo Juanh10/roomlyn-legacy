@@ -51,13 +51,13 @@ contraInput.addEventListener("blur", (e) => validarFormulario("Llena este campo 
 form.addEventListener("submit", (e) => {
 
     
-    e.preventDefault();
+    e.preventDefault(); // no dejar enviar el formulario
 
     const usuValidado = validarFormulario("Llena este campo", usarioInput);
     const contraValidado = validarFormulario("Llena este campo", contraInput);
 
     if(usuValidado && contraValidado){
-        form.submit();
+        form.submit(); // enviar el formulario
     }
 
 });

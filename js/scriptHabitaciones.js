@@ -64,7 +64,7 @@ $(document).ready(function () {
     let inputFechas = $('input[name="fechasRango"]');
     $(inputFechas).daterangepicker({
       locale: {
-        format: 'YYYY/M/DD',
+        format: 'YYYY/MM/DD',
         "separator": " - ",
         "applyLabel": "Aplicar",
         "cancelLabel": "Cancelar",

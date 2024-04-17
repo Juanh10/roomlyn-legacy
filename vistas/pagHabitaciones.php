@@ -111,7 +111,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                             <div class="grupo-rango-fechas">
                                 <input type="text" name="fechasRango" id="rangoFechas" readonly>
                                 <label for="rangoFechas" class="label-fechas">Seleccionar fechas</label>
-                            </div>
+                            </div> 
                         </div>
                         <div class="huespedes">
                             <div class="grupo-huespedes">
