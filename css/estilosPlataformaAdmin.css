@@ -40,6 +40,25 @@ body {
     background-color: #b49d91;
 }
 
+.btn-guardar-habitacion{
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+.boton-guardar-hab {
+    width: 40%;
+    background-color: #c4ac9f;
+    transition: .3s ease;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.boton-guardar-hab:hover {
+    background-color: #b49d91;
+}
+
 .buscBntAgr {
     display: flex;
     justify-content: space-between;

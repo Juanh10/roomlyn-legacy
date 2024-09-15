@@ -38,7 +38,7 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
             <div class="row">
                 <div class="col">
                     <div class="btnBuscador">
-                        <span class="btn" data-bs-toggle="modal" data-bs-target="#addHabitacion">Añadir habitación</span>
+                        <span class="btn btn-crear-habitacion">Añadir habitación</span>
                     </div>
                     <div class="table-responsive tabla-usuarios">
                         <table class="table table-borderless text-center" id="tablaHabitaciones">
@@ -89,108 +89,37 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
                 </div>
             </div>
         </div>
+        <div class="container" id="containerAddHabitaciones">
+
+        </div>
         <div class="container" id="contaionerEditHabitaciones">
 
         </div>
     </div>
 
+    <!-- MODAL PARA ACTUALIZAR SERVICIOS -->
 
-    <!-- MODAL DE AÑADIR HABITACION -->
-
-    <div class="modal fade" id="addHabitacion" tabindex="-1" aria-labelledby="modalAñadir" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal fade" id="actualizarServicios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header fondo-modal">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir habitación</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar elemento</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-7 me-5">
-                                <form action="../../procesos/registroHabitaciones/registroHabi/conRegistroHabitaciones.php" method="post" id="formRegHab">
-
-                                    <label for="numHabitacion">Número de la habitación</label>
-                                    <input type="number" class="form-control mt-2" min="0" name="numHabitacion" id="numHabitacion" required>
-                                    <p></p>
-
-                                    <label for="tipoHab">Tipo de habitación</label>
-                                    <select class="form-select mt-2" name="tipoHab" id="tipoHab" required>
-                                        <option disabled selected value="">Escoja una opción</option>
-                                        <?php
-                                        foreach ($dbh->query($sql) as $row) :
-                                        ?>
-                                            <option value="<?php echo $row['id_hab_tipo'] ?>"><?php echo $row['tipoHabitacion'] ?></option>
-                                        <?php
-                                        endforeach;
-                                        ?>
-                                    </select>
-                                    <p></p>
-
-                                    <div id="inputAgregado">
-                                        <?php
-                                        include "formTipoCama.php"; // incluimos para añadir los demas inputs segun el tipo de habitacion escogida
-                                        ?>
-                                    </div>
-
-                                    <label class="mt-2" for="sisClimatizacion">Sistema de climatización</label>
-                                    <select class="form-select mt-2" name="sisClimatizacion" id="sisClimatizacion">
-                                        <option value="" disabled selected>Seleccione una opción</option>
-                                        <option value="1">Ventilador</option>
-                                        <option value="2">Aire acondicionado</option>
-                                    </select>
-                                    <p></p>
-
-                                    <label for="observaciones" class="mt-2">Observaciones</label>
-                                    <textarea class="form-control mt-2" name="observaciones" id="observaciones" required></textarea>
-                                    <p></p>
-                            </div>
-                            <div class="col-4 responsiveServicios">
-                                <div class="serviciosHabitaciones">
-                                    <h1 class="tituloServicios mb-0"><i class="bi bi-check-square"></i> Elementos</h1>
-
-                                    <?php
-
-                                    $sqlElemento = "SELECT id_hab_elemento, elemento FROM habitaciones_elementos WHERE 1";
-
-                                    foreach ($dbh->query($sqlElemento) as $rowElemento) :
-                                    ?>
-                                        <div class="form-check serviciosCheck border border-bottom">
-                                            <label for="" class="ocularIdServi"><?php echo $rowElemento['id_hab_elemento'] ?></label>
-                                            <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $rowElemento['elemento'] ?>" value="<?php echo $rowElemento['id_hab_elemento'] ?>" name="opcionesServ[]">
-                                            <label class="form-check-label" for="<?php echo $rowElemento['elemento'] ?>"><?php echo $rowElemento['elemento'] ?></label>
-
-                                            <span class="btn btn-sm editServiciosBtn bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#actualizarServicios" title="Editar"></span>
-                                        </div>
-                                    <?php
-                                    endforeach;
-                                    ?>
-
-                                    <!-- BOTON PARA AÑADIR MAS SERVICIOS -->
-                                    <div class="botonRegServi">
-                                        <span class="btnServicio" data-bs-toggle="modal" data-bs-target="#modalRegServ">Registrar Elemento</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span id="mensajeErrorServicio">Debes seleccionar al menos un servicio</span>
-                                </div>
-                            </div>
-                            <div class="formularioMensaje">
-                                <p>¡Por favor rellene todos los campos!</p>
-                            </div>
-                        </div>
-                    </div>
+                    <form action="../../procesos/registroHabitaciones/registroServicios/conActualizarServicios.php" method="post">
+                        <input type="hidden" class="form-control mt-2" id="idServicio" name="idServicio">
+                        <label for="servicioAct">Elemento</label>
+                        <input type="text" class="form-control mt-2" id="servicioAct" name="servicioAct">
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" value="Añadir" name="añadirHab" class="boton-guardar">
+                    <input type="submit" name="btnActElemento" value="Actualizar" class="btn boton-guardar">
                 </div>
                 </form>
             </div>
         </div>
     </div>
-
 
     <!-- MODAL DE AÑADIR MAS SERVICIOS -->
 
@@ -219,37 +148,11 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
         </div>
     </div>
 
-    <!-- MODAL PARA ACTUALIZAR SERVICIOS -->
-
-    <div class="modal fade" id="actualizarServicios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header fondo-modal">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar elemento</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="../../procesos/registroHabitaciones/registroServicios/conActualizarServicios.php" method="post">
-                        <input type="hidden" class="form-control mt-2" id="idServicio" name="idServicio">
-                        <label for="servicioAct">Elemento</label>
-                        <input type="text" class="form-control mt-2" id="servicioAct" name="servicioAct">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" name="btnActElemento" value="Actualizar" class="btn boton-guardar">
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <!-- PIE DE PAGINA -->
     <footer class="pie-de-pagina">
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
-
-    <!-- ALERTAS -->
 
     <?php
 
@@ -272,9 +175,6 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
     endif;
 
     ?>
-
-<script src="../../js/validarRegistroHabitaciones.js"></script>
-
 
 
 </body>

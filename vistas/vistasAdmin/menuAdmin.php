@@ -67,6 +67,12 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_item">
+                <a class="enlaceMenu" href="lectorNfc.php" title="Lector">
+                <i class="bi bi-file-easel-fill"></i>
+                </a>
+            </li>
+
+            <li class="list_item">
                 <a class="enlaceMenu" href="reservaciones.php" title="Reservaciones">
                     <i class="bi bi-calendar-check-fill"></i>
                 </a>
@@ -161,6 +167,13 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_itemDesplegable">
+                <a class="enlaceMenu2" href="lectorNfc.php">
+                <i class="bi bi-file-easel-fill"></i>
+                    <span class="linksOpciones">Lector</span>
+                </a>
+            </li>
+
+            <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="reservaciones.php">
                     <i class="bi bi-calendar-check-fill"></i>
                     <span class="linksOpciones">Reservaciones</span>
@@ -235,8 +248,6 @@ $dbh->query($sqlFecha);
         </div>
 
     </nav>
-
-
 
     <script src="../../librerias/jquery-3.7.0.min.js"></script>
     <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>

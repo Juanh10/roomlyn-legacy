@@ -22,7 +22,7 @@ $sqlServicios = "SELECT habitaciones_elementos_selec.id_hab_tipo_elemento, habit
             <span class="btnVolverHab">
                 < Volver</span>
                     <div class="col-md-7 me-5 ">
-                        <h1 class="tituloPrincipal mb-4">Gestión de la habitación</h1>
+                        <h1 class="tituloPrincipal mb-4">Editar habitación</h1>
                         <div class="formEditHab formularioRegTipoHabi">
                             <form action="../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php" id="formEditarHab" method="post">
                                 <?php

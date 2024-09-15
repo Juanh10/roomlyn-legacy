@@ -71,23 +71,6 @@ $(document).ready(function () {
     }
   });
 
-
-  //* MOSTRAR DATOS DE SERVICIOS DE HABITACIONES PARA EDITAR
-
-  $('.editServiciosBtn').click(function (e) {
-
-    let elemento = e.target.parentElement.children;
-    let arregloElemento = [...elemento];
-
-    let datos = arregloElemento.map(function (element) {
-      return $(element).text();
-    });
-
-    $('#idServicio').val(datos[0]);
-    $('#servicioAct').val(datos[2]);
-
-  });
-
   //* SCRIPTS PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO SE USA LA API fetch para el envio del ID del tipo que se esta seleccionando
 
   const crud = $('.tipoHab button');
@@ -153,6 +136,18 @@ $(document).ready(function () {
       .catch()
   });
 
+  //* Evento click para crear una habitacion mostrando un contenido y ocultando otro
+
+  const btnAddHab = $('.btn-crear-habitacion');
+  const contenidoAddHab = $('#containerAddHabitaciones');
+  
+  btnAddHab.click(function () {
+    contenidoAddHab.load("crearHabitaciones.php");
+    $('#contaionerHabitaciones').hide(); // Oculta el contenedor
+    $('.pie-de-pagina').hide();
+  })
+  
+  
   //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
   const btnEditHab = $('.btnEditHab');
   const contenidoEditHab = $('#contaionerEditHabitaciones');
@@ -303,24 +298,6 @@ $(document).ready(function () {
   initDatatables($('#tablaReservas'));
   initDatatables($('#tablaReservasFiltro'));
 
-
-  //* CONSULTA AJAX PARA FORMULARIO DEL REGISTRO DE HABITACIONES
-
-  let tipoHab = $('#tipoHab');
-  let inputAdd = $('#inputAgregado');
-
-  tipoHab.on('change', function () {
-
-    let seleccion = tipoHab.val();
-
-    fetch(`../vistasAdmin/formTipoCama.php?id=${seleccion}`)
-      .then(res => res.text())
-      .then(datos => inputAdd.html(datos))
-      .catch()
-
-  });
-
-
   function cambiarEstado(idHabitacion, archivo, contenido) {
     fetch(`../vistasAdmin/cambiarEstadoRecepcion.php?id=${idHabitacion}&archivo=${archivo}`)
       .then(res => res.text())
@@ -434,10 +411,10 @@ $(document).ready(function () {
 
   function setFechaActual() {
     let fechaActual = new Date();
-    
+
     // Establecer la zona horaria en Bogotá
     fechaActual.setUTCHours(fechaActual.getUTCHours() - 5);
-    
+
     // Formatear la fecha como ISO y establecerla en los elementos HTML
     let fechaFormateada = fechaActual.toISOString().split('T')[0];
     $('#fechaInicio, #fechaFinal').val(fechaFormateada);
