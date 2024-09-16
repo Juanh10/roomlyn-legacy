@@ -109,12 +109,14 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
         <div class="modal fade" id="registrarNfc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
                     <div class="modal-body">
-                        <p>Acercar el llavero al sensor</p>
-                        <input type="text" id="codNfc">
+                        <div class="llaveroNfc">
+                            <label for="codNfc">Acerque el llavero al sensor</label>
+                            <input type="text" id="codNfc" name="codigoNfc" autocomplete="off">
+                            <div class="icono-llaveroNfc">
+                                <img src="../../iconos/iconoNfc.png" alt="Icono de llavero NFC">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,6 +190,7 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
             location.reload();
 
         });
+        
     </script>
 </body>
 
