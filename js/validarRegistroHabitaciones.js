@@ -111,17 +111,29 @@ obsTextarea.forEach((textarea) => {
 })
 
 function showModal(){
-    let myModal = new bootstrap.Modal(modalNfc);
-    myModal.show();
+    let modal = new bootstrap.Modal(modalNfc);
+    modal.show();
 
     modalNfc.addEventListener('shown.bs.modal', function () {
         inputCodNfc.focus();
     });
+    
+    inputCodNfc.addEventListener('blur', function(e){
+        let texto = e.target.value;
+        if(texto.trim() === ''){
+            inputCodNfc.focus();
+        }else{
+            formulario.submit()
+        }
+    })
 }
+
 
 // VALIDAR PARTE DE LOS TIPOS DE CAMAS
 
 formulario.addEventListener('submit', (e) => {
+
+    e.preventDefault(); // No dejar enviar el formulario
 
     let inputCheck = document.querySelectorAll(".tiposDeCamas input:checked"); // checkbox a los tipos de camas
 
@@ -158,9 +170,6 @@ formulario.addEventListener('submit', (e) => {
     } else {
         errorCantCamas = true;
     }
-
-
-    e.preventDefault(); // No dejar enviar el formulario
 
     if (estadoInput.numHabitacion && estadoInput.tipoHab && estadoInput.sisClimatizacion && estadoInput.observaciones && inputCheck.length >= 1 && estadoInput.cantCamasTotales) {
         showModal();
