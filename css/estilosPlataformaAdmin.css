@@ -855,6 +855,29 @@ body {
 
 /** SECCION DE RECEPCION  */
 
+/* PARTE DE LOS FILTROS DE RECEPCION */
+.buscadorNfc{
+    width: 200px;
+    height: 57px;
+}
+
+.btn-buscadorNfc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #bac6dc;
+    border: none;
+    border-radius: 10px;
+}
+
+.icon-buscadorNfc{
+    margin-left: 8px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 .contenedorHab{
     display: flex;
     flex-wrap: wrap;

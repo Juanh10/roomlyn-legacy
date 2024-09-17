@@ -119,7 +119,7 @@ $iconos = array(
             <div class="row">
                 <div class="col">
                     <div class="d-flex flex-wrap justify-content-between align-items-center filtroYBuscador">
-                        <div class="filtroSelect">
+                        <div class="filtroSelect d-flex">
                             <span class="desplegarFiltroSelect"></span>
                             <form id="formSelectFiltro">
                                 <input type="hidden" name="idCliente" id="idCliente" value="<?php echo $idCliente ?>">
@@ -139,7 +139,11 @@ $iconos = array(
                                     <label for="selectFiltro">Estado habitación</label>
                                 </div>
                             </form>
+                            <div class="buscadorNfc ms-4" data-bs-toggle="modal" data-bs-target="#modal-buscadorNfc">
+                                <button class="btn-buscadorNfc"><span>Buscar con NFC</span> <i class="bi bi-broadcast icon-buscadorNfc"></i></button>
+                            </div>
                         </div>
+
 
                         <div class="buscadorFiltro">
                             <div class="form-floating mb-3">
@@ -147,6 +151,7 @@ $iconos = array(
                                 <label for="buscadorHab">Buscar habitación</label>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="contenedorHab" id="contenedorCardInicial">
@@ -224,7 +229,25 @@ $iconos = array(
                 </div>
             </div>
         </div>
+        <div id="contenido-buscadorNfc"></div>
     </main>
+
+    <!-- MODAL PARA BUSCAR CON NFC -->
+    <div class="modal fade" id="modal-buscadorNfc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="llaveroNfc">
+                        <label for="codNfc">Acerque el llavero al sensor</label>
+                        <input type="text" id="codNfc" name="codigoNfc" autocomplete="off">
+                        <div class="icono-llaveroNfc">
+                            <img src="../../iconos/iconoNfc.png" alt="Icono de llavero NFC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- PIE DE PAGINA -->
@@ -366,6 +389,12 @@ $iconos = array(
 
 
     <script src="../../js/scriptSelectRecepcion.js"></script>
+
+    <script>
+        $('#modal-buscadorNfc').on('shown.bs.modal', function() {
+            $('#codNfc').focus();
+        });
+    </script>
 
 </body>
 
