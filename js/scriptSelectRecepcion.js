@@ -63,41 +63,65 @@ $(document).ready(function () {
 
   const contenidoNfc = $('#contenido-buscadorNfc');
   const contenidoMain = $('.lisTiposHb');
-  const codigoNfc = $('#codNfc');
-  const modalBuscadorNfc = $('#modal-buscadorNfc');
+  const modal = $('#modal-buscadorNfc');
+  const inputNfc = $('#codNfc');
+  let intervaloFoco;
+  let temporizadorCaptura;
+  const retrasoCaptura = 500; // milisegundos
 
-  modalBuscadorNfc.on('shown.bs.modal', function () {
-    codigoNfc.focus();
+  // funcion para mantener el foco del input
+  function mantenerFoco() {
+    inputNfc.focus();
+  }
+
+  // el intervalo sirve para que se mantenga el foco del input
+
+  // funcion para capturar el codigo NFC
+  function procesarCodigoNFC(codigo) {
+    console.log('Código completo del llavero:', codigo);
+
+    //procesar codigo NFC
+
+    fetch(`../vistasAdmin/mostrarContenidoNfc.php?codigo=${codigo}`)
+      .then(res => res.text())
+      .then(datos => {
+        contenidoNfc.html(datos);
+        contenidoMain.hide();
+        contenidoNfc.show();
+        clearInterval(intervaloFoco);
+        inputNfc.blur();
+        modal.modal('hide');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+  // agregar el foco cuando el modal está abierto
+  modal.on('shown.bs.modal', function () {
+    inputNfc.val(''); // limpiar el input
+    mantenerFoco();
+
+    intervaloFoco = setInterval(mantenerFoco, 100);
   });
 
-  codigoNfc.on('blur', function (e) {
-    let valorCodigoNfc = e.target.value;
 
-    if (valorCodigoNfc.trim() === '') {
-      codigoNfc.focus();
-    } else {
-      fetch(`../vistasAdmin/mostrarContenidoNfc.php?codigo=${valorCodigoNfc}`)
-        .then(res => res.text())
-        .then(datos => {
-          contenidoNfc.html(datos);
-          modalBuscadorNfc.hide();
-          contenidoMain.hide();
-          contenidoNfc.show();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
+  inputNfc.on('input', function () {
 
-  })
+    clearTimeout(temporizadorCaptura);
 
-  setTimeout(() => {
-    modalBuscadorNfc.hide();
-  }, 3000)
+    temporizadorCaptura = setTimeout(() => {
+      const codigoNFC = $(this).val();
+      if (codigoNFC.length > 0) {
+        procesarCodigoNFC(codigoNFC);
+      }
+    }, retrasoCaptura);
+  });
 
-  // Agregar un manejador para el evento 'hidden.bs.modal'
-  modalBuscadorNfc.on('hidden.bs.modal', function () {
-    console.log('Modal cerrado');
+  // limpiar intervalos y temporizadores cuando se cierra el modal
+  modal.on('hidden.bs.modal', function () {
+    clearInterval(intervaloFoco);
+    clearTimeout(temporizadorCaptura);
   });
 
   /*  $('.buscadorNfc').click(function(){

@@ -54,21 +54,23 @@ if (!empty($_POST['numHabitacion']) && !empty($_POST['tipoHab']) && !empty($_POS
 
                 if ($sqlNfc->execute()) {
 
-                    $ultIDNfc = $dbh->lastInsertId('llaveros_nfc');
+                    $ultIDNfc = $dbh->lastInsertId();
+
+                    echo $ultIDNfc;
 
                     // Preparar la consulta para insertar la nueva habitación
-                    $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_hab_tipo, id_hab_estado, id_servicio, id_codigo_nfc, tipoCama, cantidadPersonasHab, observacion, estado, fecha, hora, fecha_update) VALUES (:nHab, :idTipo, :idHabEstado, :idNfc, :tipoServicio, :tipoCama, :cantPersonas, :observacion, :estado, :fecha, :hora, now())");
+                    $sql = $dbh->prepare("INSERT INTO habitaciones(nHabitacion, id_hab_tipo, id_hab_estado, id_servicio, id_codigo_nfc, tipoCama, cantidadPersonasHab, observacion, estado, fecha, hora, fecha_update) VALUES (:nHab, :idTipo, :idHabEstado, :tipoServicio, :idNfc, :tipoCama, :cantPersonas, :observacion, :estado, :fecha, :hora, now())");
 
                     // Enlazar los parámetros con los valores
-                    $sql->bindValue(":nHab", $numHab);
-                    $sql->bindValue(":idTipo", $tipoHab);
-                    $sql->bindValue(":idHabEstado", $estadoHab);
-                    $sql->bindValue(":idNfc", $ultIDNfc);
-                    $sql->bindValue(":tipoServicio", $sisClimatizacion, PDO::PARAM_INT);
-                    $sql->bindValue(":observacion", $descripcionHab);
-                    $sql->bindValue(":estado", $estado);
-                    $sql->bindValue(":fecha", $fecha);
-                    $sql->bindValue(":hora", $hora);
+                    $sql->bindParam(":nHab", $numHab);
+                    $sql->bindParam(":idTipo", $tipoHab);
+                    $sql->bindParam(":idHabEstado", $estadoHab);
+                    $sql->bindParam(":idNfc", $ultIDNfc);
+                    $sql->bindParam(":tipoServicio", $sisClimatizacion);
+                    $sql->bindParam(":observacion", $descripcionHab);
+                    $sql->bindParam(":estado", $estado);
+                    $sql->bindParam(":fecha", $fecha);
+                    $sql->bindParam(":hora", $hora);
 
                     $valorCampo = "";
                     $cantPersonaSimple = 0;

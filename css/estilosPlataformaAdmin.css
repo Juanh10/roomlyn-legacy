@@ -1028,6 +1028,16 @@ body {
     opacity: 0;
 }
 
+/* ESTILOS PARA LA PARTE DE LAS HABITACIONES POR NFC */
+
+.backCardHab{
+    margin-left: 40px;
+    background-color: #28a64b;
+    padding: 10px;
+}
+
+
+
 @media only screen and (max-width: 996px) {
     .contenedorFila{
         display: block;
