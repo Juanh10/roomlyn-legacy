@@ -1,6 +1,7 @@
 <?php
 
 include_once "../../procesos/config/conex.php";
+include_once "../../procesos/funciones/formatearFechas.php";
 
 $idHab = $_GET['id'];
 
@@ -28,8 +29,8 @@ $idRes = $resultado['id_reserva'];
                 <p>Nombre: <?php echo $resultado['nombres'] . " " . $resultado['apellidos'] ?></p>
                 <p>Documento: <?php echo $resultado['documento'] ?></p>
                 <p>Celular: <?php echo $resultado['celular'] ?></p>
-                <p>Fecha de ingreso: <?php echo $resultado['fecha_ingreso'] ?></p>
-                <p>Fecha de salida: <?php echo $resultado['fecha_salida'] ?></p>
+                <p>Fecha de ingreso: <?php echo formatearFecha($resultado['fecha_ingreso']) ?></p>
+                <p>Fecha de salida: <?php echo formatearFecha($resultado['fecha_salida']) ?></p>
             </div>
 
             <div class="btnEstado d-flex flex-row justify-content-center">

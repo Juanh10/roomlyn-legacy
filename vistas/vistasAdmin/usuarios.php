@@ -50,7 +50,6 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                             <table class="table table-hover table-borderless text-center" id="tablaUsuarios">
                                 <thead class="tabla-background">
                                     <tr>
-                                        <th>#</th>
                                         <th>Nombres</th>
                                         <th>Documento</th>
                                         <th>Teléfono</th>
@@ -80,7 +79,6 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                                     ?>
 
                                             <tr class="filas filasUsuario">
-                                                <td class="datos"><?php echo $id ?></td>
                                                 <td class="datos"><?php echo $nombre1 . " " . $nombre2 . " " . $apellido1 . " " . $apellido2 ?></td>
                                                 <td class="datos"><?php echo $documento ?></td>
                                                 <td class="datos"><?php echo $celular ?></td>

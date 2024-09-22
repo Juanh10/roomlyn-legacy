@@ -1,6 +1,7 @@
 <?php
 
 include_once "../../../procesos/config/conex.php";
+include_once "../../../procesos/funciones/formatearFechas.php";
 
 $fechasRango = $_GET['fechasRango'];
 $tipoHab = $_GET['tipoHab'];
@@ -78,8 +79,8 @@ if ($rowHabitacion['id_servicio'] == 1) {
         </div>
         <div class="inforDetalles">
             <div class="fechasCheck">
-                <p>Entrada: <?php echo $checkin ?></p>
-                <p>Salida: <?php echo $checkout ?></p>
+                <p>Entrada: <?php echo formatearFecha($checkin) ?></p>
+                <p>Salida: <?php echo formatearFecha($checkout) ?></p>
             </div>
             <div class="inforHab">
                 <p>

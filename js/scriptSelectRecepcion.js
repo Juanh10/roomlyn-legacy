@@ -129,4 +129,35 @@ $(document).ready(function () {
      contenidoNfc.show();
    }); */
 
+  // DRIVER JS
+
+  const driver = window.driver.js.driver;
+
+  if(!localStorage.getItem('mensajeMostrado')){
+
+    const driverObj = driver({
+      showProgress: false,
+      steps: [
+        {
+          element: '.btn-buscadorNfc',
+          popover: {
+            title: 'Buscar habitaciones con NFC',
+            description: 'Este botón te permite buscar habitaciones utilizando el llavero, solo necesitas acercarlo al sensor. A través de esta función, podrás ver el historial del cliente, incluyendo su factura, lo que ha consumido durante su estadía, entre otros detalles relacionados con la habitación.',
+            side: "bottom",
+            align: 'center'
+          }
+        }
+      ],
+      doneBtnText: 'Aceptar',
+      nextBtnText: 'Siguiente',
+      prevBtnText: 'Anterior',
+    });
+  
+    driverObj.drive();
+
+    // guardar en localStorage 
+    localStorage.setItem('mensajeMostrado', 'true');
+  }
+
+
 });

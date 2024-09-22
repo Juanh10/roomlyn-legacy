@@ -6,9 +6,9 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
 }
 
 include_once "../../procesos/config/conex.php";
+include_once "../../procesos/funciones/formatearFechas.php";
 
-$sql = "SELECT clientes_registrados.id_cliente_registrado, clientes_registrados.estado, info_clientes.fecha_reg, info_clientes.id_info_cliente, info_clientes.documento, info_clientes.nombres, info_clientes.apellidos, info_clientes.celular, info_clientes.sexo, info_clientes.email, nacionalidades.nacionalidad, municipios.municipio
-FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_info_cliente = info_clientes.id_info_cliente INNER JOIN nacionalidades ON info_clientes.id_nacionalidad = nacionalidades.id_nacionalidad INNER JOIN municipios ON info_clientes.id_municipio = municipios.id_municipio WHERE 1";
+$sql = "SELECT cliReg.id_cliente_registrado, cliReg.estado, infC.fecha_reg, infC.id_info_cliente, infC.documento, infC.nombres, infC.apellidos, infC.celular, infC.sexo, infC.email, nc.nacionalidad, mc.municipio FROM clientes_registrados as cliReg INNER JOIN info_clientes as infC ON cliReg.id_info_cliente = infC.id_info_cliente INNER JOIN nacionalidades as nc ON infC.id_nacionalidad = nc.id_nacionalidad INNER JOIN municipios as mc ON infC.id_municipio = mc.id_municipio WHERE 1 ORDER BY cliReg.id_cliente_registrado DESC";
 
 ?>
 
@@ -47,7 +47,6 @@ FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_in
                         <table class="table table-hover table-borderless text-center" id="tablaClientes">
                             <thead class="tabla-background">
                                 <tr>
-                                    <th>#</th>
                                     <th>Nombres</th>
                                     <th>Documento</th>
                                     <th>Teléfono</th>
@@ -71,7 +70,7 @@ FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_in
                                     $celular = $row['celular'];
                                     $nacionalidad = $row['nacionalidad'];
                                     $municipio = $row['municipio'];
-                                    $fechaReg = $row['fecha_reg'];
+                                    $fechaReg = formatearFecha($row['fecha_reg']);
                                     $estado = $row['estado'];
 
                                     if ($estado == 1) :
@@ -79,7 +78,6 @@ FROM clientes_registrados INNER JOIN info_clientes ON clientes_registrados.id_in
                                 ?>
 
                                         <tr class="filas filasUsuario">
-                                            <td class="datos"><?php echo $id ?></td>
                                             <td class="datos"><?php echo $nombres . " " . $apellidos ?></td>
                                             <td class="datos"><?php echo $documento ?></td>
                                             <td class="datos"><?php echo $celular ?></td>

@@ -6,8 +6,9 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
 }
 
 include_once "../../procesos/config/conex.php";
+include_once "../../procesos/funciones/formatearFechas.php";
 
-$sqlReservas = "SELECT r.id_reserva, r.id_cliente, r.id_habitacion, r.id_estado_reserva, r.fecha_ingreso, r.fecha_salida, r.total_reserva, r.estado, DATE(r.fecha_sys) AS fecha_sys, info.nombres, info.apellidos, info.documento, es.nombre_estado, h.nHabitacion FROM reservas AS r INNER JOIN estado_reservas AS es ON es.id_estado_reserva = r.id_estado_reserva INNER JOIN habitaciones AS h ON h.id_habitacion = r.id_habitacion INNER JOIN info_clientes AS info ON info.id_info_cliente = r.id_cliente WHERE 1 ORDER BY r.id_reserva ASC";
+$sqlReservas = "SELECT r.id_reserva, r.id_cliente, r.id_habitacion, r.id_estado_reserva, r.fecha_ingreso, r.fecha_salida, r.total_reserva, r.estado, DATE(r.fecha_sys) AS fecha_sys, info.nombres, info.apellidos, info.documento, es.nombre_estado, h.nHabitacion FROM reservas AS r INNER JOIN estado_reservas AS es ON es.id_estado_reserva = r.id_estado_reserva INNER JOIN habitaciones AS h ON h.id_habitacion = r.id_habitacion INNER JOIN info_clientes AS info ON info.id_info_cliente = r.id_cliente WHERE 1 ORDER BY r.id_reserva DESC";
 
 $sqlTotal = "SELECT SUM(total_reserva) AS ingresos_totales FROM reservas WHERE id_estado_reserva = 4";
 $resultTotal = $dbh->query($sqlTotal)->fetch();
@@ -76,7 +77,6 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                         <table class="table table-hover table-borderless text-center" id="tablaReservas">
                             <thead class="tabla-background">
                                 <tr>
-                                    <th>#</th>
                                     <th>Habitación</th>
                                     <th>Cliente</th>
                                     <th>Documento</th>
@@ -100,16 +100,15 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                     $nombres = $row['nombres'];
                                     $apellidos = $row['apellidos'];
                                     $documento = $row['documento'];
-                                    $fechaIngreso = $row['fecha_ingreso'];
-                                    $fechaSalida = $row['fecha_salida'];
+                                    $fechaIngreso = formatearFecha($row['fecha_ingreso']);
+                                    $fechaSalida = formatearFecha($row['fecha_salida']);
                                     $idEstado = $row['id_estado_reserva'];
                                     $estado = $row['nombre_estado'];
                                     $total = $row['total_reserva'];
-                                    $fechaSys = $row['fecha_sys'];
+                                    $fechaSys = formatearFecha($row['fecha_sys']);
                                 ?>
 
                                     <tr class="filas filasUsuario">
-                                        <td class="datos"><?php echo $id ?></td>
                                         <td class="datos"><?php echo $habitacion ?></td>
                                         <td class="datos"><?php echo $nombres . " " . $apellidos ?></td>
                                         <td class="datos"><?php echo $documento ?></td>

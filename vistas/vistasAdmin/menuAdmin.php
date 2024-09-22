@@ -16,6 +16,7 @@ $dbh->query($sqlFecha);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../iconos/logo_icono.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
     <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
@@ -61,7 +62,7 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_item">
-                <a class="enlaceMenu" href="recepcion.php" title="Recepción">
+                <a class="enlaceMenu listRecepcion" href="recepcion.php" title="Recepción">
                     <i class="bi bi-calendar-plus"></i>
                 </a>
             </li>
@@ -115,7 +116,7 @@ $dbh->query($sqlFecha);
             ?>
 
                 <li class="list_item">
-                    <a class="enlaceMenu" href="usuarios.php" title="Usuarios">
+                    <a class="enlaceMenu listUsuarios" href="usuarios.php" title="Usuarios">
                         <i class="bi bi-people-fill"></i>
                     </a>
                 </li>
@@ -237,12 +238,14 @@ $dbh->query($sqlFecha);
     </nav>
 
     <script src="../../librerias/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
     <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
     <script src="../../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
     <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script>
     <script src="../../librerias/select2/dist/js/select2.min.js"></script>
     <script src="../../js/scriptMenuAdmit.js"></script>
     <script src="../../js/scriptHabitacionesReservas.js"></script>
+    <script src="../../js/driver.js"></script>
 
     <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>
 

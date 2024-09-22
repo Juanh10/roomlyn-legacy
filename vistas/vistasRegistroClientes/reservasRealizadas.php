@@ -3,6 +3,7 @@
 session_start();
 
 include_once "../../procesos/config/conex.php";
+include_once "../../procesos/funciones/formatearFechas.php";
 
 if (empty($_SESSION['id_cliente_registrado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
@@ -17,7 +18,7 @@ $apellidos = explode(" ", $_SESSION['apellidos']);
 $primerNombre = $nombres[0];
 $primerApellido = $apellidos[0];
 
-$sql = "SELECT reservas.id_reserva, reservas.id_cliente, reservas.id_estado_reserva, reservas.fecha_ingreso, reservas.fecha_salida, reservas.total_reserva, reservas.estado, reservas.fecha_sys, habitaciones.id_habitacion, habitaciones.nHabitacion, habitaciones.cantidadPersonasHab, habitaciones.observacion, habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, estado_reservas.nombre_estado FROM reservas INNER JOIN habitaciones ON habitaciones.id_habitacion = reservas.id_habitacion INNER JOIN habitaciones_tipos ON habitaciones_tipos.id_hab_tipo = habitaciones.id_hab_tipo INNER JOIN estado_reservas ON estado_reservas.id_estado_reserva = reservas.id_estado_reserva INNER JOIN info_clientes ON reservas.id_cliente = info_clientes.id_info_cliente INNER JOIN clientes_registrados ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente WHERE clientes_registrados.id_cliente_registrado = " . $idCliente . "";
+$sql = "SELECT reservas.id_reserva, reservas.id_cliente, reservas.id_estado_reserva, reservas.fecha_ingreso, reservas.fecha_salida, reservas.total_reserva, reservas.estado, reservas.fecha_sys, habitaciones.id_habitacion, habitaciones.nHabitacion, habitaciones.cantidadPersonasHab, habitaciones.observacion, habitaciones_tipos.id_hab_tipo, habitaciones_tipos.tipoHabitacion, estado_reservas.nombre_estado FROM reservas INNER JOIN habitaciones ON habitaciones.id_habitacion = reservas.id_habitacion INNER JOIN habitaciones_tipos ON habitaciones_tipos.id_hab_tipo = habitaciones.id_hab_tipo INNER JOIN estado_reservas ON estado_reservas.id_estado_reserva = reservas.id_estado_reserva INNER JOIN info_clientes ON reservas.id_cliente = info_clientes.id_info_cliente INNER JOIN clientes_registrados ON info_clientes.id_info_cliente = clientes_registrados.id_info_cliente WHERE clientes_registrados.id_cliente_registrado = " . $idCliente . " ORDER BY reservas.fecha_sys DESC ";
 
 $sqlImagenes = $dbh->prepare("SELECT nombre, MIN(ruta) AS ruta, estado FROM habitaciones_imagenes WHERE id_hab_tipo = :idTipo AND estado = :estado GROUP BY id_hab_imagen");
 
@@ -161,8 +162,8 @@ $sqlImagenes = $dbh->prepare("SELECT nombre, MIN(ruta) AS ruta, estado FROM habi
                                         <span>Descripción: Primer piso</span>
                                     </div>
                                     <div class="inforReserva">
-                                        <span>Entrada: <?php echo $checkIn ?></span>
-                                        <span>Salida: <?php echo $checkOut ?></span>
+                                        <span>Entrada: <?php echo formatearFecha($checkIn) ?></span>
+                                        <span>Salida: <?php echo formatearFecha($checkOut) ?></span>
                                         <div class="totalReserva">
                                             <span>TOTAL: <?php echo number_format($totalReserva, 0, ',', '.') ?> COP</span>
                                         </div>

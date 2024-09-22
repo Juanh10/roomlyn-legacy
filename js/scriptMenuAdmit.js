@@ -140,14 +140,14 @@ $(document).ready(function () {
 
   const btnAddHab = $('.btn-crear-habitacion');
   const contenidoAddHab = $('#containerAddHabitaciones');
-  
+
   btnAddHab.click(function () {
     contenidoAddHab.load("crearHabitaciones.php");
     $('#contaionerHabitaciones').hide(); // Oculta el contenedor
     $('.pie-de-pagina').hide();
   })
-  
-  
+
+
   //* Enviar al servidor por medio de la api FETCH el id de la habitacion para editar el modulo de habitaciones
   const btnEditHab = $('.btnEditHab');
   const contenidoEditHab = $('#contaionerEditHabitaciones');
@@ -260,6 +260,9 @@ $(document).ready(function () {
     }
 
     $($tablaID).DataTable({
+
+      "order": [], 
+      "bSort": false, 
 
       "lengthMenu": [5, 10, 20, 30],
 
