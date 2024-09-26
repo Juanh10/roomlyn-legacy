@@ -141,8 +141,8 @@ $(document).ready(function () {
         {
           element: '.btn-buscadorNfc',
           popover: {
-            title: 'Buscar habitaciones con NFC',
-            description: 'Este botón te permite buscar habitaciones utilizando el llavero, solo necesitas acercarlo al sensor. A través de esta función, podrás ver el historial del cliente, incluyendo su factura, lo que ha consumido durante su estadía, entre otros detalles relacionados con la habitación.',
+            title: 'Buscar reservas con NFC',
+            description: 'Haz clic en el botón para ver información de una reservación. Una vez que lo hagas, podrás visualizar detalles importantes como el número de la reserva, el estado actual, fechas de entrada y salida, así como cualquier solicitud o servicio adicional que hayas solicitado.',
             side: "bottom",
             align: 'center'
           }

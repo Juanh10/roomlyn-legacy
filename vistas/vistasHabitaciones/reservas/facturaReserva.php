@@ -2,6 +2,7 @@
 
 include_once "../../../procesos/config/conex.php";
 include_once "../../../procesos/funciones/formatearFechas.php";
+include_once "../../../procesos/funciones/convertirFechasDias.php";
 
 $fechasRango = $_GET['fechasRango'];
 $tipoHab = $_GET['tipoHab'];
@@ -30,17 +31,7 @@ $checkout = $arrayFechas[1];
 
 $checkout = str_replace("/", "-", $checkout); // Reemplazamos "/" por "-"
 
-// CONVERTIR FECHAS EN DIAS
-$timestampInicio = strtotime($checkin);
-$timestampFin = strtotime($checkout);
-
-// Calcular la diferencia en segundos
-$diferenciaSegundos = $timestampFin - $timestampInicio;
-
-// Convertir la diferencia en segundos a días
-$diferenciaDias = $diferenciaSegundos / 86400;
-
-$diferenciaDias = round($diferenciaDias);
+$diferenciaDias = convertirDias($checkin, $checkout);
 
 $total = 0;
 

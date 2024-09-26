@@ -1036,6 +1036,57 @@ body {
     padding: 10px;
 }
 
+/** ESTILOS PARA EL CARD QUE MUESTRA LA INFORMACION DE LA RESERVA POR MEDIO DEL NCF */
+
+.card-nfc{
+    margin-left: 30px;
+    width: 270px;
+    background-color: #cbaea0;
+    padding: 11px 25px;
+    border-radius: 8px;
+}
+
+.card-nfc-informacion{
+    padding: 0 3px;
+}
+
+.card-nfc-numhab{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-nfc-numhab span{
+    font-size: 35px;
+}
+
+.card-nfc-datpers{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-nfc-datpers span{
+    font-size: 14px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.card-nfc-factura {
+    margin: 8px 0;
+    display: grid;
+    grid-template-columns: 0.4fr 0.5fr;
+    column-gap: 0; 
+    row-gap: 1px; 
+    align-items: center; 
+}
+
+.card-nfc-factura span {
+    padding: 0;
+}
+
+.card-nfc-fechas span{
+    font-size: 13px;
+}
+
 
 
 @media only screen and (max-width: 996px) {
