@@ -78,7 +78,6 @@ $(document).ready(function () {
 
   // funcion para capturar el codigo NFC
   function procesarCodigoNFC(codigo) {
-    console.log('Código completo del llavero:', codigo);
 
     //procesar codigo NFC
 

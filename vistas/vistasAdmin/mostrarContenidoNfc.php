@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if ($idEstadoHab == 4 || $idEstadoHab == 5 || $idEstadoHab == 6) {
 
-        $sqlReserva = $dbh->prepare("SELECT res.id_reserva, res.id_cliente, res.id_habitacion, res.id_estado_reserva, res.fecha_ingreso, res.fecha_salida, res.total_reserva, res.estado, info.nombres, info.apellidos, info.documento, info.celular FROM reservas AS res INNER JOIN info_clientes AS info ON info.id_info_cliente = res.id_cliente WHERE res.id_habitacion = :idHab AND res.id_estado_reserva = 2");
+        $sqlReserva = $dbh->prepare("SELECT res.id_reserva, res.id_cliente, res.id_habitacion, res.id_estado_reserva, res.fecha_ingreso, res.fecha_salida, res.total_reserva, res.estado, info.nombres, info.apellidos, info.documento, info.celular, info.email FROM reservas AS res INNER JOIN info_clientes AS info ON info.id_info_cliente = res.id_cliente WHERE res.id_habitacion = :idHab AND res.id_estado_reserva != 4 AND res.id_estado_reserva != 3");
         $sqlReserva->bindParam(':idHab', $idHab);
         $sqlReserva->execute();
         $resultadoReserva = $sqlReserva->fetch(\PDO::FETCH_ASSOC);
@@ -37,6 +37,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $precioHabitacion = $resultadoPrecioHab['precio'];
 
         $facturaReserva = facturaReserva($precioHabitacion, $diferenciaDias);
+
+        $sqlResHab = $dbh->prepare("SELECT res.id_reserva, res.id_cliente, res.id_habitacion, res.id_estado_reserva, res.fecha_ingreso, res.fecha_salida, res.total_reserva, res.estado, info.nombres, info.apellidos, info.documento, info.celular FROM reservas AS res INNER JOIN info_clientes AS info ON info.id_info_cliente = res.id_cliente WHERE res.id_habitacion = :idHab AND res.id_estado_reserva = :idEstadoRes");
+
+        switch ($idEstadoHab) {
+            case 4:
+                $idEstadoHabitacion = 2;
+                $sqlResHab->bindParam(':idHab', $idHab);
+                $sqlResHab->bindParam(':idEstadoRes', $idEstadoHabitacion);
+                break;
+
+            case 5:
+                $idEstadoHabitacion = 1;
+                $sqlResHab->bindParam(':idHab', $idHab);
+                $sqlResHab->bindParam(':idEstadoRes', $idEstadoHabitacion);
+                break;
+
+            case 6:
+                $idEstadoHabitacion = 2;
+                $sqlResHab->bindParam(':idHab', $idHab);
+                $sqlResHab->bindParam(':idEstadoRes', $idEstadoHabitacion);
+                break;
+
+            default:
+                echo "Pcurrió un error";
+                break;
+        }
+
+        $sqlResHab->execute();
+        $resultadoResHab = $sqlResHab->fetch(\PDO::FETCH_ASSOC);
+
+        $idRes = $resultadoResHab['id_reserva'];
     }
 }
 
@@ -57,53 +88,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </span>
     </div>
 
-    <div class="card-nfc">
-        <div class="card-nfc-informacion">
-            <div class="card-nfc-numhab">
-                <span><strong><?php echo $resultado['nHabitacion'] ?></strong></span>
-                <span><i class="bi bi-cart4"></i></span>
-            </div>
-            <?php
-            if ($idEstadoHab == 4 || $idEstadoHab == 5 || $idEstadoHab == 6):
-            ?>
-                <div class="card-nfc-datpers"> <!-- DATOS PERSONALES -->
-                    <span><strong><?php echo $resultadoReserva['documento'] ?></strong></span>
-                    <span><strong><?php echo $resultadoReserva['nombres'] . " " . $resultadoReserva['apellidos'] ?></strong></span>
-                    <div class="card-nfc-factura">
-                        <span>Estancia</span> <span><?php echo $diferenciaDias . ' ' . ($diferenciaDias > 1 ? "días" : "día"); ?></span>
-                        <span>Habitación</span> <span><?php echo number_format($precioHabitacion, 0, ',', '.') ?></span>
-                        <span>Subtotal</span> <span><?php echo number_format($facturaReserva['subtotal'], 0, ',', '.') ?></span>
-                        <span>IVA</span> <span><?php echo number_format($facturaReserva['iva'], 0, ',', '.') ?></span>
-                        <span><strong>TOTAL</strong></span> <span><strong><?php echo number_format($resultadoReserva['total_reserva'], 0, ',', '.') ?> COP</strong></span>
-                    </div>
-                    <div class="card-nfc-fechas">
-                        <span><strong>Entrada: </strong><?php echo formatearFecha($resultadoReserva['fecha_ingreso']) ?></span>
-                        <span><strong>Salida: </strong><?php echo formatearFecha($resultadoReserva['fecha_salida']) ?></span>
-                    </div>
-                </div>
-            <?php
-            else:
-            ?>
-                <div class="card-nfc-datpers"> <!-- DATOS HABITACION -->
-                    <span>Tipo: <?php echo $resultado['tipoHabitacion'] ?></span>
-                    <span>Servicio: <?php echo $resultado['servicio'] ?></span>
-                    <span>Tipo de cama: <?php echo $resultado['tipoCama'] ?></span>
-                </div>
+    <?php
+    if ($idEstadoHab == 4 || $idEstadoHab == 5 || $idEstadoHab == 6):
+        include "cardsNfc/cardNfcCliente.php";
 
-            <?php
-            endif;
-            ?>
-            <!--        <div class="card-nfc-boton">
-                <button>Finalizar reservación</button>
-            </div> -->
+    else:
+    ?>
+        <div id="contenidoHab" data-label="<?php echo $idHab ?>"></div>
+    <?php
+    endif;
+    ?>
+
+
+    <!-- MODAL DISPONIBLE -->
+    <div class="modal fade" id="modalDisponible" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Disponible</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="btnOpciones">
+                        <button id="cambiarEstadoDispo" data-bs-toggle="modal" data-bs-target="#modalEstadoDispo">Cambiar estado de la habitación</button>
+                        <button id="btnReservarRecepcion">Reservar habitación</button>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- MODAL ESTADO -->
+    <div class="modal fade" id="modalEstado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar estado</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="contentCamEstadoDi"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../../js/scriptCardNfc.js"></script>
+
+    <script>
+        $('.btnVolverFiltro').click(function() {
+            location.reload();
+        });
+    </script>
 
 </body>
 
-<script>
-    $('.btnVolverFiltro').click(function() {
-        location.reload();
-    });
-</script>
 
 </html>

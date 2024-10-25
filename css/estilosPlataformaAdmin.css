@@ -1,99 +1,99 @@
 body {
-    background-color: #f8f9fa;
+  background-color: #f2f2f5;
 }
 
 .contenido {
-    padding-top: 90px;
-    padding-left: 90px;
-    margin-bottom: 10px;
+  padding-top: 90px;
+  padding-left: 90px;
+  margin-bottom: 10px;
 }
 
 /*! SECCION PARA TODO  */
 
 .tabla-background {
-    background-color: #c4ac9f;
+  background-color: #c4ac9f;
 }
 
 .alerta {
-    position: fixed;
-    top: 90px;
-    right: 0;
+  position: fixed;
+  top: 90px;
+  right: 0;
 }
 
 .alerta strong i {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .fondo-modal {
-    background-color: #c4ac9f;
+  background-color: #c4ac9f;
 }
 
 .boton-guardar {
-    background-color: #c4ac9f;
-    transition: .3s ease;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
+  background-color: #c4ac9f;
+  transition: 0.3s ease;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
 }
 
 .boton-guardar:hover {
-    background-color: #b49d91;
+  background-color: #b49d91;
 }
 
-.btn-guardar-habitacion{
-    margin-top: 18px;
-    display: flex;
-    justify-content: center;
+.btn-guardar-habitacion {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
 }
 
 .boton-guardar-hab {
-    width: 40%;
-    background-color: #c4ac9f;
-    transition: .3s ease;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
+  width: 40%;
+  background-color: #c4ac9f;
+  transition: 0.3s ease;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
 }
 
 .boton-guardar-hab:hover {
-    background-color: #b49d91;
+  background-color: #b49d91;
 }
 
 .buscBntAgr {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
 }
 
-.botonAgregar{
-    height: 50px;
-    line-height: 50px;
+.botonAgregar {
+  height: 50px;
+  line-height: 50px;
 }
 
 .botonAgregar a {
-    margin-top: 5px;
-    background-color: #1cc78d;
-    color: #000;
-    box-shadow: 0px 1px 2px #1cc78d;
+  margin-top: 5px;
+  background-color: #1cc78d;
+  color: #000;
+  box-shadow: 0px 1px 2px #1cc78d;
 }
 
 .botonAgregar a:hover {
-    background-color: #23a97c;
-    color: #000;
+  background-color: #23a97c;
+  color: #000;
 }
 
-.botonFiltrarFecha{
-    padding: 5px 10px;
-    margin-top: 5px;
-    background-color: #1cc78d;
-    color: #000;
-    box-shadow: 0px 1px 2px #1cc78d;
+.botonFiltrarFecha {
+  padding: 5px 10px;
+  margin-top: 5px;
+  background-color: #1cc78d;
+  color: #000;
+  box-shadow: 0px 1px 2px #1cc78d;
 }
 
-.botonFiltrarFecha:hover{
-    background-color: #23a97c;
-    color: #000;
+.botonFiltrarFecha:hover {
+  background-color: #23a97c;
+  color: #000;
 }
 
 /* .buscador {
@@ -132,45 +132,43 @@ body {
 }
  */
 
+/*! ESTILOS AL DATATABLE  */
 
- /*! ESTILOS AL DATATABLE  */
-
-.dataTables_length{
-    margin-bottom: 20px;
+.dataTables_length {
+  margin-bottom: 20px;
 }
 
-.botonActualizar{
-    width: 100%;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    background-color: #c4ac9f;
-    border: none;
-    border-radius: 5px;
-    transition: .3s ease;
+.botonActualizar {
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: #c4ac9f;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s ease;
 }
 
-.botonActualizar:hover{
-    background-color: #b49d91;
-    border: none;
-    transition: .3s ease;
+.botonActualizar:hover {
+  background-color: #b49d91;
+  border: none;
+  transition: 0.3s ease;
 }
 
 /*! SECCION USUARIO  */
 
 .tabla-usuarios {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .accion {
-    display: flex;
+  display: flex;
 }
 
 .botonEditar {
-    margin-right: 5px;
+  margin-right: 5px;
 }
-
 
 /*! SECCION SERVICIOS DE HABITACIONES  */
 
@@ -182,1098 +180,1231 @@ body {
 
 /*! SECCION DE REGISTRO TIPOS DE HABITACIONES  */
 
-.tituloPrincipal{
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: left;
-    background-color: #c4ac9f;
-    padding: 10px;
+.tituloPrincipal {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left;
+  background-color: #c4ac9f;
+  padding: 10px;
 }
 
-.tituloServicios{
-    font-size: 22px;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 0;
-    background-color: #c4ac9f;
-    padding: 15px;
+.tituloServicios {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0;
+  background-color: #c4ac9f;
+  padding: 15px;
 }
 
-.tituloServicios i{
-    font-size: 22px;
+.tituloServicios i {
+  font-size: 22px;
 }
 
-.tituloServicios .checkSpan{
-    font-size: 12px;
+.tituloServicios .checkSpan {
+  font-size: 12px;
 }
 
-#mensajeErrorServicio{
-    color: red;
-    font-weight: bold;
-    font-size: 14px;
-    display: none;
+#mensajeErrorServicio {
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+  display: none;
 }
 
-#mensajeErrorServicio.activoMensajeErrorServicio{
-    display: block;
+#mensajeErrorServicio.activoMensajeErrorServicio {
+  display: block;
 }
 
-.formularioRegTipoHabi{
-    background-color: #fff;
-    padding: 14px;
-    border-radius: 5px;
+.formularioRegTipoHabi {
+  background-color: #fff;
+  padding: 14px;
+  border-radius: 5px;
 }
 
-.inputPeque{
-    width: 140px;
+.inputPeque {
+  width: 140px;
 }
 
-.formularioRegTipoHabi h2{
-    font-size: 22px;
-    font-weight: bold;
-    border-bottom: 2px solid #000;
-    padding: 2px;
-    margin-bottom: 20px;
+.formularioRegTipoHabi h2 {
+  font-size: 22px;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  padding: 2px;
+  margin-bottom: 20px;
 }
 
-.serviciosHabitaciones{
-    background-color: #fff;
-    border: 1px solid #c4ac9f;
+.serviciosHabitaciones {
+  background-color: #fff;
+  border: 1px solid #c4ac9f;
 }
 
-.serviciosCheck{
-    max-height: 401px;
-    width: 100%;
-    height: 50px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    position: relative;
+.serviciosCheck {
+  max-height: 401px;
+  width: 100%;
+  height: 50px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.ocularIdServi{
-    display: none;
+.ocularIdServi {
+  display: none;
 }
 
-.serviciosCheck label{
-    margin-left: 20px;
-    cursor: pointer;
+.serviciosCheck label {
+  margin-left: 20px;
+  cursor: pointer;
 }
 
-.serviciosCheck input{
-    display: flex;
-    align-items: center;
-    margin: 0;
-    cursor: pointer;
+.serviciosCheck input {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
 }
 
-.editServiciosBtn{
-    position: absolute;
-    right: 30px;
-    font-size: 15px;
+.editServiciosBtn {
+  position: absolute;
+  right: 30px;
+  font-size: 15px;
 }
 
-.botonRegServi{
-    width: 100%;
-    height: 50px;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.botonRegServi {
+  width: 100%;
+  height: 50px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.botonRegServi .btnServicio{
-    width: 80%;
-    height: 40px;
-    background-color: #c4ac9f;
-    border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
+.botonRegServi .btnServicio {
+  width: 80%;
+  height: 40px;
+  background-color: #c4ac9f;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.botonRgServicio{
-    margin-top: 20px;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: center;
+.botonRgServicio {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
 }
 
-.botonRgServicio .btnInputSubmit{
-    font-size: 18px;
-    height: 45px;
-    line-height: 45px;
-    width: 30%;
-    background-color: #000;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 50px;
+.botonRgServicio .btnInputSubmit {
+  font-size: 18px;
+  height: 45px;
+  line-height: 45px;
+  width: 30%;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 50px;
 }
 
-.botonRgServicio .btnInputSubmit:hover{
-    box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+.botonRgServicio .btnInputSubmit:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 /*! ESTILOS DEL INPUT CHECKBOX  */
 .form-check-input:checked {
-    background-color: #000;
-    border-color: #000;
-    box-shadow: none;
+  background-color: #000;
+  border-color: #000;
+  box-shadow: none;
 }
 
-.form-check-input[type=checkbox]{
-    box-shadow: none;
-    border-color: #000;
+.form-check-input[type="checkbox"] {
+  box-shadow: none;
+  border-color: #000;
 }
 
 /*! ESTILOS DE MENSAJES DE ERROR Y VALIDACION DEL FORMULARIO  */
 
-.error{
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-    font-weight: bold;
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: bold;
 }
 
-.inputError{
-    border-color: red;
-    box-shadow: 0 0 2px red;
+.inputError {
+  border-color: red;
+  box-shadow: 0 0 2px red;
 }
 
-.formularioMensaje{
-    margin-top: 20px;
-    background-color: #f66060;
-    height: 45px;
-    line-height: 45px;
-    padding: 0 15px;
-    border-radius: 5px;
-    font-size: 15px;
-    font-weight: 900;
-    display: none;
+.formularioMensaje {
+  margin-top: 20px;
+  background-color: #f66060;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 900;
+  display: none;
 }
 
-.formularioMensaje.activoMensaje{
-    display: block;
+.formularioMensaje.activoMensaje {
+  display: block;
 }
 
-.formularioMensaje i{
-    margin-right: 5px;
+.formularioMensaje i {
+  margin-right: 5px;
 }
-
 
 /*! SECCION LISTADO TIPOS DE HABITACIONES */
 
-.lisTiposHb h1{
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: 10px;
-    text-align: left;
+.lisTiposHb h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+  text-align: left;
 }
 
-.cardHabitacion{
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    margin-top: 40px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 180px;
-    grid-gap: 20px;
+.cardHabitacion {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 180px;
+  grid-gap: 20px;
 }
 
-.cardHab{
-    width: 300px;
-    height: 180px;
-    background-color: #fff;
-    border: 1px solid #c3c3c3;
-    border-radius: 5px;
-    position: relative;
-    transition: transform .3s ease;
+.cardHab {
+  width: 300px;
+  height: 180px;
+  background-color: #fff;
+  border: 1px solid #c3c3c3;
+  border-radius: 5px;
+  position: relative;
+  transition: transform 0.3s ease;
 }
 
-.cardHab:hover{
-    transform: scale(1.03);
+.cardHab:hover {
+  transform: scale(1.03);
 }
 
-.imgHab{
-    width: 100%;
-    height: 100%;
+.imgHab {
+  width: 100%;
+  height: 100%;
 }
 
-.imgHab img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+.imgHab img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
-.cardHab .tipoHab{
-    position: absolute;
-    inset: 0;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 2px;
+.cardHab .tipoHab {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2px;
 }
 
-.cardHab .tipoHab .nombreTipo{
-    font-size: 18px;
-    margin-bottom: 5px;
-    text-align: center;
+.cardHab .tipoHab .nombreTipo {
+  font-size: 18px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
-.cardHab .tipoHab button{
-    margin-top: 5px;
-    background-color: transparent;
-    color: #fff;
-    font-size: 15px;
-    padding: 5px;
-    border: none;
-    border-radius: 10px;
+.cardHab .tipoHab button {
+  margin-top: 5px;
+  background-color: transparent;
+  color: #fff;
+  font-size: 15px;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
 }
 
 /** Estilos a mostrarTipoHabitaciones  */
 
-.contenidoTipoHab{
-    padding: 15px;
+.contenidoTipoHab {
+  padding: 15px;
 }
 
-.contenidoTipoHab .nombreTipo{
-    text-align: center;
-    font-size: 25px;
-    font-weight: 700;
-    margin-bottom: 30px;
+.contenidoTipoHab .nombreTipo {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
-.contenidoTipoHab .inforTipHo{
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    margin-left: 30px;
+.contenidoTipoHab .inforTipHo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-left: 30px;
 }
 
-.contenidoTipoHab h2{
-    font-size: 20px;
-    font-weight: 700;
-    margin-left: 20px;
+.contenidoTipoHab h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 20px;
 }
 
-.contenidoTipoHab .inforTipHo p{
-    margin-right: 40px;
-    font-size: 15px;
+.contenidoTipoHab .inforTipHo p {
+  margin-right: 40px;
+  font-size: 15px;
 }
 
-.contenidoTipoHab .precioTipo{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px 0 10px 30px;
+.contenidoTipoHab .precioTipo {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 10px 30px;
 }
 
-.contenidoTipoHab .precioTipo p{
-    margin-right: 40px;
-    font-size: 15px;
+.contenidoTipoHab .precioTipo p {
+  margin-right: 40px;
+  font-size: 15px;
 }
 
-.contenidoTipoHab .serviciosTipo{
-    font-size: 15px;
-    margin: 20px 0 20px 30px;
+.contenidoTipoHab .serviciosTipo {
+  font-size: 15px;
+  margin: 20px 0 20px 30px;
 }
 
-.imagenesTipos{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px 0 10px 30px;
+.imagenesTipos {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 10px 30px;
 }
 
-.imagenesTipos .listImg{
-    width: 220px;
-    height: 120px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+.imagenesTipos .listImg {
+  width: 220px;
+  height: 120px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
-.imagenesTipos .listImg img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+.imagenesTipos .listImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 /*! ESTILOS PARA LA SECCION DE EDITAR DE TIPOS DE HABITACIONES  */
 
-.cardFotos{
-    padding: 14px;
-    border-radius: 5px;
-    background-color: #fff;
-    margin-left: 12px;
-    width: 640px;
-    height: 100%;
-    margin-bottom: 50px;
+.cardFotos {
+  padding: 14px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-left: 12px;
+  width: 640px;
+  height: 100%;
+  margin-bottom: 50px;
 }
 
-
-.cardFotos h2{
-    font-size: 22px;
-    font-weight: bold;
-    border-bottom: 2px solid #000;
-    padding: 2px;
-    margin-bottom: 20px;
+.cardFotos h2 {
+  font-size: 22px;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  padding: 2px;
+  margin-bottom: 20px;
 }
 
-.actImg{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
+.actImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.listImg2{
-    width: 160px;
-    height: 120px;
-    margin: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform .3s ease;
+.listImg2 {
+  width: 160px;
+  height: 120px;
+  margin: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.listImg2:hover{
-    transform: scale(1.1);
-    position: relative;
+.listImg2:hover {
+  transform: scale(1.1);
+  position: relative;
 }
 
-.listImg2:hover:after{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.2);
- }
+.listImg2:hover:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
- .listImg2:hover:after{
-    content: 'Editar';
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
- }
+.listImg2:hover:after {
+  content: "Editar";
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
 
-.listImg2 img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+.listImg2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 /** ESTILOS A mostrarImgTipo  */
 
-.mostrarImg{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
+.mostrarImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.imagenTipo{
-    width: 180px;
-    height: 150px;
-    margin: 20px;
-    border-radius: 5px;
+.imagenTipo {
+  width: 180px;
+  height: 150px;
+  margin: 20px;
+  border-radius: 5px;
 }
 
-.imagenTipo img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+.imagenTipo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
-#formActImg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+#formActImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.inputFileImg{
-    width: 350px;
-    margin-bottom: 20px;
+.inputFileImg {
+  width: 350px;
+  margin-bottom: 20px;
 }
 
-.btnInputs{
-    display: flex;
+.btnInputs {
+  display: flex;
 }
 
-.btnElmImg{
-    padding: 8px;
-    margin-right: 15px;
-    background-color: #f66060;
-    border: none;
-    border-radius: 5px;
-    transition: .3s ease;
+.btnElmImg {
+  padding: 8px;
+  margin-right: 15px;
+  background-color: #f66060;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s ease;
 }
 
-.btnElmImg:hover{
-    background-color: #cd4b4b;
+.btnElmImg:hover {
+  background-color: #cd4b4b;
 }
 
-.btnActImg{
-    padding: 8px;
-    background-color: #c4ac9f;
-    border: none;
-    border-radius: 5px;
-    transition: .3s ease;
+.btnActImg {
+  padding: 8px;
+  background-color: #c4ac9f;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s ease;
 }
 
-.btnActImg:hover{
-    background-color: #8c7b71;
+.btnActImg:hover {
+  background-color: #8c7b71;
 }
-
 
 /*! ESTILOS PARA LA SECCION DE AÑADIR IMAGEN  */
 
-.addFoto{
-    width: 160px;
-    height: 120px;
-    margin: 20px;
-    border: 2px dashed #4863A0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
+.addFoto {
+  width: 160px;
+  height: 120px;
+  margin: 20px;
+  border: 2px dashed #4863a0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
 }
 
-.addFoto i{
-    margin-top: 20px;
-    color: #4863A0;
-    font-size: 25px;
+.addFoto i {
+  margin-top: 20px;
+  color: #4863a0;
+  font-size: 25px;
 }
 
-.addFoto label{
-    color: #4863A0;
-    font-size: 18px;
-    cursor: pointer;
+.addFoto label {
+  color: #4863a0;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-#addImg{
-    display: none;
+#addImg {
+  display: none;
 }
 
-#btnAddImg{
-    display: none;
+#btnAddImg {
+  display: none;
 }
-
 
 /*! ESTILOS EN SERVICIOS DE LOS TIPOS DE HABITACIONES  */
 
-.listaServTipo{
-    margin: 0;
-    padding: 0  ;
+.listaServTipo {
+  margin: 0;
+  padding: 0;
 }
 
-.listaServTipo li{
-    list-style: none;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    display: flex;
-    justify-content: space-between;
+.listaServTipo li {
+  list-style: none;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.listaServTipo li span{
-    margin-left: 20px;
+.listaServTipo li span {
+  margin-left: 20px;
 }
 
-.listaServTipo li form button{
-    margin-right: 30px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
+.listaServTipo li form button {
+  margin-right: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
-.listaServTipo .btnAñadirServ{
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.listaServTipo .btnAñadirServ {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.listaServTipo .btnAñadirServ button{
-    width: 250px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    background-color: #c4ac9f;
+.listaServTipo .btnAñadirServ button {
+  width: 250px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c4ac9f;
 }
 
 /*! Estilos para la seccion de mostrar en el modal los servicios "mostrarServicios"  */
 
-.contenServicios{
-    display: flex;
-    justify-content: center;
+.contenServicios {
+  display: flex;
+  justify-content: center;
 }
 
-.contenServicios form{
-    width: 90%;
-    height: 100%;
+.contenServicios form {
+  width: 90%;
+  height: 100%;
 }
 
-.contenServicios form legend{
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.contenServicios form legend {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.contenServicios .listServicios{
-    width: 100%;
-    height: 20px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
+.contenServicios .listServicios {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
-.contenServicios .listServicios input{
-    width: 50px;
-    height: 100%;
-    margin-left: 5px;
-    cursor: pointer;
+.contenServicios .listServicios input {
+  width: 50px;
+  height: 100%;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-.contenServicios .listServicios label{
-    font-size: 17px;
-    cursor: pointer;
+.contenServicios .listServicios label {
+  font-size: 17px;
+  cursor: pointer;
 }
 
-.btnAñadirServicio{
-    display: flex;
-    justify-content: center;
+.btnAñadirServicio {
+  display: flex;
+  justify-content: center;
 }
 
-.btnAñadirServicio input{
-    width: 80px;
-    height: 38px;
-    line-height: 30px;
-    margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-    transition: .3s ease;
-    background-color: #c4ac9f;
+.btnAñadirServicio input {
+  width: 80px;
+  height: 38px;
+  line-height: 30px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  background-color: #c4ac9f;
 }
 
-.btnAñadirServicio input:hover{
-    background-color: #b49d91;
+.btnAñadirServicio input:hover {
+  background-color: #b49d91;
 }
 
 /*! ESTILOS PARA LA SECCION DE HABITACIONES  */
 
-.btnBuscador{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.btnBuscador {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.btnBuscador input{
-    width: 250px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+.btnBuscador input {
+  width: 250px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.btnBuscador span{
-    background-color: #1cc78d;
-    border: none;
-    box-shadow: 0px 1px 2px #1cc78d;
-    color: #000;
+.btnBuscador span {
+  background-color: #1cc78d;
+  border: none;
+  box-shadow: 0px 1px 2px #1cc78d;
+  color: #000;
 }
 
-.btnBuscador span:hover{
-    background-color: #23a97c;
-    color: #000;
+.btnBuscador span:hover {
+  background-color: #23a97c;
+  color: #000;
 }
 
-.botones-Config{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.botones-Config {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.botones-Config form button{
-    margin-left: 5px;
+.botones-Config form button {
+  margin-left: 5px;
 }
 
-#msjErrorTipoCama{
-    font-size: 10px;
-    font-weight: bold;
-    color: #f66060;
-    display: none;
+#msjErrorTipoCama {
+  font-size: 10px;
+  font-weight: bold;
+  color: #f66060;
+  display: none;
 }
 
-#msjErrorTipoCama2{
-    font-size: 10px;
-    font-weight: bold;
-    color: #f66060;
-    display: none;
+#msjErrorTipoCama2 {
+  font-size: 10px;
+  font-weight: bold;
+  color: #f66060;
+  display: none;
 }
 
-.dataTables_wrapper{
-    margin-bottom: 90px;
+.dataTables_wrapper {
+  margin-bottom: 90px;
 }
 
-.btnVolverHab{
-    color: #b49d91;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-weight: bold;
+.btnVolverHab {
+  color: #b49d91;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /** MODAL DE REGISTRO DE HABITACIONES  */
 
 .mensajeCantidad {
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 /** SECCION DE RECEPCION  */
 
 /* PARTE DE LOS FILTROS DE RECEPCION */
-.buscadorNfc{
-    width: 200px;
-    height: 57px;
+.buscadorNfc {
+  width: 200px;
+  height: 57px;
 }
 
-.btn-buscadorNfc{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #bac6dc;
-    border: none;
-    border-radius: 10px;
+.btn-buscadorNfc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #bac6dc;
+  border: none;
+  border-radius: 10px;
 }
 
-.icon-buscadorNfc{
-    margin-left: 8px;
-    font-size: 30px;
-    font-weight: bold;
+.icon-buscadorNfc {
+  margin-left: 8px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.contenedorHab{
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+.contenedorHab {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-.cardHabitaciones{
-    width: 250px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    color: #fff;
+.cardHabitaciones {
+  width: 250px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  color: #fff;
 }
 
-.informacionHab{
-    padding: 0 10px;
+.informacionHab {
+  padding: 0 10px;
 }
 
-.informacionHab .numHabitacion{
-    font-size: 35px;
-    font-weight: bold;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
+.informacionHab .numHabitacion {
+  font-size: 35px;
+  font-weight: bold;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
-.informacionHab .numHabitacion i{
-    font-size: 60px;
-    opacity: 0.5;
-    color: #d4d4d4;
+.informacionHab .numHabitacion i {
+  font-size: 60px;
+  opacity: 0.5;
+  color: #d4d4d4;
 }
 
-.informacionHab .inforHab{
-    margin: 5px 0;
+.informacionHab .inforHab {
+  margin: 5px 0;
 }
 
-.informacionHab .inforHab span{
-    font-size: 14px;
-    display: block;
+.informacionHab .inforHab span {
+  font-size: 14px;
+  display: block;
 }
 
-.btnEstado{
-    padding: 5px 10px;
-    text-align: center;
-    cursor: pointer;
+.btnEstado {
+  padding: 5px 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .btnOpciones {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .btnOpciones button {
-    display: block;
-    width: 280px;
-    padding: 10px;
-    margin: 0 auto; 
-    margin-bottom: 10px; 
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  display: block;
+  width: 280px;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.btnVolverFiltro{
-    margin-top: 10px;
-    margin-left: 0;
-    padding-bottom: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #9d8076;
-    text-decoration: none;
+.btnVolverFiltro {
+  margin-top: 10px;
+  margin-left: 0;
+  padding-bottom: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #9d8076;
+  text-decoration: none;
 }
 
-.pInforCLi{
-    font-weight: bold;
+.pInforCLi {
+  font-weight: bold;
 }
 
 .contenedorConsulta {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ventana {
-    margin: 10px;
-    height: 110px;
-    width: 135px;
-    background-color: red;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    text-align: center;
+  margin: 10px;
+  height: 110px;
+  width: 135px;
+  background-color: red;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-
-
-.desplegarInformacionRecep{
-    display: none;
+.desplegarInformacionRecep {
+  display: none;
 }
 
 .mensajeError {
-    color: red;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* TARJETAS DE INICIO */
 
 .tarjeta {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 0 10px 20px 10px;
-    text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0 10px 20px 10px;
+  text-align: center;
 }
 
 .numero-cant {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 /*! ESTILOS PARA LA PARTE DEL MODAL PARA REGISTRAR LOS LLAVEROS NFC  */
 
-.llaveroNfc{
-    text-align: center;
+.llaveroNfc {
+  text-align: center;
 }
 
-.llaveroNfc label{
-    font-size: 15px;
+.llaveroNfc label {
+  font-size: 15px;
 }
 
-.icono-llaveroNfc{
-    width: 100%;
-    height: 100%;
+.icono-llaveroNfc {
+  width: 100%;
+  height: 100%;
 }
 
-.icono-llaveroNfc img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.icono-llaveroNfc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-#codNfc{
-    cursor: default;
-    opacity: 0;
+#codNfc {
+  cursor: default;
+  opacity: 0;
 }
 
 /* ESTILOS PARA LA PARTE DE LAS HABITACIONES POR NFC */
 
-.backCardHab{
-    margin-left: 40px;
-    background-color: #28a64b;
-    padding: 10px;
+.backCardHab {
+  margin-left: 40px;
+  background-color: #28a64b;
+  padding: 10px;
+}
+
+/*TODO ESTILOS PARA LA PARTE QUE MEUSTRA LA INFORMACION EN GENERAL POR MEDIO DEL NFC  */
+
+.seccion-factura {
+  margin-left: 45px;
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  gap: 20px;
+  padding: 8px;
+}
+
+.seccion-infor-general {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 2rem;
+}
+
+.seccion-infor-general::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #86726b;
+}
+
+.seccion-titulo {
+  font-size: 1.1rem;
+  color: #86726b;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  border-left: 4px solid #86726b;
+}
+
+.informacion-cliente,
+.informacion-habitacion {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.informacion-cliente span,
+.informacion-habitacion span {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+  color: #333;
+  border-bottom: 2px solid #86726b;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.informacion-cliente span::before,
+.informacion-habitacion span::before {
+  content: attr(data-label);
+  font-weight: bold;
+  color: #86726b;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tabla-consumo {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.tabla-consumo th,
+.tabla-consumo td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.tabla-consumo th {
+  background: #86726b;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.tabla-consumo tr:hover {
+  background: #f9f9f9;
+}
+.tabla-consumo .fila-total {
+  font-weight: bold;
+  background: #f5f5f5;
+  border-top: 2px solid #86726b;
+}
+.tabla-consumo .fila-total td {
+  padding: 1.2rem 1rem;
 }
 
 /** ESTILOS PARA EL CARD QUE MUESTRA LA INFORMACION DE LA RESERVA POR MEDIO DEL NCF */
 
-.card-nfc{
-    margin-left: 30px;
-    width: 270px;
-    background-color: #cbaea0;
-    padding: 11px 25px;
-    border-radius: 8px;
+.contenedor-card-nfc {
+  min-height: 100vh;
 }
 
-.card-nfc-informacion{
-    padding: 0 3px;
+.card-nfc {
+  position: sticky;
+  top: 100px;
+  width: 270px;
+  padding: 11px 25px;
+  border-radius: 8px;
+  /* border: 1px solid #c6ceda; */
+  background-color: #cbaea0;
 }
 
-.card-nfc-numhab{
-    display: flex;
-    justify-content: space-between;
+.card-nfc-informacion {
+  padding: 0 3px;
 }
 
-.card-nfc-numhab span{
-    font-size: 35px;
+.card-nfc-numhab {
+  display: flex;
+  justify-content: space-between;
 }
 
-.card-nfc-datpers{
-    display: flex;
-    flex-direction: column;
+.card-nfc-numhab span {
+  font-size: 35px;
 }
 
-.card-nfc-datpers span{
-    font-size: 14px;
-    display: block;
-    margin-bottom: 3px;
+/* .card-nfc-numhab .card-nfc-icon {
+  color: #86726b;
+} */
+
+.card-nfc-datpers {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-nfc-datpers span {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 3px;
 }
 
 .card-nfc-factura {
-    margin: 8px 0;
-    display: grid;
-    grid-template-columns: 0.4fr 0.5fr;
-    column-gap: 0; 
-    row-gap: 1px; 
-    align-items: center; 
+  margin: 8px 0;
+  display: grid;
+  grid-template-columns: 0.4fr 0.5fr;
+  column-gap: 0;
+  row-gap: 1px;
+  align-items: center;
 }
 
 .card-nfc-factura span {
-    padding: 0;
+  padding: 0;
+  margin: 0;
 }
 
-.card-nfc-fechas span{
-    font-size: 13px;
+.card-nfc-fechas span {
+  font-size: 13px;
 }
 
+.card-nfc-boton {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.card-nfc-boton input[type="submit"] {
+  border-radius: 5px;
+  border: none;
+  padding: 8px 15px;
+  background-color: #86726b;
+  color: #000;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.card-nfc-boton input:hover {
+  background-color: #7d6a63;
+}
+
+.card-nfc-btn-grupo{
+  display: flex;
+}
+
+/*! SECCION DE CARDS DISPONIBLES Y LOS OTROS ESTADOS */
+
+.card-estado-habitacion{
+  margin-left: 45px;
+}
 
 @media only screen and (max-width: 996px) {
-    .contenedorFila{
-        display: block;
-    }
+  .contenedorFila {
+    display: block;
+  }
 
-    .responsive-informacion{
-        width: 100%;
-    }
+  .responsive-informacion {
+    width: 100%;
+  }
 
-    .responsiveGestion{
-        width: 100%;
-        margin-bottom: 20px;
-    }
+  .responsiveGestion {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 
+  .responsiveServicios {
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
 
-    .responsiveServicios{
-        margin-top: 20px;
-        width: 100%;
-        margin-bottom: 20px;
-    }
+  .respisive-row-fotos {
+    width: 100%;
+    margin: 0;
+  }
 
-    .respisive-row-fotos{
-        width: 100%;
-        margin: 0;
-    }
+  .responsive-card-fotos {
+    width: 100%;
+  }
 
-    .responsive-card-fotos{
-        width: 100%;
-    }
+  .listImg2 {
+    width: 130px;
+    height: 90px;
+  }
 
-    .listImg2{
-        width: 130px;
-        height: 90px;
-    }
+  .addFoto {
+    width: 130px;
+    height: 90px;
+  }
 
-    .addFoto{
-        width: 130px;
-        height: 90px;
-    }
+  .addFoto i {
+    margin-top: 15px;
+    font-size: 20px;
+  }
 
-    .addFoto i{
-        margin-top: 15px;
-        font-size: 20px;
-    }
-
-    .addFoto label{
-        font-size: 15px;
-    }
+  .addFoto label {
+    font-size: 15px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    .contenido {
-        padding-top: 80px;
-        padding-left: 0;
-    }
+  .contenido {
+    padding-top: 80px;
+    padding-left: 0;
+  }
 
-    .cardInformacion{
-        display: none;
-    }
+  .cardInformacion {
+    display: none;
+  }
 
-    .desplegarInformacionRecep{
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #000;
-        cursor: pointer;
-        display: block;
-    }
+  .desplegarInformacionRecep {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    cursor: pointer;
+    display: block;
+  }
 }
 
-@media only screen and (max-width: 470px){
+@media only screen and (max-width: 470px) {
+  /* Responsive registro tipo de habitaciones */
 
-    /* Responsive registro tipo de habitaciones */
+  .responsiveRowInput {
+    display: block;
+  }
 
-    .responsiveRowInput{
-        display: block;
-    }
+  .responsiveRowInput input {
+    width: 100%;
+  }
 
-    .responsiveRowInput input{
-        width: 100%;
-    }
+  .responsiveInput {
+    width: 100%;
+  }
 
-    .responsiveInput{
-        width: 100%;
-    }
+  .botonRgServicio .btnInputSubmit {
+    margin-top: 20px;
+    width: 100%;
+  }
 
+  .modal-dialog {
+    z-index: 1000;
+    max-height: 90vh;
+  }
 
-    .botonRgServicio .btnInputSubmit{
-        margin-top: 20px;
-        width: 100%;
-    }
+  .dataTables_length label {
+    display: none;
+  }
 
-    .modal-dialog {
-        z-index: 1000;
-        max-height: 90vh;
-    }
+  .dataTables_filter {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 10px;
+  }
 
-    .dataTables_length label{
-        display: none;
-    }
+  .dataTables_info {
+    display: none;
+  }
 
-    .dataTables_filter{
-        display: flex;
-        justify-content: left;
-        margin-bottom: 10px;
-    }
+  .lisTiposHb h1 {
+    margin-top: 10px;
+  }
 
-    .dataTables_info{
-        display: none;
-    }
+  .cardHabitacion {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    grid-template-columns: repeat(1, 1fr);
+  }
 
-    .lisTiposHb h1{
-        margin-top: 10px;
-    }
+  .cardHab {
+    width: 100%;
+  }
 
-    .cardHabitacion{
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        margin-top: 30px;
-        grid-template-columns: repeat(1, 1fr);
-    }
+  /* ESTILOS FOTOS */
+  .respisive-row-fotos {
+    width: 100%;
+  }
 
-    .cardHab{
-        width: 100%;
-    }
+  .responsive-card-fotos {
+    width: 100%;
+  }
 
-    /* ESTILOS FOTOS */
-    .respisive-row-fotos{
-        width: 100%;
-    }
+  .cardFotos {
+    margin-left: 0;
+  }
 
-    .responsive-card-fotos{
-        width: 100%;
-    }
+  .listImg2 {
+    width: 130px;
+    height: 90px;
+  }
 
-    .cardFotos{
-        margin-left: 0;
-    }
+  .addFoto {
+    width: 130px;
+    height: 90px;
+  }
 
-    .listImg2{
-        width: 130px;
-        height: 90px;
-    }
+  .addFoto i {
+    margin-top: 15px;
+    font-size: 20px;
+  }
 
-    .addFoto{
-        width: 130px;
-        height: 90px;
-    }
-
-    .addFoto i{
-        margin-top: 15px;
-        font-size: 20px;
-    }
-
-    .addFoto label{
-        font-size: 15px;
-    }
-
+  .addFoto label {
+    font-size: 15px;
+  }
 }
 
-@media only screen and (max-width: 470px){
+@media only screen and (max-width: 470px) {
+  .listImg2 {
+    width: 100%;
+    height: 200px;
+  }
 
-    .listImg2{
-        width: 100%;
-        height: 200px;
-    }
+  .addFoto {
+    width: 100%;
+    height: 200px;
+  }
 
-    .addFoto{
-        width: 100%;
-        height: 200px;
-    }
+  .addFoto i {
+    margin-top: 20px;
+    font-size: 25px;
+  }
 
-    .addFoto i{
-        margin-top: 20px;
-        font-size: 25px;
-    }
+  .addFoto label {
+    font-size: 18px;
+  }
 
-    .addFoto label{
-        font-size: 18px;
-    }
-
-    .cardHabitaciones{
-        width: 100%;
-    }
-
-
+  .cardHabitaciones {
+    width: 100%;
+  }
 }
