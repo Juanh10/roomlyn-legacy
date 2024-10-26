@@ -111,21 +111,25 @@ obsTextarea.forEach((textarea) => {
 })
 
 function showModal(){
-    let modal = new bootstrap.Modal(modalNfc);
-    modal.show();
-
-    modalNfc.addEventListener('shown.bs.modal', function () {
-        inputCodNfc.focus();
-    });
+    if($('#regLlaveroNfc').is(':checked')){
+        let modal = new bootstrap.Modal(modalNfc);
+        modal.show();
     
-    inputCodNfc.addEventListener('blur', function(e){
-        let texto = e.target.value;
-        if(texto.trim() === ''){
+        modalNfc.addEventListener('shown.bs.modal', function () {
             inputCodNfc.focus();
-        }else{
-            formulario.submit()
-        }
-    })
+        });
+        
+        inputCodNfc.addEventListener('blur', function(e){
+            let texto = e.target.value;
+            if(texto.trim() === ''){
+                inputCodNfc.focus();
+            }else{
+                formulario.submit()
+            }
+        })
+    }else{
+        formulario.submit()
+    }
 }
 
 

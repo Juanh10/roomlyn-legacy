@@ -63,6 +63,13 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
                             <label for="observaciones" class="mt-2">Observaciones</label>
                             <textarea class="form-control mt-2" name="observaciones" id="observaciones" required></textarea>
                             <p></p>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="regLlaveroNfc" name="regLlavero" value="llavero Activo">
+                                <label class="form-check-label" for="regLlaveroNfc">
+                                    Registrar llavero NFC
+                                </label>
+                            </div>
                         </div>
                         <div class="col-4 responsiveServicios">
                             <div class="serviciosHabitaciones">
@@ -190,7 +197,6 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
             location.reload();
 
         });
-        
     </script>
 </body>
 
