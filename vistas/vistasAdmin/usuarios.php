@@ -47,16 +47,17 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                             </div>
                         </div>
                         <div class="table-responsive tabla-usuarios">
-                            <table class="table table-hover table-borderless text-center" id="tablaUsuarios">
+                            <table class="table table-hover table-borderless text-center tableAdmin" id="tablaUsuarios" aria-label="Usuarios">
                                 <thead class="tabla-background">
                                     <tr>
+                                        <th>#</th>
                                         <th>Nombres</th>
                                         <th>Documento</th>
                                         <th>Teléfono</th>
                                         <th>Email</th>
                                         <th>Tipo</th>
                                         <th>Usuario</th>
-                                        <th>Acción</th>
+                                        <th class="no-export">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,6 +80,7 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                                     ?>
 
                                             <tr class="filas filasUsuario">
+                                                <td class="datos"><?php echo $id ?></td>
                                                 <td class="datos"><?php echo $nombre1 . " " . $nombre2 . " " . $apellido1 . " " . $apellido2 ?></td>
                                                 <td class="datos"><?php echo $documento ?></td>
                                                 <td class="datos"><?php echo $celular ?></td>
@@ -202,7 +204,6 @@ if ($_SESSION['tipoUsuario'] == 1) :  // verificamos el tipo de usuario
                 $('#nCelular').val(datos[3]);
                 $('#email').val(datos[4]);
                 $('#usuario').val(datos[6]);
-                $('#contraseñaUsuario').val(datos[7]);
             });
         </script>
 

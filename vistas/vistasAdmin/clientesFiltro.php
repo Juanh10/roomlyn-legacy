@@ -1,6 +1,7 @@
 <?php
 
 include_once "../../procesos/config/conex.php";
+include_once "../../procesos/funciones/formatearFechas.php";
 
 $fechaInicio = $_POST['fechaInicial'];
 $fechaFin = $_POST['fechaFinal'];
@@ -28,7 +29,7 @@ if ($resultCons->rowCount() > 0) :
             </div>
             <div class="col">
                 <div class="table-responsive tabla-clientes">
-                    <table class="table table-hover table-borderless text-center" id="tablaClientesFiltro">
+                    <table class="table table-hover table-borderless text-center" id="tablaClientesFiltro" aria-label="Clientes">
                         <thead class="tabla-background">
                             <tr>
                                 <th>#</th>
@@ -70,7 +71,7 @@ if ($resultCons->rowCount() > 0) :
                                         <td class="datos"><?php echo $email ?></td>
                                         <td class="datos"><?php echo $nacionalidad ?></td>
                                         <td class="datos"><?php echo $municipio ?></td>
-                                        <td class="datos"><?php echo $fechaReg ?></td>
+                                        <td class="datos"><?php echo formatearFecha($fechaReg) ?></td>
                                     </tr>
                             <?php
 

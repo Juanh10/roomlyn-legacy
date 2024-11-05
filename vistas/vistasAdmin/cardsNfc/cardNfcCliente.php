@@ -101,43 +101,51 @@
                 </div>
             </div>
 
-            <div>
-                <h2 class="seccion-titulo">Información del Consumo</h2>
-                <table class="tabla-consumo">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio Unitario</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Coca Cola</td>
-                            <td>2</td>
-                            <td>$10,000</td>
-                            <td>$20,000</td>
-                        </tr>
-                        <tr>
-                            <td>Papas Fritas</td>
-                            <td>3</td>
-                            <td>$5,000</td>
-                            <td>$15,000</td>
-                        </tr>
-                        <tr>
-                            <td>Café Premium</td>
-                            <td>5</td>
-                            <td>$5,000</td>
-                            <td>$25,000</td>
-                        </tr>
-                        <tr class="fila-total">
-                            <td colspan="3">Total</td>
-                            <td>$60,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <?php
+            if ($idEstadoHab == 4):
+            ?>
+                <div>
+                    <h2 class="seccion-titulo">Información del Consumo</h2>
+                    <table class="tabla-consumo">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Coca Cola</td>
+                                <td>2</td>
+                                <td>$10,000</td>
+                                <td>$20,000</td>
+                            </tr>
+                            <tr>
+                                <td>Papas Fritas</td>
+                                <td>3</td>
+                                <td>$5,000</td>
+                                <td>$15,000</td>
+                            </tr>
+                            <tr>
+                                <td>Café Premium</td>
+                                <td>5</td>
+                                <td>$5,000</td>
+                                <td>$25,000</td>
+                            </tr>
+                            <tr class="fila-total">
+                                <td colspan="3">Total</td>
+                                <td>$60,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <?php
+            endif;
+
+            ?>
+
 
 
         </div>

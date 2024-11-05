@@ -46,7 +46,7 @@ function verificarExistencia($numHab, $codigoNfc, $llaveroNfc, $dbh) {
         return "Esta habitación ya existe y está disponible.";
     }
 
-    if (!empty($codigoNfc) && empty($llaveroNfc)) {
+    if (!empty($codigoNfc)) {
         $consultaNfc = $dbh->prepare("SELECT l.codigo FROM habitaciones as h INNER JOIN llaveros_nfc as l ON h.id_codigo_nfc = l.id_codigo_nfc WHERE l.codigo = :codigo AND h.estado = 1");
         $consultaNfc->bindParam(":codigo", $codigoNfc);
         $consultaNfc->execute();
@@ -89,7 +89,7 @@ try {
     $sisClimatizacion = $_POST['sisClimatizacion'];
     $descripcionHab = $_POST['observaciones'];
     $opcionesServ = $_POST['opcionesServ'];
-    $codigoNfc = $_POST['codigoNfc'] ?? 0; // Si no es definida toma el valor de 0
+    $codigoNfc = $_POST['codigoNfc'] ?? 0;
     $llaveroNfc = $_POST['regLlavero'];
     $estadoHab = 1;
     $estado = 1;

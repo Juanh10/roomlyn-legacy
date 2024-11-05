@@ -20,7 +20,8 @@ $dbh->query($sqlFecha);
     <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
-    <link rel="stylesheet" href="../../librerias/datatables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../librerias/datatables/css/datatables.min.css">
+    <!-- <link rel="stylesheet" href="../../librerias/datatables/css/jquery.dataTables.min.css"> -->
     <link rel="stylesheet" href="../../librerias/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="../../css/estilosMenuAdmin.css">
     <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
@@ -105,6 +106,41 @@ $dbh->query($sqlFecha);
                 </a>
             </li>
 
+            <li class="list_item">
+
+                <div class="enlacePrincipal">
+                    <a class="enlaceMenu menuDesplegable_inventario" title="Inventario">
+                        <i class="bi bi-boxes"></i>
+                        <i class="bi bi-caret-right-fill flecha"></i>
+                    </a>
+                </div>
+
+                <ul class="submenu">
+                    <li class="list_itemSecund">
+                        <div class="enlaceSecundarios">
+                            <a class="enlaceMenuSecund_inventario" href="categorias_inventario.php" title="Administrar categorias">
+                                <i class="bi bi-tags-fill"></i>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php" title="Administrar articulos">
+                                <i class="bi bi-bag-check-fill"></i>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Administrar proovedores">
+                                <i class="bi bi-person-lines-fill"></i>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Administrar compras">
+                                <i class="bi bi-upc"></i>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
+                                <i class="bi bi-clipboard2-check-fill"></i>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Punto de venta">
+                                <i class="bi bi-box-seam-fill"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+
             <?php
 
             //? strtolower: convertir en minuscula
@@ -146,7 +182,6 @@ $dbh->query($sqlFecha);
             </div>
         </div>
         <ul class="list_MenuDesplegable">
-
             <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="inicio.php">
                     <i class="bi bi-house-door-fill"></i>
@@ -169,7 +204,6 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_itemDesplegable">
-
                 <div class="enlacePrincipal">
                     <a class="enlaceMenu2 menuDesplegable">
                         <i class="bi bi-list-ul"></i>
@@ -177,7 +211,6 @@ $dbh->query($sqlFecha);
                         <i class="bi bi-caret-right-fill flecha"></i>
                     </a>
                 </div>
-
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
@@ -205,27 +238,56 @@ $dbh->query($sqlFecha);
                 </a>
             </li>
 
+            <li class="list_itemDesplegable">
+                <div class="enlacePrincipal">
+                    <a class="enlaceMenu2 menuDesplegable_inventario">
+                        <i class="bi bi-boxes"></i>
+                        <span>Inventario</span>
+                        <i class="bi bi-caret-right-fill flecha"></i>
+                    </a>
+                </div>
+                <ul class="submenu">
+                    <li class="list_itemSecund">
+                        <div class="enlaceSecundarios">
+                            <a class="enlaceMenuSecund_inventario" href="categorias_inventario.php">
+                                <i class="bi bi-tags-fill"></i>
+                                <span>Categorías</span>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php">
+                                <i class="bi bi-bag-check-fill"></i>
+                                <span>Productos</span>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
+                                <i class="bi bi-person-lines-fill"></i>
+                                <span>Proveedores</span>
+                            </a>
+                            
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
+                                <i class="bi bi-person-lines-fill"></i>
+                                <span>Compras</span>
+                            </a>
 
-            <?php
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
+                                <i class="bi bi-clipboard2-check-fill"></i>
+                                <span>Reportes</span>
+                            </a>
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
+                                <i class="bi bi-box-seam-fill"></i>
+                                <span>Punto de venta</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
 
-            //* comparar si el tipo de usuario es igual a administrador para asi mostrar otra opcion del menu que solo se le muestra si es administrador
-
-            if ($_SESSION['tipoUsuario'] == 1) :
-
-            ?>
+            <?php if ($_SESSION['tipoUsuario'] == 1) : ?>
                 <li class="list_itemDesplegable">
                     <a class="enlaceMenu2" href="usuarios.php">
                         <i class="bi bi-people-fill"></i>
                         <span class="linksOpciones">Usuarios</span>
                     </a>
                 </li>
-            <?php
-
-            endif;
-
-            ?>
-
-
+            <?php endif; ?>
         </ul>
 
         <div class="iconCerrarSesion">
@@ -234,17 +296,19 @@ $dbh->query($sqlFecha);
                 <span>Cerrar Sesión</span>
             </a>
         </div>
-
     </nav>
+
 
     <script src="../../librerias/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
     <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
     <script src="../../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
-    <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../../librerias/datatables/js/datatables.min.js"></script>
+    <!-- <script src="../../librerias/datatables/js/jquery.dataTables.min.js"></script> -->
     <script src="../../librerias/select2/dist/js/select2.min.js"></script>
     <script src="../../js/scriptMenuAdmit.js"></script>
     <script src="../../js/scriptHabitacionesReservas.js"></script>
+    <script src="../../js/logoBase64Roomlyn.js"></script>
     <script src="../../js/driver.js"></script>
 
     <script src="https://cdn.userway.org/widget.js" data-account="5f8ySwz5CA"></script>

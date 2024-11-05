@@ -36,68 +36,68 @@ $resultEm = $dbh->query($sqlEm)->fetch();
 
 <body>
 
-<main class="contenido">
-    <div class="container">
-        <div class="row mb-4">
-            <!-- INGRESOS TOTALES -->
-            <div class="col-md-3">
-                <div class="card tarjeta">
-                    <div class="numero-cant">$<?php echo number_format($resultTotal['ingresos_totales'], 0, ',', '.') ?></div>
-                    <p class="card-text">Ingresos mensuales</p>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card tarjeta">
-                    <div class="numero-cant"><?php echo $resulHab['habitaciones_totales'] ?></div>
-                    <p class="card-text">Total de habitaciones</p>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card tarjeta">
-                    <div class="numero-cant"><?php echo $resulCli['clientes_totales'] ?></div>
-                    <p class="card-text">Total de clientes registrados</p>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card tarjeta">
-                    <div class="numero-cant"><?php echo $resultEm['empleados_totales'] ?></div>
-                    <p class="card-text">Total de Recepcionistas</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mx-3 text-center">
-            <div class="col">
-                <div class="grafica d-flex justify-content-center">
-                    <div class="col-md-4">
-                        <select class="form-select" name="mesHab" id="mesHab" aria-label="Seleccione un mes">
-                            <option value="1">Enero</option>
-                            <option value="2">Febrero</option>
-                            <option value="3">Marzo</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Mayo</option>
-                            <option value="6">Junio</option>
-                            <option value="7">Julio</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Septiembre</option>
-                            <option value="10">Octubre</option>
-                            <option value="11">Noviembre</option>
-                            <option value="12">Diciembre</option>
-                        </select>
+    <main class="contenido">
+        <div class="container">
+            <div class="row mb-4">
+                <!-- INGRESOS TOTALES -->
+                <div class="col-md-3">
+                    <div class="card tarjeta">
+                        <div class="numero-cant">$<?php echo number_format($resultTotal['ingresos_totales'], 0, ',', '.') ?></div>
+                        <p class="card-text">Ingresos mensuales</p>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-10 mx-auto">
-                        <canvas id="myChart" width="200" height="100"></canvas>
+
+                <div class="col-md-3">
+                    <div class="card tarjeta">
+                        <div class="numero-cant"><?php echo $resulHab['habitaciones_totales'] ?></div>
+                        <p class="card-text">Total de habitaciones</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card tarjeta">
+                        <div class="numero-cant"><?php echo $resulCli['clientes_totales'] ?></div>
+                        <p class="card-text">Total de clientes registrados</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card tarjeta">
+                        <div class="numero-cant"><?php echo $resultEm['empleados_totales'] ?></div>
+                        <p class="card-text">Total de Recepcionistas</p>
                     </div>
                 </div>
             </div>
+
+            <div class="row mx-3 text-center">
+                <div class="col contenidoPrincipal">
+                    <div class="grafica d-flex justify-content-center">
+                        <div class="col-md-4">
+                            <select class="form-select" name="mesHab" id="mesHab" aria-label="Seleccione un mes">
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-10 mx-auto">
+                            <canvas id="myChart" width="200" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 
 
     <!-- PIE DE PAGINA -->

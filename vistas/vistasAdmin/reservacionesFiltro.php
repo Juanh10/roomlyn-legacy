@@ -57,7 +57,7 @@ if ($estado == 0) :
             </div>
             <div class="col">
                 <div class="table-responsive tabla-reservas">
-                    <table class="table table-hover table-borderless text-center" id="tablaReservasFiltro">
+                    <table class="table table-hover table-borderless text-center" id="tablaReservasFiltro" aria-label="Reservaciones">
                         <thead class="tabla-background">
                             <tr>
                                 <th>#</th>
@@ -69,7 +69,7 @@ if ($estado == 0) :
                                 <th>Estado</th>
                                 <th>Total</th>
                                 <th>Fecha registro</th>
-                                <th>Acción</th>
+                                <th class="no-export">Acción</th>
                             </tr>
                         </thead>
                         <tbody>

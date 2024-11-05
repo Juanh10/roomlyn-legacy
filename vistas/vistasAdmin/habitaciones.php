@@ -41,16 +41,16 @@ $sql2 = "SELECT habitaciones.id_habitacion, habitaciones.id_servicio, habitacion
                         <span class="btn btn-crear-habitacion">Añadir habitación</span>
                     </div>
                     <div class="table-responsive tabla-usuarios">
-                        <table class="table table-borderless text-center" id="tablaHabitaciones">
+                        <table class="table table-borderless text-center tableAdmin" id="tablaHabitaciones" aria-label="Habitaciones">
                             <thead class="tabla-background">
                                 <tr>
                                     <th>Habitación</th>
                                     <th>Tipo habitación</th>
                                     <th>Sistema de climatización</th>
                                     <th>Camas</th>
-                                    <th class="col-3">Observaciones</th>
+                                    <th class="col-2">Observaciones</th>
                                     <th>Estado</th>
-                                    <th>Acción</th>
+                                    <th class="col-2 no-export">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>

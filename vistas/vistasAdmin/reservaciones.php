@@ -72,9 +72,9 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col contenidoPrincipal">
                     <div class="table-responsive tabla-reservas">
-                        <table class="table table-hover table-borderless text-center" id="tablaReservas">
+                        <table class="table table-hover table-borderless text-center tableAdmin" id="tablaReservas" aria-label="Reservaciones">
                             <thead class="tabla-background">
                                 <tr>
                                     <th>Habitación</th>
@@ -85,7 +85,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                     <th>Estado</th>
                                     <th>Total</th>
                                     <th>Fecha registro</th>
-                                    <th>Acción</th>
+                                    <th class="no-export">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,6 +155,12 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
         <div id="contenedorFilReservaciones"></div>
     </main>
 
+    
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
+    
     <!-- MODAL -->
 
     <div class="modal fade" id="modalVerInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -212,12 +218,6 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
             </div>
         </div>
     </div>
-
-    <!-- PIE DE PAGINA -->
-    <footer class="pie-de-pagina">
-        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
-    </footer>
-
 
     <!-- ALERTAS -->
 

@@ -5,7 +5,11 @@ body {
 .contenido {
   padding-top: 90px;
   padding-left: 90px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.contenidoPrincipal{
+  margin-bottom: 40px;
 }
 
 /*! SECCION PARA TODO  */
@@ -160,6 +164,7 @@ body {
 
 .tabla-usuarios {
   margin-top: 10px;
+  margin-bottom: 40px;
 }
 
 .accion {

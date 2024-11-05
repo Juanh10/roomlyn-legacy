@@ -44,7 +44,7 @@ $sql = "SELECT cliReg.id_cliente_registrado, cliReg.estado, infC.fecha_reg, infC
             </div>
                 <div class="col">
                     <div class="table-responsive tabla-clientes">
-                        <table class="table table-hover table-borderless text-center" id="tablaClientes">
+                        <table class="table table-hover table-borderless text-center tableAdmin" id="tablaClientes" aria-label="Clientes">
                             <thead class="tabla-background">
                                 <tr>
                                     <th>Nombres</th>
@@ -53,7 +53,7 @@ $sql = "SELECT cliReg.id_cliente_registrado, cliReg.estado, infC.fecha_reg, infC
                                     <th>Email</th>
                                     <th>Nacionalidad</th>
                                     <th>Municipio</th>
-                                    <th>Fecha registro</th>
+                                    <th class="no-export">Fecha registro</th>
                                 </tr>
                             </thead>
                             <tbody>

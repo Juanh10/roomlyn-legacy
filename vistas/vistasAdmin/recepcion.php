@@ -117,7 +117,7 @@ $iconos = array(
         <div class="container lisTiposHb">
             <h1 class="mb-3">Habitaciones</h1>
             <div class="row">
-                <div class="col">
+                <div class="col contenidoPrincipal">
                     <div class="d-flex flex-wrap justify-content-between align-items-center filtroYBuscador">
                         <div class="filtroSelect d-flex">
                             <span class="desplegarFiltroSelect"></span>
@@ -232,6 +232,13 @@ $iconos = array(
         <div id="contenido-buscadorNfc"></div>
     </main>
 
+    
+    
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
+    
     <!-- MODAL PARA BUSCAR CON NFC -->
     <div class="modal fade" id="modal-buscadorNfc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -248,12 +255,6 @@ $iconos = array(
             </div>
         </div>
     </div>
-
-
-    <!-- PIE DE PAGINA -->
-    <footer class="pie-de-pagina">
-        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
-    </footer>
 
     <!-- MODALES DE ESTADO -->
 

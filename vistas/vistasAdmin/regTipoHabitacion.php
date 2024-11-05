@@ -111,9 +111,9 @@ $sql = "SELECT id_servicio, servicio FROM habitaciones_servicios WHERE 1";
                                 <?php
                                 } else {
                                 ?>
-                                    <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['servicio'] ?>" value="<?php echo $row['id_servicio'] ?>" name="opcionesServ[]" >
+                                    <input class="form-check-input inputCheck ms-1" type="checkbox" id="<?php echo $row['servicio'] ?>" value="<?php echo $row['id_servicio'] ?>" name="opcionesServ[]">
                                     <label class="form-check-label" for="<?php echo $row['servicio'] ?>"><?php echo $row['servicio'] ?></label>
-    
+
                                     <span class="btn btn-sm editServiciosBtn bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#actualizarServicios" title="Editar"></span>
                                 <?php
                                 }
@@ -247,6 +247,23 @@ $sql = "SELECT id_servicio, servicio FROM habitaciones_servicios WHERE 1";
 
 
     <script src="../../js/validarRegistroTipoHabitaciones.js"></script>
+    <script>
+        //* MOSTRAR DATOS DE SERVICIOS DE HABITACIONES PARA EDITAR
+
+        $('.editServiciosBtn').click(function(e) {
+
+            let elemento = e.target.parentElement.children;
+            let arregloElemento = [...elemento];
+
+            let datos = arregloElemento.map(function(element) {
+                return $(element).text();
+            });
+
+            $('#idServicio').val(datos[0]);
+            $('#servicioAct').val(datos[2]);
+
+        });
+    </script>
 
 
 </body>

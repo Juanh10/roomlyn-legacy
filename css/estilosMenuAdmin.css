@@ -1,449 +1,535 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-body{
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    transition: background-color 0.3s ease;
+body {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  transition: background-color 0.3s ease;
 }
 
-body.activoBackground::before{
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 100;
+body.activoBackground::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
 }
 
 /** ESTILOS CABECERA  */
 
-.cabeceraMenu{
-    position: fixed;
-    width: calc(100% - 90px);
-    margin-left: 90px;
-    background-color: #c4ac9f;
-    padding: 12px;
-    z-index: 90;
+.cabeceraMenu {
+  position: fixed;
+  width: calc(100% - 90px);
+  margin-left: 90px;
+  background-color: #86726b;
+  border-left: 1.5px solid #fff;
+  padding: 12px;
+  z-index: 90;
 }
 
-.cabeceraMenu{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.cabeceraMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.cabeceraMenu .iconoMenu{
-    display: flex;
-    align-items: center;
+.cabeceraMenu .iconoMenu {
+  display: flex;
+  align-items: center;
 }
 
-.cabeceraMenu .iconoMenu span{
-    font-size: 20px;
-    font-weight: bold;
+.cabeceraMenu .iconoMenu span {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.cabeceraMenu .iconoMenu i{
-    font-size: 25px;
-    margin: 0 30px 0 10px;
-    cursor: pointer;
+.cabeceraMenu .iconoMenu i {
+  font-size: 25px;
+  margin: 0 30px 0 10px;
+  cursor: pointer;
 }
 
-.usuPlat{
-    margin-right: 45px;
-    padding: 10px;
-    background-color: #86726b;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.usuPlat {
+  margin-right: 45px;
+  padding: 10px;
+  background-color: #86726b;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.usuPlat span{
-    font-size: 12px;
-    color: #fff;
+.usuPlat span {
+  font-size: 12px;
+  color: #fff;
 }
 
 /** ESTILOS MENU LATERAL FIJO  */
 
-.menuLateralFijo{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 90px;
-    background-color: #86726b;
-    padding: 6px 0;
+.menuLateralFijo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 90px;
+  background-color: #86726b;
+  padding: 6px 0;
 }
 
-.logo_cont2{
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.logo_cont2 {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.logo_cont2 .logo2{
-    width: 70px;
-    height: 100%;
+.logo_cont2 .logo2 {
+  width: 70px;
+  height: 100%;
 }
 
-.logo_cont2 .logo2 img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.logo_cont2 .logo2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.menuLateralFijo .list{
-    width: 100%;
-    height: 75%;
-    padding: 0;
-    margin-top: 10px;
-    overflow-y: auto;
+.menuLateralFijo .list {
+  width: 100%;
+  height: 75%;
+  padding: 0;
+  margin-top: 10px;
+  overflow-y: auto;
 }
 
-.menuLateralFijo .list::-webkit-scrollbar{ /* Estilos para el scroll */
-    width: 5px;
+.menuLateralFijo .list::-webkit-scrollbar {
+  /* Estilos para el scroll */
+  width: 5px;
 }
 
-.menuLateralFijo .list::-webkit-scrollbar-thumb{  /* Estilos para el scroll */
-    background-color: #000;
+.menuLateralFijo .list::-webkit-scrollbar-thumb {
+  /* Estilos para el scroll */
+  background-color: #000;
 }
 
-.menuLateralFijo .list .list_item{
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-    overflow: hidden;
+.menuLateralFijo .list .list_item {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  overflow: hidden;
 }
 
-.menuLateralFijo .list .list_item a{
-    color: #000;
-    text-decoration: none;
-    font-size: 20px;
-    display: block;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 15px;
-    transition: .5s ease;
-    cursor: pointer;
+.menuLateralFijo .list .list_item a {
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 15px;
+  transition: 0.5s ease;
+  cursor: pointer;
 }
 
-.menuLateralFijo .list .list_item .enlaceMenu:hover{
-    background-color: #c4ad9d;
+.menuLateralFijo .list .list_item .enlaceMenu:hover {
+  background-color: #c4ad9d;
 }
 
-.menuLateralFijo .list .list_item .enlaceMenu.activo{
-    background-color: #c4ad9d;
+.menuLateralFijo .list .list_item .enlaceMenu.activo {
+  background-color: #c4ad9d;
 }
 
-.menuLateralFijo .enlacePrincipal .menuDesplegable{
-    position: relative;
+.menuLateralFijo .enlacePrincipal .menuDesplegable {
+  position: relative;
 }
 
-.menuLateralFijo .enlacePrincipal .menuDesplegable .flecha{
-    position: absolute;
-    font-size: 12px;
-    left: 58px;
-    transition: transform .4s;
+.menuLateralFijo .enlacePrincipal .menuDesplegable .flecha {
+  position: absolute;
+  font-size: 12px;
+  left: 58px;
+  transition: transform 0.4s;
 }
 
-.menuLateralFijo .enlacePrincipal .menuDesplegable .flechaActivo{
-    transform: rotate(90deg);
+.menuLateralFijo .enlacePrincipal .menuDesplegable .flechaActivo {
+  transform: rotate(90deg);
 }
 
-.menuLateralFijo .submenu{
-    padding: 0;
-    position: relative;
-    transition: height .3s;
-    height: 0;
+.menuLateralFijo .enlacePrincipal .menuDesplegable_inventario {
+  position: relative;
 }
 
-.menuLateralFijo .submenu:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 30px;
-    width: 2px;
-    height: 100%;
-    background-color: #000;
+.menuLateralFijo .enlacePrincipal .menuDesplegable_inventario .flecha {
+  position: absolute;
+  font-size: 12px;
+  left: 58px;
+  transition: transform 0.4s;
 }
 
-.menuLateralFijo .submenu .list_itemSecund{
-    list-style: none;
-    margin-left: 30px;
+.menuLateralFijo .enlacePrincipal .menuDesplegable_inventario .flechaActivo {
+  transform: rotate(90deg);
 }
 
-.menuLateralFijo .submenu .list_itemSecund a{
-    font-size: 18px;
-    font-weight: bold;
+.menuLateralFijo .submenu {
+  padding: 0;
+  position: relative;
+  transition: height 0.3s;
+  height: 0;
 }
 
-
-.iconCerrarSesion2{
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    position: absolute;
-    bottom: 20px;
-    left: 0;
+.menuLateralFijo .submenu:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
 }
 
-.iconCerrarSesion2 a{
-    font-size: 30px;
-    text-decoration: none;
-    color: #000;
+.menuLateralFijo .submenu .list_itemSecund {
+  list-style: none;
+  margin-left: 30px;
+}
+
+.menuLateralFijo .submenu .list_itemSecund a {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.iconCerrarSesion2 {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+}
+
+.iconCerrarSesion2 a {
+  font-size: 30px;
+  text-decoration: none;
+  color: #000;
 }
 
 /** Estilos del menu lateral */
 
-.menuLateral{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 280px;
-    background-color: #86726b;
-    padding: 6px 0;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 200;
+.menuLateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 280px;
+  background-color: #86726b;
+  padding: 6px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 200;
 }
 
-.menuLateral.activoMenu{
-    transform: translateX(0%);
+.menuLateral.activoMenu {
+  transform: translateX(0%);
 }
 
-
-.menuLateral.descMenu{
-    opacity: 0;
+.menuLateral.descMenu {
+  opacity: 0;
 }
 
-.logo_cont .logo{
-    padding: 5px;
-    width: 180px;
-    height: 70px;
-    display: flex;
-    align-items: center;
+.logo_cont .logo {
+  padding: 5px;
+  width: 180px;
+  height: 70px;
+  display: flex;
+  align-items: center;
 }
 
-.logo_cont .logo img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.logo_cont .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.menuLateral #btnMenu{
-    position: absolute;
-    left: 90%;
-    top: 15px;
-    right: 0;
-    font-size: 35px;
-    height: 50px;
-    width: 50px;
-    text-align: center;
-    line-height: 50px;
-    transform: translateX(-50%);
-    cursor: pointer;
+.menuLateral #btnMenu {
+  position: absolute;
+  left: 90%;
+  top: 15px;
+  right: 0;
+  font-size: 35px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  transform: translateX(-50%);
+  cursor: pointer;
 }
 
-.list_MenuDesplegable{
-    padding: 0;
-    height: 70%;
-    overflow-y: auto;
+.list_MenuDesplegable {
+  padding: 0;
+  height: 70%;
+  overflow-y: auto;
 }
 
-.list_MenuDesplegable::-webkit-scrollbar{ /* Estolos para el scroll */
-    width: 5px;
+.list_MenuDesplegable::-webkit-scrollbar {
+  /* Estolos para el scroll */
+  width: 5px;
 }
 
-.list_MenuDesplegable::-webkit-scrollbar-thumb{  /* Estolos para el scroll */
-    background-color: #000;
+.list_MenuDesplegable::-webkit-scrollbar-thumb {
+  /* Estolos para el scroll */
+  background-color: #000;
 }
 
-.list_MenuDesplegable .list_itemDesplegable{
-    list-style: none;
-    position: relative;
-    width: 100%;
-    margin-top: 20px;
-    overflow: hidden;
+.list_MenuDesplegable .list_itemDesplegable {
+  list-style: none;
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  overflow: hidden;
 }
 
-.list_MenuDesplegable .list_itemDesplegable a{
-    color: #000;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 15px;
-    transition: .5s ease;
-    cursor: pointer;
+.list_MenuDesplegable .list_itemDesplegable a {
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 15px;
+  transition: 0.5s ease;
+  cursor: pointer;
 }
 
-.list_MenuDesplegable .list_itemDesplegable a span{
-    font-size: 15px;
+.list_MenuDesplegable .list_itemDesplegable a span {
+  font-size: 15px;
 }
 
-.list_MenuDesplegable .list_itemDesplegable a i{
-    height: 50px;
-    min-width: 50px;
-    line-height: 50px;
-    font-size: 20px;
-    text-align: center;
+.list_MenuDesplegable .list_itemDesplegable a i {
+  height: 50px;
+  min-width: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
 }
 
-.list_MenuDesplegable .list_itemDesplegable .enlaceMenu2:hover{
-    background-color: #c4ad9d;
+.list_MenuDesplegable .list_itemDesplegable .enlaceMenu2:hover {
+  background-color: #c4ad9d;
 }
 
-.list_MenuDesplegable .list_itemDesplegable .enlaceMenu2.activo{
-    background-color: #c4ad9d;
+.list_MenuDesplegable .list_itemDesplegable .enlaceMenu2.activo {
+  background-color: #c4ad9d;
 }
 
-.menuLateral .submenu{
-    padding: 0;
-    position: relative;
-    transition: height .3s;
-    height: 0;
+.menuLateral .submenu {
+  padding: 0;
+  position: relative;
+  transition: height 0.3s;
+  height: 0;
 }
 
-.menuLateral .submenu:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 20px;
-    width: 2px;
-    height: 100%;
-    background-color: #000;
+.menuLateral .submenu:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
 }
 
-.menuLateral .submenu .list_itemSecund{
-    list-style: none;
-    margin-left: 30px;
+.menuLateral .submenu .list_itemSecund {
+  list-style: none;
+  margin-left: 30px;
 }
 
-.menuLateral .submenu .list_itemSecund a{
-    font-size: 18px;
+.menuLateral .submenu .list_itemSecund a {
+  font-size: 18px;
 }
 
-.menuLateral .menuDesplegable .flecha{
-    position: absolute;
-    font-size: 12px;
-    right: 0;
-    transition: transform .4s;
-} 
-
-.menuLateral .enlacePrincipal .menuDesplegable .flechaActivo{
-    transform: rotate(90deg);
+.menuLateral .menuDesplegable_inventario .flecha {
+  position: absolute;
+  font-size: 12px;
+  right: 0;
+  transition: transform 0.4s;
 }
 
-.iconCerrarSesion{
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    position: absolute;
-    bottom: 15px;
+.menuLateral .enlacePrincipal .menuDesplegable_inventario .flechaActivo {
+  transform: rotate(90deg);
 }
 
-.iconCerrarSesion a{
-    color: #000;
-    text-decoration: none;
-    display: flex;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 15px;
-    transition: .5s ease;
-    cursor: pointer;
+.menuLateral .menuDesplegable .flecha {
+  position: absolute;
+  font-size: 12px;
+  right: 0;
+  transition: transform 0.4s;
 }
 
-
-.iconCerrarSesion a:hover{
-    background-color: #d88383;
+.menuLateral .enlacePrincipal .menuDesplegable .flechaActivo {
+  transform: rotate(90deg);
 }
 
-.iconCerrarSesion a span{
-    font-size: 18px;
+.iconCerrarSesion {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  position: absolute;
+  bottom: 15px;
 }
 
-.iconCerrarSesion a i{
-    height: 50px;
-    min-width: 50px;
-    line-height: 50px;
-    font-size: 25px;
-    text-align: center;
+.iconCerrarSesion a {
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 15px;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.iconCerrarSesion a:hover {
+  background-color: #d88383;
+}
+
+.iconCerrarSesion a span {
+  font-size: 18px;
+}
+
+.iconCerrarSesion a i {
+  height: 50px;
+  min-width: 50px;
+  line-height: 50px;
+  font-size: 25px;
+  text-align: center;
 }
 
 /* FOOTER */
-.pie-de-pagina{
-    position: absolute;
-    bottom: 0;
-    left: 90px;
-    width: calc(100% - 90px);
-    height: 40px;
-    text-align: center;
+.pie-de-pagina {
+  position: absolute;
+  bottom: 0;
+  left: 90px;
+  width: calc(100% - 90px);
+  height: 40px;
+  text-align: center;
 }
 
-.pie-de-pagina p{
-    margin-top: 40px;
-    margin-bottom: 20px;
-    line-height: 40px;
-    font-size: 14px;
+.pie-de-pagina p {
+  line-height: 40px;
+  font-size: 14px;
 }
 
-.pie-de-pagina p.activoBackground2{
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 100;
+/* .pie-de-pagina p.activoBackground2 {
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+} */
+
+/* ESTILOS A LA PAGINACION DE DATATABLES */
+
+.active > .page-link,
+.page-link.active {
+  color: #000;
+  border-color: #c4ac9f;
+  background-color: #c4ac9f;
 }
 
-@media only screen and (max-width: 600px){
+.page-link {
+  color: #000;
+}
 
-    .cabeceraMenu{
-        width: 100%;
-        margin-left: 0;
-    }
+.page-link:hover {
+  color: #000;
+  background-color: #d4d4d4;
+}
 
-    .cabeceraMenu .iconoMenu span{
-        display: none;
-    }
+.dataTables_bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
 
-    .cabeceraMenu .iconoMenu i{
-        font-size: 30px;
-        margin: 0 30px 0 10px;
-        cursor: pointer;
-    }
+.dataTables_top {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-bottom: 10px;
+}
 
-    .usuPlat{
-        margin-right: 15px;
-    }
+.buttons-print span i{
+    color: #fff;
+}
 
-    .usuPlat span{
-        font-size: 12px;
-        color: #fff;
-    }
+/* CENTRAR CONTENIDO DE LAS TABLAS */
 
-    .menuLateralFijo{
-        display: none;
-    }
+.tableAdmin tbody td,
+.tableAdmin thead th {
+  text-align: center !important;
+  vertical-align: middle;
+}
 
-    .pie-de-pagina{
-        width: 100%;
-        left: 0;
-    }
+@media only screen and (max-width: 600px) {
+  .cabeceraMenu {
+    width: 100%;
+    margin-left: 0;
+  }
 
-    .pie-de-pagina p{
-        font-size: 12px;
-    }
+  .cabeceraMenu .iconoMenu span {
+    display: none;
+  }
 
+  .cabeceraMenu .iconoMenu i {
+    font-size: 30px;
+    margin: 0 30px 0 10px;
+    cursor: pointer;
+  }
+
+  .usuPlat {
+    margin-right: 15px;
+  }
+
+  .usuPlat span {
+    font-size: 12px;
+    color: #fff;
+  }
+
+  .menuLateralFijo {
+    display: none;
+  }
+
+  .pie-de-pagina {
+    width: 100%;
+    left: 0;
+  }
+
+  .pie-de-pagina p {
+    font-size: 12px;
+  }
+
+  /* ESTILOS DATATABLES */
+
+  .dataTables_bottom {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .dataTables_bottom .dt-info {
+    display: none;
+  }
+
+  .dataTables_top .dt-search {
+    margin-bottom: 10px;
+  }
+
+  .dataTables_bottom .dt-length{
+    margin-bottom: 10px;
+  }
 }
