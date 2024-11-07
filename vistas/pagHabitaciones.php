@@ -211,7 +211,7 @@ $sqlPrecios = $dbh->prepare("SELECT htp.id_tipo_servicio, htp.precio, htp.estado
                                 ?>
                                     <div class="precioVent">
                                         <p>Precio por dia con <?php echo $resPrecio['servicio'] ?></p>
-                                        <span>COP <?php echo number_format($resPrecio['precio'], 0, ',', '.') ?> + IVA</span>
+                                        <span>COP <?php echo number_format($resPrecio['precio'], 0, ',', '.') ?></span>
                                     </div>
                                 <?php
                                 }

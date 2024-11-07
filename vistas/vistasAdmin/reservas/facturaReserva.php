@@ -41,17 +41,19 @@ if ($rowHabitacion['id_servicio'] == 1) {
 
     $subtotal1 = $precioTipo * $diferenciaDias;
 
-    $iva = $subtotal1 * 0.19;
+    //$iva = $subtotal1 * 0.19;
 
-    $totalFactura = $subtotal1 + $iva;
+    //$totalFactura = $subtotal1 + $iva;
+    $totalFactura = $subtotal1;
 } else {
     $precioTipo = $rowPrecioAire['precio'];
 
     $subtotal1 = $precioTipo * $diferenciaDias;
 
-    $iva = $subtotal1 * 0.19;
+    //$iva = $subtotal1 * 0.19;
 
-    $totalFactura = $subtotal1 + $iva;
+    //$totalFactura = $subtotal1 + $iva;
+    $totalFactura = $subtotal1;
 }
 
 ?>
@@ -78,10 +80,10 @@ if ($rowHabitacion['id_servicio'] == 1) {
                     <span>Habitación <?php echo $rowHabitacion['nHabitacion'] ?> | <?php echo $diferenciaDias ?> días</span>
                     <span><?php echo number_format($subtotal1, 0, ',', '.') ?></span>
                 </p>
-                <p>
+<!--                 <p>
                     <span>IVA </span>
                     <span><?php echo number_format($iva, 0, ',', '.')  ?></span>
-                </p>
+                </p> -->
             </div>
             <div class="totalFactura">
                 <p>

@@ -84,17 +84,19 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
                 $subtotal1 = $precioTipo * $diferenciaDias;
 
-                $iva = $subtotal1 * 0.19;
+                //$iva = $subtotal1 * 0.19;
 
-                $totalFactura = $subtotal1 + $iva;
+                //$totalFactura = $subtotal1 + $iva;
+                $totalFactura = $subtotal1;
             } else {
                 $precioTipo = $rowPrecioAire['precio'];
 
                 $subtotal1 = $precioTipo * $diferenciaDias;
 
-                $iva = $subtotal1 * 0.19;
+                //$iva = $subtotal1 * 0.19;
 
-                $totalFactura = $subtotal1 + $iva;
+                //$totalFactura = $subtotal1 + $iva;
+                $totalFactura = $subtotal1;
             }
 
             // CONSULTAS PARA INSERTAR LOS REGISTROS

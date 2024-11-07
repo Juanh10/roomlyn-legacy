@@ -69,17 +69,19 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
                 $subtotal1 = $precioTipo * $diferenciaDias;
 
-                $iva = $subtotal1 * 0.19;
+                //$iva = $subtotal1 * 0.19;
 
-                $totalFactura = $subtotal1 + $iva;
+                //$totalFactura = $subtotal1 + $iva;
+                $totalFactura = $subtotal1;
             } else {
                 $precioTipo = $rowPrecioAire['precio'];
 
                 $subtotal1 = $precioTipo * $diferenciaDias;
 
-                $iva = $subtotal1 * 0.19;
+                //$iva = $subtotal1 * 0.19;
 
-                $totalFactura = $subtotal1 + $iva;
+                //$totalFactura = $subtotal1 + $iva;
+                $totalFactura = $subtotal1;
             }
 
             $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitacion, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");

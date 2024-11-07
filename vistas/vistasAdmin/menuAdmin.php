@@ -124,12 +124,6 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php" title="Administrar articulos">
                                 <i class="bi bi-bag-check-fill"></i>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Administrar proovedores">
-                                <i class="bi bi-person-lines-fill"></i>
-                            </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Administrar compras">
-                                <i class="bi bi-upc"></i>
-                            </a>
                             <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
                                 <i class="bi bi-clipboard2-check-fill"></i>
                             </a>
@@ -256,15 +250,6 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php">
                                 <i class="bi bi-bag-check-fill"></i>
                                 <span>Productos</span>
-                            </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
-                                <i class="bi bi-person-lines-fill"></i>
-                                <span>Proveedores</span>
-                            </a>
-                            
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
-                                <i class="bi bi-person-lines-fill"></i>
-                                <span>Compras</span>
                             </a>
 
                             <a class="enlaceMenuSecund_inventario" href="habitaciones.php">

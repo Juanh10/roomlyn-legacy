@@ -73,6 +73,7 @@ if (!empty($_GET['idHabitacion']) && !empty($_GET['idTipoHab'])) { // Condicion 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../iconos/logo_icono.png">
     <?php require_once "dependecias.php" ?>
     <title>Habitaciones | Hotel Colonial City</title>
 </head>
