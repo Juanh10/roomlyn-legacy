@@ -118,15 +118,13 @@
     border-top: 1px solid #cdcdcd;
 }
 
-.inforDetalles .inforHab p{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
+.detToFacNumHab{
+    width: 50%;
 }
 
-.inforDetalles .inforHab p span{
-    font-size: 14px;
+.inputEditValor{
+    height: 25px; 
+    margin-left: 90px;
 }
 
 .inforDetalles .totalFactura{
@@ -134,13 +132,20 @@
     border-top: 1px solid #cdcdcd;
 }
 
-.inforDetalles .totalFactura p{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
-    font-weight: bold;
+#totalFacturaEdit{
+    margin-right: 5px;
+    cursor: pointer;
 }
+
+#guardarValor{
+    margin-left: 5px;
+    background: none;
+    border: none;
+    color: green;
+}
+
+
+/* FORMULARIO RESERVA */
 
 .formularioReserva{
     margin-top: 40px;

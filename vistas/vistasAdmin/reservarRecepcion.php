@@ -20,6 +20,12 @@ $urlActual = $_SERVER['HTTP_REFERER'];
 
 if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no estan vacios
 
+    if(!empty($_POST['totalFactura'])){
+        $totalFactura = $_POST['totalFactura'];
+    }else{
+        $totalFactura = 0;
+    }
+
     $habitacion = $_GET['idHabitacion']; // capturar por medio de GET
     $tipoHabitacion = $_GET['idTipoHab'];
 
@@ -108,6 +114,7 @@ if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no es
 
                                     <input type="hidden" id="tipoHab" name="tipoHab" value="<?php echo $tipoHabitacion ?>">
                                     <input type="hidden" id="habitacion" name="habitacion" value="<?php echo $habitacion ?>">
+                                    <input type="hidden" id="totalFactura" name="totalFactura" value="<?php echo $totalFactura ?>">
 
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres" required>
@@ -226,13 +233,13 @@ if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no es
                             <div class="btnReservar">
                                 <input type="submit" name="btnReservar" value="Reservar" id="btnResClnNoReg">
                             </div>
-                        </form>
 
                     </div>
                 </div>
                 <div class="col col-factura">
 
                 </div>
+                </form>
             </div>
         </div>
     </main>

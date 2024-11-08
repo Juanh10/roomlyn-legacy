@@ -1,0 +1,557 @@
+[33mcommit fb4b0ede2d927b1d9997c0e361b93ca6ac244469[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/nueva-funcionalidad[m[33m)[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 7 15:13:46 2024 -0500
+
+    Remover calculo de IVA en facturacion
+
+[33mcommit bca3602c39bad67ef7beb8b31da9dd26efba6ea5[m[33m ([m[1;31morigin/feature/nueva-funcionalidad[m[33m)[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Nov 5 01:24:22 2024 -0500
+
+    Creacion del nuevo modulo de inventario
+
+[33mcommit de52e71e82201f878f3353eaaa26fdaf64af5baf[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Oct 26 01:32:34 2024 -0500
+
+    Se implemento la opcion de registrar el llavero con un check
+
+[33mcommit e63ce7d27836733f300bc9360d9abe352a7f67f8[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Oct 24 23:37:59 2024 -0500
+
+    Completado la seccion de buscar por NFC
+
+[33mcommit b84dc231e5aca0062c31cc6590e9f28cb7475d87[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Sep 25 23:14:11 2024 -0500
+
+    Actualizacion en las consultas NFC
+
+[33mcommit 4bee19476223d6257eb7129a487b51992fd355c4[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Sep 21 21:26:57 2024 -0500
+
+    Se formatearon las fechas a COL y se realizó lo de drivejs
+
+[33mcommit c26d78617907676f1ab7ab0886a22e690ad12684[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Sep 17 23:17:14 2024 -0500
+
+    Ya se realizó la parte donde se busca una habitación por NFC
+
+[33mcommit 019c732881f4dcd17274d49983207baed6ee34e7[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Sep 17 00:34:09 2024 -0500
+
+    Se puso la opcion de buscar por NFC en el modulo de recepcion
+
+[33mcommit ad54db961ee8ea21026cba730093952acbc6b82a[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Sep 15 20:11:56 2024 -0500
+
+    Lista la parte de registrar la habitacion con la pulsera
+
+[33mcommit 1fbaa1494a2610c111b788c1a392e36594c8e745[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Sep 15 11:54:06 2024 -0500
+
+    Nueva funcionalidad para pulseras NFC
+
+[33mcommit 8266caf7412b52ef6f6124ff5befb4a2db5dd79a[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Apr 16 20:30:20 2024 -0500
+
+    Actualizacion de comentarios
+
+[33mcommit b8d113620dd6a6d5d4fc88766e351c12f82ec974[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Dec 9 16:04:54 2023 -0500
+
+    Software completo
+
+[33mcommit 2936eb58e27df42535b3ab1897a0f702e235bdee[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Dec 1 22:26:08 2023 -0500
+
+    Software terminado
+
+[33mcommit 4871e86373893bc826580cc3f17f895ca27dca2d[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Nov 25 23:54:54 2023 -0500
+
+    Actualizacion de filtros de las reservaciones
+
+[33mcommit 9549c72e7af9c478a62df756a550f58d162f9670[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Nov 24 14:33:04 2023 -0500
+
+    Actualizacion de mensajes de errores y la implementacion del chatbot y la accesibilidad
+
+[33mcommit a2d1114c44a185eade802b100c711be66f18569f[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 23 23:49:56 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit d24d7d3acf69ee164725690c6d4e3316fb39ffe7[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 23 01:46:56 2023 -0500
+
+    Adelanto consultas
+
+[33mcommit c6ef7eca1cbf09ababbdaed8a72507b22f4ac59e[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Nov 22 00:32:54 2023 -0500
+
+    Actualizacion de las habitaciones
+
+[33mcommit c7127f1cae7b6bdbc898a6379e6862e5c68451f9[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Nov 20 23:38:18 2023 -0500
+
+    Actualizacion parte de reservas
+
+[33mcommit 0fd804aee436fc720c08ebe748e99f2704b47528[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Nov 19 22:18:33 2023 -0500
+
+    Actualizacion de habitaciones ADMIN
+
+[33mcommit 1981447773bf3e6e6de5929e76c01e53cc4c0bd2[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Nov 19 01:25:27 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit 89f79cd6a649be41bfd2d34a8808481d7bed9a96[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Nov 17 00:29:30 2023 -0500
+
+    Rediseño configuracion de clientes
+
+[33mcommit fe5543e496cb26a160c50e724f8c27b0f8792911[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 16 14:56:43 2023 -0500
+
+    Realicé la seccion de los filtros de habitaciones
+
+[33mcommit 88d261bfb4931551ed0f55173262eff738f4decf[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 16 08:12:42 2023 -0500
+
+    Estoy realizando la parte para filtrar por habitacion
+
+[33mcommit 33e2c711bfda3262cc03e8d0e8cd2c82979b4405[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 16 01:01:12 2023 -0500
+
+    Correccion de errores de validaciones
+
+[33mcommit 3b78de94631087b22112191da59de0e7d4f95179[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Nov 14 05:23:00 2023 -0500
+
+    Realicé la seccion de reservas realizadas
+
+[33mcommit 42c3ad3c4102c1baa0b3c86d1fb15adb74eba757[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Nov 13 21:54:57 2023 -0500
+
+    Actualizacion de casi todo
+
+[33mcommit 53ebe691b2e86d92f2d865fb56a4bd58cc06a225[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Nov 10 00:07:20 2023 -0500
+
+    Actualizacion de usuarios
+
+[33mcommit b3f2a6eacebd56ddd1df08692c98888d2f92b329[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Nov 7 23:59:09 2023 -0500
+
+    Actualizacion de las alertas de confirmacion
+
+[33mcommit 2fedeec38409f457bdea27f7aa9aae471fce104c[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Nov 5 21:39:49 2023 -0500
+
+    Actualizacion el modulo de login de clientes
+
+[33mcommit b1edcfc4a93c3893a70f538c2268bde52699c239[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Nov 5 02:10:19 2023 -0500
+
+    Creacion de perfiles de clientes
+
+[33mcommit 919a4e6842edfff65a9515962735ef94d8b6ecf2[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Nov 4 00:56:02 2023 -0500
+
+    Actualizacion de la BD
+
+[33mcommit e96048dd48468972ff6526ec1e8c107ee53a8a29[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Nov 4 00:54:44 2023 -0500
+
+    Actualizacion de casi todo
+
+[33mcommit 1485adae0488aa61c485da99848d779ef651df2f[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Nov 2 22:28:08 2023 -0500
+
+    Actualizacion seccion de reservas
+
+[33mcommit 4e1241e8f4e0fd0d4cd3e18e4ebbc190f0bc3b71[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Nov 1 16:06:02 2023 -0500
+
+    BASE DE DATOS
+
+[33mcommit e8ee6beaeed2153c6c21e81e9b9724d7eb34bc8a[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Nov 1 08:25:20 2023 -0500
+
+    Respinsive la seccion del formulario de reservas
+
+[33mcommit dfaefdf08002e87d145383511b3b9d7616035c0e[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Oct 31 20:50:28 2023 -0500
+
+    Base de datos
+
+[33mcommit 9198d2cfb2d2871d5b9e2f9a09ba724c86d98934[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Oct 30 23:01:19 2023 -0500
+
+    Factura de la reserva
+
+[33mcommit a86008d2d639bc3f6da6b16cfec494dfeff50f7e[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Oct 29 16:41:32 2023 -0500
+
+    Actualizacion del deiseño de las reservas y ya esta conectado con la BD
+
+[33mcommit 67b42ad0d86114d1817cee7f6dd927e645a61f1b[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Oct 29 13:43:11 2023 -0500
+
+    Diseño de la pagina de reservas
+
+[33mcommit 3b6a35ce83b65764d4156ebb4f1f990fa1bc97d8[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Oct 28 22:44:37 2023 -0500
+
+    Creacion de formulario de reservas
+
+[33mcommit 6f35cd0336d2510296c19eda425390699107e03b[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Oct 27 14:56:36 2023 -0500
+
+    Actualizacion de la base de datos
+
+[33mcommit 9537cdb8b020054edc21f73b1448eebf7205c8b8[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Oct 25 22:45:01 2023 -0500
+
+    Se realizó el apartado de la busqueda de habitaciones
+
+[33mcommit e6903fcce7e0a53264b0d889edbe843d37b521f0[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Oct 24 21:52:37 2023 -0500
+
+    Filtros de tipos de habitaciones
+
+[33mcommit d7f54de7923e2a5a80723b7e439dce7020da432e[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Oct 23 22:34:01 2023 -0500
+
+    Filtros de los tipos de habitaciones
+
+[33mcommit a39de5452b57126d1ff580226aff11040f2b47c6[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Oct 19 13:48:43 2023 -0500
+
+    Diseño responsive
+
+[33mcommit 43e97aefec9fa4575a5601b6edeecd21f73d844b[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Oct 17 05:03:55 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit 91786c6a16dff968df6cb52b7b4feb0825a253b2[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Oct 13 13:25:50 2023 -0500
+
+    Ash cambié toda la BD
+
+[33mcommit 1ff2c0bc396f8302d6a860e4913551465e6101d6[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Oct 12 08:32:39 2023 -0500
+
+    Diseño responsive
+
+[33mcommit 2f7b36b54c33ad20056446c003f0b84403179b91[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Oct 11 09:04:00 2023 -0500
+
+    Cambié el fondo del formulario de registros de usuarios
+
+[33mcommit fd7f9d578e4351a27c6c5240f2853ed501a09f7a[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Oct 10 05:11:44 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit 4111e04fe93773e46bf9eae8add44b5a5c4737c8[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Oct 7 20:18:31 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit 83faa4e7754ff16ad87b37aa275e82347252a6e7[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Oct 6 20:48:11 2023 -0500
+
+    Actualizacion en la parte de habitaciones
+
+[33mcommit 4b0826011ad8ba58d96c25f0f95880a9708edb1c[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Oct 2 10:21:09 2023 -0500
+
+    Avaces de la parte de reservas
+
+[33mcommit 316a2c3f65f2db1b24f82dc3f04a561008a213c5[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Oct 1 22:19:28 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit cc53bc46ea28780c7e7427450baf77469cf524a5[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Sep 24 13:31:52 2023 -0500
+
+    Correción de errores
+
+[33mcommit 62bf603b4519f9d32873afd3d248d2069fb641a7[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Sep 23 23:02:44 2023 -0500
+
+    Rediseñando casi todo
+
+[33mcommit b3883b80ce469ec832543433b1d30f3a1be81e59[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Sep 18 22:14:32 2023 -0500
+
+    Mejoras en la seccion de habitaciones
+
+[33mcommit 28176c42a37d5b27051bc54a7d7d82f3835a56b8[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Sep 17 21:19:31 2023 -0500
+
+    Rebicion de errores
+
+[33mcommit a7f264b86eedf6d57addf08dd4d9e1bddfc26aad[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Sep 16 15:40:24 2023 -0500
+
+    Diseño del listado de las habitaciones
+
+[33mcommit 592dd6520d2ac2eb808f26489d3d9ca1c3e43e4d[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Sep 8 22:29:19 2023 -0500
+
+    Actualización del login y solucion de errores
+
+[33mcommit d946284dff00fd32e5a0dd87a448efec539481ca[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Sep 7 19:12:14 2023 -0500
+
+    Actualizacion de usuarios
+
+[33mcommit c9da93dec002b57248867ec7e41c055980da0fb8[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Sep 7 07:55:28 2023 -0500
+
+    Rediseño de los tipos de habitaciones
+
+[33mcommit c2f6bbe17d0d5ebedea1ea5cd1304ba8d65b225f[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Sep 6 20:51:06 2023 -0500
+
+    Actualizacion de los modulos de habitaciones
+
+[33mcommit 9c6f10cd1d49b99e5b97840698a0f2f6dabe27e4[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Sep 2 22:53:34 2023 -0500
+
+    Actualizacion de habitaciones
+
+[33mcommit 9bda588051c60510deda226a8c5dfa97366369e6[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Sep 2 08:15:28 2023 -0500
+
+    Actualizacion del CRUD de las habitaciones
+
+[33mcommit 25bbd489f790432615e7cdd5757aade5596deb01[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Sep 1 22:24:27 2023 -0500
+
+    Creacion del CRUD de las habitaciones
+
+[33mcommit aa4ffcb88dd15dc0d71d5362ec77bb6dd098951d[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Sep 1 11:42:11 2023 -0500
+
+    Correccion de errores
+
+[33mcommit eaf1f03b7c569058eb4d258b75444f5f6d708644[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Aug 28 22:15:39 2023 -0500
+
+    Diseño del formulario y las validaciones de la seccion de registro de habitaciones
+
+[33mcommit 3ff4ca0bae81bf941d74fdd91b3ee38b31d8f7c0[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Aug 25 23:29:46 2023 -0500
+
+    Correcciones de errores
+
+[33mcommit 387dd15d847e27d18c2371ed698001863f06e17a[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Aug 24 21:33:17 2023 -0500
+
+    Se ha actualizado la seccion de editar los tipos de habitaciones
+
+[33mcommit 705ea0d174793c67bf525b56e4852363454150a3[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Aug 18 21:48:42 2023 -0500
+
+    Actualizaciones de todo
+
+[33mcommit 149dc1f46eaab3e50f725928fb59fe733efe817e[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Aug 18 10:43:32 2023 -0500
+
+    Actualizacion de todo
+
+[33mcommit 7d25661cdc8634ecd7bb5432614ec0295f7d9890[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Aug 17 19:43:03 2023 -0500
+
+    Actualizacion de la seccion editar tipos de habitaciones
+
+[33mcommit 59e7b5d5558ec4ca218f0033a3f1fd1ea8010449[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Aug 17 07:45:15 2023 -0500
+
+    Completada la parte de editar y deshabilitar  las imagenes
+
+[33mcommit e5d1a531cce5e1fcbc9d2b9d7a7b1d8e2926a375[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Aug 13 17:15:09 2023 -0500
+
+    Actualizacion de secciones del menu
+
+[33mcommit 7360ea28af9e8f2bc194133182744916d46afcc7[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Aug 9 15:51:46 2023 -0500
+
+    Creando la seccion del listado de los tipos de las habitaciones
+
+[33mcommit 87bc63ea12e3249082b0f5bdfa84e7bc6dacb7e1[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Aug 6 21:03:36 2023 -0500
+
+    Registrar formulario de tipo de habitaciones
+
+[33mcommit fc68bdcd919bd5db6fe690ac2c90a7164b5128ad[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Aug 6 10:54:12 2023 -0500
+
+    Diseño de la seccion crear tipo de habitacion
+
+[33mcommit eb74330291207738d71e5245044aa1ac1c3d5018[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Aug 4 18:11:37 2023 -0500
+
+    Creando la parte de olvidaste la contraseña
+
+[33mcommit ed5223eafbc480ed638c0aa6614e8a9aa2ea4e19[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Tue Aug 1 15:07:19 2023 -0500
+
+    Adelantos
+
+[33mcommit 0866e94497ad9b26ac56eeeb4072ca84b1407521[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Jul 31 20:06:46 2023 -0500
+
+    Actualizacion de secciones del menu
+
+[33mcommit 59707563869ee7bce33130dfa4615291d3b2c7b3[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Jul 29 20:51:56 2023 -0500
+
+    Mejoras de secciones del menu
+
+[33mcommit 9725429506e2f49303995aff11b290412b71b850[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Fri Jul 28 19:28:40 2023 -0500
+
+    Se añadió paginacion de tablas
+
+[33mcommit d247a48d0aa498214853f996cb91223bb89fbb5f[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Thu Jul 27 21:30:17 2023 -0500
+
+    Mejorando secciones del menu del administrador
+
+[33mcommit 93fe9c0bef761ba6ac229f919edc5aa4470ad913[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Jul 26 14:36:51 2023 -0500
+
+    Mejoras en la seccion de servicios de habitaciones
+
+[33mcommit 84b59fd08153392f00c0d6345ed50677f38f4a61[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Wed Jul 26 12:27:22 2023 -0500
+
+    Se mejora la seccion de Usuarios
+
+[33mcommit 64346a0356a8d3a81dbffd22884f19be9f6673bf[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Jul 24 12:30:28 2023 -0500
+
+    Avances del menu
+
+[33mcommit f4aba32e1f0b61d4941c8904b220ae198300529b[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sun Jul 23 16:49:07 2023 -0500
+
+    Avances del menu del administrador
+
+[33mcommit 24b31718c532a6355f6fba68df3817c3e0d67e56[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Jul 15 19:55:14 2023 -0500
+
+    Cambios en el tamaño de las imagenes en los estilos y el html
+
+[33mcommit 13934fac740904efffa40d61afed748beccdd244[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Sat Jul 15 16:08:36 2023 -0500
+
+    Cambios en los estilos
+
+[33mcommit 4bde473f247a13df3be9dfd83f8977d00735bacb[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Jul 10 19:55:58 2023 -0500
+
+    Probando cambios
+
+[33mcommit 68e3d41de35af5a37b010880205a28aee0ef988d[m
+Author: Juanh18 <juandavidh052@gmail.com>
+Date:   Mon Jul 10 19:52:08 2023 -0500
+
+    Se agrega el proyecto

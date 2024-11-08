@@ -21,6 +21,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
     $ciudad = $_POST['ciudad'];
     $tipoHab = $_POST['tipoHab'];
     $habitacion = $_POST['habitacion'];
+    $totalFacturaRes = $_POST['totalFactura'];
     $estadoRegistro = 0;
     $estado = 1;
     $fecha = date('Y-m-d'); // Obtener la fecha actual
@@ -78,26 +79,31 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
 
             $total = 0;
 
-            if ($rowHabitacion['id_servicio'] == 1) {
-
-                $precioTipo = $rowPrecioVentilador['precio'];
-
-                $subtotal1 = $precioTipo * $diferenciaDias;
-
-                //$iva = $subtotal1 * 0.19;
-
-                //$totalFactura = $subtotal1 + $iva;
-                $totalFactura = $subtotal1;
-            } else {
-                $precioTipo = $rowPrecioAire['precio'];
-
-                $subtotal1 = $precioTipo * $diferenciaDias;
-
-                //$iva = $subtotal1 * 0.19;
-
-                //$totalFactura = $subtotal1 + $iva;
-                $totalFactura = $subtotal1;
+            if($totalFacturaRes != 0){
+                $totalFactura = $totalFacturaRes;
+            }else{
+                if ($rowHabitacion['id_servicio'] == 1) {
+    
+                    $precioTipo = $rowPrecioVentilador['precio'];
+    
+                    $subtotal1 = $precioTipo * $diferenciaDias;
+    
+                    //$iva = $subtotal1 * 0.19;
+    
+                    //$totalFactura = $subtotal1 + $iva;
+                    $totalFactura = $subtotal1;
+                } else {
+                    $precioTipo = $rowPrecioAire['precio'];
+                    
+                    $subtotal1 = $precioTipo * $diferenciaDias;
+                    
+                    //$iva = $subtotal1 * 0.19;
+                    
+                    //$totalFactura = $subtotal1 + $iva;
+                    $totalFactura = $subtotal1;
+                }
             }
+
 
             // CONSULTAS PARA INSERTAR LOS REGISTROS
 
