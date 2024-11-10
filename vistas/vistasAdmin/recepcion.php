@@ -223,9 +223,7 @@ $iconos = array(
                         ?>
                     </div>
 
-                    <div id="contenedorCardFiltro">
-
-                    </div>
+                    <div id="contenedorCardFiltro"></div>
                 </div>
             </div>
         </div>

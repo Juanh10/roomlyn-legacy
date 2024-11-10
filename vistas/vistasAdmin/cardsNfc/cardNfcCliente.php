@@ -15,7 +15,6 @@
                         <span><strong><?php echo $resultadoReserva['nombres'] . " " . $resultadoReserva['apellidos'] ?></strong></span>
                         <div class="card-nfc-factura">
                             <span>Habitación</span> <span><?php echo number_format($precioHabitacion, 0, ',', '.') ?></span>
-                            <span>IVA</span> <span><?php echo number_format($facturaReserva['iva'], 0, ',', '.') ?></span>
                             <span>Consumo(P)</span> <span><?php echo number_format($facturaReserva['iva'], 0, ',', '.') ?></span>
                             <span><strong>TOTAL</strong></span> <span><strong><?php echo number_format($resultadoReserva['total_reserva'], 0, ',', '.') ?> COP</strong></span>
                         </div>

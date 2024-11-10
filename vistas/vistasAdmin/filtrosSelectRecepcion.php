@@ -1,9 +1,8 @@
 <?php
 session_start();
+date_default_timezone_set('America/Bogota');
 
 $seleccion = $_POST['seleccion'];
-
-date_default_timezone_set('America/Bogota');
 
 if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porque esta intentando ingresar sin iniciar sesion
     header("location: ../login.php");
@@ -127,6 +126,8 @@ else :
 endif;
 
 ?>
+
+<script src="../../js/scriptCardFiltrosSelect.js"></script>
 
 <script>
     $('.btnInforCli').click(function() {
