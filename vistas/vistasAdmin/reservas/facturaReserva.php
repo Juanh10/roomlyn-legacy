@@ -58,10 +58,10 @@ if ($rowHabitacion['id_servicio'] == 1) {
 
 ?>
 
-<div class="facturaReserva">
+<div class="facturaReserva" data-idHab="<?php echo $habitacion ?>" data-idTipoHab="<?php echo $tipoHab ?>">
     <div class="totalReserva">
         <span class="precioTotal"><?php echo number_format($totalFactura, 0, ',', '.')  ?> COP</span>
-        <div class="fechaHospedaje">
+        <div class="fechaHospedaje" data-checkin = "<?php echo $checkin ?>" data-checkout="<?php echo $checkout ?>">
             <p><?php echo $checkin ?> | <?php echo $checkout ?></p>
             <p><?php echo $diferenciaDias.' '.($diferenciaDias > 1 ? 'días' : 'día') ?></p>
         </div>

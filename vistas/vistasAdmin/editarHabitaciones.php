@@ -78,7 +78,33 @@ $sqlServicios = "SELECT habitaciones_elementos_selec.id_hab_tipo_elemento, habit
                                 <?php
                                 endforeach;
                                 ?>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="actLlaveroNfc" name="actLlaveroNfc" value="llavero Activo">
+                                    <label class="form-check-label" for="actLlaveroNfc">
+                                        Actualizar llavero NFC
+                                    </label>
+                                </div>
                                 <input type="submit" class="botonActualizar" name="btnActualizar" value="Actualizar">
+
+                                <!-- MODAL PARA REGISTRAR NFC -->
+
+                                <div class="modal fade" id="actualizarNFC" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="llaveroNfc">
+                                                    <label for="codNfc">Acerque el llavero al sensor</label>
+                                                    <input type="text" id="codNfc" name="codigoNfc" autocomplete="off">
+                                                    <div class="icono-llaveroNfc">
+                                                        <img src="../../iconos/iconoNfc.png" alt="Icono de llavero NFC">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </form>
                         </div>
                     </div>

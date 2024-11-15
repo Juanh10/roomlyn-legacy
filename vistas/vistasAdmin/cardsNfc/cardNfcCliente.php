@@ -14,9 +14,22 @@
                         <span><strong><?php echo $resultadoReserva['documento'] ?></strong></span>
                         <span><strong><?php echo $resultadoReserva['nombres'] . " " . $resultadoReserva['apellidos'] ?></strong></span>
                         <div class="card-nfc-factura">
-                            <span>Habitación</span> <span><?php echo number_format($precioHabitacion, 0, ',', '.') ?></span>
-                            <span>Consumo(P)</span> <span><?php echo number_format($facturaReserva['iva'], 0, ',', '.') ?></span>
-                            <span><strong>TOTAL</strong></span> <span><strong><?php echo number_format($resultadoReserva['total_reserva'], 0, ',', '.') ?> COP</strong></span>
+                            <span>Reserva</span> <span><?php echo number_format($resultadoReserva['total_reserva'], 0, ',', '.') ?></span>
+                            <?php
+                            if ($idEstadoHab == 4 || $idEstadoHab == 6):
+                                ?>
+                                <span>Abonado</span> <span><?php echo number_format($resultadoReserva['monto_abonado'], 0, ',', '.') ?></span>
+                            <?php
+                            endif;
+                            ?>
+                            <?php
+                            if ($idEstadoHab == 4):
+                            ?>
+                                <span>Consumo(P)</span> <span><?php echo number_format($facturaReserva['iva'], 0, ',', '.') ?></span>
+                            <?php
+                            endif;
+                            ?>
+                            <span><strong>TOTAL</strong></span> <span><strong><?php echo number_format($resultadoReserva['saldo_pendiente'], 0, ',', '.') ?> COP</strong></span>
                         </div>
                         <div class="card-nfc-fechas">
                             <span class="card-nfc-factura-estancia"><strong>Estancia: </strong><?php echo $diferenciaDias . ' ' . ($diferenciaDias > 1 ? "días" : "día"); ?></span>
@@ -40,17 +53,18 @@
 
                             case 5:
                             ?>
-                                <div class="card-nfc-btn-grupo">
-                                    <form action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" class="mx-2" id="formCancelarRes">
+                                <div class="card-nfc-btn-grupo position-relative">
+                                    <form action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" class="mx-2 mt-5" id="formCancelarRes">
                                         <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
                                         <input type="hidden" name="idRes" value="<?php echo $idRes ?>">
                                         <input type="hidden" name="cancelReserva" value="cancelReserva">
                                         <input type="submit" class="btn btn-danger" name="cancelReserva" value="Cancelar">
                                     </form>
-                                    <form action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" class="mx-2" id="formConfirmRes">
+                                    <form action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" class="mx-2 mt-5" id="formConfirmRes">
                                         <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
                                         <input type="hidden" name="idRes" value="<?php echo $idRes ?>">
                                         <input type="hidden" name="confirmReserva" value="confirmReserva">
+                                        <input type="number" class="position-absolute top-0 start-0 form-control" pattern="^[0-9]+$" id="montoReserva" name="montoReserva" min="0" placeholder="Cantidad a abonar" required>
                                         <input type="submit" class="btn btn-success" name="confirmReserva" value="Confirmar">
                                     </form>
                                 </div>

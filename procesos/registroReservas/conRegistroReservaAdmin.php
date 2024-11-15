@@ -1,4 +1,6 @@
 <?php
+
+//Incluir la conexion y ajustar la zona horaria a Bogota e iniciar una sesion
 include_once "../config/conex.php";
 date_default_timezone_set("America/Bogota");
 session_start();
@@ -6,8 +8,10 @@ session_start();
 // Obtener la URL de la pagina actual
 $urlActual = $_SERVER['HTTP_REFERER'];
 
-if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['checkIn']) && !empty($_POST['checkOut']) && !empty($_POST['documento']) && !empty($_POST['telefono']) && !empty($_POST['email']) && !empty($_POST['sexo']) && !empty($_POST['nacionalidad']) && !empty($_POST['departamento']) && !empty($_POST['ciudad'])) {
+//validar si los campos estan vacios
 
+if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['nombres']) && !empty($_POST['apellidos']) && !empty($_POST['checkIn']) && !empty($_POST['checkOut']) && !empty($_POST['documento']) && !empty($_POST['telefono']) && !empty($_POST['email']) && !empty($_POST['sexo']) && !empty($_POST['nacionalidad']) && !empty($_POST['departamento']) && !empty($_POST['ciudad'])) {
+    // Capturar todos los valores que se recibe del formulario
     $nombres = $_POST['nombres'];
     $apellidos = $_POST['apellidos'];
     $checkIn = $_POST['checkIn'];
@@ -22,6 +26,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
     $tipoHab = $_POST['tipoHab'];
     $habitacion = $_POST['habitacion'];
     $totalFacturaRes = $_POST['totalFactura'];
+    $montoReserva = $_POST['montoReserva'];
     $estadoRegistro = 0;
     $estado = 1;
     $fecha = date('Y-m-d'); // Obtener la fecha actual
@@ -125,7 +130,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
             $sqlInforCliente->bindParam(':fecha', $fecha);
             $sqlInforCliente->bindParam(':hora', $hora);
 
-            $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitacion, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva,:estado,now())");
+            $sqlInforReserva = $dbh->prepare("INSERT INTO reservas(id_cliente, id_habitacion, id_estado_reserva, fecha_ingreso, fecha_salida, total_reserva, monto_abonado, estado, fecha_sys) VALUES (:id_cliente,:id_habitaciones, :id_estado_reserva,:fecha_ingreso,:fecha_salida,:total_reserva, :monto_abonado, :estado,now())");
 
             $sqlActHabitacion = $dbh->prepare("UPDATE habitaciones SET id_hab_estado = :estadoHab WHERE id_habitacion = :habitacion");
 
@@ -140,6 +145,7 @@ if (!empty($_POST['tipoHab']) && !empty($_POST['habitacion']) && !empty($_POST['
                 $sqlInforReserva->bindParam(':fecha_ingreso', $checkIn);
                 $sqlInforReserva->bindParam(':fecha_salida', $checkOut);
                 $sqlInforReserva->bindParam(':total_reserva', $totalFactura);
+                $sqlInforReserva->bindParam(':monto_abonado', $montoReserva);
                 $sqlInforReserva->bindParam(':estado', $estado);
 
                 if ($sqlInforReserva->execute()) {

@@ -84,52 +84,66 @@ obsTextareaEdit.forEach((textarea) => {
 
 // VALIDAR PARTE DE LOS TIPOS DE CAMAS
 
-
-formularioEdit.addEventListener('submit', (e) => {
-
-    let inputCheck = document.querySelectorAll(".tiposDeCamasEdit input:checked"); // checkbox a los tipos de camas
+const modalNfc = document.getElementById('actualizarNFC');
 
 
-    const cantidadCamasElementos = document.querySelectorAll(".cantidadCamasEdit");
-    let valoresCantidadCamas = []; // Crear un array para almacenar los valores
-    const cantidadCamasBD = document.querySelectorAll(".mensajeCantidad"); // cantidad de las camas que estan registradas en la BD
-    let numCantCamas;
-
-    cantidadCamasBD.forEach(function (e) {
-        let textoCantCamas = e.textContent; //numero total de la cantidad de camas
-        numCantCamas = parseInt(textoCantCamas.match(/\d+/g));
-    })
-
-
-    // Recorrer los elementos de cantidadCamasElementos
-    cantidadCamasElementos.forEach(function (elemento) {
-        let valor = parseInt(elemento.value, 10); // Parsear el valor a entero
-        if (!isNaN(valor)) {
-            valoresCantidadCamas.push(valor); // Agregar el valor al arreglo si es un número válido
-        }
-    });
-
-    // Calcular la suma total
-    let sumaTotal = 0;
-    valoresCantidadCamas.forEach(function (valor) {
-        sumaTotal += valor;
-    });
-
+// Función para validar las camas
+const validarCamas = () => {
     let errorCantCamas = false;
+    let inputCheck = document.querySelectorAll(".tiposDeCamasEdit input:checked"); // checkboxes seleccionados
 
-    if (sumaTotal == numCantCamas) {
-        estadoInput[cantCamasTotales] = true;
+    // Validar que al menos un checkbox está seleccionado
+    if (inputCheck.length === 0) {
+        errorCantCamas = true; // No se seleccionó ningún checkbox
     } else {
-        errorCantCamas = true;
+        const cantidadCamasElementos = document.querySelectorAll(".cantidadCamasEdit");
+        let valoresCantidadCamas = []; // Crear un array para almacenar los valores de las camas
+        const cantidadCamasBD = document.querySelectorAll(".mensajeCantidad"); // Cantidad de camas que están registradas en la BD
+        let numCantCamas;
+
+        cantidadCamasBD.forEach(function (e) {
+            let textoCantCamas = e.textContent; // Obtiene el texto con la cantidad de camas
+            numCantCamas = parseInt(textoCantCamas.match(/\d+/g)); // Extrae el número de camas
+        });
+
+        // Recorre los campos de cantidad de camas e ingresa los valores en un array
+        cantidadCamasElementos.forEach(function (elemento) {
+            let valor = parseInt(elemento.value, 10); // Convierte el valor a entero
+            if (!isNaN(valor)) {
+                valoresCantidadCamas.push(valor); // Agrega el valor al array si es un número válido
+            }
+        });
+
+        // Calcula la suma total de las camas ingresadas
+        let sumaTotal = 0;
+        valoresCantidadCamas.forEach(function (valor) {
+            sumaTotal += valor;
+        });
+
+        // Si la suma total de camas ingresadas coincide con la cantidad de camas en la BD
+        if (sumaTotal === numCantCamas) {
+            estadoInput['cantCamasTotales'] = true;
+        } else {
+            errorCantCamas = true;
+        }
     }
 
+    return errorCantCamas;
+}
 
-    e.preventDefault(); // No dejar enviar el formulario
+// Evento submit del formulario
+formularioEdit.addEventListener('submit', (e) => {
 
-    if (estadoInput.numHabitacionEdit && estadoInput.observacionesEdit && inputCheck.length >= 1 && estadoInput.cantCamasTotales) {
+    e.preventDefault(); // No dejar enviar el formulario hasta que sea válido
+
+    // Llamamos a la función para validar las camas
+    let errorCantCamas = validarCamas();
+
+    // Si todos los campos son válidos, se envía el formulario
+    if (estadoInput.numHabitacionEdit && estadoInput.observacionesEdit && inputCheck.length > 0 && estadoInput.cantCamasTotales) {
         formulario.submit();
     } else {
-
+        // Si hay error en la cantidad de camas o no se seleccionó ningún checkbox
         if (errorCantCamas) {
             document.getElementById("msjErrorTipoCama2").style.display = "block";
         } else {

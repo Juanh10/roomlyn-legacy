@@ -36,7 +36,7 @@ if ($estado == 0) :
                     <div class="col-md-3 mb-3">
                         <div class="card cardInformacion tarjeta">
                             <h4 style="text-align: center; margin: 8px;" class="numero-cant">$<?php echo number_format($resultTotal['ingresos_totales'], 0, ',', '.') ?></h4>
-                            <p style="font-size: 12px; text-align: center;">Ingresos totales</p>
+                            <p style="font-size: 12px; text-align: center;">Ingresos</p>
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@ if ($estado == 0) :
                 </div>
             </div>
             <div class="col">
-                <div class="table-responsive tabla-reservas">
+                <div class="table-responsive tabla-reservas mb-5">
                     <table class="table table-hover table-borderless text-center" id="tablaReservasFiltro" aria-label="Reservaciones">
                         <thead class="tabla-background">
                             <tr>

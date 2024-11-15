@@ -17,7 +17,7 @@ $fechaSiguiente = date("Y-m-d", strtotime($fechaActual . " +1 day")); // Calcula
 
 $rangoFecha = $fechaActual . " - " . $fechaSiguiente;
 
-$sqlHab = "SELECT hb.id_habitacion, hb.id_hab_tipo, hb.id_hab_estado, hb.nHabitacion, hb.tipoCama, hb.cantidadPersonasHab, hb.estado, hbt.tipoHabitacion, hbe.estado_habitacion, hbs.servicio, hbe.estado_habitacion FROM habitaciones AS hb INNER JOIN habitaciones_tipos AS hbt ON hbt.id_hab_tipo = hb.id_hab_tipo INNER JOIN habitaciones_estado AS hbe ON hbe.id_hab_estado = hb.id_hab_estado INNER JOIN habitaciones_servicios hbs ON hbs.id_servicio = hb.id_servicio  WHERE hb.estado = 1 AND hb.id_habitacion = " . $seleccion . " ORDER BY hb.nHabitacion ASC";
+$sqlHab = "SELECT hb.id_habitacion, hb.id_hab_tipo, hb.id_hab_estado, hb.nHabitacion, hb.tipoCama, hb.cantidadPersonasHab, hb.estado, hbt.tipoHabitacion, hbe.estado_habitacion, hbs.servicio, hbe.estado_habitacion FROM habitaciones AS hb INNER JOIN habitaciones_tipos AS hbt ON hbt.id_hab_tipo = hb.id_hab_tipo INNER JOIN habitaciones_estado AS hbe ON hbe.id_hab_estado = hb.id_hab_estado INNER JOIN habitaciones_servicios hbs ON hbs.id_servicio = hb.id_servicio  WHERE hb.estado = 1 AND hb.id_habitacion = '$seleccion'";
 
 // Definir colores según el estado
 $colores = array(
@@ -116,7 +116,7 @@ if ($resultConsulta->rowCount() > 0) :
 <?php
 else :
 ?>
-    <span>No hay habitaciones disponibles en ese estado.</span>
+    <span class="ms-5">El llavero no está registrado a ninguna habitación.</span>
 <?php
 
 endif;

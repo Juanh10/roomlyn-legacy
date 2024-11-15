@@ -1218,7 +1218,7 @@ body {
   transition: 0.3s ease;
 }
 
-.card-nfc-boton input:hover {
+.card-nfc-boton input[type="submit"]:hover {
   background-color: #7d6a63;
 }
 

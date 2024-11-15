@@ -33,20 +33,25 @@ $idRes = $resultado['id_reserva'];
                 <p>Fecha de salida: <?php echo formatearFecha($resultado['fecha_salida']) ?></p>
             </div>
 
-            <div class="btnEstado d-flex flex-row justify-content-center">
-                <form action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" class="mx-2" id="formCancelarRes">
+            <div class="btnEstado d-flex flex-row justify-content-center align-items-center gap-3 position-relative">
+                <form class="mt-5 mx-2" action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" id="formCancelarRes">
                     <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
                     <input type="hidden" name="idRes" value="<?php echo $idRes ?>">
                     <input type="hidden" name="cancelReserva" value="cancelReserva">
                     <input type="submit" class="btn btn-danger" name="cancelReserva" value="Cancelar reserva">
                 </form>
-                <form action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" class="mx-2" id="formConfirmRes">
+
+                <form class="mt-5 mx-2" action="../../procesos/registroReservas/conCancelarResAdmin.php" method="post" id="formConfirmRes">
                     <input type="hidden" name="idHab" value="<?php echo $idHab ?>">
                     <input type="hidden" name="idRes" value="<?php echo $idRes ?>">
+
+                    <input type="number" class="position-absolute top-0 start-0 form-control w-50" pattern="^[0-9]+$" id="montoReserva" name="montoReserva" min="0" placeholder="Cantidad a abonar" required>
+
                     <input type="hidden" name="confirmReserva" value="confirmReserva">
                     <input type="submit" class="btn btn-success" name="confirmReserva" value="Confirmar reserva">
                 </form>
             </div>
+
 
         <?php
 

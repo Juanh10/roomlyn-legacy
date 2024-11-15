@@ -20,12 +20,6 @@ $urlActual = $_SERVER['HTTP_REFERER'];
 
 if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no estan vacios
 
-    if(!empty($_POST['totalFactura'])){
-        $totalFactura = $_POST['totalFactura'];
-    }else{
-        $totalFactura = 0;
-    }
-
     $habitacion = $_GET['idHabitacion']; // capturar por medio de GET
     $tipoHabitacion = $_GET['idTipoHab'];
 
@@ -114,8 +108,7 @@ if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no es
 
                                     <input type="hidden" id="tipoHab" name="tipoHab" value="<?php echo $tipoHabitacion ?>">
                                     <input type="hidden" id="habitacion" name="habitacion" value="<?php echo $habitacion ?>">
-                                    <input type="hidden" id="totalFactura" name="totalFactura" value="<?php echo $totalFactura ?>">
-
+                                    
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres" required>
                                         <p></p>
@@ -224,6 +217,12 @@ if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no es
                                         <label for="departamento">Departamento</label>
                                     </div>
 
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="montoReserva" name="montoReserva" value="0" placeholder="Cantidad a abonar">
+                                        <p></p>
+                                        <label for="montoReserva">Cantidad a abonar</label>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="formularioMensaje">
@@ -258,6 +257,32 @@ if (!empty($_GET['idHabitacion'])) { // Condicion para saber si los campos no es
 
     <script src="../../js/scriptHabitacionesReservas.js"></script>
     <script src="../../js/validarRegistroReserva.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Función de validación
+            const validarCampos = (expresion, input, idCampo, message) => {
+                if (expresion.test(input.value)) {
+                    $(`#${idCampo}`).removeClass('validarInput'); 
+                    $(`#${idCampo}`).next('p').removeClass('error'); 
+                    $(`#${idCampo}`).next('p').text("");
+                    estadoInput[idCampo] = true;
+                } else {
+                    $(`#${idCampo}`).addClass('validarInput'); 
+                    $(`#${idCampo}`).next('p').addClass('error'); 
+                    $(`#${idCampo}`).next('p').text(message);
+                    estadoInput[idCampo] = false;
+                }
+            };
+
+            const expresionNumeros = /^[0-9]+$/;
+
+            $('#montoReserva').on('input', function() {
+                const monto = $(this).val();
+                validarCampos(expresionNumeros, this, 'montoReserva', 'Por favor ingrese un monto válido');
+            });
+        });
+    </script>
 
 </body>
 
