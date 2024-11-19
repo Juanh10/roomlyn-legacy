@@ -67,6 +67,89 @@ const validarObser = (input, idCampo, message) => {
 
 }
 
+const inputNfc = $('#codNfc');
+const modal = $('#modalEditNFC');
+let intervaloFoco;
+let temporizadorCaptura;
+const retrasoCaptura = 500; // ms
+
+// Funcion para mantener el foco del input
+function mantenerFoco() {
+    inputNfc.focus();
+}
+
+function alertaSweet(message, icon){
+    Swal.fire({
+        position: '',
+        icon: icon,
+        text: message,
+        showConfirmButton: false,
+        timer: 2000
+    });
+}
+
+// Funcion para procesar el código NFC
+function procesarCodigoNFC(codigo, idHab) {
+    fetch(`../../procesos/registroHabitaciones/registroHabi/conActualizarHabitaciones.php?codigoNfc=${codigo}&idHab=${idHab}`)
+        .then(res => res.json())
+        .then(datos => {
+           if(datos.status === 'success'){
+            alertaSweet(datos.message, 'success')
+           }else{
+            alertaSweet(datos.message,'error')
+           }
+            clearInterval(intervaloFoco);
+            inputNfc.blur();
+            modal.modal('hide');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Agregar el foco cuando el modal está abierto
+modal.on('shown.bs.modal', function () {
+    inputNfc.val(''); // Limpiar el input
+    mantenerFoco();
+
+    // Mantener el foco cada 100 ms
+    intervaloFoco = setInterval(mantenerFoco, 100);
+});
+
+// Evento input para capturar el código del NFC
+inputNfc.on('input', function () {
+    clearTimeout(temporizadorCaptura);
+
+    temporizadorCaptura = setTimeout(() => {
+        const codigoNFC = $(this).val().trim();
+        const idHab = $('#idHabitacionNFC').val().trim();
+
+        // Si el código NFC tiene longitud mayor que 0, procesarlo y enviarlo
+        if (codigoNFC.length > 0) {
+            procesarCodigoNFC(codigoNFC, idHab);
+        }
+    }, retrasoCaptura);
+});
+
+// Limpiar intervalos y temporizadores cuando se cierra el modal
+modal.on('hidden.bs.modal', function () {
+    clearInterval(intervaloFoco);
+    clearTimeout(temporizadorCaptura);
+});
+
+/* // Validar el input
+function validarYEnviarFormulario(e) {
+    const texto = inputCodNfc.value.trim();
+    if (texto === '') {
+        e.preventDefault();
+        inputCodNfc.focus();
+    }
+}
+
+// Agregar eventos
+formeditLlaveroNFC.addEventListener('submit', validarYEnviarFormulario); */
+
+
 inputFormEdit.forEach((input) => {
     input.addEventListener('keyup', validarFormulario);
     input.addEventListener('blur', validarFormulario);
@@ -84,66 +167,52 @@ obsTextareaEdit.forEach((textarea) => {
 
 // VALIDAR PARTE DE LOS TIPOS DE CAMAS
 
-const modalNfc = document.getElementById('actualizarNFC');
 
-
-// Función para validar las camas
-const validarCamas = () => {
-    let errorCantCamas = false;
-    let inputCheck = document.querySelectorAll(".tiposDeCamasEdit input:checked"); // checkboxes seleccionados
-
-    // Validar que al menos un checkbox está seleccionado
-    if (inputCheck.length === 0) {
-        errorCantCamas = true; // No se seleccionó ningún checkbox
-    } else {
-        const cantidadCamasElementos = document.querySelectorAll(".cantidadCamasEdit");
-        let valoresCantidadCamas = []; // Crear un array para almacenar los valores de las camas
-        const cantidadCamasBD = document.querySelectorAll(".mensajeCantidad"); // Cantidad de camas que están registradas en la BD
-        let numCantCamas;
-
-        cantidadCamasBD.forEach(function (e) {
-            let textoCantCamas = e.textContent; // Obtiene el texto con la cantidad de camas
-            numCantCamas = parseInt(textoCantCamas.match(/\d+/g)); // Extrae el número de camas
-        });
-
-        // Recorre los campos de cantidad de camas e ingresa los valores en un array
-        cantidadCamasElementos.forEach(function (elemento) {
-            let valor = parseInt(elemento.value, 10); // Convierte el valor a entero
-            if (!isNaN(valor)) {
-                valoresCantidadCamas.push(valor); // Agrega el valor al array si es un número válido
-            }
-        });
-
-        // Calcula la suma total de las camas ingresadas
-        let sumaTotal = 0;
-        valoresCantidadCamas.forEach(function (valor) {
-            sumaTotal += valor;
-        });
-
-        // Si la suma total de camas ingresadas coincide con la cantidad de camas en la BD
-        if (sumaTotal === numCantCamas) {
-            estadoInput['cantCamasTotales'] = true;
-        } else {
-            errorCantCamas = true;
-        }
-    }
-
-    return errorCantCamas;
-}
-
-// Evento submit del formulario
 formularioEdit.addEventListener('submit', (e) => {
 
-    e.preventDefault(); // No dejar enviar el formulario hasta que sea válido
+    let inputCheck = document.querySelectorAll(".tiposDeCamasEdit input:checked"); // checkbox a los tipos de camas
 
-    // Llamamos a la función para validar las camas
-    let errorCantCamas = validarCamas();
 
-    // Si todos los campos son válidos, se envía el formulario
-    if (estadoInput.numHabitacionEdit && estadoInput.observacionesEdit && inputCheck.length > 0 && estadoInput.cantCamasTotales) {
+    const cantidadCamasElementos = document.querySelectorAll(".cantidadCamasEdit");
+    let valoresCantidadCamas = []; // Crear un array para almacenar los valores
+    const cantidadCamasBD = document.querySelectorAll(".mensajeCantidad"); // cantidad de las camas que estan registradas en la BD
+    let numCantCamas;
+
+    cantidadCamasBD.forEach(function (e) {
+        let textoCantCamas = e.textContent; //numero total de la cantidad de camas
+        numCantCamas = parseInt(textoCantCamas.match(/\d+/g));
+    })
+
+
+    // Recorrer los elementos de cantidadCamasElementos
+    cantidadCamasElementos.forEach(function (elemento) {
+        let valor = parseInt(elemento.value, 10); // Parsear el valor a entero
+        if (!isNaN(valor)) {
+            valoresCantidadCamas.push(valor); // Agregar el valor al arreglo si es un número válido
+        }
+    });
+
+    // Calcular la suma total
+    let sumaTotal = 0;
+    valoresCantidadCamas.forEach(function (valor) {
+        sumaTotal += valor;
+    });
+
+    let errorCantCamas = false;
+
+    if (sumaTotal == numCantCamas) {
+        estadoInput[cantCamasTotales] = true;
+    } else {
+        errorCantCamas = true;
+    }
+
+
+    e.preventDefault(); // No dejar enviar el formulario
+
+    if (estadoInput.numHabitacionEdit && estadoInput.observacionesEdit && inputCheck.length >= 1 && estadoInput.cantCamasTotales) {
         formulario.submit();
     } else {
-        // Si hay error en la cantidad de camas o no se seleccionó ningún checkbox
+
         if (errorCantCamas) {
             document.getElementById("msjErrorTipoCama2").style.display = "block";
         } else {

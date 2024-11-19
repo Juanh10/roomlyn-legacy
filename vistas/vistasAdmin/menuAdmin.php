@@ -69,7 +69,7 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_item">
-                <a class="enlaceMenu" href="reservaciones.php" title="Reservaciones">
+                <a class="enlaceMenu" href="reservaciones.php" title="Historial de Reservaciones">
                     <i class="bi bi-calendar-check-fill"></i>
                 </a>
             </li>
@@ -193,7 +193,7 @@ $dbh->query($sqlFecha);
             <li class="list_itemDesplegable">
                 <a class="enlaceMenu2" href="reservaciones.php">
                     <i class="bi bi-calendar-check-fill"></i>
-                    <span class="linksOpciones">Reservaciones</span>
+                    <span class="linksOpciones">Historial de Reservaciones</span>
                 </a>
             </li>
 

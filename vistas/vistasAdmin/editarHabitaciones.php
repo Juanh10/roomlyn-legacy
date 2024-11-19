@@ -78,34 +78,11 @@ $sqlServicios = "SELECT habitaciones_elementos_selec.id_hab_tipo_elemento, habit
                                 <?php
                                 endforeach;
                                 ?>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="actLlaveroNfc" name="actLlaveroNfc" value="llavero Activo">
-                                    <label class="form-check-label" for="actLlaveroNfc">
-                                        Actualizar llavero NFC
-                                    </label>
-                                </div>
-                                <input type="submit" class="botonActualizar" name="btnActualizar" value="Actualizar">
-
-                                <!-- MODAL PARA REGISTRAR NFC -->
-
-                                <div class="modal fade" id="actualizarNFC" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="llaveroNfc">
-                                                    <label for="codNfc">Acerque el llavero al sensor</label>
-                                                    <input type="text" id="codNfc" name="codigoNfc" autocomplete="off">
-                                                    <div class="icono-llaveroNfc">
-                                                        <img src="../../iconos/iconoNfc.png" alt="Icono de llavero NFC">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                                <input type="submit" class="botonActualizar" name="btnActualizar" value="Actualizar Datos">
                             </form>
+                            <button type="button" class="btn bg-primary-subtle w-100 mt-2" data-bs-toggle="modal" data-bs-target="#modalEditNFC">
+                                Actualizar llavero NFC
+                            </button>
                         </div>
                     </div>
                     <div class="col-4 responsiveServicios">
@@ -152,6 +129,24 @@ $sqlServicios = "SELECT habitaciones_elementos_selec.id_hab_tipo_elemento, habit
         </div>
     </div>
 
+    <!-- MODAL PARA REGISTRAR NFC -->
+
+    <div class="modal fade" id="modalEditNFC" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="llaveroNfc">
+                            <label for="codNfc">Acerque el llavero al sensor</label>
+                            <input type="hidden" id="idHabitacionNFC" name="idHab" value="<?php echo $idHab ?>">
+                            <input type="text" id="codNfc" name="codigoNfc" autocomplete="off">
+                        <div class="icono-llaveroNfc">
+                            <img src="../../iconos/iconoNfc.png" alt="Icono de llavero NFC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../../js/validarEdicionHab.js"></script>
     <script src="../../js/scriptModalAdmit.js"></script>

@@ -110,27 +110,40 @@ obsTextarea.forEach((textarea) => {
     textarea.addEventListener('blur', validarFormulario);
 })
 
-function showModal(){
-    if($('#regLlaveroNfc').is(':checked')){
+let temporizadorCaptura;
+const retrasoCaptura = 500; // milisegundos
+
+function showModal() {
+    if ($('#regLlaveroNfc').is(':checked')) {
         let modal = new bootstrap.Modal(modalNfc);
         modal.show();
-    
+
         modalNfc.addEventListener('shown.bs.modal', function () {
             inputCodNfc.focus();
         });
-        
-        inputCodNfc.addEventListener('blur', function(e){
-            let texto = e.target.value;
-            if(texto.trim() === ''){
+
+        inputCodNfc.addEventListener('input', function (e) {
+            // Limpiar cualquier temporizador previo
+            clearTimeout(temporizadorCaptura);
+
+            // Capturar el valor del input
+            let texto = e.target.value.trim();
+
+            // Si el input está vacío, mantener el foco
+            if (texto === '') {
                 inputCodNfc.focus();
-            }else{
-                formulario.submit()
+            } else {
+                // Si el input tiene contenido, establecer el temporizador
+                temporizadorCaptura = setTimeout(() => {
+                    formulario.submit(); 
+                }, retrasoCaptura); // 500ms de retraso
             }
-        })
-    }else{
-        formulario.submit()
+        });
+    } else {
+        formulario.submit();
     }
 }
+
 
 
 // VALIDAR PARTE DE LOS TIPOS DE CAMAS

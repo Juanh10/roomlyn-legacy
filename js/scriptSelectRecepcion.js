@@ -67,20 +67,15 @@ $(document).ready(function () {
   const inputNfc = $('#codNfc');
   let intervaloFoco;
   let temporizadorCaptura;
-  const retrasoCaptura = 500; // milisegundos
+  const retrasoCaptura = 500; // ms
 
-  // funcion para mantener el foco del input
+  // Funcion para mantener el foco del input
   function mantenerFoco() {
     inputNfc.focus();
   }
 
-  // el intervalo sirve para que se mantenga el foco del input
-
-  // funcion para capturar el codigo NFC
+  // Funcion para procesar el código NFC
   function procesarCodigoNFC(codigo) {
-
-    //procesar codigo NFC
-
     fetch(`../vistasAdmin/mostrarContenidoNfc.php?codigo=${codigo}`)
       .then(res => res.text())
       .then(datos => {
@@ -96,43 +91,40 @@ $(document).ready(function () {
       });
   }
 
-  // agregar el foco cuando el modal está abierto
+  // Agregar el foco cuando el modal está abierto
   modal.on('shown.bs.modal', function () {
-    inputNfc.val(''); // limpiar el input
+    inputNfc.val(''); // Limpiar el input
     mantenerFoco();
 
+    // Mantener el foco cada 100 ms
     intervaloFoco = setInterval(mantenerFoco, 100);
   });
 
-
+  // Evento input para capturar el código del NFC
   inputNfc.on('input', function () {
-
     clearTimeout(temporizadorCaptura);
 
     temporizadorCaptura = setTimeout(() => {
-      const codigoNFC = $(this).val();
+      const codigoNFC = $(this).val().trim();
+
+      // Si el código NFC tiene longitud mayor que 0, procesarlo y enviarlo
       if (codigoNFC.length > 0) {
         procesarCodigoNFC(codigoNFC);
       }
     }, retrasoCaptura);
   });
 
-  // limpiar intervalos y temporizadores cuando se cierra el modal
+  // Limpiar intervalos y temporizadores cuando se cierra el modal
   modal.on('hidden.bs.modal', function () {
     clearInterval(intervaloFoco);
     clearTimeout(temporizadorCaptura);
   });
 
-  /*  $('.buscadorNfc').click(function(){
-     contenidoMain.hide();
-     contenidoNfc.show();
-   }); */
-
   // DRIVER JS
 
   const driver = window.driver.js.driver;
 
-  if(!localStorage.getItem('mensajeMostrado')){
+  if (!localStorage.getItem('mensajeMostrado')) {
 
     const driverObj = driver({
       showProgress: false,
@@ -151,7 +143,7 @@ $(document).ready(function () {
       nextBtnText: 'Siguiente',
       prevBtnText: 'Anterior',
     });
-  
+
     driverObj.drive();
 
     // guardar en localStorage 

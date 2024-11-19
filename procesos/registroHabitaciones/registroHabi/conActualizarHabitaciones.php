@@ -86,6 +86,42 @@ if (isset($_POST['actualizarEstado'])) {
     }
 }
 
+//Condicion para saber si el input codigoNfc está vacio
+if (!empty($_GET['codigoNfc'])) {
+
+    header('Content-Type: application/json');
+
+    $idHab = $_GET['idHab'];
+    $codigoEditNfc = $_GET['codigoNfc'];
+
+    $consultaNfc = $dbh->prepare("SELECT l.codigo FROM habitaciones as h INNER JOIN llaveros_nfc as l ON h.id_codigo_nfc = l.id_codigo_nfc WHERE l.codigo = :codigo AND h.estado = 1");
+    $consultaNfc->bindParam(":codigo", $codigoEditNfc);
+    $consultaNfc->execute();
+
+    if ($consultaNfc->rowCount() > 0) {
+        echo json_encode(['status' => 'error', 'message' => 'El llavero ya está asociado con una habitación.']);
+    } else {
+        // Preparar la consulta para insertar el nuevo registro
+        $sqlLlaveroNfc = $dbh->prepare('INSERT INTO llaveros_nfc(codigo, fecha_sys) VALUES (:cod, now())');
+        $sqlLlaveroNfc->bindParam(':cod', $codigoEditNfc);
+
+        //Ejecutar la consulta
+        if ($sqlLlaveroNfc->execute()) {
+            $lastId = $dbh->lastInsertId();
+        }
+
+        $sqlAsociar = $dbh->prepare('UPDATE habitaciones SET id_codigo_nfc = :idLlavero WHERE id_habitacion = :idHab');
+        $sqlAsociar->bindParam(':idLlavero', $lastId);
+        $sqlAsociar->bindParam(':idHab', $idHab);
+
+        if ($sqlAsociar->execute()) {
+            echo json_encode(['status' => 'success', 'message' => 'El llavero NFC se ha asociado correctamente a la habitación.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Ha habido un error al intentar asociar el llavero con la habitación.']);
+        }
+    }
+}
+
 // Función para actualizar la habitación en la base de datos
 function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tipoCama, $cantTipoSimple, $cantTipoDoble, $sisClimatizacion, $observ)
 {
@@ -132,11 +168,10 @@ function actualizarHabitacion($sql, $dbh, $idHabitacion, $numHab, $tipoHab, $tip
 
     // Ejecutar la consulta de actualización de la habitación
     if ($sql->execute()) {
-        $_SESSION['msjExito'] = "¡La habitación se ha actualizado exitosamente!";
+        $_SESSION['msjExito'] = "¡Los datos de la habitación se ha actualizado exitosamente!";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     } else {
         $_SESSION['msjError'] = "Ha habido un error al intentar actualizar los datos. Por favor, te solicitamos amablemente que nos contactes mediante el correo electrónico hotelroomlyn@gmail.com para informarnos sobre este inconveniente.";
         header("location: ../../../vistas/vistasAdmin/habitaciones.php");
     }
 }
-?>
