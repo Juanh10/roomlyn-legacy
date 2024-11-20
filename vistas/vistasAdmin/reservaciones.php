@@ -43,6 +43,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
     <main class="contenido">
         <div class="container" id="contenedorIniReservaciones">
             <div class="filtrarFechas">
+                <button class="btn botonFiltrarFecha mb-3" id="btnRegRes" data-bs-toggle="modal" data-bs-target="#modalRegReserva">Agregar reserva</button>
                 <button class="btn botonFiltrarFecha mb-3" id="btnFiltrar" data-bs-toggle="modal" data-bs-target="#modalFiltrarFecha">Filtrar reservas</button>
             </div>
 
@@ -159,7 +160,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
         <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
     </footer>
 
-    <!-- MODAL -->
+    <!-- MODAL VER INFORMACION DEL CLIENTE -->
 
     <div class="modal fade" id="modalVerInformacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -173,7 +174,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- MODAL FILTRAR FECHAS -->
     <div class="modal fade" id="modalFiltrarFecha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -217,6 +218,144 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
         </div>
     </div>
 
+    <!-- MODAL REGISTRAR RESERVA -->
+    <div class="modal fade" id="modalRegReserva" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar reserva</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formHistorialReserva" class="formReservasClienteNoReg">
+                        <select class="form-select mb-3" id="habitacion" name="habitacion" required>
+                            <option disabled selected value="">Número de habitación</option>
+                            <?php
+                            $sqlNacionalidad = "SELECT id_habitacion, nHabitacion FROM habitaciones WHERE estado = 1 ORDER BY nHabitacion ASC";
+
+                            foreach ($dbh->query($sqlNacionalidad) as $rowNacionalidad) :
+                            ?>
+                                    <option value="<?php echo $rowNacionalidad['id_habitacion'] ?>"><?php echo 'Habitación '.$rowNacionalidad['nHabitacion'] ?></option>
+                            <?php
+                            endforeach;
+                            ?>
+                        </select>
+                        <div class="row">
+                            <div class="col-6 responsive-col-form">
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres" required>
+                                    <p></p>
+                                    <label for="nombres">Nombres</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="date" class="form-control" id="fechaEntradaRes" placeholder="Nombres" name="checkIn" required>
+                                    <p></p>
+                                    <label for="fechaEntrada">Fecha de llegada</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="documento" class="form-control" id="documento" placeholder="Documento" required>
+                                    <p></p>
+                                    <label for="documento">Documento</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+                                    <p></p>
+                                    <label for="email">Email</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="nacionalidad" id="nacionalidad" required>
+                                        <option selected disabled value="">Escoja una opción</option>
+                                        <?php
+                                        $sqlNacionalidad = "SELECT id_nacionalidad, nacionalidad FROM nacionalidades WHERE 1";
+
+                                        foreach ($dbh->query($sqlNacionalidad) as $rowNacionalidad) :
+                                            if ($rowNacionalidad['id_nacionalidad'] != 1) :
+                                        ?>
+                                                <option value="<?php echo $rowNacionalidad['id_nacionalidad'] ?>"><?php echo $rowNacionalidad['nacionalidad'] ?></option>
+                                        <?php
+                                            endif;
+                                        endforeach;
+
+                                        ?>
+                                    </select>
+                                    <label for="nacionalidad">Nacionalidad</label>
+                                </div>
+
+                                <div class="form-floating mb-3" id="selectCiudad">
+                                    <select class="form-select" name="ciudad" id="ciudad" required>
+
+                                    </select>
+                                    <label for="ciudad">Ciudad de origen</label>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Apellidos" required>
+                                    <p></p>
+                                    <label for="apellidos">Apellidos</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="date" class="form-control" id="fechaSalidaRes" placeholder="Nombres" name="checkOut" required>
+                                    <p></p>
+                                    <label for="fechaSalida">Fecha de salida</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="telefono" class="form-control" id="telefono" placeholder="Teléfono" required>
+                                    <p></p>
+                                    <label for="telefono">Teléfono</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="sexo" id="sexo" required>
+                                        <option selected disabled value="">Escoja una opción</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                    </select>
+                                    <p></p>
+                                    <label for="sexo">Sexo</label>
+                                </div>
+
+                                <div class="form-floating mb-3" id="selectDepartamento">
+                                    <select class="form-select" name="departamento" id="departamento" required>
+
+                                    </select>
+                                    <label for="departamento">Departamento</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <!-- select -->
+                                    <input type="text" class="form-control" id="totalReserva" name="totalReserva" placeholder="Cantidad a abonar">
+                                    <p></p>
+                                    <label for="montoReserva">Total de la reserva</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="formularioMensaje">
+                            <p><i class="bi bi-exclamation-circle-fill"></i>¡Por favor rellene los campos correctamente!</p>
+                        </div>
+
+                        <div class="btnReservar d-flex justify-content-center">
+                            <input type="submit" class="btn" style="background-color: #9d8076; font-weight: bold;" name="btnReservar" value="Agregar reserva" id="btnResClnNoReg">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
     <!-- ALERTAS -->
 
     <?php
@@ -256,17 +395,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
 
     ?>
 
-    <script>
-        $('.btnInforCli').click(function() {
-            let idCLiente = $(this).attr('id');
-            let contenido = $('#contenidoInforCliente');
-
-            fetch(`../../vistas/vistasAdmin/inforCLienteReserva.php?id=${idCLiente}`)
-                .then(res => res.text())
-                .then(datos => contenido.html(datos))
-                .catch();
-        });
-    </script>
+    <script src="../../js/scriptHistorialReservaciones.js"></script>
 
 </body>
 

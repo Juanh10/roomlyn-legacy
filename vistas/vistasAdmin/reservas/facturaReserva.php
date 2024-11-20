@@ -103,3 +103,16 @@ if ($rowHabitacion['id_servicio'] == 1) {
 </div>
 
 <script src="../../js/scriptFacturas.js"></script>
+
+<script>
+    $('.btnAbrirDetalles').click(function () {
+        let detalles = $(this).next('.inforDetalles');
+        if (detalles.is(':visible')) {
+            $('.flechaDetalles').addClass('active');
+            detalles.hide();
+        } else {
+            $('.flechaDetalles').removeClass('active');
+            detalles.show();
+        }
+    });
+</script>

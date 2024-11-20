@@ -1,15 +1,4 @@
 $(document).ready(function () {
-    $('.btnAbrirDetalles').click(function () {
-        let detalles = $(this).next('.inforDetalles');
-        if (detalles.is(':visible')) {
-            $('.flechaDetalles').addClass('active');
-            detalles.hide();
-        } else {
-            $('.flechaDetalles').removeClass('active');
-
-            detalles.show();
-        }
-    });
 
     $('#totalFacturaEdit').click(function () {
 
