@@ -76,10 +76,10 @@ $dbh->query($sqlFecha);
 
             <li class="list_item">
 
-                <div class="enlacePrincipal">
+                <div class="enlacePrincipal" id="flechaHabitaciones">
                     <a class="enlaceMenu menuDesplegable" title="Habitaciones">
                         <i class="bi bi-list-ul"></i>
-                        <i class="bi bi-caret-right-fill flecha"></i>
+                        <i class="bi bi-caret-right-fill flecha iconHabitaciones"></i>
                     </a>
                 </div>
 
@@ -108,17 +108,17 @@ $dbh->query($sqlFecha);
 
             <li class="list_item">
 
-                <div class="enlacePrincipal">
+                <div class="enlacePrincipal" id="flechaInventario">
                     <a class="enlaceMenu menuDesplegable_inventario" title="Inventario">
                         <i class="bi bi-boxes"></i>
-                        <i class="bi bi-caret-right-fill flecha"></i>
+                        <i class="bi bi-caret-right-fill flecha iconInventario"></i>
                     </a>
                 </div>
 
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
-                            <a class="enlaceMenuSecund_inventario" href="categorias_inventario.php" title="Administrar categorias">
+                            <a class="enlaceMenuSecund_inventario" href="inventario_categorias.php" title="Administrar categorias">
                                 <i class="bi bi-tags-fill"></i>
                             </a>
                             <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php" title="Administrar articulos">
@@ -198,11 +198,11 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_itemDesplegable">
-                <div class="enlacePrincipal">
+                <div class="enlacePrincipal" id="flechaMenuHabitaciones">
                     <a class="enlaceMenu2 menuDesplegable">
                         <i class="bi bi-list-ul"></i>
                         <span>Habitaciones</span>
-                        <i class="bi bi-caret-right-fill flecha"></i>
+                        <i class="bi bi-caret-right-fill flecha iconoHabitaciones"></i>
                     </a>
                 </div>
                 <ul class="submenu">
@@ -233,17 +233,17 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_itemDesplegable">
-                <div class="enlacePrincipal">
+                <div class="enlacePrincipal" id="flechaMenuInventario">
                     <a class="enlaceMenu2 menuDesplegable_inventario">
                         <i class="bi bi-boxes"></i>
                         <span>Inventario</span>
-                        <i class="bi bi-caret-right-fill flecha"></i>
+                        <i class="bi bi-caret-right-fill flecha IconoInventario"></i>
                     </a>
                 </div>
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
-                            <a class="enlaceMenuSecund_inventario" href="categorias_inventario.php">
+                            <a class="enlaceMenuSecund_inventario" href="inventario_categorias.php">
                                 <i class="bi bi-tags-fill"></i>
                                 <span>Categorías</span>
                             </a>

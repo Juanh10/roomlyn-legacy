@@ -476,6 +476,26 @@ body.activoBackground::before {
   vertical-align: middle;
 }
 
+/* BOTON DE LA PLATAFORMA */
+
+.botonRoomlyn{
+  background-color: #876e66;
+}
+
+.botonRoomlyn:hover{
+  background-color: #79645d;
+}
+
+
+/* ALERTA DE ERROR DE VALIDACION DE INPUTS DE LA PLATAFORMA */
+.errorValidacion{
+  display: none;
+  font-size: 12px;
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .cabeceraMenu {
     width: 100%;

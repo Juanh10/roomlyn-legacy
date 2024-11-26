@@ -6,21 +6,26 @@ $(document).ready(function () {
     $('.pie-de-pagina p').toggleClass('activoBackground2');
   });
 
-  let enlacePrincipal = $('.enlacePrincipal');
+  function subMenuDesplegable(id, icono){
+    id.click(function () {
+      $(icono).toggleClass('flechaActivo');// agregar clase
+  
+      let height = 0;
+      let menu = this.nextElementSibling; // seleccionar al hermano adyacente del elemento con la clase enlacePrincipal
+  
+      if (menu.clientHeight == 0) {
+        height = menu.scrollHeight;
+      }
+  
+      menu.style.height = `${height}px`;
+  
+    });
+  }
 
-  enlacePrincipal.click(function () {
-    $('.flecha').toggleClass('flechaActivo');// agregar clase
-
-    let height = 0;
-    let menu = this.nextElementSibling; // seleccionar al hermano adyacente del elemento con la clase enlacePrincipal
-
-    if (menu.clientHeight == 0) {
-      height = menu.scrollHeight;
-    }
-
-    menu.style.height = `${height}px`;
-
-  });
+  subMenuDesplegable($('#flechaHabitaciones'),$('.iconHabitaciones'));
+  subMenuDesplegable($('#flechaInventario'), $('.iconInventario'));
+  subMenuDesplegable($('#flechaMenuHabitaciones'), $('.iconoHabitaciones'));
+  subMenuDesplegable($('#flechaMenuInventario'), $('.IconoInventario'));
 
   $(document).click(function (event) {
 
@@ -466,6 +471,7 @@ $(document).ready(function () {
   initDatatables($('#tablaHabitaciones'));
   initDatatables($('#tablaReservas'));
   initDatatables($('#tablaReservasFiltro'));
+  //initDatatables($('#tablaCategorias'));
 
   function cambiarEstado(idHabitacion, archivo, contenido) {
     fetch(`../vistasAdmin/cambiarEstadoRecepcion.php?id=${idHabitacion}&archivo=${archivo}`)
