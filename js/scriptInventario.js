@@ -32,6 +32,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     // Función general para enviar datos con AJAX
     function enviarFormularioAjax(metodo, datos, successCallback) {
         $.ajax({
@@ -75,7 +77,7 @@ $(document).ready(function () {
                         showConfirmButton: false,
                         timer: 3000
                     });
-                } 
+                }
                 else if (metodo === 'PUT') {
                     // Lógica de editar categoría
                     if (respuesta.id) {
@@ -100,11 +102,11 @@ $(document).ready(function () {
                             timer: 3000
                         });
                     }
-                } 
+                }
                 else if (metodo === 'DELETE') {
                     if (respuesta.resultado) {
                         // Eliminar la fila de la tabla
-                        let filaIndex = tablaCat.rows().indexes().filter(function(index) {
+                        let filaIndex = tablaCat.rows().indexes().filter(function (index) {
                             return tablaCat.row(index).data()[0] == respuesta.id;
                         });
 
@@ -183,9 +185,9 @@ $(document).ready(function () {
             msjError.show();
         } else {
             msjError.hide();
-            enviarFormularioAjax("PUT", { 
-                id_categoria: idCategoria, 
-                categoria: inputEditCategoria 
+            enviarFormularioAjax("PUT", {
+                id_categoria: idCategoria,
+                categoria: inputEditCategoria
             }, function () {
                 formEditCategorias.addClass('d-none');
                 formCategorias.removeClass('d-none');
@@ -200,16 +202,16 @@ $(document).ready(function () {
     });
 
     // Evento para deshabilitar categoría
-    $('#tablaCategorias').on('submit', '.formEliminarCategoria', function(e) {
+    $('#tablaCategorias').on('submit', '.formEliminarCategoria', function (e) {
         e.preventDefault();
-        
+
 
         let filas = $(this).closest('tr');
         let idCategoria = filas.find('td:nth-child(1)').text();
 
         console.log(idCategoria);
-        
-        
+
+
         // Confirmación con SweetAlert
         Swal.fire({
             title: '¿Estás seguro?',
@@ -222,8 +224,8 @@ $(document).ready(function () {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                enviarFormularioAjax('DELETE', { 
-                    id_categoria: idCategoria 
+                enviarFormularioAjax('DELETE', {
+                    id_categoria: idCategoria
                 });
             }
         });
@@ -245,11 +247,11 @@ $(document).ready(function () {
         });
 
         // Eventos de deshabilitar
-        $('.formEliminarCategoria').submit(function(e) {
+        $('.formEliminarCategoria').submit(function (e) {
             e.preventDefault();
-            
+
             let idCategoria = $(this).find('input[name="id_categoria"]').val();
-            
+
             // Confirmación con SweetAlert
             Swal.fire({
                 title: '¿Estás seguro?',
@@ -262,11 +264,180 @@ $(document).ready(function () {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    enviarFormularioAjax('DELETE', { 
-                        id_categoria: idCategoria 
+                    enviarFormularioAjax('DELETE', {
+                        id_categoria: idCategoria
                     });
                 }
             });
         });
     });
+
+    const formProductos = $('#formularioProducto');
+
+
+    // VALIDACION DE PRODUCTOS
+    formProductos.submit(function (e) {
+        // Definir los campos a validar
+        const campos = [
+            {
+                id: '#categoria_cat',
+                tipo: 'select',
+                error: 'Seleccione una categoría',
+            },
+            {
+                id: '#referencia_cat',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                id: '#nombre_cat',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                id: '#imagen_cat',
+                tipo: 'file',
+                error: 'Sube un archivo de imagen válido (jpg, png, gif, bmp, webp, svg, ico)',
+            },
+            {
+                id: '#cantidad_cat',
+                tipo: 'input',
+                error: 'Completa este campo con solo números',
+            },
+            {
+                id: '#precio_cat',
+                tipo: 'input',
+                error: 'Completa este campo con un valor válido',
+            },
+        ];
+
+        let formularioValido = true;
+
+        // Funcion de validacion
+        function validarCampo(campo) {
+            const valor = $(campo.id).val();
+
+            if (campo.tipo === 'file') {
+                const archivo = $(campo.id)[0].files[0];
+
+                // Validar si se selecciono un archivo
+                /*             if (!archivo) {
+                              $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                              $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                              return false;
+                            } */
+
+                // Validar tipo de extension
+                const tiposValidos = [
+                    'image/jpeg', 'image/png', 'image/gif',
+                    'image/bmp', 'image/webp', 'image/svg+xml',
+                    'image/x-icon'
+                ];
+
+                if (!tiposValidos.includes(archivo.type)) {
+                    $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                    $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                    return false;
+                }
+
+                // validar otros campos
+            } else if (valor === null || valor === "" || (campo.tipo === 'input' && valor.trim() === "")) {
+                $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                return false;
+            } else {
+                $(campo.id).closest('div').find('p').eq(0).removeClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text('');
+                return true;
+            }
+
+            return true;
+        }
+
+        // Validar todos los campos
+        campos.forEach(function (campo) {
+            if (!validarCampo(campo)) {
+                formularioValido = false;
+            }
+        });
+
+        // Prevenir envio del formulario si hay errores
+        if (!formularioValido) {
+            e.preventDefault();
+        }
+    });
+
+    const formCaja = $('#formulariCajaVenta');
+
+    // VALIDACION DE REGISTRO DE CAJAS PUNTO DE VENTA
+    formCaja.submit(function (e) {
+        // Definir los campos a validar
+        const campos = [
+            {
+                id: '#nombreCaja',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                id: '#ubicacionCaja',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                // Contraseña
+                id: '#contrasena',
+                tipo: 'input',
+                error: 'La contraseña debe tener al menos 4 caracteres',
+                validar: function (valor) {
+                    return valor.length >= 4;
+                },
+            },
+            {
+                // Confirmar contraseña
+                id: '#contrasenaTwo',
+                tipo: 'input',
+                error: 'Las contraseñas no coinciden',
+                validar: function (valor) {
+                    // Validar que las contraseñas coincidan
+                    return valor === $('#contrasena').val();
+                },
+            },
+        ];
+
+        let formularioValido = true;
+
+        // Funcion de validacion
+        function validarCampo(campo) {
+            const valor = $(campo.id).val();
+
+            if (valor === null || valor === "" || (campo.tipo === 'input' && valor.trim() === "")) {
+                $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                return false;
+            } else if (campo.validar && !campo.validar(valor)) {
+                $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                return false;
+            } else {
+                $(campo.id).closest('div').find('p').eq(0).removeClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text('');
+                return true;
+            }
+        }
+
+        // Validar todos los campos
+        campos.forEach(function (campo) {
+            if (!validarCampo(campo)) {
+                formularioValido = false;
+            }
+        });
+
+        // Prevenir envio del formulario si hay errores
+        if (!formularioValido) {
+            e.preventDefault();
+        }
+    });
+
+
+
 });

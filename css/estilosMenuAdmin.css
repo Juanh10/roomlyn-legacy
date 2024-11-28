@@ -496,6 +496,14 @@ body.activoBackground::before {
   padding: 0;
 }
 
+.errorValidacionInput{
+  display: block;
+  font-size: 12px;
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .cabeceraMenu {
     width: 100%;

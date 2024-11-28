@@ -29,11 +29,11 @@ body {
 }
 
 .fondo-modal {
-  background-color: #c4ac9f;
+  background-color: #79645d;
 }
 
 .boton-guardar {
-  background-color: #c4ac9f;
+  background-color: #79645d;
   transition: 0.3s ease;
   border: none;
   padding: 6px 10px;

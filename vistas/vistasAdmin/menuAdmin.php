@@ -121,15 +121,28 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund_inventario" href="inventario_categorias.php" title="Administrar categorias">
                                 <i class="bi bi-tags-fill"></i>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php" title="Administrar articulos">
+                            <a class="enlaceMenuSecund_inventario" href="inventario_productos.php" title="Administrar articulos">
                                 <i class="bi bi-bag-check-fill"></i>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
+                            <!-- <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
                                 <i class="bi bi-clipboard2-check-fill"></i>
-                            </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Punto de venta">
-                                <i class="bi bi-box-seam-fill"></i>
-                            </a>
+                            </a> -->
+
+                            <?php
+                            if ($_SESSION['tipoUsuario'] == 1):
+                            ?>
+                                <a class="enlaceMenuSecund_inventario" href="inventarioAdministrarPuntoVenta.php" title="Punto de venta">
+                                    <i class="bi bi-box-seam-fill"></i>
+                                </a>
+                            <?php
+                            else:
+                            ?>
+                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php" title="Punto de venta">
+                                    <i class="bi bi-box-seam-fill"></i>
+                                </a>
+                            <?php
+                            endif;
+                            ?>
                         </div>
                     </li>
                 </ul>
@@ -247,19 +260,32 @@ $dbh->query($sqlFecha);
                                 <i class="bi bi-tags-fill"></i>
                                 <span>Categorías</span>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="tipoHabitaciones.php">
+                            <a class="enlaceMenuSecund_inventario" href="inventario_productos.php">
                                 <i class="bi bi-bag-check-fill"></i>
                                 <span>Productos</span>
                             </a>
 
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
+                            <!-- <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
                                 <i class="bi bi-clipboard2-check-fill"></i>
                                 <span>Reportes</span>
-                            </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
-                                <i class="bi bi-box-seam-fill"></i>
-                                <span>Punto de venta</span>
-                            </a>
+                            </a> -->
+                            <?php
+                            if ($_SESSION['tipoUsuario'] == 1):
+                            ?>
+                                <a class="enlaceMenuSecund_inventario" href="inventarioAdministrarPuntoVenta.php">
+                                    <i class="bi bi-box-seam-fill"></i>
+                                    <span>Punto de venta</span>
+                                </a>
+                            <?php
+                            else:
+                            ?>
+                                <a class="enlaceMenuSecund_inventario" href="inventarioPuntoVenta.php">
+                                    <i class="bi bi-box-seam-fill"></i>
+                                    <span>Punto de venta</span>
+                                </a>
+                            <?php
+                            endif;
+                            ?>
                         </div>
                     </li>
                 </ul>
