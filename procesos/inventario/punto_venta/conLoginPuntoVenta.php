@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cajaId = $_POST['caja'];
     $password = $_POST['password'];
     $usuario = $_POST['usuario'];
+    $fechaActual = new DateTime();
+    $fechaYHora = $fechaActual->format('Y-m-d H:i:s');
 
     // Verificar que la caja y la contraseña no estén vacíos
     if (empty($cajaId) || empty($password)) {
@@ -20,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Consulta para verificar que la caja existe
-    $sql = "SELECT id_punto_venta, nombre, contrasena FROM inventario_punto_venta WHERE id_punto_venta = :cajaId AND estado = 1"; 
+    $sql = "SELECT id_punto_venta, nombre, contrasena FROM inventario_punto_venta WHERE id_punto_venta = :cajaId AND estado = 1";
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':cajaId', $cajaId);
     $stmt->execute();
@@ -34,9 +36,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['nombre_caja'] = $caja['nombre'];
             $_SESSION['usuario'] = $usuario;
 
-            // Redirigir a la página principal del sistema de ventas o caja
-            header("Location: ../../../vistas/vistasAdmin/inventarioPuntoVenta.php");
-            exit;
+            $sqlActFecha = $dbh->prepare("UPDATE inventario_punto_venta SET fecha_acceso = :fech WHERE id_punto_venta = :id");
+            $sqlActFecha->bindParam(':id', $caja['id_punto_venta']);
+            $sqlActFecha->bindParam(':fech', $fechaYHora);
+
+            if ($sqlActFecha->execute()) {
+                $sqlActualizarEstado = $dbh->prepare("UPDATE inventario_punto_venta SET estado_conexion = 1 WHERE id_punto_venta = :id");
+                $sqlActualizarEstado->bindParam(':id', $caja['id_punto_venta']);
+                $sqlActualizarEstado->execute();
+
+                // Redirigir a la página principal del sistema de ventas o caja
+                header("Location: ../../../vistas/vistasAdmin/inventarioPuntoVenta.php");
+                exit;
+            } else {
+                $_SESSION['msjError'] = "ocurrió un error en el sistema.";
+                header("Location: ../../../vistas/vistasAdmin/inventarioLoginPuntoVenta.php");
+                exit;
+            }
         } else {
             $_SESSION['msjError'] = "Contraseña incorrecta.";
             header("Location: ../../../vistas/vistasAdmin/inventarioLoginPuntoVenta.php");
@@ -48,4 +64,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 }
-?>

@@ -3,6 +3,9 @@ $(document).ready(function () {
     const formEditCategorias = $('#formularioEditCategorias');
     const msjError = $('.errorValidacion');
 
+
+    //* CATEGORIAS
+
     // Inicializar la tabla como instancia de DataTables
     let tablaCat = $('#tablaCategorias').DataTable({
         "order": [],
@@ -31,8 +34,6 @@ $(document).ready(function () {
             }
         }
     });
-
-
 
     // Función general para enviar datos con AJAX
     function enviarFormularioAjax(metodo, datos, successCallback) {
@@ -272,8 +273,37 @@ $(document).ready(function () {
         });
     });
 
-    const formProductos = $('#formularioProducto');
+    //* PRODUCTOS
 
+    $('#tablaProductos').DataTable({
+        "order": [],
+        "bSort": false,
+        "lengthMenu": [5, 10, 20, 30],
+        responsive: true,
+        language: {
+            "decimal": ",",
+            "thousands": ".",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "info": "Total registros: _TOTAL_",
+            "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+            "infoFiltered": "(filtrado de _MAX_ registros en total)",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron registros",
+            "emptyTable": "No hay datos disponibles en la tabla",
+            "paginate": {
+                "first": "<<",
+                "previous": "<",
+                "next": ">",
+                "last": ">>"
+            },
+            "aria": {
+                "sortAscending": ": activar para ordenar la columna de manera ascendente",
+                "sortDescending": ": activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+
+    const formProductos = $('#formularioProducto');
 
     // VALIDACION DE PRODUCTOS
     formProductos.submit(function (e) {
@@ -367,6 +397,200 @@ $(document).ready(function () {
         }
     });
 
+    // EDITAR PRODUCTO
+    // Evento de clic en el botón de edición
+    $(".botonEditar").on("click", function () {
+        const idProducto = $(this).data("id"); // Obtener el ID del data-id
+        const fila = $(this).closest("tr"); // Obtener la fila del botón
+
+        // Obtener los valores de las celdas
+        const referencia = fila.find("td").eq(0).text().trim();
+        const categoria = fila.find("td").eq(1).text().trim();
+        const nombre = fila.find("td").eq(2).text().trim();
+        const cantidad = fila.find("td").eq(3).text().trim();
+        const precio = fila.find("td").eq(4).text().replace("$", "").replace(",", "").trim();
+        const descripcion = fila.find("td").eq(6).text().trim();
+        const imagenSrc = fila.find("td").eq(5).find("img").attr("src"); // Obtener el src de la imagen
+
+        // Llenar los campos del formulario
+        $("#id_producto").val(idProducto);
+        $("#referencia_catEdit").val(referencia);
+        $("#nombre_catEdit").val(nombre);
+        $("#cantidad_catEdit").val(cantidad);
+        $("#precio_catEdit").val(precio);
+        $("#descripcion_catEdit").val(descripcion);
+
+        // Seleccionar la categoría (si el select tiene texto)
+        $("#categoria_catEdit option").filter(function () {
+            return $(this).text().trim() === categoria;
+        }).prop("selected", true);
+
+        // Mostrar la imagen actual
+        if (imagenSrc) {
+            $("#imagenPreview").attr("src", imagenSrc).show();
+        } else {
+            $("#imagenPreview").hide();
+        }
+    });
+
+    const formProductosEdit = $('#formularioProductoEdit');
+
+    // VALIDACION DE PRODUCTOS
+    formProductosEdit.submit(function (e) {
+        // Definir los campos a validar
+        const campos = [
+            {
+                id: '#categoria_catEdit',
+                tipo: 'select',
+                error: 'Seleccione una categoría',
+            },
+            {
+                id: '#referencia_catEdit',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                id: '#nombre_catEdit',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                id: '#imagen_catEdit',
+                tipo: 'file',
+                error: 'Sube un archivo de imagen válido (jpg, png, gif, bmp, webp, svg, ico)',
+            },
+            {
+                id: '#cantidad_catEdit',
+                tipo: 'input',
+                error: 'Completa este campo con solo números',
+            },
+            {
+                id: '#precio_catEdit',
+                tipo: 'input',
+                error: 'Completa este campo con un valor válido',
+            },
+        ];
+
+        let formularioValido = true; // Bandera de validación
+
+        // Función de validación
+        function validarCampo(campo) {
+            const valor = $(campo.id).val();
+
+            if (campo.tipo === 'file') {
+                const archivo = $(campo.id)[0].files[0];
+
+                // Validar si se seleccionó un archivo
+                /* if (!archivo) {
+                    $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                    $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                    return false;
+                } */
+
+                // Validar tipo de extensión
+                const tiposValidos = [
+                    'image/jpeg', 'image/png', 'image/gif',
+                    'image/bmp', 'image/webp', 'image/svg+xml',
+                    'image/x-icon'
+                ];
+
+                if (!tiposValidos.includes(archivo.type)) {
+                    $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                    $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                    return false;
+                }
+            } else if (valor === null || valor === "" || (campo.tipo === 'input' && valor.trim() === "")) {
+                $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                return false;
+            } else {
+                $(campo.id).closest('div').find('p').eq(0).removeClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text('');
+                return true;
+            }
+
+            return true;
+        }
+
+        // Validar todos los campos
+        campos.forEach(function (campo) {
+            if (!validarCampo(campo)) {
+                formularioValido = false;
+            }
+        });
+
+        // Prevenir envío del formulario si hay errores
+        if (!formularioValido) {
+            e.preventDefault();
+        }
+    });
+
+    // DESHABILITAR PRODUCTO
+    $('.eliminarbtn').on('click', function () {
+        const idProducto = $(this).data('id'); // Obtener el ID del producto
+        const form = $(`#formEliminarProducto_${idProducto}`); // Seleccionar el formulario correspondiente
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'No podrás revertir esta acción',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, deshabilitar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit(); // Enviar el formulario
+            }
+        });
+    });
+
+    // CAMBIAR DE ESTADO DEL PRODUCTO
+    $('.estadoToggle').on('change', function () {
+        const idProducto = $(this).data('id');
+        const estadoProducto = $(this).is(':checked') ? 1 : 0;
+
+        console.log(idProducto);
+        console.log(estadoProducto);
+        
+
+        // Enviar la actualización al servidor
+        $.ajax({
+            url: '../../procesos/inventario/productos/conProductos.php',
+            type: 'POST',
+            data: {
+                id_producto: idProducto,
+                estadoProducto: estadoProducto,
+                action: 'updateEstado'
+            },
+            success: function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Estado actualizado',
+                    text: 'El estado del producto se ha cambiado exitosamente',
+                    toast: true,
+                    position: 'top-end',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo actualizar el estado del producto',
+                    toast: true,
+                    position: 'top-end',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    });
+
+    //* PUNTO DE VENTA
+
     const formCaja = $('#formulariCajaVenta');
 
     // VALIDACION DE REGISTRO DE CAJAS PUNTO DE VENTA
@@ -438,6 +662,115 @@ $(document).ready(function () {
         }
     });
 
+    // Cambiar entre inputs en la parte de administrar punto de venta
+    $('.inforContra').hide();
+    function toggleSections(showSelector, hideSelector) {
+        $(showSelector).show();
+        $(hideSelector).hide();
+    }
 
+    $('#editarContra').click(function () {
+        toggleSections('.inforContra', '.inforCaja');
+    });
+
+    $('#editarInformacion').click(function () {
+        toggleSections('.inforCaja', '.inforContra');
+    });
+
+    const idCajaEdit = $('#idCaja');
+    const nombreCajaEdit = $('#nombreEditCaja');
+    const ubicacionEditCaja = $('#ubicacionEditCaja');
+
+    $('#tablaCajas tbody').on('click', '.botonEditar', function () {
+        // Encuentra la fila correspondiente al botón de editar
+        const fila = $(this).closest('tr');
+
+        // Obtener los valores de las celdas de la fila
+        const idCaja = fila.find('td').eq(0).text();
+        const nombreCaja = fila.find('td').eq(1).text();
+        const ubicacionCaja = fila.find('td').eq(2).text();
+
+        idCajaEdit.val(idCaja);
+        nombreCajaEdit.val(nombreCaja);
+        ubicacionEditCaja.val(ubicacionCaja);
+
+    });
+
+
+    const formCajaEdit = $('#formulariREditCajaVenta');
+
+    // VALIDACION DE EDITAR CAJAS PUNTO DE VENTA
+    formCajaEdit.submit(function (e) {
+        // Definir los campos a validar
+        const campos = [
+            {
+                id: '#nombreEditCaja',
+                tipo: 'input',
+                error: 'Completa este campo',
+            },
+            {
+                id: '#ubicacionEditCaja',
+                tipo: 'input',
+                error: 'Completa este campo',
+            }
+        ];
+
+        let formularioValido = true;
+
+        // Funcion de validacion
+        function validarCampo(campo) {
+            const valor = $(campo.id).val();
+
+            if (valor === null || valor === "" || (campo.tipo === 'input' && valor.trim() === "")) {
+                $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                return false;
+            } else if (campo.validar && !campo.validar(valor)) {
+                $(campo.id).closest('div').find('p').eq(0).addClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text(campo.error);
+                return false;
+            } else {
+                $(campo.id).closest('div').find('p').eq(0).removeClass('errorValidacionInput');
+                $(campo.id).closest('div').find('p').eq(0).text('');
+                return true;
+            }
+        }
+
+        // Validar todos los campos
+        campos.forEach(function (campo) {
+            if (!validarCampo(campo)) {
+                formularioValido = false;
+            }
+        });
+
+        // Prevenir envio del formulario si hay errores
+        if (!formularioValido) {
+            e.preventDefault();
+        }
+    });
+
+    const formCerrarSesionCaja = $('#formCerrarSesionCaja');
+
+    formCerrarSesionCaja.submit(function (e) {
+
+        e.preventDefault();
+
+        // Confirmación con SweetAlert
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../../procesos/inventario/punto_venta/conCerrarPuntoVenta.php";
+            }
+        });
+
+    });
 
 });

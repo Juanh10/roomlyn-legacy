@@ -5,32 +5,46 @@ if (empty($_SESSION['id_caja'])) { //* Si el id de la caja es vacio es porque es
     header("location: inicio.php");
 }
 
+include_once "../../procesos/config/conex.php";
+
+$sqlHab = $dbh->query("SELECT hb.id_habitacion, hb.id_hab_tipo, hb.id_hab_estado, hb.nHabitacion, hb.tipoCama, hb.cantidadPersonasHab, hb.estado, hbt.tipoHabitacion, hbe.estado_habitacion, hbs.servicio, hbe.estado_habitacion FROM habitaciones AS hb INNER JOIN habitaciones_tipos AS hbt ON hbt.id_hab_tipo = hb.id_hab_tipo INNER JOIN habitaciones_estado AS hbe ON hbe.id_hab_estado = hb.id_hab_estado INNER JOIN habitaciones_servicios hbs ON hbs.id_servicio = hb.id_servicio  WHERE hb.estado = 1 ORDER BY hb.nHabitacion ASC")->fetchAll();
+
+// Consulta SQL para obtener los productos activos
+$sqlProducto = $dbh->query("SELECT inv.id_producto, inv.id_categoria, inv.referencia, inv.nombre, inv.descripcion, inv.imagen, inv.precio_unitario, inv.cantidad_stock, inv.estado, inv.estadoProducto AS estado_producto, inv.fecha_ingreso, inv.fecha_sys, cat.estado AS estado_categoria FROM inventario_productos AS inv INNER JOIN inventario_categorias AS cat ON cat.id_categoria = inv.id_categoria WHERE inv.estadoProducto = 1 AND inv.estado = 1 AND cat.estado = 1")->fetchAll();
+
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caja Abierta</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="icon" href="../../iconos/logo_icono.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
+    <link rel="stylesheet" href="../../librerias/bootstrap-icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../librerias/bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../librerias/sweetAlert2/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../librerias/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="../../css/estilosMenuAdmin.css">
     <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
     <link rel="stylesheet" href="../../css/estilosReservasAdmin.css">
     <style>
         .product-card {
-            width: 350px;
             background-color: #f8f9fa;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px;
+            cursor: pointer;
         }
 
-        .contenedorImagen{
-            width: 150px;
+        .contenedorImagen {
+            width: 100%;
             height: 100px;
+            overflow: hidden;
         }
 
         .contenedorImagen img {
@@ -62,9 +76,12 @@ if (empty($_SESSION['id_caja'])) { //* Si el id de la caja es vacio es porque es
                         <a class="nav-link fw-bold active" aria-current="page" href="#"><?php echo $_SESSION['nombre_caja'] ?></a>
                     </li>
                 </ul>
-                <div class="ms-auto">
+                <div class="ms-auto d-flex justify-content-center ">
                     <span class="navbar-text">
-                        <?php echo $_SESSION['pNombre'] . " " . $_SESSION['pApellido']; ?>
+                        <form id="formCerrarSesionCaja">
+                            <input type="hidden" name="id" value="<?php echo $_SESSION['id_caja'] ?>">
+                            <input type="submit" class="btn btn-secondary" value="Cerrar caja">
+                        </form>
                     </span>
                 </div>
             </div>
@@ -76,26 +93,47 @@ if (empty($_SESSION['id_caja'])) { //* Si el id de la caja es vacio es porque es
             <div class="col-md-8">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
-                    <button class="btn botonRoomlyn" type="button" id="button-addon2">Buscar</button>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <div class="col">
-                        <div class="product-card d-flex">
-                            <div class="contenedorImagen">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Producto 1">
-                            </div>
-                            <div class="card-body ms-4">
-                                <h5 class="card-title">Producto 1</h5>
-                                <p class="card-text">$67.00</p>
-                                <a href="#" class="btn botonRoomlyn">Agregar al carrito</a>
+                    <?php
+
+                    foreach ($sqlProducto as $producto):
+                    ?>
+
+                        <div class="col-md-3">
+                            <div class="product-card" data-id="<?php echo $producto['id_producto'] ?>">
+                                <div class="contenedorImagen d-flex justify-content-center">
+                                    <img src="../../<?php echo $producto['imagen'] ?>" class="card-img-top" alt="Producto 1">
+                                </div>
+                                <div class="card-body text-center mt-1">
+                                    <h5 class="fs-6"><?php echo $producto['nombre'] ?></h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    endforeach;
+
+                    ?>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="cart-item mb-3">
-                    <h5 class="mb-3">Carrito</h5>
+                    <div class="tipoCliente">
+                        <select class="form-select mb-3">
+                            <option selected disabled>Destinatario de la venta</option>
+                            <option value="0">Publico general</option>
+                            <?php
+
+                            foreach ($sqlHab as $habitacion):
+                            ?>
+                                <option value="<?php echo $habitacion['id_habitacion'] ?>"><?php echo 'Habitación ' . $habitacion['nHabitacion'] ?></option>
+                            <?php
+                            endforeach;
+                            ?>
+
+                        </select>
+                    </div>
+                    <h5 class="mb-3">Venta</h5>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <span>Vaso</span>
                         <div class="d-flex align-items-center">
@@ -109,13 +147,23 @@ if (empty($_SESSION['id_caja'])) { //* Si el id de la caja es vacio es porque es
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
                         <strong>Total</strong>
-                        <strong>$131.08</strong>
+                        <strong>$1100000</strong>
                     </div>
-                    <button class="btn botonRoomlyn w-100 mt-3">Pagar $131000</button>
+                    <button class="btn botonRoomlyn w-100 mt-3">Generar venta</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="../../librerias/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    <script src="../../librerias/bootstrap5/js/bootstrap.min.js"></script>
+    <script src="../../librerias/sweetAlert2/js/sweetalert2.all.min.js"></script>
+    <script src="../../librerias/datatables/js/datatables.min.js"></script>
+    <script src="../../librerias/select2/dist/js/select2.min.js"></script>
+    <script src="../../js/logoBase64Roomlyn.js"></script>
+    <script src="../../js/driver.js"></script>
+    <script src="../../js/scriptInventario.js"></script>
 </body>
 
 </html>

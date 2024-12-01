@@ -62,9 +62,9 @@ $sqlCategorias->execute();
                 <table class="table text-center" id="tablaCategorias" border="1">
                     <thead class="tabla-background">
                         <tr>
-                            <th>#</th>
-                            <th>Categoría</th>
-                            <th>Acción</th>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Categoría</th>
+                            <th class="text-center">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,9 +78,9 @@ $sqlCategorias->execute();
                             if ($estadoCategoria == 1):
                         ?>
                                 <tr>
-                                    <td><?php echo $id ?></td>
-                                    <td><?php echo $NombreCategoria ?></td>
-                                    <td>
+                                    <td class="text-center"><?php echo $id ?></td>
+                                    <td class="text-center"><?php echo $NombreCategoria ?></td>
+                                    <td class="d-flex justify-content-center">
                                         <div class="accion">
                                             <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditarCategoria" data-id="<?php echo $id ?>" title="Editar"></span>
                                             <form class="formEliminarCategoria">

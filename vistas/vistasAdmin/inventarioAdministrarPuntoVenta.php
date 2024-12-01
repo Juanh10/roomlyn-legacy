@@ -7,7 +7,7 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
 
 include_once "../../procesos/config/conex.php";
 
-$sql2 = "SELECT id_punto_venta, nombre, ubicacion, contrasena, fecha_sys FROM inventario_punto_venta WHERE estado = 1";
+$sql2 = "SELECT id_punto_venta, nombre, ubicacion, contrasena, fecha_acceso, estado_conexion FROM inventario_punto_venta WHERE estado = 1";
 
 // Ejecutar la consulta
 $stmt = $dbh->prepare($sql2);
@@ -43,15 +43,17 @@ $stmt->execute();
                     <button type="button" class="btn botonRoomlyn fw-bold" data-bs-toggle="modal" data-bs-target="#agregar">
                         Agregar caja
                     </button>
-                    <a class="btn botonRoomlyn fw-bold" href="inventarioLoginPuntoVenta.php?usuario=<?php echo $_SESSION['id_empleado']?>" target="_blank">Iniciar caja</a>
+                    <a class="btn botonRoomlyn fw-bold" href="inventarioLoginPuntoVenta.php?usuario=<?php echo $_SESSION['id_empleado'] ?>" target="_blank">Iniciar caja</a>
                 </div>
                 <div class="table-responsive-md">
-                    <table id="tablaCajas" class="table table-hover table-condensed table-bordered display nowrap">
+                    <table id="tablaCajas" class="table table-hover table-condensed display nowrap">
                         <thead class="tabla-background">
                             <tr>
+                                <th class="text-center" scope="col">#</th>
                                 <th class="text-center" scope="col">Nombre</th>
                                 <th class="text-center" scope="col">Ubicación</th>
-                                <th class="text-center" scope="col">Fecha de Ingreso</th>
+                                <th class="text-center" scope="col">Fecha de acceso</th>
+                                <th class="text-center" scope="col">Estado</th>
                                 <th class="text-center" scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -61,15 +63,17 @@ $stmt->execute();
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
+                                    <td class="text-center"><?php echo $row['id_punto_venta']; ?></td>
                                     <td class="text-center"><?php echo $row['nombre']; ?></td>
                                     <td class="text-center"><?php echo $row['ubicacion']; ?></td>
-                                    <td class="text-center"><?php echo $row['fecha_sys']; ?></td>
+                                    <td class="text-center"><?php echo $row['fecha_acceso']; ?></td>
+                                    <td class="text-center"><?php echo ($row['estado_conexion'] == 1) ? '<i class="bi bi-patch-check-fill text-success" title="Conectado"></i>' : '<i class="bi bi-patch-minus-fill text-secondary" title="Desconectado"></i>'; ?></td>
                                     <td class="text-center">
-                                        <!-- NO FUNCIONA TODAVIA -->
                                         <div class="accion justify-content-center">
-                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarUsuario" title="Editar"></span>
-                                            <form action="../../procesos/registroUsuario/conEliminarUsuario.php" method="post" class="formularioEliminar">
-                                                <input type="hidden" name="id_usuario" value="">
+                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-bs-toggle="modal" data-bs-target="#modalActualizarCaja" title="Editar"></span>
+                                            <form action="../../procesos/inventario/punto_venta/conAdminCaja.php" method="post" class="formularioEliminar">
+                                                <input type="hidden" name="action" value="delete">
+                                                <input type="hidden" name="idCaja" value="<?php echo $row['id_punto_venta'] ?>">
                                                 <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
@@ -89,7 +93,7 @@ $stmt->execute();
     </div>
 
 
-    <!-- Modal agregar productos-->
+    <!-- Modal agregar caja-->
     <div class="modal fade" id="agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
@@ -99,6 +103,7 @@ $stmt->execute();
                 </div>
                 <div class="modal-body">
                     <form id="formulariCajaVenta" action="../../procesos/inventario/punto_venta/conAdminCaja.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="action" value="insert">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="nombreCaja" name="nombreCaja" placeholder="REV0230" required>
                             <label for="referencia_cat">Nombre caja*</label>
@@ -131,6 +136,57 @@ $stmt->execute();
         </div>
     </div>
 
+
+    <!-- Modal editar caja-->
+    <div class="modal fade" id="modalActualizarCaja" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar caja</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formulariREditCajaVenta" method="post" action="../../procesos/inventario/punto_venta/conAdminCaja.php" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" id="idCaja" name="idCaja">
+                        <div class="inforCaja">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="nombreEditCaja" name="nombreEditCaja" placeholder="Nombre caja" required>
+                                <label for="referencia_cat">Nombre caja*</label>
+                                <p></p>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ubicacionEditCaja" name="ubicacionEditCaja" placeholder="Ubicación" required>
+                                <label for="nombre_cat">Ubicación*</label>
+                                <p></p>
+                            </div>
+                            <a class="ms-1" id="editarContra" style="cursor: pointer;">Cambiar contraseña</a>
+                        </div>
+
+                        <div class="inforContra">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="contrasenaEdit" name="contrasenaEdit" placeholder="9" minlength="4">
+                                <label for="cantidad_cat">Contraseña nueva*</label>
+                                <p></p>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="contrasenaTwoEdit" name="contrasenaTwoEdit" placeholder="9">
+                                <label for="cantidad_cat">Confirmar contraseña*</label>
+                                <p></p>
+                            </div>
+                            <a class="ms-1" id="editarInformacion" style="cursor: pointer;">Cambiar Información</a>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Agregar" class="btn botonRoomlyn fw-bold">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <?php
 
     if (isset($_SESSION['msjExito'])) :
@@ -140,7 +196,7 @@ $stmt->execute();
             Swal.fire({
                 icon: 'success',
                 title: 'Operación exitosa',
-                text: '<?php echo $_SESSION['msjExito'] ?>.',
+                text: '<?php echo $_SESSION['msjExito'] ?>',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
@@ -158,7 +214,7 @@ $stmt->execute();
             Swal.fire({
                 icon: 'error',
                 title: 'Error en la operación',
-                text: '<?php echo $_SESSION['msjError'] ?>.',
+                text: '<?php echo $_SESSION['msjError'] ?>',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,

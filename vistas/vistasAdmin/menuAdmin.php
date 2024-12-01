@@ -124,9 +124,9 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund_inventario" href="inventario_productos.php" title="Administrar articulos">
                                 <i class="bi bi-bag-check-fill"></i>
                             </a>
-                            <!-- <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
                                 <i class="bi bi-clipboard2-check-fill"></i>
-                            </a> -->
+                            </a>
 
                             <?php
                             if ($_SESSION['tipoUsuario'] == 1):
@@ -137,7 +137,7 @@ $dbh->query($sqlFecha);
                             <?php
                             else:
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php" title="Punto de venta">
+                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php" target="_blank" title="Punto de venta">
                                     <i class="bi bi-box-seam-fill"></i>
                                 </a>
                             <?php
@@ -265,10 +265,10 @@ $dbh->query($sqlFecha);
                                 <span>Productos</span>
                             </a>
 
-                            <!-- <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
+                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
                                 <i class="bi bi-clipboard2-check-fill"></i>
                                 <span>Reportes</span>
-                            </a> -->
+                            </a>
                             <?php
                             if ($_SESSION['tipoUsuario'] == 1):
                             ?>
