@@ -47,7 +47,7 @@ $stmt->execute();
                         Agregar
                     </button>
                 </div>
-                <div class="table-responsive-md">
+                <div class="table-responsive-md mb-5">
                     <table id="tablaProductos" class="table table-condensed display nowrap">
                         <thead class="tabla-background">
                             <tr>
@@ -117,6 +117,12 @@ $stmt->execute();
             </div>
         </div>
     </div>
+
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
+
 
 
     <!-- Modal agregar productos-->

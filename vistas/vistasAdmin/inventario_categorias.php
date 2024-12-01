@@ -40,11 +40,11 @@ $sqlCategorias->execute();
 
     <div class="contenido">
         <div class="row m-0 d-flex justify-content-center mt-5">
-            <div class="col-md-3 me-5">
+            <div class="col-md-3">
                 <!-- AGREGAR CATEGORIAS -->
                 <form id="formularioCategorias" class="d-grid gap-2">
                     <label for="categoria" class="mb-1">Nombre de la categoria*</label>
-                    <input type="text" class="form-control justify-self-center" style="max-width: 300px;" name="categoria" id="categoria">
+                    <input type="text" class="form-control justify-self-center" name="categoria" id="categoria">
                     <p class="errorValidacion">Completa este campo</p>
                     <button class="btn fw-bold mt-2 justify-self-center botonRoomlyn">Agregar</button>
                 </form>
@@ -53,12 +53,12 @@ $sqlCategorias->execute();
                     <span class="btnVolverHab">
                         < Volver</span>
                             <label for="editcategoria" class="mb-1">Nombre de la categoria*</label>
-                            <input type="text" class="form-control justify-self-center" style="max-width: 300px;" name="editcategoria" id="editcategoria">
+                            <input type="text" class="form-control justify-self-center" name="editcategoria" id="editcategoria">
                             <p class="errorValidacion">Completa este campo</p>
                             <button class="btn fw-bold mt-2 justify-self-center botonRoomlyn">Editar</button>
                 </form>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 table-responsive-md mb-5">
                 <table class="table text-center" id="tablaCategorias" border="1">
                     <thead class="tabla-background">
                         <tr>
@@ -101,6 +101,11 @@ $sqlCategorias->execute();
             </div>
         </div>
     </div>
+
+    <!-- PIE DE PAGINA -->
+    <footer class="pie-de-pagina">
+        <p>Copyright 2023 ROOMLYN | Todos los derechos reservados</p>
+    </footer>
 
     <script src="../../js/scriptInventario.js"></script>
 

@@ -12,6 +12,8 @@ $sqlHab = $dbh->query("SELECT hb.id_habitacion, hb.id_hab_tipo, hb.id_hab_estado
 // Consulta SQL para obtener los productos activos
 $sqlProducto = $dbh->query("SELECT inv.id_producto, inv.id_categoria, inv.referencia, inv.nombre, inv.descripcion, inv.imagen, inv.precio_unitario, inv.cantidad_stock, inv.estado, inv.estadoProducto AS estado_producto, inv.fecha_ingreso, inv.fecha_sys, cat.estado AS estado_categoria FROM inventario_productos AS inv INNER JOIN inventario_categorias AS cat ON cat.id_categoria = inv.id_categoria WHERE inv.estadoProducto = 1 AND inv.estado = 1 AND cat.estado = 1")->fetchAll();
 
+$sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventario_categorias WHERE estado = 1")->fetchAll();
+
 ?>
 
 
@@ -33,33 +35,7 @@ $sqlProducto = $dbh->query("SELECT inv.id_producto, inv.id_categoria, inv.refere
     <link rel="stylesheet" href="../../css/estilosMenuAdmin.css">
     <link rel="stylesheet" href="../../css/estilosPlataformaAdmin.css">
     <link rel="stylesheet" href="../../css/estilosReservasAdmin.css">
-    <style>
-        .product-card {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .contenedorImagen {
-            width: 100%;
-            height: 100px;
-            overflow: hidden;
-        }
-
-        .contenedorImagen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cart-item {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/estilosPuntoVenta.css">
 </head>
 
 <body>
@@ -92,65 +68,47 @@ $sqlProducto = $dbh->query("SELECT inv.id_producto, inv.id_categoria, inv.refere
         <div class="row">
             <div class="col-md-8">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                    <input type="text" id="buscadorProducto" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <?php
 
-                    foreach ($sqlProducto as $producto):
-                    ?>
-
-                        <div class="col-md-3">
-                            <div class="product-card" data-id="<?php echo $producto['id_producto'] ?>">
-                                <div class="contenedorImagen d-flex justify-content-center">
-                                    <img src="../../<?php echo $producto['imagen'] ?>" class="card-img-top" alt="Producto 1">
-                                </div>
-                                <div class="card-body text-center mt-1">
-                                    <h5 class="fs-6"><?php echo $producto['nombre'] ?></h5>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    endforeach;
-
-                    ?>
+                <div class="input-group mb-3">
+                    <label for="filtroCategoria" class="mb-2 text-body-tertiary fw-bold">Filtrar por categoria</label>
+                    <select id="filtroCategoria" name="states[]" multiple="multiple">
+                        <option value="0" selected>Todos</option>
+                        <?php
+                        foreach ($sqlCategorias as $categoria):
+                        ?>
+                            <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre_categoria'] ?></option>
+                        <?php
+                        endforeach;
+                        ?>
+                    </select>
                 </div>
+                <div id="contenedorProductos"></div>
             </div>
             <div class="col-md-4">
                 <div class="cart-item mb-3">
                     <div class="tipoCliente">
-                        <select class="form-select mb-3">
+                        <select id="tipoCliente" class="form-select mb-3">
                             <option selected disabled>Destinatario de la venta</option>
-                            <option value="0">Publico general</option>
-                            <?php
-
-                            foreach ($sqlHab as $habitacion):
-                            ?>
-                                <option value="<?php echo $habitacion['id_habitacion'] ?>"><?php echo 'Habitación ' . $habitacion['nHabitacion'] ?></option>
-                            <?php
-                            endforeach;
-                            ?>
-
+                            <option value="0">Público general</option>
+                            <?php foreach ($sqlHab as $habitacion): ?>
+                                <option value="<?php echo $habitacion['id_habitacion']; ?>">
+                                    <?php echo 'Habitación ' . $habitacion['nHabitacion']; ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-                    <h5 class="mb-3">Venta</h5>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span>Vaso</span>
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-sm btn-outline-secondary">-</button>
-                            <span class="mx-2">1</span>
-                            <button class="btn btn-sm btn-outline-secondary">+</button>
-                        </div>
-                        <span>$50000</span>
-                    </div>
-                    <!-- Agrega más elementos del carrito aquí -->
+                    <h5 class="mb-3">Factura</h5>
+                    <div id="listaFactura"></div>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <strong>Total</strong>
-                        <strong>$1100000</strong>
+                        <strong>Total a pagar</strong>
+                        <strong id="totalFactura">$0</strong>
                     </div>
-                    <button class="btn botonRoomlyn w-100 mt-3">Generar venta</button>
+                    <button id="generarVenta" class="btn btn-success w-100 mt-3">Generar venta</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -164,6 +122,7 @@ $sqlProducto = $dbh->query("SELECT inv.id_producto, inv.id_categoria, inv.refere
     <script src="../../js/logoBase64Roomlyn.js"></script>
     <script src="../../js/driver.js"></script>
     <script src="../../js/scriptInventario.js"></script>
+    <script src="../../js/scriptPuntoVenta.js"></script>
 </body>
 
 </html>
