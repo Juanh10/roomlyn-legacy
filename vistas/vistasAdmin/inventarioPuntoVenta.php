@@ -102,10 +102,27 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
                     <h5 class="mb-3">Factura</h5>
                     <div id="listaFactura"></div>
                     <hr>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <strong>Total a pagar</strong>
-                        <strong id="totalFactura">$0</strong>
+                    <div class="factura">
+                        <div class="totalFactura d-flex justify-content-between align-items-center mb-2">
+                            <strong>Total factura</strong>
+                            <strong id="totalFactura">$0</strong>
+                        </div>
+
+                        <div class="totalPagar d-flex justify-content-between align-items-center mb-3">
+                            <strong>Total a pagar</strong>
+                            <strong id="totalPagar">$0</strong>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="number" id="cantidadCliente" class="form-control" placeholder="Cuánto dio el cliente">
+                        </div>
+
+                        <div class="devolverCliente d-flex justify-content-between align-items-center mb-2">
+                            <strong>Devolver al cliente</strong>
+                            <strong id="cantidadDevolver">$0</strong>
+                        </div>
                     </div>
+
                     <button id="generarVenta" class="btn btn-success w-100 mt-3">Generar venta</button>
                 </div>
 

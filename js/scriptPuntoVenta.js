@@ -115,15 +115,18 @@ $(document).ready(function () {
 
     function actualizarTotal() {
         let total = 0;
+        let totalFactura = 0;
         $(".productoFactura").each(function () {
             const isChecked = $(this).find(".productoCheck").is(":checked");
+            const precio = parseFloat($(this).data("precio"));
+            const cantidad = parseInt($(this).find(".cantidad").text());
             if (isChecked) {
-                const precio = parseFloat($(this).data("precio"));
-                const cantidad = parseInt($(this).find(".cantidad").text());
                 total += precio * cantidad;
             }
+            totalFactura += precio * cantidad;
         });
-        $("#totalFactura").text(`$${formatearPrecio(total)}`);
+        $("#totalPagar").text(`$${formatearPrecio(total)}`);
+        $("#totalFactura").text(`$${formatearPrecio(totalFactura)}`);
     }
 
     // Función para formatear precios
@@ -137,39 +140,71 @@ $(document).ready(function () {
         return precioFormateado;
     }
 
+    $("#cantidadCliente").on("input", function () {
+        const cantidadCliente = $(this).val();
+        const totalPagar = parseFloat($("#totalPagar").text().replace(/[$,]/g, ""));
+
+        //Calcuar cuanto toca devolver
+        let totalDevolver = Math.max(cantidadCliente - totalPagar, 0);
+
+        // Actualizar el campo de devolución
+        $("#cantidadDevolver").text(`$${formatearPrecio(totalDevolver)}`);
+
+    });
+
     // Generar venta
     $("#generarVenta").click(function () {
         const productos = [];
         $(".productoFactura").each(function () {
-            const id = $(this).data("id");
-            const cantidad = parseInt($(this).find(".cantidad").text());
-            const isChecked = $(this).find(".productoCheck").is(":checked");
+            const id = $(this).data("id"); 
+            const cantidadTexto = $(this).find(".cantidad").text().trim(); 
+            const cantidad = parseInt(cantidadTexto, 10); 
+            const isChecked = $(this).find(".productoCheck").is(":checked"); 
 
-            productos.push({
-                id: id,
-                cantidad: cantidad,
-                pagar: isChecked // True si se paga ahora, false si queda pendiente
-            });
+            if (!isNaN(cantidad)) { // Validar que la cantidad sea un número válido
+                productos.push({
+                    id: id,
+                    cantidad: cantidad,
+                    pagar: isChecked
+                });
+            } else {
+                console.error("Cantidad inválida para el producto con ID: " + id);
+            }
         });
+
+        console.log(productos);
+        
 
         const tipoCliente = $("#tipoCliente").val();
 
-        $.ajax({
-            url: 'generar_venta.php',
-            method: 'POST',
-            data: {
-                tipoCliente: tipoCliente,
-                productos: JSON.stringify(productos)
-            },
-            success: function (response) {
-                alert("Venta generada con éxito");
-                console.log(response);
-            },
-            error: function (xhr, status, error) {
-                console.error("Error:", error);
-            }
-        });
-    });
+        if(tipoCliente == null){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Selecciona el destinario de la venta',
+                toast: true,
+                position: 'top-end',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }else{
+              $.ajax({
+                  url: 'generar_venta.php',
+                  method: 'POST',
+                  data: {
+                      tipoCliente: tipoCliente,
+                      productos: JSON.stringify(productos)
+                  },
+                  success: function (response) {
+                      alert("Venta generada con éxito");
+                      console.log(response);
+                  },
+                  error: function (xhr, status, error) {
+                      console.error("Error:", error);
+                  }
+              });
+        }
 
+    });
 
 });
