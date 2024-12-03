@@ -7,7 +7,7 @@ if (empty($_SESSION['id_caja'])) { //* Si el id de la caja es vacio es porque es
 
 include_once "../../procesos/config/conex.php";
 
-$sqlHab = $dbh->query("SELECT hb.id_habitacion, hb.id_hab_tipo, hb.id_hab_estado, hb.nHabitacion, hb.tipoCama, hb.cantidadPersonasHab, hb.estado, hbt.tipoHabitacion, hbe.estado_habitacion, hbs.servicio, hbe.estado_habitacion FROM habitaciones AS hb INNER JOIN habitaciones_tipos AS hbt ON hbt.id_hab_tipo = hb.id_hab_tipo INNER JOIN habitaciones_estado AS hbe ON hbe.id_hab_estado = hb.id_hab_estado INNER JOIN habitaciones_servicios hbs ON hbs.id_servicio = hb.id_servicio  WHERE hb.estado = 1 ORDER BY hb.nHabitacion ASC")->fetchAll();
+$sqlHab = $dbh->query("SELECT hb.id_habitacion, hb.id_hab_tipo, hb.id_hab_estado, hb.nHabitacion, hb.tipoCama, hb.cantidadPersonasHab, hb.estado, hbt.tipoHabitacion, hbe.estado_habitacion, hbs.servicio, hbe.estado_habitacion FROM habitaciones AS hb INNER JOIN habitaciones_tipos AS hbt ON hbt.id_hab_tipo = hb.id_hab_tipo INNER JOIN habitaciones_estado AS hbe ON hbe.id_hab_estado = hb.id_hab_estado INNER JOIN habitaciones_servicios hbs ON hbs.id_servicio = hb.id_servicio  WHERE hb.estado = 1 AND hb.id_hab_estado = 4 ORDER BY hb.nHabitacion ASC")->fetchAll();
 
 // Consulta SQL para obtener los productos activos
 $sqlProducto = $dbh->query("SELECT inv.id_producto, inv.id_categoria, inv.referencia, inv.nombre, inv.descripcion, inv.imagen, inv.precio_unitario, inv.cantidad_stock, inv.estado, inv.estadoProducto AS estado_producto, inv.fecha_ingreso, inv.fecha_sys, cat.estado AS estado_categoria FROM inventario_productos AS inv INNER JOIN inventario_categorias AS cat ON cat.id_categoria = inv.id_categoria WHERE inv.estadoProducto = 1 AND inv.estado = 1 AND cat.estado = 1")->fetchAll();
@@ -102,7 +102,7 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
                     <h5 class="mb-3">Factura</h5>
                     <div id="listaFactura"></div>
                     <hr>
-                    <div class="factura">
+                    <div class="factura" data-caja = "<?php echo $_SESSION['id_caja'] ?>">
                         <div class="totalFactura d-flex justify-content-between align-items-center mb-2">
                             <strong>Total factura</strong>
                             <strong id="totalFactura">$0</strong>

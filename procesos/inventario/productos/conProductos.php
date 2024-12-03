@@ -6,6 +6,8 @@ date_default_timezone_set("America/Bogota");
 
 session_start();
 
+$idEmpleado = $_SESSION['id_empleado'];
+
 // Verificar que la solicitud sea POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -216,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $sqlUpdateEstado = $dbh->prepare("UPDATE inventario_productos SET estadoProducto = :estadoProducto WHERE id_producto = :idProducto");
                     $sqlUpdateEstado->bindParam(':estadoProducto', $estadoProducto, PDO::PARAM_INT);
                     $sqlUpdateEstado->bindParam(':idProducto', $idProducto, PDO::PARAM_INT);
-        
+
                     if ($sqlUpdateEstado->execute()) {
                         echo json_encode(['success' => true]);
                     } else {
@@ -228,14 +230,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 echo json_encode(['success' => false, 'error' => 'Datos incompletos.']);
             }
+        } else if ($action === "updateCantidad") {
+            $idProducto = $_POST['id_productoCant'];
+            $accionCantidad = $_POST['accionCantidad'];
+            $cantidad = $_POST['cantidad_stock'];
+            $estado = 1;
+            $fechaActual = new DateTime();
+            $fechaYHora = $fechaActual->format('Y-m-d H:i:s');
+
+            // Determinar si sumar o restar
+            if ($accionCantidad == 1) {
+                // Preparar la consulta de actualización
+                $sqlProducto = $dbh->prepare("UPDATE inventario_productos SET cantidad_stock = cantidad_stock + :cantidad WHERE id_producto = :id");
+                // Preparar la consulta de inserción
+                $sqlEntrada = $dbh->prepare("INSERT INTO inventario_entradas(id_empleado, id_producto, cantidad, estado, fecha_sys) VALUES (:id, :producto, :cant, :est, :fecha)");
+
+                $sqlEntrada->bindParam(':id', $idEmpleado);
+                $sqlEntrada->bindParam(':producto', $idProducto);
+                $sqlEntrada->bindParam(':cant', $cantidad);
+                $sqlEntrada->bindParam(':est', $estado);
+                $sqlEntrada->bindParam(':fecha', $fechaYHora);
+            } else {
+                $sqlProducto = $dbh->prepare("UPDATE inventario_productos SET cantidad_stock = cantidad_stock - :cantidad WHERE id_producto = :id");
+            }
+
+            $sqlProducto->bindParam(':cantidad', $cantidad);
+            $sqlProducto->bindParam(':id', $idProducto);
+
+            if ($sqlProducto->execute()) {
+                if (isset($sqlEntrada)) {
+                    if ($sqlEntrada->execute()) {
+                        $_SESSION['msjExito'] = "Cantidad actualizada exitosamente";
+                        header("location: ../../../vistas/vistasAdmin/inventario_productos.php");
+                        exit;
+                    } else {
+                        $_SESSION['msjError'] = "Error al insertar la entrada";
+                        header("location: ../../../vistas/vistasAdmin/inventario_productos.php");
+                        exit;
+                    }
+                } else {
+                    $_SESSION['msjExito'] = "Cantidad actualizada exitosamente";
+                    header("location: ../../../vistas/vistasAdmin/inventario_productos.php");
+                    exit;
+                }
+            } else {
+                $_SESSION['msjError'] = "Error al actualizar la cantidad";
+                header("location: ../../../vistas/vistasAdmin/inventario_productos.php");
+                exit;
+            }
         } else {
             $_SESSION['msjError'] = "Acción no válida.";
             header("location: ../../../vistas/vistasAdmin/inventario_productos.php");
             exit;
         }
-        
     }
-    
 } else {
     // Redirigir si no se accede por POST
     header("location: ../../../vistas/vistasAdmin/inventario_productos.php");

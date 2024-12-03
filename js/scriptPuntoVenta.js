@@ -102,10 +102,10 @@ $(document).ready(function () {
         const tipoCliente = $(this).val();
         if (tipoCliente === "0") {
             // Público general: seleccionar todos los productos automáticamente
-            $(".productoCheck").prop("checked", true);
+            $(".productoCheck").prop("checked", true).prop("disabled", true);
         } else {
             // Habitaciones: permitir seleccionar productos
-            $(".productoCheck").prop("checked", false);
+            $(".productoCheck").prop("checked", false).prop("disabled", false);
         }
         actualizarTotal();
     });
@@ -156,10 +156,10 @@ $(document).ready(function () {
     $("#generarVenta").click(function () {
         const productos = [];
         $(".productoFactura").each(function () {
-            const id = $(this).data("id"); 
-            const cantidadTexto = $(this).find(".cantidad").text().trim(); 
-            const cantidad = parseInt(cantidadTexto, 10); 
-            const isChecked = $(this).find(".productoCheck").is(":checked"); 
+            const id = $(this).data("id");
+            const cantidadTexto = $(this).find(".cantidad").text().trim();
+            const cantidad = parseInt(cantidadTexto, 10);
+            const isChecked = $(this).find(".productoCheck").is(":checked");
 
             if (!isNaN(cantidad)) { // Validar que la cantidad sea un número válido
                 productos.push({
@@ -172,12 +172,12 @@ $(document).ready(function () {
             }
         });
 
-        console.log(productos);
-        
 
         const tipoCliente = $("#tipoCliente").val();
+        const caja = $(".factura").data("caja");
 
-        if(tipoCliente == null){
+
+        if (tipoCliente == null) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -187,22 +187,51 @@ $(document).ready(function () {
                 timer: 1500,
                 showConfirmButton: false
             });
-        }else{
-              $.ajax({
-                  url: 'generar_venta.php',
-                  method: 'POST',
-                  data: {
-                      tipoCliente: tipoCliente,
-                      productos: JSON.stringify(productos)
-                  },
-                  success: function (response) {
-                      alert("Venta generada con éxito");
-                      console.log(response);
-                  },
-                  error: function (xhr, status, error) {
-                      console.error("Error:", error);
-                  }
-              });
+        } else {
+            $.ajax({
+                url: '../../procesos/inventario/punto_venta/conGenerarVenta.php',
+                method: 'POST',
+                data: {
+                    caja: caja,
+                    tipoCliente: tipoCliente,
+                    productos: JSON.stringify(productos)
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Venta generada',
+                            text: response.message,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+
+                        // Vaciar la factura
+                        $("#listaFactura").empty(); // Limpia los productos de la factura
+
+                        // Resetear el total a pagar y total de la factura
+                        $("#totalPagar").text("$0");
+                        $("#totalFactura").text("$0");
+                        $("#cantidadCliente").val(''); 
+                        $("#cantidadDevolver").text('$0');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message,
+                            toast: true,
+                            position: 'top-end',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                }
+            });
         }
 
     });

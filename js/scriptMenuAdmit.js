@@ -471,6 +471,8 @@ $(document).ready(function () {
   initDatatables($('#tablaHabitaciones'));
   initDatatables($('#tablaReservas'));
   initDatatables($('#tablaReservasFiltro'));
+  initDatatables($('#tablaEntradas'));
+  initDatatables($('#tablaProductos'));
   //initDatatables($('#tablaCategorias'));
 
   function cambiarEstado(idHabitacion, archivo, contenido) {

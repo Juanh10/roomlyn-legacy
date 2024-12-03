@@ -49,12 +49,12 @@ $(document).ready(function () {
                     // Lógica de agregar categoría
                     if (respuesta.id) {
                         tablaCat.row.add([
-                            respuesta.id,
-                            respuesta.nombre,
+                            `<div class="text-center">${respuesta.id}</div>`,
+                            `<div class="text-center">${respuesta.nombre}</div>`,
                             `
-                            <div class="accion">
+                            <div class="text-center">
                                 <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditarCategoria" data-id="${respuesta.id}" title="Editar"></span>
-                                <form class="formEliminarCategoria">
+                                <form class="formEliminarCategoria d-inline">
                                     <input type="hidden" name="id_categoria" value="${respuesta.id}">
                                     <button type="submit" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar">
                                         <i class="bi bi-trash"></i>
@@ -275,33 +275,6 @@ $(document).ready(function () {
 
     //* PRODUCTOS
 
-    $('#tablaProductos').DataTable({
-        "order": [],
-        "bSort": false,
-        "lengthMenu": [5, 10, 20, 30],
-        responsive: true,
-        language: {
-            "decimal": ",",
-            "thousands": ".",
-            "lengthMenu": "Mostrar _MENU_ registros",
-            "info": "Total registros: _TOTAL_",
-            "infoEmpty": "Mostrando 0 a 0 de 0 registros",
-            "infoFiltered": "(filtrado de _MAX_ registros en total)",
-            "search": "Buscar:",
-            "zeroRecords": "No se encontraron registros",
-            "emptyTable": "No hay datos disponibles en la tabla",
-            "paginate": {
-                "first": "<<",
-                "previous": "<",
-                "next": ">",
-                "last": ">>"
-            },
-            "aria": {
-                "sortAscending": ": activar para ordenar la columna de manera ascendente",
-                "sortDescending": ": activar para ordenar la columna de manera descendente"
-            }
-        }
-    });
 
     const formProductos = $('#formularioProducto');
 
@@ -553,7 +526,7 @@ $(document).ready(function () {
 
         console.log(idProducto);
         console.log(estadoProducto);
-        
+
 
         // Enviar la actualización al servidor
         $.ajax({
@@ -749,6 +722,8 @@ $(document).ready(function () {
         }
     });
 
+    // CERRAR SESION CAJA
+
     const formCerrarSesionCaja = $('#formCerrarSesionCaja');
 
     formCerrarSesionCaja.submit(function (e) {
@@ -772,5 +747,48 @@ $(document).ready(function () {
         });
 
     });
+
+
+    // SECCION DE AGREGAR CANTIDAD EN LOS PRODUCTOS
+
+    $(document).on('click', '.btnEditarCantidadProducto', function () {
+        const idProducto = $(this).data('id'); 
+        $('#id_productoCant').val(idProducto); 
+    });
+
+    // Evento para validar los campos y enviar el formulario
+    $('#agregarCantidad').click(function (e) {
+        e.preventDefault();
+
+        const cantidad = $('#cantidad_stock').val().trim();
+        const idProducto = $('#id_productoCant').val();
+        const accionCantidad = $('#accionCantidad').val(); 
+
+        // Validar que todos los campos requeridos están llenos
+        if (!idProducto) {
+            console.error("No se ha seleccionado un producto.");
+            return;
+        }
+
+        if (!cantidad || isNaN(cantidad) || cantidad <= 0) {
+            $('.cantidadStock').find('p').addClass('errorValidacionInput');
+            $('.cantidadStock').find('p').text("Por favor, ingresa una cantidad válida.");
+            return;
+        } else {
+            $('.cantidadStock').find('p').removeClass('errorValidacionInput');
+            $('.cantidadStock').find('p').text("");
+        }
+
+        if (!accionCantidad) {
+            console.error("No se ha seleccionado una acción válida.");
+            return;
+        }
+
+        // Si todo es válido, enviar el formulario
+        $('#formularioProductoCantidad').submit();
+    });
+
+    // DATATABLES ENTRADAS
+
 
 });

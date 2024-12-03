@@ -58,6 +58,7 @@ $stmt->execute();
                                 <th class="text-center" scope="col">Precio</th>
                                 <th class="text-center" scope="col">Imagen</th>
                                 <th class="text-center" scope="col">Descripcion</th>
+                                <th class="text-center" scope="col">Agregar</th>
                                 <th class="text-center" scope="col">Estado</th>
                                 <th class="text-center" scope="col">Acción</th>
                             </tr>
@@ -86,6 +87,9 @@ $stmt->execute();
                                     <td class="text-center"><?php echo '$' . number_format($row['precio_unitario'], 0); ?></td>
                                     <td class="text-center"><img src="../../<?php echo $row['imagen']; ?>" width="80px" height="80px" alt=""></td>
                                     <td class="text-center"><?php echo $row['descripcion']; ?></td>
+                                    <td class="text-center">
+                                        <span class="bi bi-plus-circle-fill btn btn-primary btn-sm botonEditar btnEditarCantidadProducto" data-id="<?php echo $row['id_producto'] ?>" data-bs-toggle="modal" data-bs-target="#modalAgregarCantidad" title="Agregar cantidad"></span>
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <label class="switch">
@@ -96,15 +100,21 @@ $stmt->execute();
                                     </td>
                                     <td>
                                         <div class="accion d-flex justify-content-center">
-                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btnEditarCategoria" data-id="<?php echo $row['id_producto'] ?>" data-bs-toggle="modal" data-bs-target="#modalEditProducto" title="Editar"></span>
-                                            <form action="../../procesos/inventario/productos/conProductos.php" method="post" id="formEliminarProducto_<?php echo $row['id_producto']; ?>" class="formEliminarProducto">
-                                                <input type="hidden" name="id_producto" value="<?php echo $row['id_producto'] ?>">
-                                                <input type="hidden" name="action" value="delete">
-                                                <button type="button" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar" data-id="<?php echo $row['id_producto']; ?>">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
+                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-id="<?php echo $row['id_producto'] ?>" data-bs-toggle="modal" data-bs-target="#modalEditProducto" title="Editar"></span>
+                                            <?php
+                                            if ($_SESSION['id_empleado'] == 1):
+                                            ?>
+                                                <form action="../../procesos/inventario/productos/conProductos.php" method="post" id="formEliminarProducto_<?php echo $row['id_producto']; ?>" class="formEliminarProducto">
+                                                    <input type="hidden" name="id_producto" value="<?php echo $row['id_producto'] ?>">
+                                                    <input type="hidden" name="action" value="delete">
+                                                    <button type="button" class="btn btn-danger btn-sm eliminarbtn" title="Deshabilitar" data-id="<?php echo $row['id_producto']; ?>">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
 
+                                            <?php
+                                            endif;
+                                            ?>
                                         </div>
                                     </td>
                                 </tr>
@@ -236,11 +246,26 @@ $stmt->execute();
                             <img id="imagenPreview" src="" alt="Imagen del producto" class="img-fluid mb-2" style="max-width: 100px; display: none;">
                         </div>
 
-                        <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="cantidad_catEdit" name="cantidad_catEdit" placeholder="9" required>
-                            <label for="cantidad_cat">Cantidad en stock*</label>
-                            <p></p>
-                        </div>
+                        <?php
+
+                        if ($_SESSION['id_empleado'] == 1):
+                        ?>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="cantidad_catEdit" name="cantidad_catEdit" placeholder="9" required>
+                                <label for="cantidad_cat">Cantidad en stock*</label>
+                                <p></p>
+                            </div>
+                        <?php
+                        else:
+                        ?>
+                            <div class="form-floating mb-3">
+                                <input type="hidden" class="form-control" id="cantidad_catEdit" name="cantidad_catEdit" placeholder="9" required>
+                                <p></p>
+                            </div>
+                        <?php
+                        endif;
+
+                        ?>
 
                         <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="precio_catEdit" name="precio_catEdit" placeholder="4000" required>
@@ -255,6 +280,47 @@ $stmt->execute();
                 </div>
                 <div class="modal-footer">
                     <input type="submit" value="Editar" class="btn botonRoomlyn fw-bold">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal agregar cantidad-->
+    <div class="modal fade" id="modalAgregarCantidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header fondo-modal">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Cantidad</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioProductoCantidad" action="../../procesos/inventario/productos/conProductos.php" method="post">
+                        <input type="hidden" name="id_productoCant" id="id_productoCant">
+                        <input type="hidden" name="action" value="updateCantidad">
+                        <div class="mb-3">
+                            <select id="accionCantidad" name="accionCantidad" class="form-select" aria-label="Default select example" required>
+                                <option value="1" selected>+</option>
+                                <?php
+                                if ($_SESSION['id_empleado'] == 1) {
+                                ?>
+                                    <option value="2">-</option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <p></p>
+                        </div>
+
+                        <div class="form-floating mb-3 cantidadStock">
+                            <input type="number" class="form-control" id="cantidad_stock" name="cantidad_stock" placeholder="9">
+                            <label for="cantidad_cat">Agrega la cantidad*</label>
+                            <p></p>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Agregar" id="agregarCantidad" class="btn botonRoomlyn fw-bold">
                 </div>
                 </form>
             </div>

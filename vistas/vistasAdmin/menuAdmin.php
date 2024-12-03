@@ -124,8 +124,13 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund_inventario" href="inventario_productos.php" title="Administrar articulos">
                                 <i class="bi bi-bag-check-fill"></i>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php" title="Reportes">
-                                <i class="bi bi-clipboard2-check-fill"></i>
+
+                            <a class="enlaceMenuSecund_inventario" href="inventarioEntradas.php" title="Entradas">
+                                <i class="bi bi-box-arrow-in-down"></i>
+                            </a>
+
+                            <a class="enlaceMenuSecund_inventario" href="inventarioSalidas.php" title="Salidas">
+                                <i class="bi bi-box-arrow-up"></i>
                             </a>
 
                             <?php
@@ -265,10 +270,16 @@ $dbh->query($sqlFecha);
                                 <span>Productos</span>
                             </a>
 
-                            <a class="enlaceMenuSecund_inventario" href="habitaciones.php">
-                                <i class="bi bi-clipboard2-check-fill"></i>
-                                <span>Reportes</span>
+                            <a class="enlaceMenuSecund_inventario" href="inventarioEntradas.php">
+                                <i class="bi bi-box-arrow-in-down"></i>
+                                <span>Entradas</span>
                             </a>
+
+                            <a class="enlaceMenuSecund_inventario" href="inventarioSalidas.php">
+                                <i class="bi bi-box-arrow-up"></i>
+                                <span>Salidas</span>
+                            </a>
+
                             <?php
                             if ($_SESSION['tipoUsuario'] == 1):
                             ?>
@@ -279,7 +290,7 @@ $dbh->query($sqlFecha);
                             <?php
                             else:
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioPuntoVenta.php">
+                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php">
                                     <i class="bi bi-box-seam-fill"></i>
                                     <span>Punto de venta</span>
                                 </a>
