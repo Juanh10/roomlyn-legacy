@@ -57,7 +57,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                         <div class="col-md-3 mb-3">
                             <div class="card cardInformacion tarjeta">
                                 <h4 style="text-align: center; margin: 8px;" class="numero-cant">$<?php echo number_format($resultTotal['ingresos_totales'], 0, ',', '.') ?></h4>
-                                <p style="font-size: 12px; text-align: center;" class="card-text">Ingresos mensuales</p>
+                                <p style="font-size: 12px; text-align: center;" class="card-text">Ingresos mensuales en reservas</p>
                             </div>
                         </div>
 
@@ -92,9 +92,9 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                     <th>Fecha ingreso</th>
                                     <th>Fecha salida</th>
                                     <th>Estado</th>
-                                    <th>Total</th>
-                                    <th>Monto abonado</th>
-                                    <th>Saldo Pendiente</th>
+                                    <th>Reserva</th>
+                                    <th>Consumo</th>
+                                    <!-- <th>Total</th> -->
                                     <th class="no-export">Acción</th>
                                 </tr>
                             </thead>
@@ -103,6 +103,7 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
 
                                 foreach ($dbh->query($sqlReservas) as $row) :
 
+                                    
                                     $id = $row['id_reserva'];
                                     $idHab = $row['id_habitacion'];
                                     $habitacion = $row['nHabitacion'];
@@ -118,6 +119,11 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                     $monto = $row['monto_abonado'];
                                     $saldo = $row['saldo_pendiente'];
                                     $fechaSys = formatearFecha($row['fecha_sys']);
+                                    
+                                    $sqlVenta = $dbh->query("SELECT SUM(total_venta) as total_venta FROM inventario_ventas WHERE id_reserva = $id")->fetch();
+                                    $totalConsumo = $sqlVenta['total_venta'];
+
+                                    $totalFactura = $total + $totalConsumo;
                                 ?>
 
                                     <tr class="filas filasUsuario">
@@ -128,8 +134,8 @@ $sqlEstados = "SELECT er.nombre_estado, COUNT(*) AS cantidad_reservas FROM reser
                                         <td class="datos"><?php echo $fechaSalida ?></td>
                                         <td class="datos"><?php echo $estado ?></td>
                                         <td class="datos"><?php echo number_format($total, 0, ',', '.') ?></td>
-                                        <td class="datos"><?php echo number_format($monto, 0, ',', '.') ?></td>
-                                        <td class="datos"><?php echo number_format($saldo, 0, ',', '.') ?></td>
+                                        <td class="datos"><?php echo number_format($totalConsumo, 0, ',', '.') ?></td>
+                                        <!-- <td class="datos"><?php // echo number_format($totalFactura, 0, ',', '.') ?></td> -->
                                         <td>
                                             <div class="accion">
                                                 <span class="bi bi-search btn btn-primary btn-sm mx-2 btnInforCli" data-bs-toggle="modal" data-bs-target="#modalVerInformacion" title="Ver información del cliente" id="<?php echo $idCliente ?>"></span>

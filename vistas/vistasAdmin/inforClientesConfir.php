@@ -23,17 +23,58 @@ $idRes = $resultado['id_reserva'];
 
         if ($resultado != false) :
         ?>
-            <div class="informacionCliente">
-                <h1 class="fs-3 text-center mb-3">Información del cliente</h1>
+             <div class="informacionCliente">
+             <div class="row mb-4">
+                <div class="col-md-12">
+                    <h6 class="text-center fw-bold">Datos del Cliente</h6>
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Nombre</th>
+                                <td><?php echo $resultado['nombres'] . " " . $resultado['apellidos']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Documento</th>
+                                <td><?php echo $resultado['documento']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Celular</th>
+                                <td><?php echo $resultado['celular']; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                <p>Nombre: <?php echo $resultado['nombres'] . " " . $resultado['apellidos'] ?></p>
-                <p>Documento: <?php echo $resultado['documento'] ?></p>
-                <p>Celular: <?php echo $resultado['celular'] ?></p>
-                <p>Fecha de ingreso: <?php echo formatearFecha($resultado['fecha_ingreso']) ?></p>
-                <p>Fecha de salida: <?php echo formatearFecha($resultado['fecha_salida']) ?></p>
-                <p>Total Reserva: <?php echo number_format($resultado['total_reserva'], 0, ',', '.') ?></p>
-                <p>Monto abonado: <?php echo number_format($resultado['monto_abonado'], 0, ',', '.') ?></p>
-                <p>Saldo pendiente: <?php echo number_format($resultado['saldo_pendiente'], 0, ',', '.') ?></p>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h6 class="text-center fw-bold">Detalles de la Reserva</h6>
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Fecha de Ingreso</th>
+                                <td><?php echo formatearFecha($resultado['fecha_ingreso']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Fecha de Salida</th>
+                                <td><?php echo formatearFecha($resultado['fecha_salida']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Total Reserva</th>
+                                <td><?php echo number_format($resultado['total_reserva'], 0, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Monto Abonado</th>
+                                <td><?php echo number_format($resultado['monto_abonado'], 0, ',', '.'); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Saldo Pendiente</th>
+                                <td class="text-danger fw-bold"><?php echo number_format($resultado['saldo_pendiente'], 0, ',', '.'); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             </div>
 
             <div class="btnEstado d-flex flex-row justify-content-center">

@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 break;
 
             default:
-                echo "Pcurrió un error";
+                echo "Ocurrió un error";
                 break;
         }
 

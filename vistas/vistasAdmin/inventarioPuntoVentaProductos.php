@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
                 </div>
                 <div class="card-body text-center mt-1">
                     <h5 class="fs-6"><?php echo $producto['nombre'] ?></h5>
+                    <h5 class="fs-6">$<?php echo number_format($producto['precio_unitario'], 0, ',', '.') ?></h5>
                 </div>
             </div>
         </div>

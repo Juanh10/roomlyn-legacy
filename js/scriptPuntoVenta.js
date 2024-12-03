@@ -73,19 +73,34 @@ $(document).ready(function () {
 
     // Cambiar cantidad de productos
     $("#listaFactura").on("click", ".aumentarCantidad", function () {
+        const producto = $(this).closest(".productoFactura");
         const cantidadSpan = $(this).closest(".cantidadProducto").find(".cantidad");
         let cantidad = parseInt(cantidadSpan.text());
+        const precioUnitario = parseFloat(producto.data("precio"));
         cantidad++;
+
+        // Actualizar precio total del producto
+        const nuevoPrecio = precioUnitario * cantidad;
+        producto.find(".precioProducto").text(formatearPrecio(nuevoPrecio));
+
         cantidadSpan.text(cantidad);
         actualizarTotal();
     });
 
     $("#listaFactura").on("click", ".disminuirCantidad", function () {
+        const producto = $(this).closest(".productoFactura");
         const cantidadSpan = $(this).closest(".cantidadProducto").find(".cantidad");
         let cantidad = parseInt(cantidadSpan.text());
+        const precioUnitario = parseFloat(producto.data("precio"));
+
         if (cantidad > 1) {
             cantidad--;
             cantidadSpan.text(cantidad);
+
+            // Actualizar precio total del producto
+            const nuevoPrecio = precioUnitario * cantidad;
+            producto.find(".precioProducto").text(formatearPrecio(nuevoPrecio));
+            
             actualizarTotal();
         }
     });
@@ -136,7 +151,7 @@ $(document).ready(function () {
             return 0;
         }
         let precioFormateado = precio.toFixed(0);
-        precioFormateado = precioFormateado.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        precioFormateado = precioFormateado.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         return precioFormateado;
     }
 
@@ -214,7 +229,7 @@ $(document).ready(function () {
                         // Resetear el total a pagar y total de la factura
                         $("#totalPagar").text("$0");
                         $("#totalFactura").text("$0");
-                        $("#cantidadCliente").val(''); 
+                        $("#cantidadCliente").val('');
                         $("#cantidadDevolver").text('$0');
                     } else {
                         Swal.fire({
