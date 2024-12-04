@@ -752,8 +752,8 @@ $(document).ready(function () {
     // SECCION DE AGREGAR CANTIDAD EN LOS PRODUCTOS
 
     $(document).on('click', '.btnEditarCantidadProducto', function () {
-        const idProducto = $(this).data('id'); 
-        $('#id_productoCant').val(idProducto); 
+        const idProducto = $(this).data('id');
+        $('#id_productoCant').val(idProducto);
     });
 
     // Evento para validar los campos y enviar el formulario
@@ -842,9 +842,9 @@ $(document).ready(function () {
                 id_venta: idVenta
             },
             async: false, // Necesario para completar antes de renderizar
-            success: function(response) {
+            success: function (response) {
                 const detalles = JSON.parse(response);
-                detalles.forEach(function(detalle) {
+                detalles.forEach(function (detalle) {
                     contenido += `<tr>
                         <td class="text-center">${detalle.producto_nombre}</td>
                         <td class="text-center">${detalle.producto_referencia}</td>
@@ -854,7 +854,7 @@ $(document).ready(function () {
                     </tr>`;
                 });
             },
-            error: function() {
+            error: function () {
                 contenido += '<tr><td colspan="5">Error al cargar los detalles</td></tr>';
             }
         });
@@ -864,7 +864,7 @@ $(document).ready(function () {
     }
 
     // Manejo de clic para expandir o contraer detalles
-    $('#tablaSalidas tbody').on('click', 'td#detallesVenta', function() {
+    $('#tablaSalidas tbody').on('click', 'td#detallesVenta', function () {
         const tr = $(this).closest('tr');
         const row = table.row(tr);
         const idVenta = $(this).data('id'); // Obtener el id_venta desde la celda
@@ -884,6 +884,37 @@ $(document).ready(function () {
             icon.removeClass('bi-caret-down-fill').addClass('bi-caret-up-fill');
         }
     });
+
+
+   /*  //* DRIVERJS GUIA PARA INVENTARIO
+
+    const driver = window.driver.js.driver;
+
+    if (!localStorage.getItem('mensajeMostrado')) {
+
+        const driverObj = driver({
+            showProgress: false,
+            steps: [
+                {
+                    element: '.btn-buscadorNfc',
+                    popover: {
+                        title: 'Buscar reservas con NFC',
+                        description: 'Haz clic en el botón para ver información de una reservación. Una vez que lo hagas, podrás visualizar detalles importantes como el número de la reserva, el estado actual, fechas de entrada y salida, así como cualquier solicitud o servicio adicional que hayas solicitado.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                }
+            ],
+            doneBtnText: 'Aceptar',
+            nextBtnText: 'Siguiente',
+            prevBtnText: 'Anterior',
+        });
+
+        driverObj.drive();
+
+        // guardar en localStorage 
+        localStorage.setItem('mensajeMostrado', 'true');
+    } */
 
 
 });

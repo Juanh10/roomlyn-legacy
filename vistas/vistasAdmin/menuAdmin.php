@@ -92,7 +92,7 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund" href="tipoHabitaciones.php" title="Listado tipo de habitaciones">
                                 <i class="bi bi-card-checklist"></i>
                             </a>
-                            <a class="enlaceMenuSecund" href="habitaciones.php" title="Habitaciones">
+                            <a class="enlaceMenuSecund" href="habitaciones.php" title="Gestionar Habitaciones">
                                 <i class="material-symbols-outlined">bed</i>
                             </a>
                         </div>
@@ -100,7 +100,7 @@ $dbh->query($sqlFecha);
                 </ul>
             </li>
 
-            <li class="list_item">
+            <li class="list_item menuInventario">
 
                 <div class="enlacePrincipal" id="flechaInventario">
                     <a class="enlaceMenu menuDesplegable_inventario" title="Inventario">
@@ -112,31 +112,31 @@ $dbh->query($sqlFecha);
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
-                            <a class="enlaceMenuSecund_inventario" href="inventario_categorias.php" title="Administrar categorias">
+                            <a class="enlaceMenuSecund_inventario adminCategorias" href="inventario_categorias.php" title="Administrar categorias">
                                 <i class="bi bi-tags-fill"></i>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="inventario_productos.php" title="Administrar articulos">
+                            <a class="enlaceMenuSecund_inventario adminProductos" href="inventario_productos.php" title="Administrar articulos">
                                 <i class="bi bi-bag-check-fill"></i>
                             </a>
 
-                            <a class="enlaceMenuSecund_inventario" href="inventarioEntradas.php" title="Entradas">
+                            <a class="enlaceMenuSecund_inventario adminEntradas" href="inventarioEntradas.php" title="Historial de Entradas">
                                 <i class="bi bi-box-arrow-in-down"></i>
                             </a>
 
-                            <a class="enlaceMenuSecund_inventario" href="inventarioSalidas.php" title="Salidas">
+                            <a class="enlaceMenuSecund_inventario adminSalidas" href="inventarioSalidas.php" title="Historial de Salidas">
                                 <i class="bi bi-box-arrow-up"></i>
                             </a>
 
                             <?php
                             if ($_SESSION['tipoUsuario'] == 1):
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioAdministrarPuntoVenta.php" title="Punto de venta">
+                                <a class="enlaceMenuSecund_inventario adminPuntoVenta" href="inventarioAdministrarPuntoVenta.php" title="Punto de venta">
                                     <i class="bi bi-box-seam-fill"></i>
                                 </a>
                             <?php
                             else:
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php" target="_blank" title="Punto de venta">
+                                <a class="enlaceMenuSecund_inventario adminPuntoVenta" href="inventarioLoginPuntoVenta.php" target="_blank" title="Punto de venta">
                                     <i class="bi bi-box-seam-fill"></i>
                                 </a>
                             <?php
@@ -244,7 +244,7 @@ $dbh->query($sqlFecha);
                 </ul>
             </li>
 
-            <li class="list_itemDesplegable">
+            <li class="list_itemDesplegable menuInventarioDesplegable">
                 <div class="enlacePrincipal" id="flechaMenuInventario">
                     <a class="enlaceMenu2 menuDesplegable_inventario">
                         <i class="bi bi-boxes"></i>
@@ -255,36 +255,36 @@ $dbh->query($sqlFecha);
                 <ul class="submenu">
                     <li class="list_itemSecund">
                         <div class="enlaceSecundarios">
-                            <a class="enlaceMenuSecund_inventario" href="inventario_categorias.php">
+                            <a class="enlaceMenuSecund_inventario adminCategoriasDesple" href="inventario_categorias.php">
                                 <i class="bi bi-tags-fill"></i>
                                 <span>Categorías</span>
                             </a>
-                            <a class="enlaceMenuSecund_inventario" href="inventario_productos.php">
+                            <a class="enlaceMenuSecund_inventario adminProductosDesple" href="inventario_productos.php">
                                 <i class="bi bi-bag-check-fill"></i>
                                 <span>Productos</span>
                             </a>
 
-                            <a class="enlaceMenuSecund_inventario" href="inventarioEntradas.php">
+                            <a class="enlaceMenuSecund_inventario adminEntradasDesple" href="inventarioEntradas.php">
                                 <i class="bi bi-box-arrow-in-down"></i>
-                                <span>Entradas</span>
+                                <span>Historial de Entradas</span>
                             </a>
 
-                            <a class="enlaceMenuSecund_inventario" href="inventarioSalidas.php">
+                            <a class="enlaceMenuSecund_inventario adminSalidasDesple" href="inventarioSalidas.php">
                                 <i class="bi bi-box-arrow-up"></i>
-                                <span>Salidas</span>
+                                <span>Historial de Salidas</span>
                             </a>
 
                             <?php
                             if ($_SESSION['tipoUsuario'] == 1):
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioAdministrarPuntoVenta.php">
+                                <a class="enlaceMenuSecund_inventario adminPuntoVentaDesple" href="inventarioAdministrarPuntoVenta.php">
                                     <i class="bi bi-box-seam-fill"></i>
                                     <span>Punto de venta</span>
                                 </a>
                             <?php
                             else:
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php" target="_blank">
+                                <a class="enlaceMenuSecund_inventario adminPuntoVentaDesple" href="inventarioLoginPuntoVenta.php" target="_blank">
                                     <i class="bi bi-box-seam-fill"></i>
                                     <span>Punto de venta</span>
                                 </a>

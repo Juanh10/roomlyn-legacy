@@ -42,7 +42,7 @@ $stmt->execute();
     <div class="contenido">
         <div class="row mx-0">
             <div class="col">
-                <div class="btnAdd mt-4 ms-5 mb-4">
+                <div class="btnAdd mt-4 ms-2 mb-4">
                     <button type="button" class="btn botonRoomlyn fw-bold" data-bs-toggle="modal" data-bs-target="#agregar">
                         Agregar
                     </button>

@@ -6,23 +6,23 @@ $(document).ready(function () {
     $('.pie-de-pagina p').toggleClass('activoBackground2');
   });
 
-  function subMenuDesplegable(id, icono){
+  function subMenuDesplegable(id, icono) {
     id.click(function () {
       $(icono).toggleClass('flechaActivo');// agregar clase
-  
+
       let height = 0;
       let menu = this.nextElementSibling; // seleccionar al hermano adyacente del elemento con la clase enlacePrincipal
-  
+
       if (menu.clientHeight == 0) {
         height = menu.scrollHeight;
       }
-  
+
       menu.style.height = `${height}px`;
-  
+
     });
   }
 
-  subMenuDesplegable($('#flechaHabitaciones'),$('.iconHabitaciones'));
+  subMenuDesplegable($('#flechaHabitaciones'), $('.iconHabitaciones'));
   subMenuDesplegable($('#flechaInventario'), $('.iconInventario'));
   subMenuDesplegable($('#flechaMenuHabitaciones'), $('.iconoHabitaciones'));
   subMenuDesplegable($('#flechaMenuInventario'), $('.IconoInventario'));
@@ -77,7 +77,6 @@ $(document).ready(function () {
 
   //* AGREGAR Y QUITAR CLASES A LOS ENLACES DEL MENU LATERAL
 
-
   $('.enlaceMenu2').each(function () { // RECORRER TODAS LAS URL DEL MENU
     let href2 = $(this).attr('href'); // GUARDAR EL ATRIBUTO HREF DE LOS MENU
 
@@ -86,6 +85,45 @@ $(document).ready(function () {
       return false; // ME RETORNA EL VALOR CUADNO ENCUENTRE EL ENLACE
     }
   });
+
+  //* Crear el contenedor del tooltip
+  $('body').append('<div id="custom-tooltip"></div>');
+
+  // Estilos del tooltip
+  $('#custom-tooltip').css({
+    position: 'absolute',
+    background: '#333',
+    color: '#fff',
+    padding: '5px 10px',
+    borderRadius: '5px',
+    fontSize: '12px',
+    display: 'none',
+    zIndex: 1000
+  });
+
+  // Mostrar el tooltip al pasar el cursor
+  $('.enlaceMenu, .enlaceMenuSecund, .enlaceMenuSecund_inventario').hover(
+    function (e) {
+      const title = $(this).attr('title');
+      if (title) {
+        $('#custom-tooltip').text(title).fadeIn(100);
+        $(this).removeAttr('title');
+      }
+    },
+    function () {
+      $(this).attr('title', $('#custom-tooltip').text());
+      $('#custom-tooltip').fadeOut(100);
+    }
+  );
+
+  // Mover el tooltip junto con el cursor
+  $('.enlaceMenu, .enlaceMenuSecund, .enlaceMenuSecund_inventario').mousemove(function (e) {
+    $('#custom-tooltip').css({
+      top: e.pageY + 10 + 'px',
+      left: e.pageX + 10 + 'px'
+    });
+  });
+
 
   //* SCRIPTS PARA MOSTRAR LA INFORMACION DE LOS TIPOS DE HABITACIONES EN LA PLATAFORMA DEL ADMINISTRADOR, PARA ESTO SE USA LA API fetch para el envio del ID del tipo que se esta seleccionando
 
@@ -656,5 +694,97 @@ $(document).ready(function () {
       }
     });
   });
+
+  //* DRIVERJS GUIA PARA INVENTARIO
+
+  const driver = window.driver.js.driver;
+
+  function guiaInventario(clase1, clase2, clase3, clase4, clase5, clase6) {
+    const driverObj = driver({
+      showProgress: true,
+      steps: [
+        {
+          element: clase1,
+          popover: {
+            title: 'Gestión de inventario',
+            description: 'Haz clic en este botón para acceder al menú de gestión del inventario. Desde aquí, podrás administrar categorías, productos y otros elementos esenciales para mantener un control organizado y eficiente de los recursos disponibles.',
+            side: "bottom",
+            align: 'center'
+          }
+        },
+        {
+          element: clase2,
+          popover: {
+            title: 'Administrar Categorías',
+            description: 'Crea, edita o desactiva categorías para organizar mejor los productos de tu inventario. Esto te permite mantener una estructura clara y funcional.',
+            side: "bottom",
+            align: 'center'
+          }
+        },
+        {
+          element: clase3,
+          popover: {
+            title: 'Administrar Productos',
+            description: 'Gestiona los productos de tu inventario. Aquí puedes crear nuevos productos, editarlos, desactivarlos o registrar nuevas compras para actualizar la cantidad de los productos.',
+            side: "bottom",
+            align: 'center'
+          }
+        },
+        {
+          element: clase4,
+          popover: {
+            title: 'Historial de Entradas',
+            description: 'Consulta la información de las compras realizadas, incluyendo los detalles de los productos añadidos al inventario.',
+            side: "bottom",
+            align: 'center'
+          }
+        },
+        {
+          element: clase5,
+          popover: {
+            title: 'Historial de Salidas',
+            description: 'Revisa la información de las ventas realizadas. Aquí puedes consultar los detalles de los productos vendidos y su estado.',
+            side: "bottom",
+            align: 'center'
+          }
+        },
+        {
+          element: clase6,
+          popover: {
+            title: 'Punto de Venta',
+            description: 'Realiza ventas seleccionando la caja en la que deseas registrar las transacciones. Este módulo te facilita gestionar las operaciones de venta en tiempo real.',
+            side: "bottom",
+            align: 'center'
+          }
+        }
+      ],
+      doneBtnText: 'Aceptar',
+      nextBtnText: 'Siguiente',
+      prevBtnText: 'Anterior',
+    });
+
+    driverObj.drive();
+  }
+
+  $('.menuInventario').click(function () {
+    if (!localStorage.getItem('mensajeMostradoInventario')) {
+
+      guiaInventario('.menuInventario','.adminCategorias','.adminProductos','.adminEntradas','.adminSalidas','.adminPuntoVenta')
+
+      // guardar en localStorage 
+      localStorage.setItem('mensajeMostradoInventario', 'true');
+    }
+  });
+
+  $('.menuInventarioDesplegable').click(function () {
+    if (!localStorage.getItem('mensajeMostradoInventario')) {
+
+      guiaInventario('.menuInventarioDesplegable','.adminCategoriasDesple','.adminProductosDesple','.adminEntradasDesple','.adminSalidasDesple','.adminPuntoVentaDesple')
+
+      // guardar en localStorage 
+      localStorage.setItem('mensajeMostradoInventario', 'true');
+    }
+  });
+
 
 });
