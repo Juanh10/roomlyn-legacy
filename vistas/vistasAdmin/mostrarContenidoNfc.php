@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sqlHabitaciones->execute();
     $resultado = $sqlHabitaciones->fetch(\PDO::FETCH_ASSOC);
 
-    if($resultado){
+    if ($resultado) {
         $idHab = $resultado['id_habitacion'];
         $idEstadoHab = $resultado['id_hab_estado'];
         $tipoHab = $resultado['id_hab_tipo'];
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $facturaReserva = facturaReserva($precioHabitacion, $diferenciaDias);
 
-        $sqlResHab = $dbh->prepare("SELECT res.id_reserva, res.id_cliente, res.id_habitacion, res.id_estado_reserva, res.fecha_ingreso, res.fecha_salida, res.total_reserva, res.estado, info.nombres, info.apellidos, info.documento, info.celular FROM reservas AS res INNER JOIN info_clientes AS info ON info.id_info_cliente = res.id_cliente WHERE res.id_habitacion = :idHab AND res.id_estado_reserva = :idEstadoRes");
+        $sqlResHab = $dbh->prepare("SELECT res.id_reserva, res.id_cliente, res.id_habitacion, res.id_estado_reserva, res.fecha_ingreso, res.fecha_salida, res.total_reserva, res.saldo_pendiente, res.estado, info.nombres, info.apellidos, info.documento, info.celular FROM reservas AS res INNER JOIN info_clientes AS info ON info.id_info_cliente = res.id_cliente WHERE res.id_habitacion = :idHab AND res.id_estado_reserva = :idEstadoRes");
 
         switch ($idEstadoHab) {
             case 4:
@@ -73,6 +73,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $resultadoResHab = $sqlResHab->fetch(\PDO::FETCH_ASSOC);
 
         $idRes = $resultadoResHab['id_reserva'];
+
+        $saldoPendienteRes = $resultadoResHab['saldo_pendiente'];
+
+        $sqlConsumo = $dbh->query("SELECT SUM(idv.precio_total) AS total_precio FROM inventario_detalles_ventas as idv INNER JOIN inventario_ventas as iv ON idv.id_venta = iv.id_venta INNER JOIN reservas as r ON iv.id_reserva = r.id_reserva WHERE iv.id_reserva = $idRes AND idv.estado_debe = 1")->fetch();
+
+        $totalConsumo = $sqlConsumo['total_precio'];
+
+        $totalFactura = $saldoPendienteRes + $totalConsumo;
+
+        // consulta de detalles del consumo del cliente
+        $sqlDetConsumo = $dbh->query("SELECT idv.id_detalle_venta, idv.id_venta, idv.cantidad_producto, idv.precio_unitario, idv.precio_total, idv.estado_debe, p.nombre FROM inventario_detalles_ventas as idv INNER JOIN inventario_ventas iv ON idv.id_venta = iv.id_venta INNER JOIN reservas as r ON iv.id_reserva = r.id_reserva INNER JOIN inventario_productos as p ON idv.id_producto = p.id_producto WHERE idv.estado = 1 AND iv.id_reserva = $idRes")->fetchAll();
     }
 }
 

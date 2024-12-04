@@ -58,7 +58,7 @@ $stmt->execute();
                                 <th class="text-center" scope="col">Precio</th>
                                 <th class="text-center" scope="col">Imagen</th>
                                 <th class="text-center" scope="col">Descripcion</th>
-                                <th class="text-center" scope="col">Agregar</th>
+                                <th class="text-center" scope="col">Comprar</th>
                                 <th class="text-center" scope="col">Estado</th>
                                 <th class="text-center" scope="col">Acción</th>
                             </tr>
@@ -84,7 +84,7 @@ $stmt->execute();
                                     </td>
                                     <td class="text-center"><?php echo $row['nombre']; ?></td>
                                     <td class="text-center"><?php echo $row['cantidad_stock']; ?></td>
-                                    <td class="text-center"><?php echo '$' . number_format($row['precio_unitario'], 0); ?></td>
+                                    <td class="text-center"><?php echo '$' . number_format($row['precio_unitario'], 0, ',', '.'); ?></td>
                                     <td class="text-center"><img src="../../<?php echo $row['imagen']; ?>" width="80px" height="80px" alt=""></td>
                                     <td class="text-center"><?php echo $row['descripcion']; ?></td>
                                     <td class="text-center">
@@ -299,23 +299,16 @@ $stmt->execute();
                     <form id="formularioProductoCantidad" action="../../procesos/inventario/productos/conProductos.php" method="post">
                         <input type="hidden" name="id_productoCant" id="id_productoCant">
                         <input type="hidden" name="action" value="updateCantidad">
-                        <div class="mb-3">
-                            <select id="accionCantidad" name="accionCantidad" class="form-select" aria-label="Default select example" required>
-                                <option value="1" selected>+</option>
-                                <?php
-                                if ($_SESSION['id_empleado'] == 1) {
-                                ?>
-                                    <option value="2">-</option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                            <p></p>
-                        </div>
 
                         <div class="form-floating mb-3 cantidadStock">
                             <input type="number" class="form-control" id="cantidad_stock" name="cantidad_stock" placeholder="9">
                             <label for="cantidad_cat">Agrega la cantidad*</label>
+                            <p></p>
+                        </div>
+                       
+                        <div class="form-floating mb-3 PrecioStock">
+                            <input type="number" class="form-control" id="precio_unitario" name="precio_unitario" placeholder="9">
+                            <label for="cantidad_cat">Agregar el precio unitario*</label>
                             <p></p>
                         </div>
                 </div>

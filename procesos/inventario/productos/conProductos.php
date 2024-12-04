@@ -232,27 +232,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else if ($action === "updateCantidad") {
             $idProducto = $_POST['id_productoCant'];
-            $accionCantidad = $_POST['accionCantidad'];
             $cantidad = $_POST['cantidad_stock'];
+            $precio = $_POST['precio_unitario'];
             $estado = 1;
             $fechaActual = new DateTime();
             $fechaYHora = $fechaActual->format('Y-m-d H:i:s');
 
-            // Determinar si sumar o restar
-            if ($accionCantidad == 1) {
-                // Preparar la consulta de actualización
-                $sqlProducto = $dbh->prepare("UPDATE inventario_productos SET cantidad_stock = cantidad_stock + :cantidad WHERE id_producto = :id");
-                // Preparar la consulta de inserción
-                $sqlEntrada = $dbh->prepare("INSERT INTO inventario_entradas(id_empleado, id_producto, cantidad, estado, fecha_sys) VALUES (:id, :producto, :cant, :est, :fecha)");
+            // Preparar la consulta de actualización
+            $sqlProducto = $dbh->prepare("UPDATE inventario_productos SET cantidad_stock = cantidad_stock + :cantidad WHERE id_producto = :id");
+            // Preparar la consulta de inserción
+            $sqlEntrada = $dbh->prepare("INSERT INTO inventario_entradas(id_empleado, id_producto, cantidad, precio_unitario, estado, fecha_sys) VALUES (:id, :producto, :cant, :prec, :est, :fecha)");
 
-                $sqlEntrada->bindParam(':id', $idEmpleado);
-                $sqlEntrada->bindParam(':producto', $idProducto);
-                $sqlEntrada->bindParam(':cant', $cantidad);
-                $sqlEntrada->bindParam(':est', $estado);
-                $sqlEntrada->bindParam(':fecha', $fechaYHora);
-            } else {
-                $sqlProducto = $dbh->prepare("UPDATE inventario_productos SET cantidad_stock = cantidad_stock - :cantidad WHERE id_producto = :id");
-            }
+            $sqlEntrada->bindParam(':id', $idEmpleado);
+            $sqlEntrada->bindParam(':producto', $idProducto);
+            $sqlEntrada->bindParam(':cant', $cantidad);
+            $sqlEntrada->bindParam(':prec', $precio);
+            $sqlEntrada->bindParam(':est', $estado);
+            $sqlEntrada->bindParam(':fecha', $fechaYHora);
 
             $sqlProducto->bindParam(':cantidad', $cantidad);
             $sqlProducto->bindParam(':id', $idProducto);

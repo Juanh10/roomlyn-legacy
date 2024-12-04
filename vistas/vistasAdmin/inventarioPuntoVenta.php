@@ -39,6 +39,9 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
 </head>
 
 <body>
+    <!-- DETECTAR EL CODIGO NFC AUTOMATICAMENTE -->
+    <input type="text" id="nfcInput" style="position: absolute; opacity: 0; z-index: -1;">
+
     <!--* CABECERA DEL MENU  -->
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #86726b;">
@@ -102,7 +105,7 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
                     <h5 class="mb-3">Factura</h5>
                     <div id="listaFactura"></div>
                     <hr>
-                    <div class="factura" data-caja = "<?php echo $_SESSION['id_caja'] ?>">
+                    <div class="factura" data-caja="<?php echo $_SESSION['id_caja'] ?>">
                         <div class="totalFactura d-flex justify-content-between align-items-center mb-2">
                             <strong>Total factura</strong>
                             <strong id="totalFactura">$0</strong>

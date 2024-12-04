@@ -761,8 +761,8 @@ $(document).ready(function () {
         e.preventDefault();
 
         const cantidad = $('#cantidad_stock').val().trim();
+        const precioCant = $('#precio_unitario').val().trim();
         const idProducto = $('#id_productoCant').val();
-        const accionCantidad = $('#accionCantidad').val(); 
 
         // Validar que todos los campos requeridos están llenos
         if (!idProducto) {
@@ -779,16 +779,111 @@ $(document).ready(function () {
             $('.cantidadStock').find('p').text("");
         }
 
-        if (!accionCantidad) {
-            console.error("No se ha seleccionado una acción válida.");
+        if (!precioCant || isNaN(precioCant) || precioCant <= 0) {
+            $('.PrecioStock').find('p').addClass('errorValidacionInput');
+            $('.PrecioStock').find('p').text("Por favor, ingresa un valor válido.");
             return;
+        } else {
+            $('.PrecioStock').find('p').removeClass('errorValidacionInput');
+            $('.PrecioStock').find('p').text("");
         }
 
         // Si todo es válido, enviar el formulario
         $('#formularioProductoCantidad').submit();
     });
 
-    // DATATABLES ENTRADAS
+    //* SECCION DE SALIDAS
+
+    // Inicializar la tabla como instancia de DataTables
+    let table = $('#tablaSalidas').DataTable({
+        "order": [],
+        "bSort": false,
+        "lengthMenu": [5, 10, 20, 30],
+        info: true,
+        columnDefs: [{
+            orderable: false,
+            targets: 0
+        }],
+        responsive: true,
+        language: {
+            "decimal": ",",
+            "thousands": ".",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "info": "Total registros: _TOTAL_",
+            "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+            "infoFiltered": "(filtrado de _MAX_ registros en total)",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron registros",
+            "emptyTable": "No hay datos disponibles en la tabla",
+            "paginate": {
+                "first": "<<",
+                "previous": "<",
+                "next": ">",
+                "last": ">>"
+            },
+            "aria": {
+                "sortAscending": ": activar para ordenar la columna de manera ascendente",
+                "sortDescending": ": activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+
+    // Función para cargar y mostrar los detalles de la venta
+    function format(idVenta) {
+        let contenido = '<table class="table table-condensed display nowrap">';
+        contenido += '<thead><tr><th class="text-center">Producto</th><th class="text-center">Referencia</th><th class="text-center">Cantidad</th><th class="text-center">Precio Unitario</th><th class="text-center">Precio Total</th></tr></thead>';
+        contenido += '<tbody>';
+
+        // Realizar una llamada AJAX para obtener los detalles de la venta
+        $.ajax({
+            url: 'inventario_obtener_detalles_salidas.php', // Archivo que procesa la consulta
+            type: 'POST',
+            data: {
+                id_venta: idVenta
+            },
+            async: false, // Necesario para completar antes de renderizar
+            success: function(response) {
+                const detalles = JSON.parse(response);
+                detalles.forEach(function(detalle) {
+                    contenido += `<tr>
+                        <td class="text-center">${detalle.producto_nombre}</td>
+                        <td class="text-center">${detalle.producto_referencia}</td>
+                        <td class="text-center">${detalle.cantidad_producto}</td>
+                        <td class="text-center">${detalle.precio_unitario}</td>
+                        <td class="text-center">${detalle.precio_total}</td>
+                    </tr>`;
+                });
+            },
+            error: function() {
+                contenido += '<tr><td colspan="5">Error al cargar los detalles</td></tr>';
+            }
+        });
+
+        contenido += '</tbody></table>';
+        return contenido;
+    }
+
+    // Manejo de clic para expandir o contraer detalles
+    $('#tablaSalidas tbody').on('click', 'td#detallesVenta', function() {
+        const tr = $(this).closest('tr');
+        const row = table.row(tr);
+        const idVenta = $(this).data('id'); // Obtener el id_venta desde la celda
+        const icon = $(this).find('i'); // Seleccionar el ícono dentro de la celda
+
+        if (row.child.isShown()) {
+            // Contraer
+            row.child.hide();
+            tr.removeClass('shown');
+            // Cambiar el ícono a caret-down
+            icon.removeClass('bi-caret-up-fill').addClass('bi-caret-down-fill');
+        } else {
+            // Expandir
+            row.child(format(idVenta)).show();
+            tr.addClass('shown');
+            // Cambiar el ícono a caret-up
+            icon.removeClass('bi-caret-down-fill').addClass('bi-caret-up-fill');
+        }
+    });
 
 
 });

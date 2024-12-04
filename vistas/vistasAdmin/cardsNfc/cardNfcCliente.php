@@ -17,7 +17,7 @@
                             <span>Reserva</span> <span><?php echo number_format($resultadoReserva['total_reserva'], 0, ',', '.') ?></span>
                             <?php
                             if ($idEstadoHab == 4 || $idEstadoHab == 6):
-                                ?>
+                            ?>
                                 <span>Abonado</span> <span><?php echo number_format($resultadoReserva['monto_abonado'], 0, ',', '.') ?></span>
                             <?php
                             endif;
@@ -25,11 +25,11 @@
                             <?php
                             if ($idEstadoHab == 4):
                             ?>
-                                <span>Consumo(P)</span> <span><?php echo number_format($facturaReserva['iva'], 0, ',', '.') ?></span>
+                                <span>Consumo</span> <span><?php echo number_format($totalConsumo, 0, ',', '.') ?></span>
                             <?php
                             endif;
                             ?>
-                            <span><strong>TOTAL</strong></span> <span><strong><?php echo number_format($resultadoReserva['saldo_pendiente'], 0, ',', '.') ?> COP</strong></span>
+                            <span><strong>TOTAL</strong></span> <span><strong><?php echo number_format($totalFactura, 0, ',', '.') ?> COP</strong></span>
                         </div>
                         <div class="card-nfc-fechas">
                             <span class="card-nfc-factura-estancia"><strong>Estancia: </strong><?php echo $diferenciaDias . ' ' . ($diferenciaDias > 1 ? "días" : "día"); ?></span>
@@ -122,34 +122,34 @@
                     <table class="tabla-consumo">
                         <thead>
                             <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio Unitario</th>
-                                <th>Subtotal</th>
+                                <th class="text-center">Producto</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Debe</th>
+                                <th class="text-center">Precio Unitario</th>
+                                <th class="text-center">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Coca Cola</td>
-                                <td>2</td>
-                                <td>$10,000</td>
-                                <td>$20,000</td>
-                            </tr>
-                            <tr>
-                                <td>Papas Fritas</td>
-                                <td>3</td>
-                                <td>$5,000</td>
-                                <td>$15,000</td>
-                            </tr>
-                            <tr>
-                                <td>Café Premium</td>
-                                <td>5</td>
-                                <td>$5,000</td>
-                                <td>$25,000</td>
-                            </tr>
+                            <?php
+
+                            $totalVentaConsumo = 0;
+
+                            foreach ($sqlDetConsumo as $consumo):
+                                $totalVentaConsumo += $consumo['precio_total'];
+                            ?>
+                                <tr>
+                                    <td class="text-center"><?php echo $consumo['nombre'] ?></td>
+                                    <td class="text-center"><?php echo $consumo['cantidad_producto'] ?></td>
+                                    <td class="text-center"><?php echo ($consumo['estado_debe'] == 0) ? 'No' : 'Si' ?></td>
+                                    <td class="text-center">$<?php echo number_format($consumo['precio_unitario'], 0, ',', '.') ?></td>
+                                    <td class="text-center">$<?php echo number_format($consumo['precio_total'], 0, ',', '.') ?></td>
+                                </tr>
+                            <?php
+                            endforeach;
+                            ?>
                             <tr class="fila-total">
-                                <td colspan="3">Total</td>
-                                <td>$60,000</td>
+                                <td colspan="4">Total</td>
+                                <td class="text-center">$<?php echo number_format($totalVentaConsumo, 0, ',', '.') ?></td>
                             </tr>
                         </tbody>
                     </table>

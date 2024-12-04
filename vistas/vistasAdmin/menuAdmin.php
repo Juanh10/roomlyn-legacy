@@ -101,12 +101,6 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_item">
-                <a class="enlaceMenu" href="clientes.php" title="Clientes">
-                    <i class="bi bi-person-lines-fill"></i>
-                </a>
-            </li>
-
-            <li class="list_item">
 
                 <div class="enlacePrincipal" id="flechaInventario">
                     <a class="enlaceMenu menuDesplegable_inventario" title="Inventario">
@@ -152,6 +146,13 @@ $dbh->query($sqlFecha);
                     </li>
                 </ul>
             </li>
+
+            <li class="list_item">
+                <a class="enlaceMenu" href="clientes.php" title="Clientes">
+                    <i class="bi bi-person-lines-fill"></i>
+                </a>
+            </li>
+
 
             <?php
 
@@ -244,13 +245,6 @@ $dbh->query($sqlFecha);
             </li>
 
             <li class="list_itemDesplegable">
-                <a class="enlaceMenu2" href="clientes.php">
-                    <i class="bi bi-person-lines-fill"></i>
-                    <span class="linksOpciones">Clientes</span>
-                </a>
-            </li>
-
-            <li class="list_itemDesplegable">
                 <div class="enlacePrincipal" id="flechaMenuInventario">
                     <a class="enlaceMenu2 menuDesplegable_inventario">
                         <i class="bi bi-boxes"></i>
@@ -290,7 +284,7 @@ $dbh->query($sqlFecha);
                             <?php
                             else:
                             ?>
-                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php">
+                                <a class="enlaceMenuSecund_inventario" href="inventarioLoginPuntoVenta.php" target="_blank">
                                     <i class="bi bi-box-seam-fill"></i>
                                     <span>Punto de venta</span>
                                 </a>
@@ -301,6 +295,14 @@ $dbh->query($sqlFecha);
                     </li>
                 </ul>
             </li>
+
+            <li class="list_itemDesplegable">
+                <a class="enlaceMenu2" href="clientes.php">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span class="linksOpciones">Clientes</span>
+                </a>
+            </li>
+
 
             <?php if ($_SESSION['tipoUsuario'] == 1) : ?>
                 <li class="list_itemDesplegable">

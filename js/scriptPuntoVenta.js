@@ -100,7 +100,7 @@ $(document).ready(function () {
             // Actualizar precio total del producto
             const nuevoPrecio = precioUnitario * cantidad;
             producto.find(".precioProducto").text(formatearPrecio(nuevoPrecio));
-            
+
             actualizarTotal();
         }
     });
@@ -250,5 +250,86 @@ $(document).ready(function () {
         }
 
     });
+
+    //* DETECTAR CODIGO NFC
+    const nfcInput = $('#nfcInput');
+    let interaccionTipoDato = false; 
+
+    // Establecer el foco en el input NFC al cargar la página
+    nfcInput.focus();
+
+    // Evento para detectar la interacción con cualquier 
+    $('input, select').on('focus', function () {
+     interaccionTipoDato = true; 
+    });
+
+    // Evento para detectar cuando el foco se pierde de cualquier 
+    $('input, select').on('blur', function () {
+     interaccionTipoDato = false;
+    });
+
+    // Evento de input para detectar el código NFC
+    let debounceTimer;
+
+    nfcInput.on('input', function () {
+        const input = $(this);
+        clearTimeout(debounceTimer); // Resetea el temporizador si se detecta un nuevo cambio
+
+        debounceTimer = setTimeout(function () {
+            const codigoNFC = input.val().trim(); 
+            input.val('');
+
+            if (codigoNFC) {
+                // Enviar el código NFC al servidor para validar la habitación
+                $.ajax({
+                    url: 'inventario_nfc_punto_venta.php',
+                    type: 'POST',
+                    data: { codigo_nfc: codigoNFC },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.id_habitacion) {
+                            // Si se encuentra la habitación, seleccionarla en el SELECT
+                            $('#tipoCliente').val(data.id_habitacion).trigger('change');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Habitación detectada',
+                                text: `Se seleccionó la Habitación ${data.nHabitacion}`,
+                                toast: true,
+                                position: 'top-end',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Habitación no detectada',
+                                text: data.error || 'Habitación no válida o está libre',
+                                toast: true,
+                                position: 'top-end',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Hubo un problema al validar el código NFC'
+                        });
+                    }
+                });
+            }
+        }, 300); // Retraso de 300ms para esperar el final de la escritura
+    });
+
+    // Mantener el foco en el input NFC
+    setInterval(function () {
+        if ( interaccionTipoDato) {
+            nfcInput.focus();
+        }
+    }, 100);
+
+
 
 });
