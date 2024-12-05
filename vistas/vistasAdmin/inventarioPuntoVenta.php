@@ -71,11 +71,11 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
         <div class="row">
             <div class="col-md-8">
                 <div class="input-group mb-3">
-                    <input type="text" id="buscadorProducto" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                    <input type="text" id="buscadorProducto" class="form-control btn-buscar-producto" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
                 </div>
 
                 <div class="input-group mb-3">
-                    <label for="filtroCategoria" class="mb-2 text-body-tertiary fw-bold">Filtrar por categoria</label>
+                    <label for="filtroCategoria" class="mb-2 text-body-tertiary fw-bold btn-filtrar-categoria">Filtrar por categoria</label>
                     <select id="filtroCategoria" name="states[]" multiple="multiple">
                         <option value="0" selected>Todos</option>
                         <?php
@@ -92,7 +92,7 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
             <div class="col-md-4">
                 <div class="cart-item mb-3">
                     <div class="tipoCliente">
-                        <select id="tipoCliente" class="form-select mb-3">
+                        <select id="tipoCliente" class="form-select mb-3 btn-destinario-venta">
                             <option selected disabled>Destinatario de la venta</option>
                             <option value="0">Público general</option>
                             <?php foreach ($sqlHab as $habitacion): ?>
@@ -117,7 +117,7 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
                         </div>
 
                         <div class="mb-3">
-                            <input type="number" id="cantidadCliente" class="form-control" placeholder="Cuánto dio el cliente">
+                            <input type="number" id="cantidadCliente" class="form-control btn-cantidad-cliente" placeholder="Cuánto dio el cliente">
                         </div>
 
                         <div class="devolverCliente d-flex justify-content-between align-items-center mb-2">
@@ -126,7 +126,7 @@ $sqlCategorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventa
                         </div>
                     </div>
 
-                    <button id="generarVenta" class="btn btn-success w-100 mt-3">Generar venta</button>
+                    <button id="generarVenta" class="btn btn-success w-100 mt-3 btn-generar-venta">Generar venta</button>
                 </div>
 
             </div>

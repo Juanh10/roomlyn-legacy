@@ -43,7 +43,7 @@ $stmt->execute();
         <div class="row mx-0">
             <div class="col">
                 <div class="btnAdd mt-4 ms-2 mb-4">
-                    <button type="button" class="btn botonRoomlyn fw-bold" data-bs-toggle="modal" data-bs-target="#agregar">
+                    <button type="button" class="btn botonRoomlyn btn-agregar-producto fw-bold" data-bs-toggle="modal" data-bs-target="#agregar">
                         Agregar
                     </button>
                 </div>
@@ -91,7 +91,7 @@ $stmt->execute();
                                         <span class="bi bi-plus-circle-fill btn btn-primary btn-sm botonEditar btnEditarCantidadProducto" data-id="<?php echo $row['id_producto'] ?>" data-bs-toggle="modal" data-bs-target="#modalAgregarCantidad" title="Agregar cantidad"></span>
                                     </td>
                                     <td>
-                                        <div class="d-flex justify-content-center">
+                                        <div class="d-flex justify-content-center btn-cambiar-estado-producto">
                                             <label class="switch">
                                                 <input type="checkbox" class="estadoToggle" data-id="<?php echo $row['id_producto']; ?>" <?php echo $row['estadoProducto'] == 1 ? 'checked' : ''; ?>>
                                                 <span class="slider"></span>
@@ -100,7 +100,7 @@ $stmt->execute();
                                     </td>
                                     <td>
                                         <div class="accion d-flex justify-content-center">
-                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar" data-id="<?php echo $row['id_producto'] ?>" data-bs-toggle="modal" data-bs-target="#modalEditProducto" title="Editar"></span>
+                                            <span class="bi bi-pencil-square btn btn-warning btn-sm botonEditar btn-editar-producto" data-id="<?php echo $row['id_producto'] ?>" data-bs-toggle="modal" data-bs-target="#modalEditProducto" title="Editar"></span>
                                             <?php
                                             if ($_SESSION['id_empleado'] == 1):
                                             ?>

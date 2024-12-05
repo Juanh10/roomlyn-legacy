@@ -157,8 +157,9 @@ $(document).ready(function () {
 
     $("#cantidadCliente").on("input", function () {
         const cantidadCliente = $(this).val();
-        const totalPagar = parseFloat($("#totalPagar").text().replace(/[$,]/g, ""));
-
+        const totalPagar = $("#totalPagar").text().replace(/[$,.]/g, "");
+        let totalPagarFloat = parseFloat(totalPagar);
+        
         //Calcuar cuanto toca devolver
         let totalDevolver = Math.max(cantidadCliente - totalPagar, 0);
 
@@ -253,19 +254,19 @@ $(document).ready(function () {
 
     //* DETECTAR CODIGO NFC
     const nfcInput = $('#nfcInput');
-    let interaccionTipoDato = false; 
+    let interaccionTipoDato = false;
 
     // Establecer el foco en el input NFC al cargar la página
     nfcInput.focus();
 
     // Evento para detectar la interacción con cualquier 
     $('input, select').on('focus', function () {
-     interaccionTipoDato = true; 
+        interaccionTipoDato = true;
     });
 
     // Evento para detectar cuando el foco se pierde de cualquier 
     $('input, select').on('blur', function () {
-     interaccionTipoDato = false;
+        interaccionTipoDato = false;
     });
 
     // Evento de input para detectar el código NFC
@@ -276,7 +277,7 @@ $(document).ready(function () {
         clearTimeout(debounceTimer); // Resetea el temporizador si se detecta un nuevo cambio
 
         debounceTimer = setTimeout(function () {
-            const codigoNFC = input.val().trim(); 
+            const codigoNFC = input.val().trim();
             input.val('');
 
             if (codigoNFC) {
@@ -329,6 +330,81 @@ $(document).ready(function () {
             nfcInput.focus();
         }
     }, 100);
+
+    //* GUIA PUNTO VENTA
+    const driver = window.driver.js.driver;
+
+
+    if (!localStorage.getItem('mensajeMostradoPuntoVenta')) {
+
+        const driverObj = driver({
+            showProgress: true,
+            steps: [
+                {
+                    element: '.btn-buscar-producto',
+                    popover: {
+                        title: 'Buscar Producto',
+                        description: 'Usa este campo para buscar rápidamente productos por nombre o palabra clave. Esto facilita encontrar productos específicos para la venta.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                },
+                {
+                    element: '.btn-filtrar-categoria',
+                    popover: {
+                        title: 'Filtrar por Categoría',
+                        description: 'Selecciona una categoría de este menú desplegable para mostrar únicamente los productos pertenecientes a esa categoría específica.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                },
+                {
+                    element: '.btn-destinario-venta',
+                    popover: {
+                        title: 'Seleccionar Destinatario',
+                        description: 'Usa este menú para elegir a quién se le realizará la venta. Puedes asignarla a una habitación o a un cliente sin reserva, como público general.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                },
+                {
+                    popover: {
+                        title: 'Seleccionar Destinatario con NFC',
+                        description: 'Aproxima el llavero al sensor NFC para identificar automáticamente al destinatario de la venta, eliminando la necesidad de buscarlo manualmente.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                },
+                {
+                    element: '.btn-cantidad-cliente',
+                    popover: {
+                        title: 'Cantidad Recibida',
+                        description: 'Introduce el monto entregado por el cliente para calcular automáticamente el cambio que debes devolver.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                },
+                {
+                    element: '.btn-generar-venta',
+                    popover: {
+                        title: 'Generar Venta',
+                        description: 'Haz clic en este botón para finalizar la venta y registrar la transacción en el sistema.',
+                        side: "bottom",
+                        align: 'center'
+                    }
+                }
+            ],
+            doneBtnText: 'Aceptar',
+            nextBtnText: 'Siguiente',
+            prevBtnText: 'Anterior',
+        });
+
+        driverObj.drive();
+
+        // guardar en localStorage 
+        localStorage.setItem('mensajeMostradoPuntoVenta', 'true');
+    }
+
 
 
 

@@ -6,6 +6,7 @@ if (empty($_SESSION['id_empleado'])) { //* Si el id del usuario es vacio es porq
 }
 
 include_once "../../procesos/config/conex.php";
+include_once "../../procesos/funciones/formatearFechas.php";
 
 // Realizar la consulta a la BD
 $categorias = $dbh->query("SELECT id_categoria, nombre_categoria FROM inventario_categorias WHERE estado = 1 GROUP BY nombre_categoria ASC")->fetchAll();
@@ -67,7 +68,7 @@ $stmt->execute();
                                     <td class="text-center"><?php echo $row['cantidad']; ?></td>
                                     <td class="text-center"><?php echo number_format($row['precio_unitario'],0,',','.'); ?></td>
                                     <td class="text-center"><?php echo number_format($row['precio_unitario'] * $row['cantidad'],0,',','.'); ?></td>
-                                    <td class="text-center"><?php echo $row['fecha_sys']; ?></td>
+                                    <td class="text-center"><?php echo formatearFecha($row['fecha_sys']); ?></td>
                                 </tr>
                             <?php
                             }

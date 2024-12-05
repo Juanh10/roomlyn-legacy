@@ -886,35 +886,64 @@ $(document).ready(function () {
     });
 
 
-   /*  //* DRIVERJS GUIA PARA INVENTARIO
+    //* DRIVERJS GUIA PARA INVENTARIO
 
     const driver = window.driver.js.driver;
 
-    if (!localStorage.getItem('mensajeMostrado')) {
-
-        const driverObj = driver({
-            showProgress: false,
-            steps: [
-                {
-                    element: '.btn-buscadorNfc',
-                    popover: {
-                        title: 'Buscar reservas con NFC',
-                        description: 'Haz clic en el botón para ver información de una reservación. Una vez que lo hagas, podrás visualizar detalles importantes como el número de la reserva, el estado actual, fechas de entrada y salida, así como cualquier solicitud o servicio adicional que hayas solicitado.',
-                        side: "bottom",
-                        align: 'center'
+    // Verificar la pagina
+    if (window.location.pathname.endsWith('inventario_productos.php')) {
+        if (!localStorage.getItem('mensajeMostradoProductos')) {
+            const driverObj = driver({
+                showProgress: true,
+                steps: [
+                    {
+                        element: '.btn-agregar-producto',
+                        popover: {
+                            title: 'Agregar Producto',
+                            description: 'Haz clic en este botón para añadir un nuevo producto al inventario. Se abrirá un formulario donde podrás ingresar toda la información necesaria, como el nombre, categoría, cantidad inicial y precio.',
+                            side: "bottom",
+                            align: 'center'
+                        }
+                    },
+                    {
+                        element: '.btnEditarCantidadProducto',
+                        popover: {
+                            title: 'Actualizar Cantidad',
+                            description: 'Utiliza este botón para añadir más cantidad a un producto existente. También podrás registrar el precio al que lo adquiriste para mantener un control preciso.',
+                            side: "bottom",
+                            align: 'center'
+                        }
+                    },
+                    {
+                        element: '.btn-cambiar-estado-producto',
+                        popover: {
+                            title: 'Cambiar Estado del Producto',
+                            description: 'Este botón permite desactivar un producto para que no aparezca en el punto de venta. Es útil cuando un producto ya no estará disponible para la venta.',
+                            side: "bottom",
+                            align: 'center'
+                        }
+                    },
+                    {
+                        element: '.btn-editar-producto',
+                        popover: {
+                            title: 'Editar Producto',
+                            description: 'Haz clic aquí para modificar la información de un producto existente.',
+                            side: "bottom",
+                            align: 'center'
+                        }
                     }
-                }
-            ],
-            doneBtnText: 'Aceptar',
-            nextBtnText: 'Siguiente',
-            prevBtnText: 'Anterior',
-        });
+                ],
+                doneBtnText: 'Aceptar',
+                nextBtnText: 'Siguiente',
+                prevBtnText: 'Anterior',
+            });
 
-        driverObj.drive();
+            driverObj.drive();
 
-        // guardar en localStorage 
-        localStorage.setItem('mensajeMostrado', 'true');
-    } */
+            // guardar en localStorage 
+            localStorage.setItem('mensajeMostradoProductos', 'true');
+        }
+    }
 
 
 });
