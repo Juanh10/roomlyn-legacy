@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $totalFactura = $saldoPendienteRes + $totalConsumo;
 
         // consulta de detalles del consumo del cliente
-        $sqlDetConsumo = $dbh->query("SELECT idv.id_detalle_venta, idv.id_venta, idv.cantidad_producto, idv.precio_unitario, idv.precio_total, idv.estado_debe, p.nombre FROM inventario_detalles_ventas as idv INNER JOIN inventario_ventas iv ON idv.id_venta = iv.id_venta INNER JOIN reservas as r ON iv.id_reserva = r.id_reserva INNER JOIN inventario_productos as p ON idv.id_producto = p.id_producto WHERE idv.estado = 1 AND iv.id_reserva = $idRes")->fetchAll();
+        $sqlDetConsumo = $dbh->query("SELECT idv.id_detalle_venta, idv.id_venta, idv.cantidad_producto, idv.precio_unitario, idv.precio_total, idv.estado_debe, p.nombre FROM inventario_detalles_ventas as idv INNER JOIN inventario_ventas iv ON idv.id_venta = iv.id_venta INNER JOIN reservas as r ON iv.id_reserva = r.id_reserva INNER JOIN inventario_productos as p ON idv.id_producto = p.id_producto WHERE idv.estado = 1 AND iv.id_reserva = $idRes ORDER BY idv.estado_debe DESC")->fetchAll();
     }
 }
 

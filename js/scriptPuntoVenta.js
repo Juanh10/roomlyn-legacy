@@ -325,7 +325,7 @@ $(document).ready(function () {
 
     // Mantener el foco en el input NFC
     setInterval(function () {
-        if ( interaccionTipoDato) {
+        if (!interaccionTipoDato) {
             nfcInput.focus();
         }
     }, 100);

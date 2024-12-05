@@ -115,7 +115,7 @@ $dbh->query($sqlFecha);
                             <a class="enlaceMenuSecund_inventario adminCategorias" href="inventario_categorias.php" title="Administrar categorias">
                                 <i class="bi bi-tags-fill"></i>
                             </a>
-                            <a class="enlaceMenuSecund_inventario adminProductos" href="inventario_productos.php" title="Administrar articulos">
+                            <a class="enlaceMenuSecund_inventario adminProductos" href="inventario_productos.php" title="Administrar productos">
                                 <i class="bi bi-bag-check-fill"></i>
                             </a>
 
