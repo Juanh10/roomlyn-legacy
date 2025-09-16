@@ -35,7 +35,7 @@ git clone https://github.com/TU-USUARIO/roomlyn-php.git
 cd roomlyn-php
 
 ### 2. Configurar la base de datos
-- Importa el archivo SQL que se encuentra en la carpeta /database.
+- Importa el archivo SQL que se encuentra en la carpeta BD con el nombre **roomlync_proyecto.sql**.
 - Edita el archivo de conexión config/db.php con tus credenciales de MySQL.
 
 ### 3. Iniciar el servidor
