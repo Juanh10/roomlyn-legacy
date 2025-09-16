@@ -31,7 +31,7 @@ Este proyecto corresponde a la primera versión de Roomlyn, desarrollada en **PH
 ## 🚀 Instalación y configuración
 
 ### 1. Clonar el repositorio
-git clone https://github.com/TU-USUARIO/roomlyn-php.git
+git clone https://github.com/Juanh10/roomlyn-relacy.git
 cd roomlyn-php
 
 ### 2. Configurar la base de datos
